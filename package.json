@@ -1,0 +1,27 @@
+{
+  "name": "tech-stop",
+  "version": "1.0.0",
+  "description": "A MERN ecommerce website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vidarshanadithya/tech-stop.git"
+  },
+  "keywords": [
+    "ecommerce",
+    "mern",
+    "react",
+    "node",
+    "tech",
+    "shop"
+  ],
+  "author": "Vidarshan Adithya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vidarshanadithya/tech-stop/issues"
+  },
+  "homepage": "https://github.com/vidarshanadithya/tech-stop#readme"
+}
