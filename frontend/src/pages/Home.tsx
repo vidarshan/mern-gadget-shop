@@ -10,9 +10,9 @@ const Home = () => {
   return (
     <Container sx={{ maxWidth: "85vw" }}>
       <Banner />
+      <Features title="Why Us?" subTitle="Why you should shop here" />
       <Featured />
       <Announcement />
-      <Features />
     </Container>
   );
 };
