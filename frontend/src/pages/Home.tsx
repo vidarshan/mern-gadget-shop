@@ -6,7 +6,7 @@ import Header from "../components/Header";
 
 const Home = () => {
   return (
-    <Container size="xl">
+    <Container style={{ maxWidth: "85vw" }}>
       <Header />
       <Banner />
       <Featured />

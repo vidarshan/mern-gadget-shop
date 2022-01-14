@@ -1,0 +1,38 @@
+import { Button, Card, Image, Text } from "@mantine/core";
+import React from "react";
+import item from "../images/item.jpeg";
+
+const ItemCard = () => {
+  return (
+    <Card shadow="xl" radius="lg" withBorder>
+      <Card.Section>
+        <Image fit="cover" src={item} alt="Norway" />
+      </Card.Section>
+      <div style={{ margin: "10px 0" }}>
+        <Card.Section>
+          <Text size="xl" weight={600}>
+            Apple Airtag
+          </Text>
+        </Card.Section>
+        <Card.Section sx={{ marginTop: "1rem" }}>
+          <Text weight={400}>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda
+            nostrum modi ipsum sit magnam possimus.
+          </Text>
+        </Card.Section>
+        <Card.Section sx={{ marginTop: "1rem" }}>
+          <Text size="xl" weight={600}>
+            $12.99
+          </Text>
+        </Card.Section>
+        <Card.Section sx={{ marginTop: "1rem" }}>
+          <Button variant="filled" radius="xl" color="dark" fullWidth>
+            View Product
+          </Button>
+        </Card.Section>
+      </div>
+    </Card>
+  );
+};
+
+export default ItemCard;

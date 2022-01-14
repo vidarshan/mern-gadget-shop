@@ -12,6 +12,7 @@ code {
 }
 
 #id,
-.mantine-Text-root {
+.mantine-Text-root,
+.mantine-Button-filled {
   font-family: "Poppins", sans-serif !important;
 }
