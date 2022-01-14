@@ -1,22 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { MantineProvider } from '@mantine/core';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { MantineProvider } from "@mantine/core";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Header from "./components/Header";
 
 ReactDOM.render(
   <MantineProvider>
-   <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<App />} />
-              <Route index element={<Home />} />
-              </Routes>
-          </BrowserRouter>
-    </MantineProvider>,
-  document.getElementById('root')
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route index element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+  </MantineProvider>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
