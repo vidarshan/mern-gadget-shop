@@ -7,6 +7,7 @@ import { MantineProvider } from "@mantine/core";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 ReactDOM.render(
   <MantineProvider>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route path="/" element={<App />} />
         <Route index element={<Home />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   </MantineProvider>,
   document.getElementById("root")
