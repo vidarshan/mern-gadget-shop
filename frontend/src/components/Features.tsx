@@ -13,7 +13,7 @@ const Features = ({ title, subTitle }: { title: string; subTitle: string }) => {
         {subTitle}
       </Text>
       <Grid sx={{ marginTop: "20px" }}>
-        <Col span={3}>
+        <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
           <Card
             shadow="xl"
             sx={{
@@ -34,7 +34,7 @@ const Features = ({ title, subTitle }: { title: string; subTitle: string }) => {
             </Text>
           </Card>
         </Col>
-        <Col span={3}>
+        <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
           <Card
             shadow="xl"
             sx={{
@@ -56,7 +56,7 @@ const Features = ({ title, subTitle }: { title: string; subTitle: string }) => {
             </Text>
           </Card>
         </Col>
-        <Col span={3}>
+        <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
           <Card
             shadow="xl"
             sx={{
@@ -77,7 +77,7 @@ const Features = ({ title, subTitle }: { title: string; subTitle: string }) => {
             </Text>
           </Card>
         </Col>
-        <Col span={3}>
+        <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
           <Card
             shadow="xl"
             sx={{
