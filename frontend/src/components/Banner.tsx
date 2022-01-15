@@ -10,13 +10,24 @@ const Banner = () => {
           justifyContent: "center",
           flexDirection: "column",
         }}
-        span={6}
+        span={5}
       >
-        <Text sx={{ fontSize: "40px" }} weight={700}>
-          All your gadgets <br /> are here.
+        <Text sx={{ fontSize: "50px" }} weight={700}>
+          Get great deals on your <br /> desired tech products.
         </Text>
+        <Text sx={{ marginTop: "10px" }} color="gray" weight={400} size="sm">
+          15% off with buy-one-get-one deals for many products, along with
+          extended warranty.
+        </Text>
+        <Grid>
+          <Col span={4} sx={{ marginTop: "20px" }}>
+            <Button color="dark" radius="md" fullWidth>
+              View Shop
+            </Button>
+          </Col>
+        </Grid>
       </Col>
-      <Col span={6}>
+      <Col span={7}>
         <Image radius="md" fit="contain" src={banner1} />
       </Col>
     </Grid>

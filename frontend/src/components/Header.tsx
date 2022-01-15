@@ -38,18 +38,13 @@ const Header = () => {
 
         <Text>Application header</Text>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <ActionIcon sx={{ margin: "10px" }} variant="outline" radius="xl">
+          <ActionIcon sx={{ margin: "10px" }} variant="outline" radius="md">
             <BiShoppingBag />
           </ActionIcon>
-          <ActionIcon sx={{ margin: "10px" }} variant="outline" radius="xl">
+          <ActionIcon sx={{ margin: "10px" }} variant="outline" radius="md">
             <BiUser />
           </ActionIcon>
-          <Button
-            variant="light"
-            color="dark"
-            sx={{ margin: "10px" }}
-            radius="xl"
-          >
+          <Button color="dark" sx={{ margin: "10px" }} radius="md">
             Sign Up
           </Button>
         </div>
