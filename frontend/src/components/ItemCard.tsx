@@ -26,7 +26,7 @@ const ItemCard = () => {
           </Text>
         </Card.Section>
         <Card.Section sx={{ marginTop: "1rem" }}>
-          <Button variant="filled" radius="xl" color="dark" fullWidth>
+          <Button variant="filled" radius="md" color="dark" fullWidth>
             View Product
           </Button>
         </Card.Section>

@@ -11,7 +11,10 @@ const Home = () => {
     <Container sx={{ maxWidth: "85vw" }}>
       <Banner />
       <Features title="Why Us?" subTitle="Why you should shop here" />
-      <Featured />
+      <Featured
+        title="This week's best"
+        subTitle="Most purchased items this week"
+      />
       <Announcement />
     </Container>
   );

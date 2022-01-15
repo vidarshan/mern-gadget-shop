@@ -24,7 +24,6 @@ const Header = () => {
           alignItems: "center",
           justifyContent: "space-between",
           height: "100%",
-          margin: "0 7rem",
         }}
       >
         <MediaQuery largerThan="sm" styles={{ display: "none" }}>
