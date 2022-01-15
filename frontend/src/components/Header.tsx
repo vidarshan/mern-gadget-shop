@@ -7,8 +7,6 @@ import {
   Text,
   useMantineTheme,
   Button,
-  AppShell,
-  Navbar,
   ActionIcon,
 } from "@mantine/core";
 

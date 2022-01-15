@@ -15,7 +15,7 @@ const Home = () => {
         title="This week's best"
         subTitle="Most purchased items this week"
       />
-      <Announcement />
+      <Announcement title="Mobile App" subTitle="Download our mobile app" />
     </Container>
   );
 };

@@ -1,5 +1,4 @@
 import { Grid, Col, Text, Button } from "@mantine/core";
-import React from "react";
 import ItemCard from "./ItemCard";
 
 const Featured = ({ title, subTitle }: { title: string; subTitle: string }) => {
