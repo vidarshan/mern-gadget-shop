@@ -73,16 +73,16 @@ const Shop = () => {
         </Grid>
       </Card>
       <Grid>
-        <Col span={3}>
+        <Col span={2}>
           <ItemCard />
         </Col>
-        <Col span={3}>
+        <Col span={2}>
           <ItemCard />
         </Col>
-        <Col span={3}>
+        <Col span={2}>
           <ItemCard />
         </Col>
-        <Col span={3}>
+        <Col span={2}>
           <ItemCard />
         </Col>
       </Grid>

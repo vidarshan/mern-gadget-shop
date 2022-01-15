@@ -11,6 +11,7 @@ import {
   ActionIcon,
   TextInput,
 } from "@mantine/core";
+import { AiOutlineUsb } from "react-icons/ai";
 
 const Header = () => {
   const [opened, setOpened] = useState(false);
@@ -36,7 +37,16 @@ const Header = () => {
           />
         </MediaQuery>
 
-        <Text>Application header</Text>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <AiOutlineUsb />
+          <Text>Techstop</Text>
+        </div>
         <div style={{ display: "flex", alignItems: "center" }}>
           <TextInput
             icon={<FiSearch />}
@@ -49,7 +59,7 @@ const Header = () => {
           <ActionIcon sx={{ margin: "10px" }} variant="outline" radius="md">
             <BiUser />
           </ActionIcon>
-          <Button color="dark" sx={{ margin: "10px" }} radius="md">
+          <Button size="xs" color="dark" sx={{ margin: "10px" }} radius="md">
             Sign Up
           </Button>
         </div>
