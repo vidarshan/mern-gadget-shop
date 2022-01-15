@@ -1,7 +1,10 @@
 import { Grid, Image, Text, Col, Button } from "@mantine/core";
+import { useNavigate } from "react-router";
 import banner1 from "../images/banner1.jpeg";
 
 const Banner = () => {
+  const navigate = useNavigate();
+
   return (
     <Grid sx={{ marginTop: "5rem" }}>
       <Col
@@ -21,7 +24,12 @@ const Banner = () => {
         </Text>
         <Grid>
           <Col span={4} sx={{ marginTop: "20px" }}>
-            <Button color="dark" radius="md" fullWidth>
+            <Button
+              onClick={() => navigate("/shop")}
+              color="dark"
+              radius="md"
+              fullWidth
+            >
               View Shop
             </Button>
           </Col>

@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Shop from "./pages/Shop";
 
 ReactDOM.render(
   <MantineProvider>
@@ -16,6 +17,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route index element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
       </Routes>
       <Footer />
     </BrowserRouter>

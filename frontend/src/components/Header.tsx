@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BiShoppingBag, BiUser } from "react-icons/bi";
+import { FiSearch } from "react-icons/fi";
 import {
   Header as Head,
   MediaQuery,
@@ -8,6 +9,7 @@ import {
   useMantineTheme,
   Button,
   ActionIcon,
+  TextInput,
 } from "@mantine/core";
 
 const Header = () => {
@@ -36,6 +38,11 @@ const Header = () => {
 
         <Text>Application header</Text>
         <div style={{ display: "flex", alignItems: "center" }}>
+          <TextInput
+            icon={<FiSearch />}
+            radius="md"
+            placeholder="Search for an item..."
+          />
           <ActionIcon sx={{ margin: "10px" }} variant="outline" radius="md">
             <BiShoppingBag />
           </ActionIcon>

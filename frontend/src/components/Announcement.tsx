@@ -45,12 +45,6 @@ const Announcement = ({
             <AiFillApple size="30" />
             <AiFillAndroid size="30" />
           </div>
-          {/* <Grid>
-            <Col span={1}>
-            </Col>
-            <Col span={1}>
-            </Col>
-          </Grid> */}
         </Col>
       </Grid>
     </div>
