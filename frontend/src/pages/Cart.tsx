@@ -21,7 +21,7 @@ const Cart = () => {
   return (
     <Container sx={{ maxWidth: "85vw" }}>
       <Grid sx={{ margin: "8rem 0" }}>
-        <Col span={6}>
+        <Col xs={12} sm={12} md={12} lg={8} xl={8} span={6}>
           <Text color="gray" size="lg" sx={{ marginBottom: "10px" }}>
             Cart Items
           </Text>
@@ -32,10 +32,27 @@ const Cart = () => {
             withBorder
           >
             <Grid>
-              <Col span={2}>
+              <Col
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                xs={12}
+                sm={2}
+                md={2}
+                lg={2}
+                xl={2}
+                span={2}
+              >
                 <Image radius="md" height={70} width={100} src={banner} />
               </Col>
               <Col
+                xs={12}
+                sm={3}
+                md={3}
+                lg={3}
+                xl={3}
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -46,6 +63,11 @@ const Cart = () => {
                 <Text size="md"> Apple iPhone 13 Pro Max (256GB)</Text>
               </Col>
               <Col
+                xs={12}
+                sm={3}
+                md={3}
+                lg={3}
+                xl={3}
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -56,6 +78,11 @@ const Cart = () => {
                 <Text size="md"> $1299.99 x 1</Text>
               </Col>
               <Col
+                xs={6}
+                sm={2}
+                md={2}
+                lg={2}
+                xl={2}
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -71,6 +98,11 @@ const Cart = () => {
                 />
               </Col>
               <Col
+                xs={6}
+                sm={2}
+                md={2}
+                lg={2}
+                xl={2}
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -90,12 +122,34 @@ const Cart = () => {
               </Col>
             </Grid>
           </Card>
-          <Card sx={{ margin: "10px 0" }} shadow="xl" radius="md" withBorder>
+          <Card
+            sx={{ marginBottom: "10px" }}
+            shadow="xl"
+            radius="md"
+            withBorder
+          >
             <Grid>
-              <Col span={2}>
+              <Col
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                xs={12}
+                sm={2}
+                md={2}
+                lg={2}
+                xl={2}
+                span={2}
+              >
                 <Image radius="md" height={70} width={100} src={banner} />
               </Col>
               <Col
+                xs={12}
+                sm={3}
+                md={3}
+                lg={3}
+                xl={3}
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -103,9 +157,14 @@ const Cart = () => {
                 }}
                 span={3}
               >
-                Apple iPhone 13 Pro Max (256GB)
+                <Text size="md"> Apple iPhone 13 Pro Max (256GB)</Text>
               </Col>
               <Col
+                xs={12}
+                sm={3}
+                md={3}
+                lg={3}
+                xl={3}
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -113,9 +172,14 @@ const Cart = () => {
                 }}
                 span={3}
               >
-                $1299.99 x 1
+                <Text size="md"> $1299.99 x 1</Text>
               </Col>
               <Col
+                xs={6}
+                sm={2}
+                md={2}
+                lg={2}
+                xl={2}
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -131,66 +195,11 @@ const Cart = () => {
                 />
               </Col>
               <Col
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                span={2}
-              >
-                <Button
-                  size="sm"
-                  radius="md"
-                  fullWidth
-                  variant="filled"
-                  color="red"
-                >
-                  <BiTrashAlt />
-                </Button>
-              </Col>
-            </Grid>
-          </Card>
-          <Card sx={{ margin: "10px 0" }} shadow="xl" radius="md" withBorder>
-            <Grid>
-              <Col span={2}>
-                <Image radius="md" height={70} width={100} src={banner} />
-              </Col>
-              <Col
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                span={3}
-              >
-                Apple iPhone 13 Pro Max (256GB)
-              </Col>
-              <Col
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                span={3}
-              >
-                $1299.99 x 1
-              </Col>
-              <Col
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                span={2}
-              >
-                <NumberInput
-                  radius="md"
-                  defaultValue={18}
-                  placeholder="Your age"
-                  required
-                />
-              </Col>
-              <Col
+                xs={6}
+                sm={2}
+                md={2}
+                lg={2}
+                xl={2}
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -211,18 +220,20 @@ const Cart = () => {
             </Grid>
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={12} sm={12} md={12} lg={4} xl={4} span={6}>
           <Text color="gray" size="lg" sx={{ marginBottom: "10px" }}>
             Checkout
           </Text>
           <Card radius="md" withBorder shadow="xl">
             <Col sx={{ borderBottom: "1px solid #E0E0E0" }} span={12}>
               <Grid>
-                <Col span={10}>
+                <Col span={7}>
                   <Text size="lg">Subtotal (3) Items</Text>
                 </Col>
-                <Col span={2}>
-                  <Text size="lg">$5999.00</Text>
+                <Col span={5}>
+                  <Text align="right" size="lg">
+                    $5999.00
+                  </Text>
                 </Col>
               </Grid>
             </Col>
@@ -231,13 +242,13 @@ const Cart = () => {
               span={12}
             >
               <Grid>
-                <Col span={10}>
+                <Col span={7}>
                   <Text color="gray" size="md">
                     Discount (5%)
                   </Text>
                 </Col>
-                <Col span={2}>
-                  <Text color="gray" size="md">
+                <Col span={5}>
+                  <Text align="right" color="gray" size="md">
                     $59.00
                   </Text>
                 </Col>
