@@ -12,7 +12,17 @@ import Shop from "./pages/Shop";
 import Product from "./pages/Product";
 
 ReactDOM.render(
-  <MantineProvider>
+  <MantineProvider
+    theme={{
+      breakpoints: {
+        xs: 200,
+        sm: 800,
+        md: 1000,
+        lg: 1200,
+        xl: 1400,
+      },
+    }}
+  >
     <BrowserRouter>
       <Header />
       <Routes>
