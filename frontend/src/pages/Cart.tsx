@@ -14,6 +14,7 @@ import {
 import { useState, useRef } from "react";
 import banner from "../images/banner1.jpeg";
 import { BiTrashAlt } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [value, setValue] = useState<any>(1);
@@ -255,9 +256,11 @@ const Cart = () => {
               </Grid>
             </Col>
             <Col sx={{ margin: "10px 0" }} span={12}>
-              <Button color="dark" fullWidth radius="md">
-                Proceed to Checkout
-              </Button>
+              <Link to="/login">
+                <Button color="dark" fullWidth radius="md">
+                  Proceed to Checkout
+                </Button>
+              </Link>
             </Col>
           </Card>
         </Col>

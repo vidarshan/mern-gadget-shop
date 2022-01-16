@@ -27,7 +27,6 @@ ReactDOM.render(
     }}
   >
     <BrowserRouter>
-      <Header />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/login" element={<Login />} />
@@ -40,7 +39,6 @@ ReactDOM.render(
           <Route path="" element={<Cart />} />
         </Route>
       </Routes>
-      <Footer />
     </BrowserRouter>
   </MantineProvider>,
   document.getElementById("root")
