@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Shop from "./pages/Shop";
 import Product from "./pages/Product";
+import Cart from "./pages/Cart";
 
 ReactDOM.render(
   <MantineProvider
@@ -30,6 +31,10 @@ ReactDOM.render(
         <Route index element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/product/:id" element={<Product />} />
+        <Route path="/cart">
+          <Route path=":id" element={<Cart />} />
+          <Route path="" element={<Cart />} />
+        </Route>
       </Routes>
       <Footer />
     </BrowserRouter>

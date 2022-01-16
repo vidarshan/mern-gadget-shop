@@ -13,11 +13,12 @@ import {
   Badge,
 } from "@mantine/core";
 import React, { useRef, useState } from "react";
-import { FiUser, FiArrowLeft, FiArrowRight } from "react-icons/fi";
-import { AiOutlineStar, AiFillStar, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineStar } from "react-icons/ai";
+import { useNavigate } from "react-router";
 import banner from "../images/banner1.jpeg";
 
 const Product = () => {
+  const navigate = useNavigate();
   const [value, setValue] = useState<any>(1);
   const handlers = useRef<NumberInputHandlers>(null);
 
@@ -186,7 +187,12 @@ const Product = () => {
                 }}
                 span={9}
               >
-                <Button color="dark" radius="md" fullWidth>
+                <Button
+                  onClick={() => navigate("/cart/1")}
+                  color="dark"
+                  radius="md"
+                  fullWidth
+                >
                   Add to Cart
                 </Button>
               </Col>
