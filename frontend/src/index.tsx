@@ -13,6 +13,7 @@ import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import Login from "./pages/authentication/Login";
 import SignUp from "./pages/authentication/SignUp";
+import Shipping from "./pages/Shipping";
 
 ReactDOM.render(
   <MantineProvider
@@ -38,6 +39,7 @@ ReactDOM.render(
           <Route path=":id" element={<Cart />} />
           <Route path="" element={<Cart />} />
         </Route>
+        <Route path="/shipping" element={<Shipping />} />
       </Routes>
     </BrowserRouter>
   </MantineProvider>,

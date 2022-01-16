@@ -262,6 +262,13 @@ const Cart = () => {
                 </Button>
               </Link>
             </Col>
+            <Col sx={{ margin: "10px 0" }} span={12}>
+              <Link to="/shipping">
+                <Button color="dark" fullWidth radius="md">
+                  Shipping
+                </Button>
+              </Link>
+            </Col>
           </Card>
         </Col>
       </Grid>
