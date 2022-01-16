@@ -11,6 +11,8 @@ import Footer from "./components/Footer";
 import Shop from "./pages/Shop";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
+import Login from "./pages/authentication/Login";
+import SignUp from "./pages/authentication/SignUp";
 
 ReactDOM.render(
   <MantineProvider
@@ -28,6 +30,8 @@ ReactDOM.render(
       <Header />
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route index element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/product/:id" element={<Product />} />
