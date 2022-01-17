@@ -5,10 +5,11 @@ import Banner from "../components/Banner";
 import Featured from "../components/Featured";
 import Features from "../components/Features";
 import Header from "../components/Header";
+import Layout from "../layout/Layout";
 
 const Home = () => {
   return (
-    <Container sx={{ maxWidth: "85vw" }}>
+    <Layout>
       <Banner />
       <Features title="Why Us?" subTitle="Why you should shop here" />
       <Featured
@@ -16,7 +17,7 @@ const Home = () => {
         subTitle="Most purchased items this week"
       />
       <Announcement title="Mobile App" subTitle="Download our mobile app" />
-    </Container>
+    </Layout>
   );
 };
 

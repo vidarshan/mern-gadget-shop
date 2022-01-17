@@ -19,3 +19,10 @@ code {
 .mantine-1kfvr5r {
   font-family: "Be Vietnam Pro", sans-serif !important;
 }
+
+.header-home {
+  color: #000;
+  text-decoration: none !important;
+  font-family: "Be Vietnam Pro", sans-serif !important;
+  font-weight: 400;
+}

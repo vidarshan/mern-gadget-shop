@@ -6,7 +6,7 @@ const Banner = () => {
   const navigate = useNavigate();
 
   return (
-    <Grid sx={{ marginTop: "5rem" }}>
+    <Grid>
       <Col
         sx={{
           display: "flex",

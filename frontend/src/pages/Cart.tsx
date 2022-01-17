@@ -15,13 +15,14 @@ import { useState, useRef } from "react";
 import banner from "../images/banner1.jpeg";
 import { BiTrashAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import Layout from "../layout/Layout";
 
 const Cart = () => {
   const [value, setValue] = useState<any>(1);
   const handlers = useRef<NumberInputHandlers>(null);
   return (
-    <Container sx={{ maxWidth: "85vw" }}>
-      <Grid sx={{ margin: "8rem 0" }}>
+    <Layout>
+      <Grid>
         <Col xs={12} sm={12} md={12} lg={8} xl={8} span={6}>
           <Text color="gray" size="lg" sx={{ marginBottom: "10px" }}>
             Cart Items
@@ -272,7 +273,7 @@ const Cart = () => {
           </Card>
         </Col>
       </Grid>
-    </Container>
+    </Layout>
   );
 };
 

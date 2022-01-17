@@ -15,7 +15,6 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
         style={{
           display: "flex",
           justifyContent: "center",
-
           minHeight: "90vh",
         }}
       >

@@ -73,7 +73,7 @@ const Features = ({ title, subTitle }: { title: string; subTitle: string }) => {
               <BiDollarCircle size="70px" />
             </Text>
             <Text size="xl" weight={600} align="center">
-              Find great deals and save more.
+              Find the best deals and save more.
             </Text>
           </Card>
         </Col>

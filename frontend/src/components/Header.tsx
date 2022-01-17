@@ -13,6 +13,7 @@ import {
 } from "@mantine/core";
 import { AiOutlineUsb } from "react-icons/ai";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -48,7 +49,9 @@ const Header = () => {
           }}
         >
           <AiOutlineUsb />
-          <Text>Techstop</Text>
+          <Link className="header-home" to="/">
+            Techstop
+          </Link>
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
           <TextInput
