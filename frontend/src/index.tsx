@@ -13,6 +13,7 @@ import SignUp from "./pages/authentication/SignUp";
 import Shipping from "./pages/Shipping";
 import Payment from "./pages/Payment";
 import PlaceOrder from "./pages/PlaceOrder";
+import Order from "./pages/Order";
 
 ReactDOM.render(
   <MantineProvider
@@ -41,13 +42,10 @@ ReactDOM.render(
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/placeorder" element={<PlaceOrder />} />
+        <Route path="/order/:order" element={<Order />} />
       </Routes>
     </BrowserRouter>
   </MantineProvider>,
   document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

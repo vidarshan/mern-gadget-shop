@@ -1,14 +1,16 @@
 import { Button, Card, Col, Grid, Image, Text } from "@mantine/core";
-import React from "react";
+import { useNavigate } from "react-router";
 import Steps from "../components/Steps";
 import Layout from "../layout/Layout";
 import banner from "../images/banner1.jpeg";
 import { BsCreditCard2Front, BsBox } from "react-icons/bs";
 
 const PlaceOrder = () => {
+  const navigate = useNavigate();
+
   return (
     <Layout>
-      <Card withBorder shadow="xl" radius="md" padding="xl">
+      <Card withBorder shadow="sm" radius="md" padding="xl">
         <Steps active={3} />
         <Grid sx={{ marginTop: "2rem" }}>
           <Col span={12}>
@@ -182,7 +184,12 @@ const PlaceOrder = () => {
             </Card>
           </Col>
           <Col span={12}>
-            <Button color="dark" radius="md" fullWidth>
+            <Button
+              onClick={() => navigate("/order/2342348284")}
+              color="dark"
+              radius="md"
+              fullWidth
+            >
               Place Order
             </Button>
           </Col>
