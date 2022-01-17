@@ -1,8 +1,11 @@
 import { Card, Grid, Stepper, TextInput, Col, Button } from "@mantine/core";
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import Layout from "../layout/Layout";
 
 const Shipping = () => {
+  const navigate = useNavigate();
+
   const [active, setActive] = useState(1);
   const nextStep = () =>
     setActive((current) => (current < 3 ? current + 1 : current));
@@ -45,7 +48,12 @@ const Shipping = () => {
             <TextInput radius="md" placeholder="Your Country" label="Country" />
           </Col>
           <Col span={12}>
-            <Button radius="md" color="dark" fullWidth>
+            <Button
+              onClick={() => navigate("/payment")}
+              radius="md"
+              color="dark"
+              fullWidth
+            >
               Continue
             </Button>
           </Col>

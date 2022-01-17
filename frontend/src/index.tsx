@@ -14,6 +14,8 @@ import Cart from "./pages/Cart";
 import Login from "./pages/authentication/Login";
 import SignUp from "./pages/authentication/SignUp";
 import Shipping from "./pages/Shipping";
+import Payment from "./pages/Payment";
+import PlaceOrder from "./pages/PlaceOrder";
 
 ReactDOM.render(
   <MantineProvider
@@ -40,6 +42,8 @@ ReactDOM.render(
           <Route path="" element={<Cart />} />
         </Route>
         <Route path="/shipping" element={<Shipping />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/placeorder" element={<PlaceOrder />} />
       </Routes>
     </BrowserRouter>
   </MantineProvider>,

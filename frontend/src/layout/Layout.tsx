@@ -16,6 +16,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
           display: "flex",
           justifyContent: "center",
           maxWidth: "1920px",
+          minHeight: "90vh",
         }}
       >
         <Container
