@@ -1,7 +1,7 @@
 import {
   Button,
   Col,
-  Container,
+  Textarea,
   Grid,
   Image,
   NumberInput,
@@ -11,6 +11,8 @@ import {
   Text,
   Card,
   Badge,
+  Modal,
+  Select,
 } from "@mantine/core";
 import React, { useRef, useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
@@ -20,11 +22,54 @@ import Layout from "../layout/Layout";
 
 const Product = () => {
   const navigate = useNavigate();
+  const [opened, setOpened] = useState(false);
   const [value, setValue] = useState<any>(1);
   const handlers = useRef<NumberInputHandlers>(null);
 
+  const ratingLevels = [
+    { value: "1", label: "1 - Poor" },
+    { value: "2", label: "2 - Fair" },
+    { value: "3", label: "3 - Good" },
+    { value: "4", label: "4 - Very Good" },
+    { value: "5", label: "5 - Excellent" },
+  ];
+
   return (
     <Layout>
+      <Modal
+        title="Add Review"
+        centered
+        radius="md"
+        opened={opened}
+        closeOnClickOutside
+        onClose={() => setOpened(false)}
+      >
+        <Grid>
+          <Col span={12}>
+            <Select
+              radius="md"
+              data={ratingLevels}
+              icon={<AiOutlineStar />}
+              placeholder="Your rating"
+              label="Rating"
+              required
+            />
+          </Col>
+          <Col span={12}>
+            <Textarea
+              placeholder="Your review"
+              label="Your review"
+              radius="md"
+              required
+            />
+          </Col>
+          <Col span={12}>
+            <Button color="dark" radius="md" fullWidth>
+              Add Review
+            </Button>
+          </Col>
+        </Grid>
+      </Modal>
       <Grid>
         <Col
           xs={12}
@@ -205,7 +250,9 @@ const Product = () => {
             Reviews (93)
           </Text>
           <Col sx={{ margin: "10px 0" }} span={12}>
-            <Button>Add Review</Button>
+            <Button color="dark" size="xs" onClick={() => setOpened(true)}>
+              Add Review
+            </Button>
           </Col>
           <Card sx={{ margin: "1rem 0" }} withBorder shadow="xl" radius="md">
             <Grid>
