@@ -59,9 +59,13 @@ input {
   height: 100% !important;
 }
 
+.mobile-header {
+  height: 70vh;
+  margin-top: 5rem;
+  transition: width 2s;
+}
 @media screen and (min-width: 800px) {
-  .mantine-1aictq3 {
-    display: none;
-    background-color: red !important;
+  .mobile-header {
+    display: none !important;
   }
 }

@@ -8,9 +8,11 @@ import {
   TextInput,
   ActionIcon,
   Button,
+  Grid,
+  Col,
+  Text,
 } from "@mantine/core";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
 import { AiOutlineUsb } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
@@ -25,34 +27,100 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   const theme = useMantineTheme();
   const navigate = useNavigate();
 
+  const handlerNavigate = (route: string) => {
+    navigate(route);
+    setOpened(false);
+  };
+
   const openMobileNavbar = () => {
     if (opened) {
       return (
-        <div>
-          <div style={{ backgroundColor: "yellow", height: "100vh" }}>
-            loremewjfnwjfnjsdasas
-          </div>
+        <div className="mobile-header">
+          <Grid>
+            <Col
+              onClick={() => handlerNavigate("/")}
+              className="flex-container"
+              sx={{ marginTop: "2rem" }}
+              span={12}
+            >
+              <AiOutlineUsb />
+              <Text weight={500} size="xl" align="center">
+                Techstop
+              </Text>
+            </Col>
+            <Col
+              onClick={() => handlerNavigate("/")}
+              sx={{ marginTop: "1rem" }}
+              span={12}
+            >
+              <Text color="gray" weight={500} size="xl" align="center">
+                Home
+              </Text>
+            </Col>
+            <Col
+              onClick={() => handlerNavigate("/shop")}
+              sx={{ marginTop: "1rem" }}
+              span={12}
+            >
+              <Text color="gray" weight={500} size="xl" align="center">
+                Shop
+              </Text>
+            </Col>
+            <Col
+              onClick={() => handlerNavigate("/cart")}
+              sx={{ marginTop: "1rem" }}
+              span={12}
+            >
+              <Text color="gray" weight={500} size="xl" align="center">
+                Cart
+              </Text>
+            </Col>
+            <Col sx={{ marginTop: "1rem" }} span={12}>
+              <Text
+                onClick={() => handlerNavigate("/profile")}
+                weight={500}
+                size="xl"
+                align="center"
+                color="gray"
+              >
+                Profile
+              </Text>
+            </Col>
+            <Col
+              onClick={() => handlerNavigate("/login")}
+              sx={{ marginTop: "1rem" }}
+              span={12}
+            >
+              <Text color="gray" weight={500} size="xl" align="center">
+                Log In
+              </Text>
+            </Col>
+          </Grid>
         </div>
       );
     } else {
       return (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            minHeight: "90vh",
-          }}
-        >
-          <Container
-            sx={{
-              marginTop: "7rem",
-              maxWidth: "1720px",
-              backgroundColor: "red",
+        <>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              minHeight: "90vh",
             }}
           >
-            {children}
-          </Container>
-        </div>
+            <Container
+              sx={{
+                marginTop: "7rem",
+                maxWidth: "1720px",
+                backgroundColor: "red",
+              }}
+            >
+              {children}
+            </Container>
+          </div>
+
+          <Footer />
+        </>
       );
     }
   };
@@ -93,34 +161,38 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
               />
             </MediaQuery>
 
-            <ActionIcon sx={{ margin: "10px" }} variant="default" radius="md">
-              <BiShoppingBag />
-            </ActionIcon>
+            <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+              <ActionIcon sx={{ margin: "10px" }} variant="default" radius="md">
+                <BiShoppingBag />
+              </ActionIcon>
+            </MediaQuery>
 
-            <ActionIcon
-              onClick={() => navigate("/profile")}
-              sx={{ margin: "10px" }}
-              variant="default"
-              radius="md"
-            >
-              <BiUser />
-            </ActionIcon>
-            <Button
-              onClick={() => navigate("/signup")}
-              color="dark"
-              variant="filled"
-              sx={{ margin: "10px" }}
-              radius="md"
-              size="xs"
-            >
-              Sign Up
-            </Button>
+            <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+              <ActionIcon
+                onClick={() => navigate("/profile")}
+                sx={{ margin: "10px" }}
+                variant="default"
+                radius="md"
+              >
+                <BiUser />
+              </ActionIcon>
+            </MediaQuery>
+            <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+              <Button
+                onClick={() => navigate("/signup")}
+                color="dark"
+                variant="filled"
+                sx={{ margin: "10px" }}
+                radius="md"
+                size="xs"
+              >
+                Sign Up
+              </Button>
+            </MediaQuery>
           </div>
         </div>
       </Head>
       {openMobileNavbar()}
-
-      <Footer />
     </>
   );
 };
