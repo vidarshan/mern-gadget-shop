@@ -15,14 +15,14 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
         style={{
           display: "flex",
           justifyContent: "center",
-          maxWidth: "1920px",
+
           minHeight: "90vh",
         }}
       >
         <Container
           sx={{
-            margin: "7rem 0",
-            width: "100%",
+            marginTop: "7rem",
+            maxWidth: "1720px",
           }}
         >
           {children}

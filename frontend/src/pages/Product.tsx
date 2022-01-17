@@ -16,6 +16,7 @@ import React, { useRef, useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
 import { useNavigate } from "react-router";
 import banner from "../images/banner1.jpeg";
+import Layout from "../layout/Layout";
 
 const Product = () => {
   const navigate = useNavigate();
@@ -23,8 +24,8 @@ const Product = () => {
   const handlers = useRef<NumberInputHandlers>(null);
 
   return (
-    <Container sx={{ maxWidth: "85vw" }}>
-      <Grid sx={{ margin: "8rem 0" }}>
+    <Layout>
+      <Grid>
         <Col
           xs={12}
           sm={12}
@@ -203,6 +204,9 @@ const Product = () => {
           <Text sx={{ margin: "10px 0" }} size="lg">
             Reviews (93)
           </Text>
+          <Col sx={{ margin: "10px 0" }} span={12}>
+            <Button>Add Review</Button>
+          </Col>
           <Card sx={{ margin: "1rem 0" }} withBorder shadow="xl" radius="md">
             <Grid>
               <Col
@@ -292,7 +296,7 @@ const Product = () => {
           </Card>
         </Col>
       </Grid>
-    </Container>
+    </Layout>
   );
 };
 
