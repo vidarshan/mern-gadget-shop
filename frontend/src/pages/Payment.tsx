@@ -15,16 +15,30 @@ import Layout from "../layout/Layout";
 
 const Payment = () => {
   const navigate = useNavigate();
-  const [active, setActive] = useState(2);
-  const nextStep = () =>
-    setActive((current) => (current < 3 ? current + 1 : current));
-  const prevStep = () =>
-    setActive((current) => (current > 0 ? current - 1 : current));
+
+  const steps = [
+    {
+      label: "Authenticate",
+      description: "Login with an account",
+    },
+    {
+      label: "Shipping",
+      description: "Confirm shipping address",
+    },
+    {
+      label: "Payment",
+      description: "Pay amount",
+    },
+    {
+      label: "Order",
+      description: "Place order",
+    },
+  ];
 
   return (
     <Layout>
       <Card withBorder shadow="xl" radius="md" padding="xl">
-        <Steps active={2} />
+        <Steps steps={steps} active={2} />
         <Grid sx={{ marginTop: "2rem" }}>
           <Col span={12}>
             <Text>Select Payment Method</Text>

@@ -3,25 +3,43 @@ import React, { PropsWithChildren } from "react";
 
 interface IStepProps {
   active: number;
+  steps: any[];
 }
-const Steps: React.FC<PropsWithChildren<IStepProps>> = ({ active }) => {
+const Steps: React.FC<PropsWithChildren<IStepProps>> = ({ active, steps }) => {
   return (
     <Stepper color="dark" active={active} breakpoint="sm">
-      <Stepper.Step
-        label="Authenticate"
-        description="Login with an account"
-      ></Stepper.Step>
-      <Stepper.Step
-        label="Shipping"
-        description="Confirm shipping address"
-      ></Stepper.Step>
-      <Stepper.Step label="Payment" description="Pay amount"></Stepper.Step>
-      <Stepper.Step label="Order" description="Place order"></Stepper.Step>
-      <Stepper.Completed>
-        Completed, click back button to get to previous step
-      </Stepper.Completed>
+      {steps.map((step) => {
+        return (
+          <Stepper.Step
+            label={step.label}
+            description={step.description}
+          ></Stepper.Step>
+        );
+      })}
     </Stepper>
   );
+};
+
+Steps.defaultProps = {
+  active: 1,
+  steps: [
+    {
+      label: "Authenticate",
+      description: "Login with an account",
+    },
+    {
+      label: "Shipping",
+      description: "Confirm shipping address",
+    },
+    {
+      label: "Payment",
+      description: "Pay amount",
+    },
+    {
+      label: "Order",
+      description: "Place order",
+    },
+  ],
 };
 
 export default Steps;
