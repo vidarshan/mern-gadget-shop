@@ -12,8 +12,11 @@ import {
   TextInput,
 } from "@mantine/core";
 import { AiOutlineUsb } from "react-icons/ai";
+import { useNavigate } from "react-router";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
 
@@ -56,7 +59,12 @@ const Header = () => {
           <ActionIcon sx={{ margin: "10px" }} variant="outline" radius="md">
             <BiShoppingBag />
           </ActionIcon>
-          <ActionIcon sx={{ margin: "10px" }} variant="outline" radius="md">
+          <ActionIcon
+            onClick={() => navigate("/profile")}
+            sx={{ margin: "10px" }}
+            variant="outline"
+            radius="md"
+          >
             <BiUser />
           </ActionIcon>
           <Button size="xs" color="dark" sx={{ margin: "10px" }} radius="md">
