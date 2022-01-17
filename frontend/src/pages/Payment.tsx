@@ -20,18 +20,20 @@ const Payment = () => {
         <Steps active={2} />
         <Grid sx={{ marginTop: "2rem" }}>
           <Col span={12}>
-            <Text>Select Payment Method</Text>
-          </Col>
-          <Col span={12}>
-            <RadioGroup value="credit" color="dark" required>
-              <Radio checked size="sm" value="credit">
-                Credit Card or PayPal
-              </Radio>
-            </RadioGroup>
+            <Text sx={{ margin: "10px 0" }}>Select Payment Method</Text>
+            <Card withBorder shadow="xs" radius="md">
+              <Col span={12}>
+                <RadioGroup value="credit" color="dark" required>
+                  <Radio checked size="sm" value="credit">
+                    Credit Card or PayPal
+                  </Radio>
+                </RadioGroup>
+              </Col>
+            </Card>
           </Col>
           <Col span={12}>
             <Button
-              onClick={() => navigate("/payment")}
+              onClick={() => navigate("/placeorder")}
               radius="md"
               color="dark"
               fullWidth
