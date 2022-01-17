@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { BiShoppingBag, BiUser } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import {
   Header as Head,
   MediaQuery,
   Burger,
-  Text,
   useMantineTheme,
   Button,
   ActionIcon,
@@ -21,16 +20,23 @@ const Header = () => {
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
 
+  const openMobileNavbar = () => {
+    if (opened) {
+      return (
+        <div>
+          <div style={{ backgroundColor: "yellow", height: "100vh" }}>
+            loremewjfnwjfnjsdasas
+          </div>
+        </div>
+      );
+    }
+  };
+
+  useEffect(() => {}, [opened]);
+
   return (
     <Head height={70} padding="md" fixed>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          height: "100%",
-        }}
-      >
+      <div className="flex-container-horizontal-align-space-between height-full-perc ">
         <MediaQuery largerThan="sm" styles={{ display: "none" }}>
           <Burger
             opened={opened}
@@ -40,43 +46,46 @@ const Header = () => {
             mr="xl"
           />
         </MediaQuery>
-
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <AiOutlineUsb />
-          <Link className="header-home" to="/">
-            Techstop
-          </Link>
+        {openMobileNavbar()}
+        <div className="flex-container-no-horizontal-align">
+          <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+            <AiOutlineUsb />
+          </MediaQuery>
+          <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+            <Link className="header-home" to="/">
+              Techstop
+            </Link>
+          </MediaQuery>
         </div>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <TextInput
-            icon={<FiSearch />}
-            radius="md"
-            placeholder="Search for an item..."
-          />
-          <ActionIcon sx={{ margin: "10px" }} variant="outline" radius="md">
+
+        <div className="flex-container-no-horizontal-align">
+          <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+            <TextInput
+              icon={<FiSearch />}
+              radius="md"
+              placeholder="Search for an item..."
+            />
+          </MediaQuery>
+
+          <ActionIcon sx={{ margin: "10px" }} variant="default" radius="md">
             <BiShoppingBag />
           </ActionIcon>
 
           <ActionIcon
             onClick={() => navigate("/profile")}
             sx={{ margin: "10px" }}
-            variant="outline"
+            variant="default"
             radius="md"
           >
             <BiUser />
           </ActionIcon>
           <Button
             onClick={() => navigate("/signup")}
-            size="sm"
             color="dark"
+            variant="filled"
             sx={{ margin: "10px" }}
             radius="md"
+            size="xs"
           >
             Sign Up
           </Button>

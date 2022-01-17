@@ -38,6 +38,30 @@ input {
   align-items: center;
 }
 
+.flex-container-horizontal-align-space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-container-no-horizontal-align {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .height-full-vh {
   height: 100vh !important;
+}
+
+.height-full-perc {
+  height: 100% !important;
+}
+
+@media screen and (min-width: 800px) {
+  .mantine-1aictq3 {
+    display: none;
+    background-color: red !important;
+  }
 }
