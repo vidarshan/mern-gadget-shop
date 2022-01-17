@@ -1,35 +1,24 @@
-import { Card, Grid, Stepper, TextInput, Col, Button } from "@mantine/core";
+import {
+  Card,
+  Grid,
+  Stepper,
+  TextInput,
+  Col,
+  Button,
+  Step,
+} from "@mantine/core";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import Layout from "../layout/Layout";
+import Steps from "../components/Steps";
 
 const Shipping = () => {
   const navigate = useNavigate();
 
-  const [active, setActive] = useState(1);
-  const nextStep = () =>
-    setActive((current) => (current < 3 ? current + 1 : current));
-  const prevStep = () =>
-    setActive((current) => (current > 0 ? current - 1 : current));
-
   return (
     <Layout>
       <Card padding="xl" withBorder radius="md" shadow="xl">
-        <Stepper color="dark" active={active} breakpoint="sm">
-          <Stepper.Step
-            label="Authenticate"
-            description="Login with an account"
-          ></Stepper.Step>
-          <Stepper.Step
-            label="Shipping"
-            description="Confirm shipping address"
-          ></Stepper.Step>
-          <Stepper.Step label="Payment" description="Pay amount"></Stepper.Step>
-          <Stepper.Step label="Order" description="Place order"></Stepper.Step>
-          <Stepper.Completed>
-            Completed, click back button to get to previous step
-          </Stepper.Completed>
-        </Stepper>
+        <Steps active={1} />
         <Grid sx={{ marginTop: "2rem" }}>
           <Col span={12}>
             <TextInput radius="md" placeholder="Your Address" label="Address" />

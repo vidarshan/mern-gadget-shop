@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
@@ -6,8 +5,6 @@ import reportWebVitals from "./reportWebVitals";
 import { MantineProvider } from "@mantine/core";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import Shop from "./pages/Shop";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
