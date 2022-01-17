@@ -51,16 +51,27 @@ const SignUp = () => {
             </Text>
           </Col>
           <Col span={12}>
-            <TextInput radius="md" placeholder="Your Name" label="Name" />
+            <TextInput
+              radius="md"
+              placeholder="Your Name"
+              label="Name"
+              required
+            />
           </Col>
           <Col span={12}>
-            <TextInput radius="md" placeholder="Your Email" label="Email" />
+            <TextInput
+              radius="md"
+              placeholder="Your Email"
+              label="Email"
+              required
+            />
           </Col>
           <Col span={12}>
             <PasswordInput
               radius="md"
               placeholder="Your Password"
               label="Password"
+              required
             />
           </Col>
           <Col span={12}>
@@ -68,6 +79,7 @@ const SignUp = () => {
               radius="md"
               placeholder="Confirm Password"
               label="Confirmation"
+              required
             />
           </Col>
           <Col sx={{ marginTop: "10px" }} span={12}>
@@ -82,7 +94,7 @@ const SignUp = () => {
               fullWidth
               variant="white"
             >
-              Already have an account? Sign up
+              Already have an account? Log in
             </Button>
           </Col>
         </Grid>

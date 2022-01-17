@@ -62,6 +62,7 @@ const Header = () => {
           <ActionIcon sx={{ margin: "10px" }} variant="outline" radius="md">
             <BiShoppingBag />
           </ActionIcon>
+
           <ActionIcon
             onClick={() => navigate("/profile")}
             sx={{ margin: "10px" }}
@@ -70,7 +71,13 @@ const Header = () => {
           >
             <BiUser />
           </ActionIcon>
-          <Button size="xs" color="dark" sx={{ margin: "10px" }} radius="md">
+          <Button
+            onClick={() => navigate("/signup")}
+            size="sm"
+            color="dark"
+            sx={{ margin: "10px" }}
+            radius="md"
+          >
             Sign Up
           </Button>
         </div>

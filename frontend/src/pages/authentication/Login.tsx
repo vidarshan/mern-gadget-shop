@@ -15,15 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   return (
-    <Container
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
+    <Container className="flex-container height-full-vh">
       <Card
         withBorder
         padding="xl"
@@ -32,14 +24,7 @@ const Login = () => {
         sx={{ width: "500px" }}
       >
         <Grid>
-          <Col
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            span={12}
-          >
+          <Col className="flex-container" span={12}>
             <AiOutlineUsb />
             <Text align="center" weight={700} size="xl">
               Techstop

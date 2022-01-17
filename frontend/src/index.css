@@ -26,3 +26,18 @@ code {
   font-family: "Be Vietnam Pro", sans-serif !important;
   font-weight: 400;
 }
+
+input {
+  font-family: "Be Vietnam Pro", sans-serif !important;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.height-full-vh {
+  height: 100vh !important;
+}
