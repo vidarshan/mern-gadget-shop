@@ -13,6 +13,7 @@ import {
   Badge,
   Modal,
   Select,
+  MediaQuery,
 } from "@mantine/core";
 import React, { useRef, useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
@@ -165,20 +166,19 @@ const Product = () => {
                   93 reviews
                 </Text>
               </Col>
-              <Col
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  borderBottom: "1px solid #E0E0E0",
-                  marginBottom: "10px",
-                }}
-                span={12}
-              >
-                <Text color="gray" weight={400} size="lg">
+              <Col span={12}>
+                <Text align="right" weight={700} size="xl">
                   $120.99
                 </Text>
               </Col>
-
+              {/* <MediaQuery
+                smallerThan="md"
+                styles={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              > */}
               <Col
                 xs={12}
                 sm={6}
@@ -222,6 +222,7 @@ const Product = () => {
                   </ActionIcon>
                 </Group>
               </Col>
+              {/* </MediaQuery> */}
               <Col
                 xs={12}
                 sm={6}
@@ -250,7 +251,13 @@ const Product = () => {
             Reviews (93)
           </Text>
           <Col sx={{ margin: "10px 0" }} span={12}>
-            <Button color="dark" size="xs" onClick={() => setOpened(true)}>
+            <Button
+              color="dark"
+              size="xs"
+              radius="md"
+              onClick={() => setOpened(true)}
+              sx={{ margin: "0" }}
+            >
               Add Review
             </Button>
           </Col>
