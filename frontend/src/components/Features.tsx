@@ -1,5 +1,4 @@
-import { Card, Col, Grid, Text } from "@mantine/core";
-import React from "react";
+import { Col, Grid, Text } from "@mantine/core";
 import { BiSearch, BiDollarCircle } from "react-icons/bi";
 import { FiBox, FiHeart } from "react-icons/fi";
 import FeatureCard from "./features/FeatureCard";
@@ -39,7 +38,7 @@ const Features = ({ title, subTitle }: { title: string; subTitle: string }) => {
       <Grid sx={{ marginTop: "20px" }}>
         {features.map((feature) => {
           return (
-            <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
+            <Col key={feature.id} xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
               <FeatureCard
                 title={feature.title}
                 icon={feature.icon}
@@ -49,38 +48,6 @@ const Features = ({ title, subTitle }: { title: string; subTitle: string }) => {
             </Col>
           );
         })}
-        {/* <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
-          <FeatureCard
-            title="Search what you need easily."
-            icon={<BiSearch size="70" />}
-            textColor="white"
-            backgroundColor="black"
-          />
-        </Col>
-        <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
-          <FeatureCard
-            title="Your items will be shipped with great care."
-            icon={<FiBox size="70" />}
-            textColor="white"
-            backgroundColor="black"
-          />
-        </Col>
-        <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
-          <FeatureCard
-            title="Find the best deals and save more."
-            icon={<BiDollarCircle size="70" />}
-            textColor="white"
-            backgroundColor="black"
-          />
-        </Col>
-        <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
-          <FeatureCard
-            title="Great return policy on defected products."
-            icon={<FiHeart size="70" />}
-            textColor="white"
-            backgroundColor="black"
-          />
-        </Col> */}
       </Grid>
     </div>
   );

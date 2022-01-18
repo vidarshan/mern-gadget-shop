@@ -1,7 +1,5 @@
 import { Card, Text } from "@mantine/core";
 import React, { PropsWithChildren } from "react";
-import { BiSearch, BiDollarCircle } from "react-icons/bi";
-import { FiBox, FiHeart } from "react-icons/fi";
 
 interface IFeatureCard {
   title: string;

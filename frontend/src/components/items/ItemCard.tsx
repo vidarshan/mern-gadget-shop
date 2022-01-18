@@ -1,6 +1,6 @@
 import { Button, Card, Image, Text } from "@mantine/core";
 import React from "react";
-import item from "../images/item.jpeg";
+import item from "../../images/item.jpeg";
 import { useNavigate } from "react-router";
 
 const ItemCard = () => {

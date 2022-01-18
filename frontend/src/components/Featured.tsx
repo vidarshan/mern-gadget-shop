@@ -1,5 +1,5 @@
-import { Grid, Col, Text, Button } from "@mantine/core";
-import ItemCard from "./ItemCard";
+import { Grid, Col, Text } from "@mantine/core";
+import ItemCard from "./items/ItemCard";
 
 const Featured = ({ title, subTitle }: { title: string; subTitle: string }) => {
   return (
@@ -16,24 +16,25 @@ const Featured = ({ title, subTitle }: { title: string; subTitle: string }) => {
         {subTitle}
       </Text>
       <Grid>
-        <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
+        <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
           <ItemCard />
         </Col>
-        <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
+        <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
           <ItemCard />
         </Col>
-        <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
+        <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
           <ItemCard />
         </Col>
-        <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
+        <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
+          <ItemCard />
+        </Col>
+        <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
+          <ItemCard />
+        </Col>
+        <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
           <ItemCard />
         </Col>
       </Grid>
-      <div style={{ marginTop: "30px" }}>
-        <Button fullWidth variant="filled" color="dark">
-          View Shop
-        </Button>
-      </div>
     </div>
   );
 };

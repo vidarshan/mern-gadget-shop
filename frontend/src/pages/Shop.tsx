@@ -1,14 +1,5 @@
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Grid,
-  Select,
-  TextInput,
-} from "@mantine/core";
-import React from "react";
-import ItemCard from "../components/ItemCard";
+import { Button, Card, Col, Container, Grid, Select } from "@mantine/core";
+import ItemCard from "../components/items/ItemCard";
 import { BiDollarCircle, BiLaptop, BiBuilding } from "react-icons/bi";
 
 const Shop = () => {
