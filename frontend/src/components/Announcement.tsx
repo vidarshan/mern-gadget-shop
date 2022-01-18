@@ -1,7 +1,5 @@
-import React from "react";
 import { Col, Grid, Image, Text } from "@mantine/core";
-import mobile from "../images/mobile.png";
-import { AiFillApple, AiFillAndroid } from "react-icons/ai";
+import announcement from "../images/announcement.png";
 
 const Announcement = ({
   title,
@@ -24,20 +22,8 @@ const Announcement = ({
         {subTitle}
       </Text>
       <Grid>
-        <Col span={4}>
-          <Image height={500} width={500} src={mobile} />
-        </Col>
-        <Col className="flex-container-no-vertical-align" span={8}>
-          <Text weight={700} sx={{ fontSize: "50px" }}>
-            Techstop mobile app.
-          </Text>
-          <Text sx={{ marginTop: "10px" }} color="gray" size="xl">
-            Shop on your mobile with our mobile application.
-          </Text>
-          <div style={{ marginTop: "20px" }}>
-            <AiFillApple size="30" />
-            <AiFillAndroid size="30" />
-          </div>
+        <Col span={12}>
+          <Image radius="md" fit="contain" src={announcement} />
         </Col>
       </Grid>
     </div>
