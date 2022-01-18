@@ -27,14 +27,7 @@ const Announcement = ({
         <Col span={4}>
           <Image height={500} width={500} src={mobile} />
         </Col>
-        <Col
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-          span={8}
-        >
+        <Col className="flex-container-no-vertical-align" span={8}>
           <Text weight={700} sx={{ fontSize: "50px" }}>
             Techstop mobile app.
           </Text>

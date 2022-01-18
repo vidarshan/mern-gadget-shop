@@ -2,8 +2,32 @@ import { Card, Col, Grid, Text } from "@mantine/core";
 import React from "react";
 import { BiSearch, BiDollarCircle } from "react-icons/bi";
 import { FiBox, FiHeart } from "react-icons/fi";
+import FeatureCard from "./features/FeatureCard";
 
 const Features = ({ title, subTitle }: { title: string; subTitle: string }) => {
+  const features = [
+    {
+      id: 1,
+      title: "Search what you need easily.",
+      icon: <BiSearch size="70" />,
+    },
+    {
+      id: 2,
+      title: "Your items will be shipped with great care.",
+      icon: <FiBox size="70" />,
+    },
+    {
+      id: 3,
+      title: "Find the best deals and save more.",
+      icon: <BiDollarCircle size="70" />,
+    },
+    {
+      id: 4,
+      title: "Great return policy on defected products.",
+      icon: <FiHeart size="70" />,
+    },
+  ];
+
   return (
     <div style={{ margin: "50px 0" }}>
       <Text align="center" weight={700} sx={{ fontSize: "30px" }}>
@@ -13,92 +37,50 @@ const Features = ({ title, subTitle }: { title: string; subTitle: string }) => {
         {subTitle}
       </Text>
       <Grid sx={{ marginTop: "20px" }}>
-        <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
-          <Card
-            shadow="xl"
-            sx={{
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-            padding="xl"
-            withBorder
-            radius="lg"
-          >
-            <Text align="center">
-              <BiSearch size="70px" />
-            </Text>
-            <Text size="xl" weight={600} align="center">
-              Search what you need easily.
-            </Text>
-          </Card>
+        {features.map((feature) => {
+          return (
+            <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
+              <FeatureCard
+                title={feature.title}
+                icon={feature.icon}
+                textColor="white"
+                backgroundColor="black"
+              />
+            </Col>
+          );
+        })}
+        {/* <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
+          <FeatureCard
+            title="Search what you need easily."
+            icon={<BiSearch size="70" />}
+            textColor="white"
+            backgroundColor="black"
+          />
         </Col>
         <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
-          <Card
-            shadow="xl"
-            sx={{
-              backgroundColor: "black",
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-            padding="xl"
-            withBorder
-            radius="lg"
-          >
-            <Text sx={{ color: "white" }} align="center">
-              <FiBox size="70px" />
-            </Text>
-            <Text sx={{ color: "white" }} size="xl" weight={600} align="center">
-              Your items will be shipped with great care.
-            </Text>
-          </Card>
+          <FeatureCard
+            title="Your items will be shipped with great care."
+            icon={<FiBox size="70" />}
+            textColor="white"
+            backgroundColor="black"
+          />
         </Col>
         <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
-          <Card
-            shadow="xl"
-            sx={{
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-            padding="xl"
-            withBorder
-            radius="lg"
-          >
-            <Text align="center">
-              <BiDollarCircle size="70px" />
-            </Text>
-            <Text size="xl" weight={600} align="center">
-              Find the best deals and save more.
-            </Text>
-          </Card>
+          <FeatureCard
+            title="Find the best deals and save more."
+            icon={<BiDollarCircle size="70" />}
+            textColor="white"
+            backgroundColor="black"
+          />
         </Col>
         <Col xs={12} sm={6} md={6} lg={6} xl={3} span={3}>
-          <Card
-            shadow="xl"
-            sx={{
-              backgroundColor: "black",
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-            padding="xl"
-            withBorder
-            radius="lg"
-          >
-            <Text sx={{ color: "white" }} align="center">
-              <FiHeart size="70px" />
-            </Text>
-            <Text sx={{ color: "white" }} size="xl" weight={600} align="center">
-              Great return policy on defected products.
-            </Text>
-          </Card>
-        </Col>
+          <FeatureCard
+            title="Great return policy on defected products."
+            icon={<FiHeart size="70" />}
+            textColor="white"
+            backgroundColor="black"
+          />
+        </Col> */}
       </Grid>
     </div>
   );
