@@ -1,13 +1,22 @@
-import { Button, Card, Col, Container, Grid, Select } from "@mantine/core";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Grid,
+  Pagination,
+  Select,
+} from "@mantine/core";
 import ItemCard from "../components/items/ItemCard";
 import { BiDollarCircle, BiLaptop, BiBuilding } from "react-icons/bi";
+import Layout from "../layout/Layout";
 
 const Shop = () => {
   return (
-    <Container sx={{ marginTop: "6rem", maxWidth: "85vw" }}>
+    <Layout>
       <Card radius="md" withBorder sx={{ marginBottom: "2rem" }}>
         <Grid>
-          <Col span={3}>
+          <Col xs={12} sm={6} md={3} lg={3} xl={3} span={3}>
             <Select
               icon={<BiBuilding />}
               variant="default"
@@ -22,7 +31,7 @@ const Shop = () => {
               ]}
             />
           </Col>
-          <Col span={3}>
+          <Col xs={12} sm={6} md={3} lg={3} xl={3} span={3}>
             <Select
               icon={<BiLaptop />}
               radius="md"
@@ -36,7 +45,7 @@ const Shop = () => {
               ]}
             />
           </Col>
-          <Col span={3}>
+          <Col xs={12} sm={6} md={3} lg={3} xl={3} span={3}>
             <Select
               icon={<BiDollarCircle />}
               radius="md"
@@ -50,9 +59,9 @@ const Shop = () => {
               ]}
             />
           </Col>
-          <Col span={3}>
+          <Col xs={12} sm={6} md={3} lg={3} xl={3} span={3}>
             <Button
-              variant="white"
+              variant="filled"
               radius="md"
               size="sm"
               fullWidth
@@ -64,20 +73,31 @@ const Shop = () => {
         </Grid>
       </Card>
       <Grid>
-        <Col span={2}>
+        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
           <ItemCard />
         </Col>
-        <Col span={2}>
+        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
           <ItemCard />
         </Col>
-        <Col span={2}>
+        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
           <ItemCard />
         </Col>
-        <Col span={2}>
+        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
+          <ItemCard />
+        </Col>
+        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
+          <ItemCard />
+        </Col>
+        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
           <ItemCard />
         </Col>
       </Grid>
-    </Container>
+      <Grid>
+        <Col className="flex-container" sx={{ margin: "1rem 0" }} span={12}>
+          <Pagination total={10} color="dark" radius="md" />
+        </Col>
+      </Grid>
+    </Layout>
   );
 };
 
