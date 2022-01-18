@@ -1,9 +1,12 @@
 import { Grid, Image, Col, Button } from "@mantine/core";
 import { BiShoppingBag } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
+import { useNavigate } from "react-router";
 import frame1 from "../images/Frame1.png";
 
 const Banner = () => {
+  const navigate = useNavigate();
+
   return (
     <Grid>
       <Col span={12}>
@@ -11,6 +14,7 @@ const Banner = () => {
       </Col>
       <Col className="flex-container" span={12}>
         <Button
+          onClick={() => navigate("/shop")}
           color="dark"
           radius="md"
           leftIcon={<BiShoppingBag />}
