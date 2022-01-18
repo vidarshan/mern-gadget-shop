@@ -51,6 +51,12 @@ input {
   align-items: center;
 }
 
+.flex-container-no-vertical-align {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .height-full-vh {
   height: 100vh !important;
 }

@@ -1,42 +1,24 @@
-import { Grid, Image, Text, Col, Button } from "@mantine/core";
-import { useNavigate } from "react-router";
-import banner1 from "../images/banner1.jpeg";
+import { Grid, Image, Col, Button } from "@mantine/core";
+import { BiShoppingBag } from "react-icons/bi";
+import { BsArrowRight } from "react-icons/bs";
+import frame1 from "../images/Frame1.png";
 
 const Banner = () => {
-  const navigate = useNavigate();
-
   return (
     <Grid>
-      <Col
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-        }}
-        span={5}
-      >
-        <Text sx={{ fontSize: "50px" }} weight={700}>
-          Get great deals on your <br /> desired tech products.
-        </Text>
-        <Text sx={{ marginTop: "10px" }} color="gray" weight={400} size="sm">
-          15% off with buy-one-get-one deals for many products, along with
-          extended warranty.
-        </Text>
-        <Grid>
-          <Col span={4} sx={{ marginTop: "20px" }}>
-            <Button
-              onClick={() => navigate("/shop")}
-              color="dark"
-              radius="md"
-              fullWidth
-            >
-              View Shop
-            </Button>
-          </Col>
-        </Grid>
+      <Col span={12}>
+        <Image radius="md" fit="contain" src={frame1} />
       </Col>
-      <Col span={7}>
-        <Image radius="md" fit="contain" src={banner1} />
+      <Col className="flex-container" span={12}>
+        <Button
+          color="dark"
+          radius="md"
+          leftIcon={<BiShoppingBag />}
+          rightIcon={<BsArrowRight />}
+          size="lg"
+        >
+          View Shop
+        </Button>
       </Col>
     </Grid>
   );
