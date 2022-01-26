@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A MERN ecommerce website",
   "main": "server.ts",
-  "type": "module",
   "scripts": {
     "start": "node server.ts",
     "server": "nodemon server.ts",
