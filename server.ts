@@ -3,9 +3,11 @@ import dotenv from "dotenv";
 import colors from "colors";
 import morgan from "morgan";
 import path from "path";
+import connectDB from "./config/db";
 
 const app = express();
 dotenv.config();
+connectDB();
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
