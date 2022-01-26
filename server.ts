@@ -5,6 +5,7 @@ import morgan from "morgan";
 import path from "path";
 
 const app = express();
+dotenv.config();
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -13,8 +14,6 @@ if (process.env.NODE_ENV === "development") {
 const MODE = process.env.NODE_ENV;
 
 const PORT = process.env.PORT || 10100;
-
-dotenv.config();
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/build"));

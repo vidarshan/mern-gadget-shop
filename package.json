@@ -4,8 +4,8 @@
   "description": "A MERN ecommerce website",
   "main": "server.ts",
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server",
+    "start": "node server.ts",
+    "server": "nodemon server.ts",
     "client": "npm start --prefix frontend",
     "dev": "NODE_ENV=development concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
