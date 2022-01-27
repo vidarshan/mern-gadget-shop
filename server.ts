@@ -5,6 +5,8 @@ import morgan from "morgan";
 import path from "path";
 import connectDB from "./config/db";
 
+import userRoutes from "./routes/userRoutes";
+
 const app = express();
 dotenv.config();
 connectDB();
@@ -12,6 +14,10 @@ connectDB();
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
+app.use(express.json());
+
+app.use("/api/v1/user", userRoutes);
 
 const MODE = process.env.NODE_ENV;
 
