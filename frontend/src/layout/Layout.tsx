@@ -16,7 +16,7 @@ import Footer from "../components/Footer";
 import { AiOutlineUsb } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
-import { BiShoppingBag, BiUser } from "react-icons/bi";
+import { BiLogOut, BiShoppingBag, BiUser } from "react-icons/bi";
 import { RootStateOrAny, useSelector } from "react-redux";
 
 interface LayoutProps {
@@ -162,25 +162,43 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
               <TextInput
                 icon={<FiSearch />}
+                size="sm"
                 radius="md"
                 placeholder="Search for an item..."
               />
             </MediaQuery>
 
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-              <ActionIcon sx={{ margin: "10px" }} variant="default" radius="md">
+              <ActionIcon
+                size="lg"
+                sx={{ margin: "10px" }}
+                variant="default"
+                radius="md"
+              >
                 <BiShoppingBag />
               </ActionIcon>
             </MediaQuery>
-
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
               <ActionIcon
+                size="lg"
                 onClick={() => navigate("/profile")}
                 sx={{ margin: "10px" }}
                 variant="default"
                 radius="md"
               >
                 <BiUser />
+              </ActionIcon>
+            </MediaQuery>
+            <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+              <ActionIcon
+                color="red"
+                size="lg"
+                onClick={() => navigate("/profile")}
+                sx={{ margin: "10px" }}
+                variant="outline"
+                radius="md"
+              >
+                <BiLogOut />
               </ActionIcon>
             </MediaQuery>
             {!userInfo && (
