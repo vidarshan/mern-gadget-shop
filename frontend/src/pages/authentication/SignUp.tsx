@@ -53,7 +53,6 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    console.log(error);
     if (error) {
       notifications.showNotification({
         title: "Oh no!",

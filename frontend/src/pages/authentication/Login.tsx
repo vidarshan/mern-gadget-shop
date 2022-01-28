@@ -9,6 +9,7 @@ import {
   Button,
 } from "@mantine/core";
 import { useForm } from "@mantine/hooks";
+import { useNotifications } from "@mantine/notifications";
 import { useEffect } from "react";
 import { AiOutlineUsb } from "react-icons/ai";
 import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
@@ -18,6 +19,7 @@ import { login } from "../../actions/userActions";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const notifications = useNotifications();
 
   const form = useForm({
     initialValues: {
@@ -46,9 +48,18 @@ const Login = () => {
 
   const handlerLogin = (values: any) => {
     const { email, password } = values;
-
     dispatch(login(email, password));
   };
+
+  useEffect(() => {
+    if (error) {
+      notifications.showNotification({
+        title: "Oh no!",
+        message: error && error.message,
+        color: "red",
+      });
+    }
+  }, [error]);
 
   return (
     <Container className="flex-container height-full-vh">
