@@ -63,6 +63,13 @@ const SignUp = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    console.log(userInfo);
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [userInfo]);
+
   return (
     <Container className="flex-container height-full-vh">
       <Card

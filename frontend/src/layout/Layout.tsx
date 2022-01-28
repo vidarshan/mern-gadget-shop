@@ -17,12 +17,15 @@ import { AiOutlineUsb } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { BiShoppingBag, BiUser } from "react-icons/bi";
+import { RootStateOrAny, useSelector } from "react-redux";
 
 interface LayoutProps {
   children: any;
 }
 
 const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
+  const { userInfo } = useSelector((state: RootStateOrAny) => state.userLogin);
+
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
   const navigate = useNavigate();
@@ -124,7 +127,11 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
     }
   };
 
-  useEffect(() => {}, [opened]);
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("/login");
+    }
+  }, [userInfo]);
 
   return (
     <>
@@ -176,18 +183,20 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                 <BiUser />
               </ActionIcon>
             </MediaQuery>
-            <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-              <Button
-                onClick={() => navigate("/signup")}
-                color="dark"
-                variant="filled"
-                sx={{ margin: "10px" }}
-                radius="md"
-                size="xs"
-              >
-                Sign Up
-              </Button>
-            </MediaQuery>
+            {!userInfo && (
+              <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+                <Button
+                  onClick={() => navigate("/signup")}
+                  color="dark"
+                  variant="filled"
+                  sx={{ margin: "10px" }}
+                  radius="md"
+                  size="xs"
+                >
+                  Sign Up
+                </Button>
+              </MediaQuery>
+            )}
           </div>
         </div>
       </Head>
