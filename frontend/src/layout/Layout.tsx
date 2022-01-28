@@ -16,16 +16,21 @@ import Footer from "../components/Footer";
 import { AiOutlineUsb } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
-import { BiShoppingBag, BiUser } from "react-icons/bi";
+import { BiLogOut, BiShoppingBag, BiUser } from "react-icons/bi";
+import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
+import { logout } from "../actions/userActions";
 
 interface LayoutProps {
   children: any;
 }
 
 const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
+  const { userInfo } = useSelector((state: RootStateOrAny) => state.userLogin);
+
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handlerNavigate = (route: string) => {
     navigate(route);
@@ -124,7 +129,15 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
     }
   };
 
-  useEffect(() => {}, [opened]);
+  const handlerLogout = () => {
+    dispatch(logout());
+  };
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("/login");
+    }
+  }, [userInfo]);
 
   return (
     <>
@@ -155,19 +168,25 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
               <TextInput
                 icon={<FiSearch />}
+                size="sm"
                 radius="md"
                 placeholder="Search for an item..."
               />
             </MediaQuery>
 
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-              <ActionIcon sx={{ margin: "10px" }} variant="default" radius="md">
+              <ActionIcon
+                size="lg"
+                sx={{ margin: "10px" }}
+                variant="default"
+                radius="md"
+              >
                 <BiShoppingBag />
               </ActionIcon>
             </MediaQuery>
-
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
               <ActionIcon
+                size="lg"
                 onClick={() => navigate("/profile")}
                 sx={{ margin: "10px" }}
                 variant="default"
@@ -177,17 +196,31 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
               </ActionIcon>
             </MediaQuery>
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-              <Button
-                onClick={() => navigate("/signup")}
-                color="dark"
-                variant="filled"
+              <ActionIcon
+                color="red"
+                size="lg"
+                onClick={() => handlerLogout()}
                 sx={{ margin: "10px" }}
+                variant="outline"
                 radius="md"
-                size="xs"
               >
-                Sign Up
-              </Button>
+                <BiLogOut />
+              </ActionIcon>
             </MediaQuery>
+            {!userInfo && (
+              <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+                <Button
+                  onClick={() => navigate("/signup")}
+                  color="dark"
+                  variant="filled"
+                  sx={{ margin: "10px" }}
+                  radius="md"
+                  size="xs"
+                >
+                  Sign Up
+                </Button>
+              </MediaQuery>
+            )}
           </div>
         </div>
       </Head>
