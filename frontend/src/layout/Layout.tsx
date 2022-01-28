@@ -17,7 +17,8 @@ import { AiOutlineUsb } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { BiLogOut, BiShoppingBag, BiUser } from "react-icons/bi";
-import { RootStateOrAny, useSelector } from "react-redux";
+import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
+import { logout } from "../actions/userActions";
 
 interface LayoutProps {
   children: any;
@@ -29,6 +30,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handlerNavigate = (route: string) => {
     navigate(route);
@@ -127,6 +129,10 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
     }
   };
 
+  const handlerLogout = () => {
+    dispatch(logout());
+  };
+
   useEffect(() => {
     if (!userInfo) {
       navigate("/login");
@@ -193,7 +199,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
               <ActionIcon
                 color="red"
                 size="lg"
-                onClick={() => navigate("/profile")}
+                onClick={() => handlerLogout()}
                 sx={{ margin: "10px" }}
                 variant="outline"
                 radius="md"
