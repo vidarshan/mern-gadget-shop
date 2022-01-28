@@ -1,10 +1,12 @@
 {
   "name": "tech-stop",
   "version": "0.1.0",
+  "proxy": "http://localhost:10100",
   "private": true,
   "dependencies": {
     "@mantine/core": "^3.5.5",
     "@mantine/hooks": "^3.5.5",
+    "@mantine/notifications": "^3.6.3",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
