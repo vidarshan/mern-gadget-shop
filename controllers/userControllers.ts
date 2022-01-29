@@ -6,7 +6,7 @@ import { Request, Response, NextFunction } from "express";
 //@desc         Auth user & get a token
 //@route        POST /api/user/login
 //@access       Public
-const authUser = asyncHandler(async (req: Request, res: Response) => {
+const authUser = asyncHandler(async (req: any, res: any) => {
   console.log(req.body);
 
   const { email, password } = req.body;
@@ -29,7 +29,7 @@ const authUser = asyncHandler(async (req: Request, res: Response) => {
 //@desc         get User profile
 //@route        GET /api/user/profile
 //@access       Public
-const getUserProfile = asyncHandler(async (req: Request, res: Response) => {
+const getUserProfile = asyncHandler(async (req: any, res: any) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
@@ -48,7 +48,7 @@ const getUserProfile = asyncHandler(async (req: Request, res: Response) => {
 //@desc         Register a new user
 //@route        POST /api/user
 //@access       Public
-const registerUser = asyncHandler(async (req: Request, res: Response) => {
+const registerUser = asyncHandler(async (req: any, res: any) => {
   const { name, email, password } = req.body;
 
   const userExists = await User.findOne({ email });
