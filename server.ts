@@ -6,6 +6,7 @@ import path from "path";
 import connectDB from "./config/db";
 
 import userRoutes from "./routes/userRoutes";
+import productRoutes from "./routes/productRoutes";
 
 const app = express();
 dotenv.config();
@@ -17,7 +18,8 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(express.json());
 
-app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/products", productRoutes);
 
 const MODE = process.env.NODE_ENV;
 
