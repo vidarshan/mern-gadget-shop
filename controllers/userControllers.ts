@@ -29,7 +29,7 @@ const authUser = asyncHandler(async (req: Request, res: Response) => {
 //@desc         get User profile
 //@route        GET /api/user/profile
 //@access       Public
-const getUserProfile = asyncHandler(async (req: any, res: any) => {
+const getUserProfile = asyncHandler(async (req: Request, res: Response) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
@@ -48,7 +48,7 @@ const getUserProfile = asyncHandler(async (req: any, res: any) => {
 //@desc         Register a new user
 //@route        POST /api/user
 //@access       Public
-const registerUser = asyncHandler(async (req, res) => {
+const registerUser = asyncHandler(async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
 
   const userExists = await User.findOne({ email });
