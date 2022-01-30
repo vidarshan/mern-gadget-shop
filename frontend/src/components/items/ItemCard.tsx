@@ -64,7 +64,7 @@ const ItemCard: React.FC<PropsWithChildren<IItemCard>> = ({
           </Card.Section>
           <Card.Section sx={{ marginTop: "1rem" }}>
             <Button
-              onClick={() => navigate("/product/83428428")}
+              onClick={() => navigate(`/product/${id}`)}
               variant="filled"
               radius="md"
               color="dark"

@@ -15,15 +15,23 @@ import {
   Select,
   MediaQuery,
 } from "@mantine/core";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import banner from "../images/banner1.jpeg";
 import Layout from "../layout/Layout";
-import { useDispatch, useSelector } from "react-redux";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../actions/productActions";
 
 const Product = () => {
+  const params = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { product, loading, success } = useSelector(
+    (state: RootStateOrAny) => state.userLogin
+  );
+
   const [opened, setOpened] = useState(false);
   const [value, setValue] = useState<any>(1);
   const handlers = useRef<NumberInputHandlers>(null);
@@ -35,6 +43,10 @@ const Product = () => {
     { value: "4", label: "4 - Very Good" },
     { value: "5", label: "5 - Excellent" },
   ];
+
+  useEffect(() => {
+    dispatch(getProduct(params.id as string));
+  }, [dispatch]);
 
   return (
     <Layout>
