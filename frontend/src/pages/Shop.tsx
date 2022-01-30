@@ -9,9 +9,22 @@ import {
 } from "@mantine/core";
 import ItemCard from "../components/items/ItemCard";
 import { BiDollarCircle, BiLaptop, BiBuilding } from "react-icons/bi";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import Layout from "../layout/Layout";
+import { getProducts } from "../actions/productActions";
 
 const Shop = () => {
+  const dispatch = useDispatch();
+
+  const { products, loading, error } = useSelector(
+    (state: RootStateOrAny) => state.products
+  );
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+
   return (
     <Layout>
       <Card radius="md" withBorder sx={{ marginBottom: "2rem" }}>
@@ -72,26 +85,37 @@ const Shop = () => {
           </Col>
         </Grid>
       </Card>
-      <Grid>
-        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
-          <ItemCard />
-        </Col>
-        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
-          <ItemCard />
-        </Col>
-        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
-          <ItemCard />
-        </Col>
-        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
-          <ItemCard />
-        </Col>
-        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
-          <ItemCard />
-        </Col>
-        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
-          <ItemCard />
-        </Col>
+      <Grid gutter="xl">
+        {products &&
+          products.products.map((product: any) => {
+            return (
+              <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
+                {" "}
+                <ItemCard />{" "}
+              </Col>
+            );
+          })}
       </Grid>
+      {/* <Grid gutter="xl">
+        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
+          <ItemCard />
+        </Col>
+        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
+          <ItemCard />
+        </Col>
+        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
+          <ItemCard />
+        </Col>
+        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
+          <ItemCard />
+        </Col>
+        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
+          <ItemCard />
+        </Col>
+        <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
+          <ItemCard />
+        </Col>
+      </Grid> */}
       <Grid>
         <Col className="flex-container" sx={{ margin: "1rem 0" }} span={12}>
           <Pagination total={10} color="dark" radius="md" />
