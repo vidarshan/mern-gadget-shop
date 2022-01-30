@@ -49,16 +49,16 @@ const ItemCard: React.FC<PropsWithChildren<IItemCard>> = ({
         <Col xs={12} sm={12} md={12} span={6}>
           <Card.Section>
             <Text size="xl" weight={700}>
-              {name}
+              {name.substring(0, 25) + "..."}
             </Text>
           </Card.Section>
           <Card.Section sx={{ marginTop: "1rem" }}>
-            <Text color="gray" align="justify" weight={500}>
-              {description.substring(0, 150) + "..."}
+            <Text size="sm" color="gray" align="justify" weight={500}>
+              {description.substring(0, 130) + "..."}
             </Text>
           </Card.Section>{" "}
           <Card.Section sx={{ marginTop: "1rem" }}>
-            <Text align="right" size="xl" weight={600}>
+            <Text align="left" size="xl" weight={600}>
               ${price}
             </Text>
           </Card.Section>

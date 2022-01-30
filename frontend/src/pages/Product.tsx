@@ -16,12 +16,14 @@ import {
   MediaQuery,
   Loader,
   List,
+  Container,
 } from "@mantine/core";
 import React, { useEffect, useRef, useState } from "react";
-import { AiOutlineStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router";
 import banner from "../images/banner1.jpeg";
 import Layout from "../layout/Layout";
+import { BsFillExclamationTriangleFill } from "react-icons/bs";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../actions/productActions";
 
@@ -70,8 +72,10 @@ const Product = () => {
   }, [product]);
 
   useEffect(() => {
-    let newTotal = value * product.product.price;
-    setTotal(+newTotal.toFixed(2));
+    if (product && Object.keys(product).includes("product")) {
+      let newTotal = value * product.product.price;
+      setTotal(+newTotal.toFixed(2));
+    }
   }, [value]);
 
   return (
@@ -112,9 +116,9 @@ const Product = () => {
       </Modal>
       {loading ? (
         <Loader />
-      ) : (
+      ) : product ? (
         <Grid>
-          <Card withBorder radius="md">
+          <Card shadow="md" withBorder radius="md">
             <Grid>
               <Col
                 xs={12}
@@ -207,11 +211,11 @@ const Product = () => {
                     }}
                     span={12}
                   >
-                    <AiOutlineStar />
-                    <AiOutlineStar />
-                    <AiOutlineStar />
-                    <AiOutlineStar />
-                    <AiOutlineStar />
+                    <AiFillStar color="orange" size="26" />
+                    <AiFillStar color="orange" size="26" />
+                    <AiFillStar color="orange" size="26" />
+                    <AiOutlineStar size="26" />
+                    <AiOutlineStar size="26" />
                     <Text
                       sx={{ marginLeft: "10px" }}
                       color="gray"
@@ -399,6 +403,33 @@ const Product = () => {
               </Grid>
             </Card>
           </Col>
+        </Grid>
+      ) : (
+        <Grid>
+          <Card radius="md" withBorder>
+            <Group direction="column" align="center">
+              <BsFillExclamationTriangleFill size="40" />
+              <Text weight={600} size="xl">
+                Product Not Found
+              </Text>
+              <Button
+                onClick={() => navigate("/shop")}
+                color="dark"
+                size="xs"
+                fullWidth
+              >
+                Back to the shop
+              </Button>
+            </Group>
+          </Card>
+          {/* <Col sx={{ width: "100%", backgroundColor: "red" }} span={12}>
+            <Card withBorder>
+              <BsFillExclamationTriangleFill size="40" />
+              <Text weight={600} size="xl">
+                Product Not Found
+              </Text>
+            </Card>
+          </Col> */}
         </Grid>
       )}
     </Layout>
