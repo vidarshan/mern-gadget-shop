@@ -72,106 +72,107 @@ const Product = () => {
         </Grid>
       </Modal>
       <Grid>
-        <Col
-          xs={12}
-          sm={12}
-          md={5}
-          lg={5}
-          xl={5}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-          span={5}
-        >
+        <Card withBorder radius="md">
           <Grid>
             <Col
+              xs={12}
+              sm={12}
+              md={5}
+              lg={5}
+              xl={5}
               sx={{
                 display: "flex",
                 justifyContent: "center",
-                padding: "2rem",
-                alignItems: "center",
               }}
-              span={12}
+              span={5}
             >
-              <Image radius="md" fit="contain" src={banner}></Image>
+              <Grid>
+                <Col
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    padding: "2rem",
+                    alignItems: "center",
+                  }}
+                  span={12}
+                >
+                  <Image radius="md" fit="contain" src={banner}></Image>
+                </Col>
+              </Grid>
             </Col>
-          </Grid>
-        </Col>
-        <Col
-          xs={12}
-          sm={12}
-          md={7}
-          lg={7}
-          xl={7}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            padding: "2rem",
-          }}
-          span={7}
-        >
-          <Card withBorder radius="md" shadow="xl">
-            <Grid>
-              <Col
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  borderBottom: "1px solid #E0E0E0",
-                }}
-                span={12}
-              >
-                <Text weight={600} size="xl">
-                  Apple Airpods 2
-                </Text>
-                <Badge
-                  color="green"
-                  sx={{ marginLeft: "10px" }}
-                  variant="filled"
+            <Col
+              xs={12}
+              sm={12}
+              md={7}
+              lg={7}
+              xl={7}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                padding: "2rem",
+              }}
+              span={7}
+            >
+              <Grid>
+                <Col
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    borderBottom: "1px solid #E0E0E0",
+                  }}
+                  span={12}
                 >
-                  In Stock
-                </Badge>
-              </Col>
-              <Col
-                sx={{ margin: "10px 0", borderBottom: "1px solid #E0E0E0" }}
-                span={12}
-              >
-                <Text color="gray" weight={400} size="md">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Pariatur cupiditate blanditiis aut sapiente atque fugiat ipsum
-                  saepe. Cupiditate nobis optio laudantium facilis. Consequuntur
-                  debitis voluptatum, suscipit beatae et ab.
-                </Text>
-              </Col>
-              <Col
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  borderBottom: "1px solid #E0E0E0",
-                  marginBottom: "10px",
-                }}
-                span={12}
-              >
-                <AiOutlineStar />
-                <AiOutlineStar />
-                <AiOutlineStar />
-                <AiOutlineStar />
-                <AiOutlineStar />
-                <Text
-                  sx={{ marginLeft: "10px" }}
-                  color="gray"
-                  weight={400}
-                  size="md"
+                  <Text weight={600} size="xl">
+                    Apple Airpods 2
+                  </Text>
+                  <Badge
+                    color="green"
+                    sx={{ marginLeft: "10px" }}
+                    variant="filled"
+                  >
+                    In Stock
+                  </Badge>
+                </Col>
+                <Col
+                  sx={{ margin: "10px 0", borderBottom: "1px solid #E0E0E0" }}
+                  span={12}
                 >
-                  93 reviews
-                </Text>
-              </Col>
-              <Col span={12}>
-                <Text align="right" weight={700} size="xl">
-                  $120.99
-                </Text>
-              </Col>
-              {/* <MediaQuery
+                  <Text color="gray" weight={400} size="md">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Pariatur cupiditate blanditiis aut sapiente atque fugiat
+                    ipsum saepe. Cupiditate nobis optio laudantium facilis.
+                    Consequuntur debitis voluptatum, suscipit beatae et ab.
+                  </Text>
+                </Col>
+                <Col
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    borderBottom: "1px solid #E0E0E0",
+                    marginBottom: "10px",
+                  }}
+                  span={12}
+                >
+                  <AiOutlineStar />
+                  <AiOutlineStar />
+                  <AiOutlineStar />
+                  <AiOutlineStar />
+                  <AiOutlineStar />
+                  <Text
+                    sx={{ marginLeft: "10px" }}
+                    color="gray"
+                    weight={400}
+                    size="md"
+                  >
+                    93 reviews
+                  </Text>
+                </Col>
+                <Col span={12}>
+                  <Text align="right" weight={700} size="xl">
+                    $120.99
+                  </Text>
+                </Col>
+                {/* <MediaQuery
                 smallerThan="md"
                 styles={{
                   display: "flex",
@@ -179,74 +180,75 @@ const Product = () => {
                   justifyContent: "center",
                 }}
               > */}
-              <Col
-                xs={12}
-                sm={6}
-                md={5}
-                lg={4}
-                xl={3}
-                sx={{
-                  marginTop: "10px",
-                }}
-                span={3}
-              >
-                <Group spacing={5}>
-                  <ActionIcon
-                    size={36}
-                    radius="md"
-                    variant="filled"
-                    color="dark"
-                    onClick={() => handlers?.current?.decrement()}
-                  >
-                    –
-                  </ActionIcon>
-                  <NumberInput
-                    hideControls
-                    value={value}
-                    onChange={(val) => setValue(val)}
-                    handlersRef={handlers}
-                    max={10}
-                    min={1}
-                    step={1}
-                    styles={{ input: { width: 54, textAlign: "center" } }}
-                    radius="md"
-                  />
-                  <ActionIcon
-                    size={36}
-                    radius="md"
-                    variant="filled"
-                    color="dark"
-                    onClick={() => handlers?.current?.increment()}
-                  >
-                    +
-                  </ActionIcon>
-                </Group>
-              </Col>
-              {/* </MediaQuery> */}
-              <Col
-                xs={12}
-                sm={6}
-                md={7}
-                lg={8}
-                xl={9}
-                sx={{
-                  marginTop: "10px",
-                }}
-                span={9}
-              >
-                <Button
-                  onClick={() => navigate("/cart/1")}
-                  color="dark"
-                  radius="md"
-                  fullWidth
+                <Col
+                  xs={12}
+                  sm={6}
+                  md={5}
+                  lg={4}
+                  xl={3}
+                  sx={{
+                    marginTop: "10px",
+                  }}
+                  span={3}
                 >
-                  Add to Cart
-                </Button>
-              </Col>
-            </Grid>
-          </Card>
-        </Col>
-        <Col sx={{ padding: "2rem" }} span={12}>
+                  <Group spacing={5}>
+                    <ActionIcon
+                      size={36}
+                      radius="md"
+                      variant="filled"
+                      color="dark"
+                      onClick={() => handlers?.current?.decrement()}
+                    >
+                      –
+                    </ActionIcon>
+                    <NumberInput
+                      hideControls
+                      value={value}
+                      onChange={(val) => setValue(val)}
+                      handlersRef={handlers}
+                      max={10}
+                      min={1}
+                      step={1}
+                      styles={{ input: { width: 54, textAlign: "center" } }}
+                      radius="md"
+                    />
+                    <ActionIcon
+                      size={36}
+                      radius="md"
+                      variant="filled"
+                      color="dark"
+                      onClick={() => handlers?.current?.increment()}
+                    >
+                      +
+                    </ActionIcon>
+                  </Group>
+                </Col>
+                {/* </MediaQuery> */}
+                <Col
+                  xs={12}
+                  sm={6}
+                  md={7}
+                  lg={8}
+                  xl={9}
+                  sx={{
+                    marginTop: "10px",
+                  }}
+                  span={9}
+                >
+                  <Button
+                    onClick={() => navigate("/cart/1")}
+                    color="dark"
+                    radius="md"
+                    fullWidth
+                  >
+                    Add to Cart
+                  </Button>
+                </Col>
+              </Grid>
+            </Col>
+          </Grid>
+        </Card>
+        <Col sx={{ padding: "2rem 0" }} span={12}>
           <Text sx={{ margin: "10px 0" }} size="lg">
             Reviews (93)
           </Text>
