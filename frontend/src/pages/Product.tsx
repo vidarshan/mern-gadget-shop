@@ -36,6 +36,7 @@ const Product = () => {
 
   const [opened, setOpened] = useState(false);
   const [value, setValue] = useState<any>(1);
+  const [total, setTotal] = useState(0);
   const handlers = useRef<NumberInputHandlers>(null);
 
   const ratingLevels = [
@@ -48,10 +49,9 @@ const Product = () => {
 
   const renderFeaturesList = (description: any) => {
     const features = description.split(", ");
-    console.log(features);
 
     return (
-      <List>
+      <List size="sm">
         {features.map((feature: string) => {
           return <List.Item>{feature}</List.Item>;
         })}
@@ -62,6 +62,17 @@ const Product = () => {
   useEffect(() => {
     dispatch(getProduct(params.id as string));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (product) {
+      setTotal(product.product.price * value);
+    }
+  }, [product]);
+
+  useEffect(() => {
+    let newTotal = value * product.product.price;
+    setTotal(+newTotal.toFixed(2));
+  }, [value]);
 
   return (
     <Layout>
@@ -210,9 +221,10 @@ const Product = () => {
                       93 reviews
                     </Text>
                   </Col>
+
                   <Col span={12}>
                     <Text align="right" weight={700} size="xl">
-                      $120.99
+                      ${total}
                     </Text>
                   </Col>
 
@@ -259,7 +271,7 @@ const Product = () => {
                       </ActionIcon>
                     </Group>
                   </Col>
-                  {/* </MediaQuery> */}
+
                   <Col
                     xs={12}
                     sm={6}
