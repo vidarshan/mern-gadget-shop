@@ -20,6 +20,7 @@ import { AiOutlineStar } from "react-icons/ai";
 import { useNavigate } from "react-router";
 import banner from "../images/banner1.jpeg";
 import Layout from "../layout/Layout";
+import { useDispatch, useSelector } from "react-redux";
 
 const Product = () => {
   const navigate = useNavigate();
