@@ -16,7 +16,7 @@ const Featured = ({ title, subTitle }: { title: string; subTitle: string }) => {
         {subTitle}
       </Text>
       <Grid>
-        <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
+        {/* <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
           <ItemCard />
         </Col>
         <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
@@ -33,7 +33,7 @@ const Featured = ({ title, subTitle }: { title: string; subTitle: string }) => {
         </Col>
         <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
           <ItemCard />
-        </Col>
+        </Col> */}
       </Grid>
     </div>
   );

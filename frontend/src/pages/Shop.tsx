@@ -4,6 +4,7 @@ import {
   Col,
   Container,
   Grid,
+  Loader,
   Pagination,
   Select,
 } from "@mantine/core";
@@ -85,17 +86,34 @@ const Shop = () => {
           </Col>
         </Grid>
       </Card>
-      <Grid gutter="xl">
-        {products &&
-          products.products.map((product: any) => {
-            return (
-              <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
-                {" "}
-                <ItemCard />{" "}
-              </Col>
-            );
-          })}
-      </Grid>
+      {loading ? (
+        <Loader></Loader>
+      ) : (
+        <Grid gutter="xl">
+          {products &&
+            products.products.map((product: any) => {
+              return (
+                <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
+                  {" "}
+                  <ItemCard
+                    id={product._id}
+                    name={product.name}
+                    image={product.image}
+                    brand={product.brand}
+                    category={product.category}
+                    description={product.description}
+                    rating={product.rating}
+                    numReviews={product.numReviews}
+                    price={product.price}
+                    countInStock={product.countInStock}
+                    reviews={product.reviews}
+                  />{" "}
+                </Col>
+              );
+            })}
+        </Grid>
+      )}
+
       {/* <Grid gutter="xl">
         <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
           <ItemCard />
