@@ -27,11 +27,13 @@ import { addReview, getProduct } from "../actions/productActions";
 import moment from "moment";
 import ReviewCard from "../components/reviews/ReviewCard";
 import { useForm } from "@mantine/hooks";
+import { useNotifications } from "@mantine/notifications";
 
 const Product = () => {
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const notifications = useNotifications();
 
   const { product, loading, error } = useSelector(
     (state: RootStateOrAny) => state.product
@@ -98,6 +100,14 @@ const Product = () => {
     return <div>{stars}</div>;
   };
 
+  const handlerAddReview = (values: any) => {
+    const { rating, comment } = values;
+    dispatch(addReview(params.id as string, parseInt(rating), comment));
+    form.reset();
+    setOpened(false);
+    dispatch(getProduct(params.id as string));
+  };
+
   useEffect(() => {
     dispatch(getProduct(params.id as string));
   }, [dispatch]);
@@ -108,11 +118,16 @@ const Product = () => {
     }
   }, [product]);
 
-  const handlerAddReview = (values: any) => {
-    const { rating, comment } = values;
-
-    dispatch(addReview(params.id as string, parseInt(rating), comment));
-  };
+  useEffect(() => {
+    console.log(reviewError);
+    if (reviewError) {
+      notifications.showNotification({
+        title: "Note!",
+        message: reviewError,
+        color: "orange",
+      });
+    }
+  }, [reviewError]);
 
   useEffect(() => {
     if (product && Object.keys(product).includes("product")) {
@@ -152,12 +167,11 @@ const Product = () => {
                 radius="md"
                 {...form.getInputProps("comment")}
                 error={form.errors.comment}
-                required
               />
             </Col>
             <Col span={12}>
               <Button
-                loading={loading}
+                loading={reviewLoading}
                 type="submit"
                 color="dark"
                 radius="md"

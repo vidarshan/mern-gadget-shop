@@ -23,10 +23,13 @@ export const getProducts = () => async (dispatch: any) => {
       type: GET_PRODUCTS_SUCCESS,
       payload: data,
     });
-  } catch (error) {
+  } catch (error: any) {
     dispatch({
       type: GET_PRODUCTS_FAIL,
-      payload: error,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
@@ -43,10 +46,13 @@ export const getProduct = (id: string) => async (dispatch: any) => {
       type: GET_PRODUCT_SUCCESS,
       payload: data,
     });
-  } catch (error) {
+  } catch (error: any) {
     dispatch({
       type: GET_PRODUCT_FAIL,
-      payload: error,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
@@ -80,10 +86,13 @@ export const addReview =
         type: ADD_REVIEW_SUCCESS,
         payload: data,
       });
-    } catch (error) {
+    } catch (error: any) {
       dispatch({
         type: ADD_REVIEW_FAIL,
-        payload: error,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
       });
     }
   };
