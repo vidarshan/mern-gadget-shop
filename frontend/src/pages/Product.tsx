@@ -26,6 +26,7 @@ import Layout from "../layout/Layout";
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../actions/productActions";
+import moment from "moment";
 
 const Product = () => {
   const params = useParams();
@@ -315,93 +316,58 @@ const Product = () => {
                 Add Review
               </Button>
             </Col>
-            <Card sx={{ margin: "1rem 0" }} withBorder shadow="xl" radius="md">
-              <Grid>
-                <Col
-                  xs={12}
-                  sm={3}
-                  md={2}
-                  lg={2}
-                  xl={2}
-                  sx={{ display: "flex", alignItems: "center" }}
-                  span={2}
+            {product.product.reviews.map((review: any) => {
+              return (
+                <Card
+                  sx={{ margin: "1rem 0" }}
+                  withBorder
+                  shadow="xl"
+                  radius="md"
                 >
-                  <Col span={12}>
-                    <Text sx={{ marginBottom: "5px" }} weight={600}>
-                      John Doe
-                    </Text>
-                    <Text sx={{ marginBottom: "5px" }} size="xs" weight={200}>
-                      12-Jun-2021
-                    </Text>
-                    <AiOutlineStar />
-                    <AiOutlineStar />
-                    <AiOutlineStar />
-                    <AiOutlineStar />
-                    <AiOutlineStar />
-                  </Col>
-                </Col>
-                <Col
-                  xs={12}
-                  sm={9}
-                  md={10}
-                  lg={10}
-                  xl={10}
-                  sx={{ display: "flex", alignItems: "center" }}
-                  span={10}
-                >
-                  <Text>
-                    "Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Fuga id distinctio esse corrupti pariatur mollitia
-                    asperiores perspiciatis ea corporis voluptatum!"
-                  </Text>
-                </Col>
-              </Grid>
-            </Card>
-            <Card sx={{ margin: "1rem 0" }} withBorder shadow="xl" radius="md">
-              <Grid>
-                <Col
-                  xs={12}
-                  sm={3}
-                  md={2}
-                  lg={2}
-                  xl={2}
-                  sx={{ display: "flex", alignItems: "center" }}
-                  span={2}
-                >
-                  <Col span={12}>
-                    <Text sx={{ marginBottom: "5px" }} weight={600}>
-                      John Doe
-                    </Text>
-                    <Text sx={{ marginBottom: "5px" }} size="xs" weight={200}>
-                      12-Jun-2021
-                    </Text>
-                    <AiOutlineStar />
-                    <AiOutlineStar />
-                    <AiOutlineStar />
-                    <AiOutlineStar />
-                    <AiOutlineStar />
-                  </Col>
-                </Col>
-                <Col
-                  xs={12}
-                  sm={9}
-                  md={10}
-                  lg={10}
-                  xl={10}
-                  sx={{ display: "flex", alignItems: "center" }}
-                  span={10}
-                >
-                  <Text>
-                    "Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Fuga id distinctio esse corrupti pariatur mollitia
-                    asperiores perspiciatis ea corporis voluptatum!" Lorem ipsum
-                    dolor, sit amet consectetur adipisicing elit. Fugiat
-                    provident quo distinctio nostrum cupiditate sapiente
-                    reprehenderit! Laborum totam iure repellat.
-                  </Text>
-                </Col>
-              </Grid>
-            </Card>
+                  <Grid>
+                    <Col
+                      xs={12}
+                      sm={3}
+                      md={2}
+                      lg={2}
+                      xl={2}
+                      sx={{ display: "flex", alignItems: "center" }}
+                      span={2}
+                    >
+                      <Col span={12}>
+                        <Text sx={{ marginBottom: "5px" }} weight={600}>
+                          {review.name}
+                        </Text>
+                        <Text
+                          sx={{ marginBottom: "5px" }}
+                          size="xs"
+                          weight={200}
+                        >
+                          {moment(review.createdAt).format("DD-MMM-YYYY")}
+                        </Text>
+
+                        <AiOutlineStar />
+                        <AiOutlineStar />
+                        <AiOutlineStar />
+                        <AiOutlineStar />
+                        <AiOutlineStar />
+                      </Col>
+                    </Col>
+                    <Col
+                      xs={12}
+                      sm={9}
+                      md={10}
+                      lg={10}
+                      xl={10}
+                      sx={{ display: "flex", alignItems: "center" }}
+                      span={10}
+                    >
+                      <Text>"{review.comment}"</Text>
+                    </Col>
+                  </Grid>
+                </Card>
+              );
+            })}
           </Col>
         </Grid>
       ) : (
@@ -422,14 +388,6 @@ const Product = () => {
               </Button>
             </Group>
           </Card>
-          {/* <Col sx={{ width: "100%", backgroundColor: "red" }} span={12}>
-            <Card withBorder>
-              <BsFillExclamationTriangleFill size="40" />
-              <Text weight={600} size="xl">
-                Product Not Found
-              </Text>
-            </Card>
-          </Col> */}
         </Grid>
       )}
     </Layout>

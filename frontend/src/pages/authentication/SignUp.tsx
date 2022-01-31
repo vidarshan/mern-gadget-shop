@@ -63,7 +63,6 @@ const SignUp = () => {
   }, [error]);
 
   useEffect(() => {
-    console.log(userInfo);
     if (userInfo) {
       navigate("/");
     }

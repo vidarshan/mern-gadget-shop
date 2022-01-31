@@ -30,7 +30,7 @@ const getProduct = asyncHandler(async (req: any, res: any) => {
 });
 
 //@desc         Create a new review
-//@route        POST /api/products/:id/reviews
+//@route        POST /api/products/:id/review
 //@access       Private
 const createProductReview = asyncHandler(async (req: any, res: any) => {
   const { rating, comment } = req.body;
@@ -72,8 +72,6 @@ const createProductReview = asyncHandler(async (req: any, res: any) => {
 //@route        POST /api/products
 //@access       Public
 const createProduct = asyncHandler(async (req: any, res: any) => {
-  console.log(req);
-
   const {
     name,
     price,

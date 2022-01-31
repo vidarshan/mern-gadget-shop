@@ -6,6 +6,9 @@ import {
   GET_PRODUCT_REQUEST,
   GET_PRODUCT_SUCCESS,
   GET_PRODUCT_FAIL,
+  ADD_REVIEW_REQUEST,
+  ADD_REVIEW_SUCCESS,
+  ADD_REVIEW_FAIL,
 } from "../constants/productConstants";
 
 export const getProducts = () => async (dispatch: any) => {
@@ -47,3 +50,34 @@ export const getProduct = (id: string) => async (dispatch: any) => {
     });
   }
 };
+
+export const addReview =
+  (id: string, rating: string, comment: string) => async (dispatch: any) => {
+    try {
+      dispatch({
+        type: ADD_REVIEW_REQUEST,
+      });
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const { data } = await axios.post(
+        `/api/v1/products/${id}/review`,
+        { rating, comment },
+        config
+      );
+
+      dispatch({
+        type: ADD_REVIEW_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ADD_REVIEW_FAIL,
+        payload: error,
+      });
+    }
+  };
