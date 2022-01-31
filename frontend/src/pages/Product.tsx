@@ -28,6 +28,7 @@ import moment from "moment";
 import ReviewCard from "../components/reviews/ReviewCard";
 import { useForm } from "@mantine/hooks";
 import { useNotifications } from "@mantine/notifications";
+import { ADD_REVIEW_RESET } from "../constants/productConstants";
 
 const Product = () => {
   const params = useParams();
@@ -119,7 +120,6 @@ const Product = () => {
   }, [product]);
 
   useEffect(() => {
-    console.log(reviewError);
     if (reviewError) {
       notifications.showNotification({
         title: "Note!",
@@ -127,6 +127,7 @@ const Product = () => {
         color: "orange",
       });
     }
+    dispatch({ type: ADD_REVIEW_RESET });
   }, [reviewError]);
 
   useEffect(() => {

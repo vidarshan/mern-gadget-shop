@@ -8,6 +8,7 @@ import {
   ADD_REVIEW_REQUEST,
   ADD_REVIEW_SUCCESS,
   ADD_REVIEW_FAIL,
+  ADD_REVIEW_RESET,
 } from "../constants/productConstants";
 
 export const getProductsReducer = (state = {}, action: any) => {
@@ -59,6 +60,8 @@ export const addReviewReducer = (state = {}, action: any) => {
       };
     case ADD_REVIEW_FAIL:
       return { ...state, loading: false, error: action.payload };
+    case ADD_REVIEW_RESET:
+      return { ...state, loading: false, error: null };
     default:
       return state;
   }

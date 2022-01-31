@@ -28,7 +28,7 @@ export const register =
         password,
       };
 
-      const { data } = await axios.post("/api/v1/user", formData, config);
+      const { data } = await axios.post("/api/v1/users", formData, config);
 
       dispatch({
         type: USER_REGISTER_SUCCESS,
@@ -66,7 +66,7 @@ export const login =
       };
 
       const { data } = await axios.post(
-        "/api/v1/user/login",
+        "/api/v1/users/login",
         { email, password },
         config
       );
