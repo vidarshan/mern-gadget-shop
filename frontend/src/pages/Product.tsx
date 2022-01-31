@@ -16,6 +16,8 @@ import {
   Loader,
   List,
   Alert,
+  ThemeIcon,
+  Divider,
 } from "@mantine/core";
 import React, { useEffect, useRef, useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
@@ -91,16 +93,16 @@ const Product = () => {
     const stars = [];
 
     for (let i = 1; i <= rating; i++) {
-      stars.push(<AiFillStar color="orange" size="26" />);
+      stars.push(<AiFillStar color="orange" size="18" />);
     }
 
     let remainingStars = 5 - stars.length;
 
     for (let i = 1; i <= remainingStars; i++) {
-      stars.push(<AiOutlineStar size="26" />);
+      stars.push(<AiOutlineStar size="18" />);
     }
 
-    return <div>{stars}</div>;
+    return <div style={{ display: "flex", alignItems: "center" }}>{stars}</div>;
   };
 
   const handlerAddReview = (values: any) => {
@@ -190,60 +192,32 @@ const Product = () => {
         <Loader />
       ) : product ? (
         <Grid>
-          <Card shadow="md" withBorder radius="md">
-            <Grid>
-              <Col
-                xs={12}
-                sm={12}
-                md={5}
-                lg={5}
-                xl={5}
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-                span={5}
-              >
-                <Grid>
-                  <Col
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      padding: "2rem",
-                      alignItems: "center",
-                    }}
-                    span={12}
-                  >
-                    <Image
-                      radius="md"
-                      fit="contain"
-                      src={product.product.image}
-                    ></Image>
-                  </Col>
-                </Grid>
-              </Col>
-              <Col
-                xs={12}
-                sm={12}
-                md={7}
-                lg={7}
-                xl={7}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "2rem",
-                }}
-                span={7}
-              >
-                <Grid>
-                  <Col
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      borderBottom: "1px solid #E0E0E0",
-                    }}
-                    span={12}
-                  >
+          <Col span={12}>
+            <Card shadow="md" withBorder radius="md">
+              {" "}
+              <Grid>
+                <Col xs={12} sm={12} md={5} lg={5} xl={5} span={5}>
+                  {" "}
+                  <Image
+                    radius="md"
+                    fit="contain"
+                    src={product.product.image}
+                  ></Image>
+                </Col>
+                <Col
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                  }}
+                  xs={12}
+                  sm={12}
+                  md={7}
+                  lg={7}
+                  xl={7}
+                  span={7}
+                >
+                  <Group>
                     <Text weight={600} size="xl">
                       {product.product.name}
                     </Text>
@@ -267,110 +241,79 @@ const Product = () => {
                         In Stock
                       </Badge>
                     )}
-                  </Col>
-                  <Col
-                    sx={{ margin: "10px 0", borderBottom: "1px solid #E0E0E0" }}
-                    span={12}
-                  >
+                  </Group>
+                  <Divider />
+                  <Group sx={{ margin: "1rem 0" }}>
                     {renderFeaturesList(product.product.description)}
-                  </Col>
-                  <Col
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      borderBottom: "1px solid #E0E0E0",
-                      marginBottom: "10px",
-                    }}
-                    span={12}
-                  >
-                    {renderRatingsList(product.product.rating)}
-
-                    <Text
-                      sx={{ marginLeft: "10px" }}
-                      color="gray"
-                      weight={400}
-                      size="md"
-                    >
-                      {product.product.rating > 0
-                        ? product.product.rating.toFixed(1)
-                        : "Unrated"}
-                    </Text>
-                  </Col>
-
-                  <Col span={12}>
-                    <Text align="right" weight={700} size="xl">
-                      ${total}
-                    </Text>
-                  </Col>
-
-                  <Col
-                    xs={12}
-                    sm={6}
-                    md={5}
-                    lg={4}
-                    xl={3}
-                    sx={{
-                      marginTop: "10px",
-                    }}
-                    span={3}
-                  >
-                    <Group spacing={5}>
-                      <ActionIcon
-                        size={36}
-                        radius="md"
-                        variant="filled"
-                        color="dark"
-                        onClick={() => handlers?.current?.decrement()}
-                      >
-                        –
-                      </ActionIcon>
-                      <NumberInput
-                        hideControls
-                        value={value}
-                        onChange={(val) => setValue(val)}
-                        handlersRef={handlers}
-                        max={10}
-                        min={1}
-                        step={1}
-                        styles={{ input: { width: 54, textAlign: "center" } }}
-                        radius="md"
-                      />
-                      <ActionIcon
-                        size={36}
-                        radius="md"
-                        variant="filled"
-                        color="dark"
-                        onClick={() => handlers?.current?.increment()}
-                      >
-                        +
-                      </ActionIcon>
+                  </Group>
+                  <Divider />
+                  <Group position="apart" sx={{ margin: "1rem 0" }}>
+                    <Group position="left">
+                      {renderRatingsList(product.product.rating)}
+                      <Text color="gray" weight={600} size="sm">
+                        (
+                        {product.product.rating > 0
+                          ? product.product.rating.toFixed(1)
+                          : "Unrated"}
+                        )
+                      </Text>
                     </Group>
-                  </Col>
-
-                  <Col
-                    xs={12}
-                    sm={6}
-                    md={7}
-                    lg={8}
-                    xl={9}
-                    sx={{
-                      marginTop: "10px",
-                    }}
-                    span={9}
-                  >
-                    <Button
-                      onClick={() => navigate("/cart/1")}
-                      color="dark"
-                      radius="md"
-                      fullWidth
-                    >
-                      Add to Cart
-                    </Button>
-                  </Col>
-                </Grid>
-              </Col>
-            </Grid>
-          </Card>
+                    <Group position="left">
+                      <Text align="right" weight={700} size="xl">
+                        ${total}
+                      </Text>
+                    </Group>
+                  </Group>
+                  <Divider />
+                  <Grid sx={{ marginTop: "1rem" }}>
+                    <Col xs={12} sm={6} md={5} lg={4} xl={3} span={6}>
+                      <Group spacing={5}>
+                        <ActionIcon
+                          size={36}
+                          radius="md"
+                          variant="filled"
+                          color="dark"
+                          onClick={() => handlers?.current?.decrement()}
+                        >
+                          –
+                        </ActionIcon>
+                        <NumberInput
+                          hideControls
+                          value={value}
+                          onChange={(val) => setValue(val)}
+                          handlersRef={handlers}
+                          max={10}
+                          min={1}
+                          step={1}
+                          styles={{ input: { width: 54, textAlign: "center" } }}
+                          radius="md"
+                        />
+                        <ActionIcon
+                          size={36}
+                          radius="md"
+                          variant="filled"
+                          color="dark"
+                          onClick={() => handlers?.current?.increment()}
+                        >
+                          +
+                        </ActionIcon>
+                      </Group>
+                    </Col>
+                    <Col xs={12} sm={6} md={7} lg={8} xl={9} span={9}>
+                      <Button
+                        onClick={() => navigate("/cart/1")}
+                        color="dark"
+                        radius="md"
+                        fullWidth
+                      >
+                        Add to Cart
+                      </Button>
+                    </Col>
+                  </Grid>
+                </Col>
+              </Grid>
+            </Card>
+          </Col>
           <Col sx={{ padding: "2rem 0" }} span={12}>
             <Text sx={{ margin: "10px 0" }} size="lg">
               Reviews ({product.product.reviews.length})
@@ -401,7 +344,7 @@ const Product = () => {
             ) : (
               <Alert
                 icon={<IoIosCloseCircle size={16} />}
-                title="Bummer!"
+                title="No reviews!"
                 color="indigo"
                 radius="md"
               >
