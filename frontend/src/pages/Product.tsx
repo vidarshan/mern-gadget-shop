@@ -27,6 +27,7 @@ import { BsFillExclamationTriangleFill } from "react-icons/bs";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../actions/productActions";
 import moment from "moment";
+import ReviewCard from "../components/reviews/ReviewCard";
 
 const Product = () => {
   const params = useParams();
@@ -318,54 +319,13 @@ const Product = () => {
             </Col>
             {product.product.reviews.map((review: any) => {
               return (
-                <Card
-                  sx={{ margin: "1rem 0" }}
-                  withBorder
-                  shadow="xl"
-                  radius="md"
-                >
-                  <Grid>
-                    <Col
-                      xs={12}
-                      sm={3}
-                      md={2}
-                      lg={2}
-                      xl={2}
-                      sx={{ display: "flex", alignItems: "center" }}
-                      span={2}
-                    >
-                      <Col span={12}>
-                        <Text sx={{ marginBottom: "5px" }} weight={600}>
-                          {review.name}
-                        </Text>
-                        <Text
-                          sx={{ marginBottom: "5px" }}
-                          size="xs"
-                          weight={200}
-                        >
-                          {moment(review.createdAt).format("DD-MMM-YYYY")}
-                        </Text>
-
-                        <AiOutlineStar />
-                        <AiOutlineStar />
-                        <AiOutlineStar />
-                        <AiOutlineStar />
-                        <AiOutlineStar />
-                      </Col>
-                    </Col>
-                    <Col
-                      xs={12}
-                      sm={9}
-                      md={10}
-                      lg={10}
-                      xl={10}
-                      sx={{ display: "flex", alignItems: "center" }}
-                      span={10}
-                    >
-                      <Text>"{review.comment}"</Text>
-                    </Col>
-                  </Grid>
-                </Card>
+                <ReviewCard
+                  id={review._id}
+                  name={review.name}
+                  date={review.createdAt}
+                  comment={review.comment}
+                  rating={review.rating}
+                />
               );
             })}
           </Col>
