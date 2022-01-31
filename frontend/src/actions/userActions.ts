@@ -41,10 +41,13 @@ export const register =
       });
 
       localStorage.setItem("userInfo", JSON.stringify(data));
-    } catch (error) {
+    } catch (error: any) {
       dispatch({
         type: USER_REGISTER_FAIL,
-        payload: error,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
       });
     }
   };
@@ -74,10 +77,13 @@ export const login =
       });
 
       localStorage.setItem("userInfo", JSON.stringify(data));
-    } catch (error) {
+    } catch (error: any) {
       dispatch({
         type: USER_LOGIN_FAIL,
-        payload: error,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
       });
     }
   };
