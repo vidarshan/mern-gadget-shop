@@ -15,11 +15,13 @@ import {
   Select,
   Loader,
   List,
+  Alert,
 } from "@mantine/core";
 import React, { useEffect, useRef, useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router";
 import banner from "../images/banner1.jpeg";
+import { IoIosCloseCircle } from "react-icons/io";
 import Layout from "../layout/Layout";
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
@@ -289,7 +291,9 @@ const Product = () => {
                       weight={400}
                       size="md"
                     >
-                      {product.product.rating.toFixed(1)}
+                      {product.product.rating > 0
+                        ? product.product.rating.toFixed(1)
+                        : "Unrated"}
                     </Text>
                   </Col>
 
@@ -395,7 +399,14 @@ const Product = () => {
                 );
               })
             ) : (
-              <></>
+              <Alert
+                icon={<IoIosCloseCircle size={16} />}
+                title="Bummer!"
+                color="indigo"
+                radius="md"
+              >
+                Be the first to review this item
+              </Alert>
             )}
           </Col>
         </Grid>
