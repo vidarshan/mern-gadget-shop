@@ -7,6 +7,7 @@ import connectDB from "./config/db";
 
 import userRoutes from "./routes/userRoutes";
 import productRoutes from "./routes/productRoutes";
+import { errorHandler, notFound } from "./middleware/errorMiddleware";
 
 const app = express();
 dotenv.config();
@@ -20,6 +21,9 @@ app.use(express.json());
 
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/products", productRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 const MODE = process.env.NODE_ENV;
 
