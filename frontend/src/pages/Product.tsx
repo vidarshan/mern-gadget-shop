@@ -13,10 +13,8 @@ import {
   Badge,
   Modal,
   Select,
-  MediaQuery,
   Loader,
   List,
-  Container,
 } from "@mantine/core";
 import React, { useEffect, useRef, useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
@@ -25,18 +23,25 @@ import banner from "../images/banner1.jpeg";
 import Layout from "../layout/Layout";
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
-import { getProduct } from "../actions/productActions";
+import { addReview, getProduct } from "../actions/productActions";
 import moment from "moment";
 import ReviewCard from "../components/reviews/ReviewCard";
+import { useForm } from "@mantine/hooks";
 
 const Product = () => {
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { product, loading, success } = useSelector(
+  const { product, loading, error } = useSelector(
     (state: RootStateOrAny) => state.product
   );
+
+  const {
+    review,
+    loading: reviewLoading,
+    error: reviewError,
+  } = useSelector((state: RootStateOrAny) => state.review);
 
   const [opened, setOpened] = useState(false);
   const [value, setValue] = useState<any>(1);
@@ -51,6 +56,20 @@ const Product = () => {
     { value: "5", label: "5 - Excellent" },
   ];
 
+  const form = useForm({
+    initialValues: {
+      rating: 5,
+      comment: "",
+    },
+    validationRules: {
+      comment: (value) => value.trim().length >= 1,
+    },
+    errorMessages: {
+      rating: "Rating is not valid",
+      comment: "Comment is not valid",
+    },
+  });
+
   const renderFeaturesList = (description: any) => {
     const features = description.split(", ");
 
@@ -63,6 +82,22 @@ const Product = () => {
     );
   };
 
+  const renderRatingsList = (rating: number) => {
+    const stars = [];
+
+    for (let i = 1; i <= rating; i++) {
+      stars.push(<AiFillStar color="orange" size="26" />);
+    }
+
+    let remainingStars = 5 - stars.length;
+
+    for (let i = 1; i <= remainingStars; i++) {
+      stars.push(<AiOutlineStar size="26" />);
+    }
+
+    return <div>{stars}</div>;
+  };
+
   useEffect(() => {
     dispatch(getProduct(params.id as string));
   }, [dispatch]);
@@ -72,6 +107,12 @@ const Product = () => {
       setTotal(product.product.price * value);
     }
   }, [product]);
+
+  const handlerAddReview = (values: any) => {
+    const { rating, comment } = values;
+
+    dispatch(addReview(params.id as string, parseInt(rating), comment));
+  };
 
   useEffect(() => {
     if (product && Object.keys(product).includes("product")) {
@@ -90,31 +131,43 @@ const Product = () => {
         closeOnClickOutside
         onClose={() => setOpened(false)}
       >
-        <Grid>
-          <Col span={12}>
-            <Select
-              radius="md"
-              data={ratingLevels}
-              icon={<AiOutlineStar />}
-              placeholder="Your rating"
-              label="Rating"
-              required
-            />
-          </Col>
-          <Col span={12}>
-            <Textarea
-              placeholder="Your review"
-              label="Your review"
-              radius="md"
-              required
-            />
-          </Col>
-          <Col span={12}>
-            <Button color="dark" radius="md" fullWidth>
-              Add Review
-            </Button>
-          </Col>
-        </Grid>
+        <form onSubmit={form.onSubmit((values) => handlerAddReview(values))}>
+          <Grid>
+            <Col span={12}>
+              <Select
+                radius="md"
+                data={ratingLevels}
+                icon={<AiOutlineStar />}
+                placeholder="Your rating"
+                label="Rating"
+                {...form.getInputProps("rating")}
+                error={form.errors.rating}
+                required
+              />
+            </Col>
+            <Col span={12}>
+              <Textarea
+                placeholder="Your review"
+                label="Your review"
+                radius="md"
+                {...form.getInputProps("comment")}
+                error={form.errors.comment}
+                required
+              />
+            </Col>
+            <Col span={12}>
+              <Button
+                loading={loading}
+                type="submit"
+                color="dark"
+                radius="md"
+                fullWidth
+              >
+                Add Review
+              </Button>
+            </Col>
+          </Grid>
+        </form>
       </Modal>
       {loading ? (
         <Loader />
@@ -213,18 +266,15 @@ const Product = () => {
                     }}
                     span={12}
                   >
-                    <AiFillStar color="orange" size="26" />
-                    <AiFillStar color="orange" size="26" />
-                    <AiFillStar color="orange" size="26" />
-                    <AiOutlineStar size="26" />
-                    <AiOutlineStar size="26" />
+                    {renderRatingsList(product.product.rating)}
+
                     <Text
                       sx={{ marginLeft: "10px" }}
                       color="gray"
                       weight={400}
                       size="md"
                     >
-                      93 reviews
+                      {product.product.rating.toFixed(1)}
                     </Text>
                   </Col>
 
@@ -304,7 +354,7 @@ const Product = () => {
           </Card>
           <Col sx={{ padding: "2rem 0" }} span={12}>
             <Text sx={{ margin: "10px 0" }} size="lg">
-              Reviews (93)
+              Reviews ({product.product.reviews.length})
             </Text>
             <Col sx={{ margin: "10px 0" }} span={12}>
               <Button
@@ -317,17 +367,21 @@ const Product = () => {
                 Add Review
               </Button>
             </Col>
-            {product.product.reviews.map((review: any) => {
-              return (
-                <ReviewCard
-                  id={review._id}
-                  name={review.name}
-                  date={review.createdAt}
-                  comment={review.comment}
-                  rating={review.rating}
-                />
-              );
-            })}
+            {product.product.reviews.length > 0 ? (
+              product.product.reviews.map((review: any) => {
+                return (
+                  <ReviewCard
+                    id={review._id}
+                    name={review.name}
+                    date={review.createdAt}
+                    comment={review.comment}
+                    rating={review.rating}
+                  />
+                );
+              })
+            ) : (
+              <></>
+            )}
           </Col>
         </Grid>
       ) : (

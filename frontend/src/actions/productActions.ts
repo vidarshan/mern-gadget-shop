@@ -52,15 +52,21 @@ export const getProduct = (id: string) => async (dispatch: any) => {
 };
 
 export const addReview =
-  (id: string, rating: string, comment: string) => async (dispatch: any) => {
+  (id: string, rating: number, comment: string) =>
+  async (dispatch: any, getState: any) => {
     try {
       dispatch({
         type: ADD_REVIEW_REQUEST,
       });
 
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
       const config = {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
         },
       };
 
