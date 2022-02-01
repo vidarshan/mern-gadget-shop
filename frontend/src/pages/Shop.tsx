@@ -2,7 +2,6 @@ import {
   Button,
   Card,
   Col,
-  Container,
   Grid,
   Loader,
   Pagination,
@@ -14,9 +13,11 @@ import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Layout from "../layout/Layout";
 import { getProducts } from "../actions/productActions";
+import { useNotifications } from "@mantine/notifications";
 
 const Shop = () => {
   const dispatch = useDispatch();
+  const notifications = useNotifications();
 
   const { products, loading, error } = useSelector(
     (state: RootStateOrAny) => state.products
@@ -25,6 +26,17 @@ const Shop = () => {
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      notifications.showNotification({
+        title: "Error!",
+        message: error,
+        color: "red",
+      });
+    }
+    // eslint-disable-next-line
+  }, [error]);
 
   return (
     <Layout>

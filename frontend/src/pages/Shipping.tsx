@@ -1,13 +1,4 @@
-import {
-  Card,
-  Grid,
-  Stepper,
-  TextInput,
-  Col,
-  Button,
-  Step,
-} from "@mantine/core";
-import React, { useState } from "react";
+import { Card, Grid, TextInput, Col, Button } from "@mantine/core";
 import { useNavigate } from "react-router";
 import Layout from "../layout/Layout";
 import Steps from "../components/Steps";

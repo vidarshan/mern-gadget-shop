@@ -1,10 +1,8 @@
 import { Card, Text, Grid, Col, Alert, Image, Button } from "@mantine/core";
-import React from "react";
 import Layout from "../layout/Layout";
 import { BiUser } from "react-icons/bi";
 import { HiOutlineMail } from "react-icons/hi";
 import { BsBox, BsCreditCard2Front } from "react-icons/bs";
-import { AiOutlineCloseCircle } from "react-icons/ai";
 import banner from "../images/banner1.jpeg";
 
 const Order = () => {

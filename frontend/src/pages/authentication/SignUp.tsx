@@ -59,13 +59,13 @@ const SignUp = () => {
         message: error && error.message,
         color: "red",
       });
-    }
+    } // eslint-disable-next-line
   }, [error]);
 
   useEffect(() => {
     if (userInfo) {
       navigate("/");
-    }
+    } // eslint-disable-next-line
   }, [userInfo]);
 
   return (

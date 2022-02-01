@@ -44,6 +44,7 @@ const Login = () => {
     if (userInfo) {
       navigate("/");
     }
+    // eslint-disable-next-line
   }, [userInfo]);
 
   const handlerLogin = (values: any) => {
@@ -59,6 +60,7 @@ const Login = () => {
         color: "red",
       });
     }
+    // eslint-disable-next-line
   }, [error]);
 
   return (

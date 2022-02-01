@@ -1,14 +1,4 @@
-import {
-  Col,
-  Container,
-  Grid,
-  Image,
-  Text,
-  TextInput,
-  Button,
-} from "@mantine/core";
-import React from "react";
-import icon from "../images/icon.png";
+import { Col, Container, Grid, Text } from "@mantine/core";
 import { FiFacebook, FiTwitter, FiInstagram } from "react-icons/fi";
 import { AiOutlineUsb } from "react-icons/ai";
 
