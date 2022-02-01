@@ -4,8 +4,6 @@
   "description": "A MERN ecommerce website",
   "main": "server.ts",
   "scripts": {
-    "build": "cd frontend && npm run build",
-    "install": "cd frontend && npm install",
     "start": "ts-node server.ts",
     "server": "nodemon server.ts",
     "client": "npm start --prefix frontend",
