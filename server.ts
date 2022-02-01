@@ -17,17 +17,11 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use(express.json());
-
-app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/products", productRoutes);
-
-app.use(notFound);
-app.use(errorHandler);
-
 const MODE = process.env.NODE_ENV;
 
 const PORT = process.env.PORT || 10100;
+
+app.use(express.json());
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "frontend/build")));
@@ -37,11 +31,11 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.use((req, res, next) => {
-  const error = new Error("Not found");
-  res.status(404);
-  next(error);
-});
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/products", productRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, () =>
   console.log(
