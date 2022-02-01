@@ -112,13 +112,13 @@ const Product = () => {
 
   useEffect(() => {
     dispatch(getProduct(params.id as string));
-  }, [dispatch]);
+  }, [dispatch, params.id]);
 
   useEffect(() => {
     if (product) {
       setTotal(product.product.price * value);
     }
-  }, [product]);
+  }, [product, value]);
 
   useEffect(() => {
     if (reviewError) {
@@ -129,6 +129,7 @@ const Product = () => {
       });
     }
     dispatch({ type: ADD_REVIEW_RESET });
+    // eslint-disable-next-line
   }, [reviewError]);
 
   useEffect(() => {
@@ -139,6 +140,7 @@ const Product = () => {
         color: "red",
       });
     }
+    // eslint-disable-next-line
   }, [error]);
 
   useEffect(() => {
@@ -151,6 +153,7 @@ const Product = () => {
     }
     dispatch({ type: ADD_REVIEW_RESET });
     dispatch(getProduct(params.id as string));
+    // eslint-disable-next-line
   }, [review]);
 
   useEffect(() => {
@@ -158,6 +161,7 @@ const Product = () => {
       let newTotal = value * product.product.price;
       setTotal(+newTotal.toFixed(2));
     }
+    // eslint-disable-next-line
   }, [value]);
 
   return (
