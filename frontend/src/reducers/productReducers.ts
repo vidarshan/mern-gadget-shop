@@ -61,7 +61,7 @@ export const addReviewReducer = (state = {}, action: any) => {
     case ADD_REVIEW_FAIL:
       return { ...state, loading: false, error: action.payload };
     case ADD_REVIEW_RESET:
-      return { ...state, loading: false, error: null };
+      return { ...state, loading: false, review: null, error: null };
     default:
       return state;
   }

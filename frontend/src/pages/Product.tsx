@@ -16,19 +16,16 @@ import {
   Loader,
   List,
   Alert,
-  ThemeIcon,
   Divider,
 } from "@mantine/core";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router";
-import banner from "../images/banner1.jpeg";
 import { IoIosCloseCircle } from "react-icons/io";
 import Layout from "../layout/Layout";
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { addReview, getProduct } from "../actions/productActions";
-import moment from "moment";
 import ReviewCard from "../components/reviews/ReviewCard";
 import { useForm } from "@mantine/hooks";
 import { useNotifications } from "@mantine/notifications";
@@ -135,6 +132,28 @@ const Product = () => {
   }, [reviewError]);
 
   useEffect(() => {
+    if (error) {
+      notifications.showNotification({
+        title: "Error!",
+        message: error,
+        color: "red",
+      });
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (review) {
+      notifications.showNotification({
+        title: "Success!",
+        message: "Thanks for reviewing",
+        color: "green",
+      });
+    }
+    dispatch({ type: ADD_REVIEW_RESET });
+    dispatch(getProduct(params.id as string));
+  }, [review]);
+
+  useEffect(() => {
     if (product && Object.keys(product).includes("product")) {
       let newTotal = value * product.product.price;
       setTotal(+newTotal.toFixed(2));
@@ -219,7 +238,7 @@ const Product = () => {
                 >
                   <Group>
                     <Text weight={600} size="xl">
-                      {product.product.name}
+                      `{product.product.name}`
                     </Text>
 
                     {product.product.countInStock === 0 ? (
