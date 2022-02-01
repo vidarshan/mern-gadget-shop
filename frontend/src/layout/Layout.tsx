@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState, useEffect } from "react";
+import React, { PropsWithChildren, useState } from "react";
 import {
   Container,
   useMantineTheme,
@@ -132,12 +132,6 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   const handlerLogout = () => {
     dispatch(logout());
   };
-
-  useEffect(() => {
-    if (!userInfo) {
-      navigate("/login");
-    }
-  }, [userInfo]);
 
   return (
     <>
