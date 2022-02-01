@@ -7,7 +7,7 @@ import generateToken from "../utils/generateToken";
 //@access       Public
 const getProducts = asyncHandler(async (req: any, res: any) => {
   const products = await Product.find({});
-
+  console.log(products);
   res.json({ products });
 });
 

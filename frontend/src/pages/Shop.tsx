@@ -106,7 +106,7 @@ const Shop = () => {
             products.products.map((product: any) => {
               return (
                 <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
-                  {" "}
+                  {console.log(products)}{" "}
                   <ItemCard
                     id={product._id}
                     name={product.name}
