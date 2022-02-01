@@ -1,25 +1,23 @@
 import {
-  ActionIcon,
+  //ActionIcon,
   Button,
   Card,
   Col,
-  Container,
   Grid,
-  Group,
   Image,
   NumberInput,
   Text,
-  NumberInputHandlers,
+  //NumberInputHandlers,
 } from "@mantine/core";
-import { useState, useRef } from "react";
+//import { useState, useRef } from "react";
 import banner from "../images/banner1.jpeg";
 import { BiTrashAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Layout from "../layout/Layout";
 
 const Cart = () => {
-  const [value, setValue] = useState<any>(1);
-  const handlers = useRef<NumberInputHandlers>(null);
+  // const [value, setValue] = useState<any>(1);
+  // const handlers = useRef<NumberInputHandlers>(null);
   return (
     <Layout>
       <Grid>

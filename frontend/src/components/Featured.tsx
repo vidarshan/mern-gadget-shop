@@ -1,5 +1,4 @@
-import { Grid, Col, Text } from "@mantine/core";
-import ItemCard from "./items/ItemCard";
+import { Grid, Text } from "@mantine/core";
 
 const Featured = ({ title, subTitle }: { title: string; subTitle: string }) => {
   return (
@@ -16,7 +15,7 @@ const Featured = ({ title, subTitle }: { title: string; subTitle: string }) => {
         {subTitle}
       </Text>
       <Grid>
-        <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
+        {/* <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
           <ItemCard />
         </Col>
         <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
@@ -33,7 +32,7 @@ const Featured = ({ title, subTitle }: { title: string; subTitle: string }) => {
         </Col>
         <Col xs={12} sm={6} md={4} lg={3} xl={2} span={2}>
           <ItemCard />
-        </Col>
+        </Col> */}
       </Grid>
     </div>
   );

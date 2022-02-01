@@ -4,6 +4,5 @@
       "target": "esnext",
       "rootDir": "./",
       "esModuleInterop": true
-    },
-    "typeRoots" : ["./src/types", "./node_modules/@types"]
+    }
 }

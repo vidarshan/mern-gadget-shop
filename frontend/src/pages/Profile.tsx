@@ -8,9 +8,7 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import React from "react";
 import Layout from "../layout/Layout";
-import { GrCheckmark, GrClose } from "react-icons/gr";
 import { RiCloseLine, RiCheckLine } from "react-icons/ri";
 
 const Profile = () => {

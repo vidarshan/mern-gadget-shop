@@ -28,7 +28,7 @@ export const register =
         password,
       };
 
-      const { data } = await axios.post("/api/v1/user", formData, config);
+      const { data } = await axios.post("/api/v1/users", formData, config);
 
       dispatch({
         type: USER_REGISTER_SUCCESS,
@@ -41,11 +41,13 @@ export const register =
       });
 
       localStorage.setItem("userInfo", JSON.stringify(data));
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
       dispatch({
         type: USER_REGISTER_FAIL,
-        payload: error,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
       });
     }
   };
@@ -64,7 +66,7 @@ export const login =
       };
 
       const { data } = await axios.post(
-        "/api/v1/user/login",
+        "/api/v1/users/login",
         { email, password },
         config
       );
@@ -75,10 +77,13 @@ export const login =
       });
 
       localStorage.setItem("userInfo", JSON.stringify(data));
-    } catch (error) {
+    } catch (error: any) {
       dispatch({
         type: USER_LOGIN_FAIL,
-        payload: error,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
       });
     }
   };
