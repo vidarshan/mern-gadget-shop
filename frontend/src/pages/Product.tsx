@@ -30,6 +30,7 @@ import ReviewCard from "../components/reviews/ReviewCard";
 import { useForm } from "@mantine/hooks";
 import { useNotifications } from "@mantine/notifications";
 import { ADD_REVIEW_RESET } from "../constants/productConstants";
+import Head from "../components/Head";
 
 const Product = () => {
   const params = useParams();
@@ -215,6 +216,11 @@ const Product = () => {
         <Loader />
       ) : product ? (
         <Grid>
+          <Head
+            title={product.product.name}
+            description={`Buy ${product.product.name}`}
+            keywords={product.product.name}
+          ></Head>
           <Col span={12}>
             <Card shadow="md" withBorder radius="md">
               {" "}
@@ -242,7 +248,7 @@ const Product = () => {
                 >
                   <Group>
                     <Text weight={600} size="xl">
-                      `{product.product.name}`
+                      {product.product.name}
                     </Text>
 
                     {product.product.countInStock === 0 ? (
