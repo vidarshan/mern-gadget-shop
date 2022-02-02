@@ -75,3 +75,31 @@ input {
     display: none !important;
   }
 }
+
+.mantine-Header-root {
+  background-color: #2c2e33 !important;
+}
+
+.mantine-Header-root .mantine-TextInput-withIcon {
+  background-color: #373a40 !important;
+  border: 1px solid #373a40 !important;
+}
+
+.mantine-Header-root a {
+  color: white !important;
+  font-weight: 700 !important;
+}
+
+.mantine-Header-root .mantine-ActionIcon-root {
+  background-color: #37393d !important;
+  border: 1px solid #373a40 !important;
+}
+
+.mantine-Header-root .mantine-ActionIcon-root svg {
+  color: white !important;
+  font-size: 16px !important;
+}
+
+.mantine-Header-root .flex-container-no-horizontal-align svg {
+  color: white !important;
+}
