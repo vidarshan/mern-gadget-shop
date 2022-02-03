@@ -31,6 +31,7 @@ import { useForm } from "@mantine/hooks";
 import { useNotifications } from "@mantine/notifications";
 import { ADD_REVIEW_RESET } from "../constants/productConstants";
 import Head from "../components/Head";
+import { addToCart } from "../actions/cartActions";
 
 const Product = () => {
   const params = useParams();
@@ -111,7 +112,9 @@ const Product = () => {
     dispatch(getProduct(params.id as string));
   };
 
-  const handlerCartAdd = (value: any) => {};
+  const handlerCartAdd = (product: string, quantity: number) => {
+    addToCart(params.id as string, 1);
+  };
 
   useEffect(() => {
     dispatch(getProduct(params.id as string));
@@ -332,7 +335,9 @@ const Product = () => {
                     </Col>
                     <Col xs={12} sm={6} md={7} lg={8} xl={9} span={9}>
                       <Button
-                        onClick={() => navigate("/cart/1")}
+                        onClick={() =>
+                          handlerCartAdd(product.product._id, value)
+                        }
                         color="dark"
                         radius="md"
                         fullWidth
