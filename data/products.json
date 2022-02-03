@@ -1,0 +1,787 @@
+[{
+  "_id": {
+    "$oid": "61f55a5762a68fe81c96d895"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple MacBook Pro 13.3 inch",
+  "image": "/images/macbook.jpeg",
+  "brand": "Apple",
+  "category": "Laptops",
+  "description": "Apple M1 chip with 8-core CPU, 8-core GPU, 16-core Neural Engine, 8GB unified memory, 256GB SSD storage, 13-inch Retina display with True Tone, Magic Keyboard, Touch Bar and Touch ID, Force Touch trackpad, Two Thunderbolt / USB 4 ports",
+  "rating": 4,
+  "numReviews": 5,
+  "price": 1299.99,
+  "countInStock": 100,
+  "reviews": [
+    {
+      "name": "John Doe",
+      "rating": 4,
+      "comment": "This one is a good one.",
+      "user": {
+        "$oid": "61f550d52bf7a4e12af88ee9"
+      },
+      "_id": {
+        "$oid": "61f6d08fa8bdd68c3b1e063a"
+      },
+      "createdAt": {
+        "$date": "2022-01-30T17:53:19.023Z"
+      },
+      "updatedAt": {
+        "$date": "2022-01-30T17:53:19.023Z"
+      }
+    },
+    {
+      "name": "Jake Doe",
+      "rating": 4,
+      "comment": "This one is a good one.",
+      "user": {
+        "$oid": "61f7673c4b2dce12c541eb88"
+      },
+      "_id": {
+        "$oid": "61f7674d4b2dce12c541eb8d"
+      },
+      "createdAt": {
+        "$date": "2022-01-31T04:36:29.283Z"
+      },
+      "updatedAt": {
+        "$date": "2022-01-31T04:36:29.283Z"
+      }
+    },
+    {
+      "name": "Steve Smith",
+      "rating": 5,
+      "comment": "Great and powerful laptop",
+      "user": {
+        "$oid": "61f768334b2dce12c541eb96"
+      },
+      "_id": {
+        "$oid": "61f7684c4b2dce12c541eb9c"
+      },
+      "createdAt": {
+        "$date": "2022-01-31T04:40:44.026Z"
+      },
+      "updatedAt": {
+        "$date": "2022-01-31T04:40:44.026Z"
+      }
+    },
+    {
+      "name": "John Doe",
+      "rating": 2,
+      "comment": "Not so great😏",
+      "user": {
+        "$oid": "61f541ad28c60fb31a63c900"
+      },
+      "_id": {
+        "$oid": "61f7947713b9100fafb74f60"
+      },
+      "createdAt": {
+        "$date": "2022-01-31T07:49:11.429Z"
+      },
+      "updatedAt": {
+        "$date": "2022-01-31T07:49:11.429Z"
+      }
+    },
+    {
+      "name": "Rich Smith",
+      "rating": 5,
+      "comment": "Good",
+      "user": {
+        "$oid": "61f7dd8438831bef24804f18"
+      },
+      "_id": {
+        "$oid": "61f7ddbc38831bef24804f35"
+      },
+      "createdAt": {
+        "$date": "2022-01-31T13:01:48.980Z"
+      },
+      "updatedAt": {
+        "$date": "2022-01-31T13:01:48.980Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2022-01-29T15:16:39.372Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-31T13:01:48.981Z"
+  },
+  "__v": 5
+},{
+  "_id": {
+    "$oid": "61f65428e1273b6867abb86c"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Microsoft Surface Laptop 13.5 inch",
+  "image": "/images/surface.jpeg",
+  "brand": "Microsoft",
+  "category": "Laptops",
+  "description": "Intel® Core™ i5-1135G7 Processor, Free Upgrade to Windows 11, RAM: 8 GB / Storage: 512 GB SSD, Graphics: Intel® Iris® Xe, Quad HD touchscreen, Two Thunderbolt / USB 4 ports",
+  "rating": 4.666666666666667,
+  "numReviews": 3,
+  "price": 1599.99,
+  "countInStock": 100,
+  "reviews": [
+    {
+      "name": "Adithya",
+      "rating": 5,
+      "comment": "Light weight and easy to use.",
+      "user": {
+        "$oid": "61f7df379ac311407217bc17"
+      },
+      "_id": {
+        "$oid": "61f9294b52258858000c650c"
+      },
+      "createdAt": {
+        "$date": "2022-02-01T12:36:27.249Z"
+      },
+      "updatedAt": {
+        "$date": "2022-02-01T12:36:27.249Z"
+      }
+    },
+    {
+      "name": "Steve",
+      "rating": 5,
+      "comment": "Great laptop",
+      "user": {
+        "$oid": "61f929a352258858000c6527"
+      },
+      "_id": {
+        "$oid": "61f929b352258858000c6539"
+      },
+      "createdAt": {
+        "$date": "2022-02-01T12:38:11.234Z"
+      },
+      "updatedAt": {
+        "$date": "2022-02-01T12:38:11.234Z"
+      }
+    },
+    {
+      "name": "Jay",
+      "rating": 4,
+      "comment": "Good but not excellent",
+      "user": {
+        "$oid": "61f92a0575e5339fc3836042"
+      },
+      "_id": {
+        "$oid": "61f92a1b75e5339fc3836059"
+      },
+      "createdAt": {
+        "$date": "2022-02-01T12:39:55.347Z"
+      },
+      "updatedAt": {
+        "$date": "2022-02-01T12:39:55.347Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2022-01-30T09:02:32.052Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-01T12:39:55.347Z"
+  },
+  "__v": 3
+},{
+  "_id": {
+    "$oid": "61fa901954d0d0a51edccc2b"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Dell Inspiron 7501 – i7",
+  "image": "/images/inspiron.jpeg",
+  "brand": "Dell",
+  "category": "Laptops",
+  "description": "Intel Core i7 – 10750H Processor, 8GB DDR4 Ram, 512GB NVMe SSD, Nvidia GTX1650TI 4GB Vga, 15.6″ FHD Display, Windows 10 Home 64 Bit, 02 Years Comprehensive Warranty",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 1149.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:07:21.739Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:07:21.739Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa90db54d0d0a51edccc40"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple MacBook Air 13-inch ",
+  "image": "/images/macbookair.jpeg",
+  "brand": "Apple",
+  "category": "Laptops",
+  "description": "Apple M1 chip with 8‑core CPU, 8GB unified memory, Retina display with True Tone, Magic Keyboard, Touch ID, Force Touch trackpad, Two Thunderbolt / USB 4 ports",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 1449.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:10:35.056Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:10:35.056Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa92b654d0d0a51edccc8b"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple iMac 27-inch ",
+  "image": "/images/imac.jpeg",
+  "brand": "Apple",
+  "category": "Desktops",
+  "description": "3.1GHz 6-core 10th-generation Intel Core i5 processor, Turbo Boost up to 4.5GHz, 8GB 2666MHz DDR4 memory, Two Thunderbolt 3 ports, Retina 5K 5120-by-2880, P3 display with True Tone, Radeon Pro 5300 with 4GB",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 2049.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:18:30.151Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:18:30.151Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa938354d0d0a51edcccac"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple iMac 27-inch 3.3 GHz",
+  "image": "/images/imac2.jpg",
+  "brand": "Apple",
+  "category": "Desktops",
+  "description": "3.3GHz 6-core 10th-generation Intel Core i5 processor, Turbo Boost up to 4.8GHz, 8GB 2666MHz DDR4 memory, 512GB SSD storage, Radeon Pro 5300 with 4GB, Two Thunderbolt 3 ports, Retina 5K 5120-by-2880, P3 display with True Tone",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 2049.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:21:55.830Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:21:55.830Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa944654d0d0a51edcccd6"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple iMac 24-inch M1",
+  "image": "/images/imac3.jpeg",
+  "brand": "Apple",
+  "category": "Desktops",
+  "description": "8-Core CPU, 256GB storage, 8GB unified memory, 24-inch 4.5K Retina display, Two Thunderbolt / USB 4 ports, Magic Keyboard, Two USB 3 ports, P3 display with True Tone",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 1549.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:25:10.404Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:25:10.404Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa94e654d0d0a51edccce2"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple iMac 24-inch M1",
+  "image": "/images/imac4.jpeg",
+  "brand": "Apple",
+  "category": "Desktops",
+  "description": "8-Core CPU, 512GB storage, 8GB unified memory, 24-inch 4.5K Retina display, Two Thunderbolt / USB 4 ports, Magic Keyboard with Touch ID, Two USB 3 ports, P3 display with True Tone",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 1999.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:27:50.585Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:27:50.585Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa95cd54d0d0a51edcccf7"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple Mac Pro Tower",
+  "image": "/images/macpro.png",
+  "brand": "Apple",
+  "category": "Desktops",
+  "description": "3.5GHz 8‑core Intel Xeon W processor, Turbo Boost up to 4.0GHz, 32GB (4x8GB) of DDR4 ECC memory, Radeon Pro 580X with 8GB of GDDR5 memory, 256GB SSD storage, Magic Mouse, Magic Keyboard with Numeric Keypad ",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 1999.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:31:41.512Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:31:41.512Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa962254d0d0a51edccd0c"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple Mac Pro Rack",
+  "image": "/images/macpro2.jpeg",
+  "brand": "Apple",
+  "category": "Desktops",
+  "description": "3.5GHz 8‑core Intel Xeon W processor, Turbo Boost up to 4.0GHz, 32GB (4x8GB) of DDR4 ECC memory, Radeon Pro 580X with 8GB of GDDR5 memory, 256GB SSD storage, Magic Mouse, Magic Keyboard with Numeric Keypad ",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 1999.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:33:06.256Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:33:06.256Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa96ac54d0d0a51edccd1e"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple Mac mini M1",
+  "image": "/images/macmini.jpeg",
+  "brand": "Apple",
+  "category": "Desktops",
+  "description": "Apple M1 chip with 8-core CPU, 8-core GPU, and 16-core Neural Engine, 8GB unified memory, 256GB SSD storage, Gigabit Ethernet",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 1699.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:35:24.216Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:35:24.216Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa96e354d0d0a51edccd33"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple Mac mini M1 Grey",
+  "image": "/images/macmini2.jpeg",
+  "brand": "Apple",
+  "category": "Desktops",
+  "description": "Apple M1 chip with 8-core CPU, 8-core GPU, and 16-core Neural Engine, 8GB unified memory, 256GB SSD storage, Gigabit Ethernet",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 1699.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:36:19.566Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:36:19.566Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa979154d0d0a51edccd48"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple Pro Display XDR",
+  "image": "/images/prodisplay.jpeg",
+  "brand": "Apple",
+  "category": "Desktops",
+  "description": "32-inch Retina 6K, Astonishing color accuracy, Superwide viewing angle, Extreme Dynamic Range",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 6699.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:39:13.120Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:39:13.120Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa98d254d0d0a51edccd69"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Dell G5 5500 GAMING i7",
+  "image": "/images/dell2.jpeg",
+  "brand": "Dell",
+  "category": "Laptops",
+  "description": "10th Gen Intel Core i7 10750H, 8GB DDR4 Ram, 512GB NVMe SSD, 6GB GDDR6 NVIDIA GeForce GTX 1660 Ti, 15.6″ FHD (1920×1080)120Hz, Windows 10 Home",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 1499.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:44:34.727Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:44:34.727Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa99b954d0d0a51edccd7e"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Dell Inspiron 3501 – i3",
+  "image": "/images/dell3.jpeg",
+  "brand": "Dell",
+  "category": "Laptops",
+  "description": "Intel Core i3 11th Gen Processor, 4GB RAM, 1TB Hard Drive, 15.6 FHD Display, Windows 10 Home, 2 Years Warranty",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 1799.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:48:25.269Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:48:25.269Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa9b1554d0d0a51edccd8a"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Dell OptiPlex 7080",
+  "image": "/images/dell4.jpeg",
+  "brand": "Dell",
+  "category": "Desktops",
+  "description": "10th Generation Intel Core i7-10700 Processor, 8GB DDR4 Ram, 1TB 7200rpm SATA Hard Disk Drive, DVD Writable, 18.5″ Display, Windows 10 Pro, 3 Years Warranty",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 1569.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:54:13.130Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:54:13.130Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa9b5554d0d0a51edccd96"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "DELL Vostro 3888",
+  "image": "/images/dell5.jpeg",
+  "brand": "Dell",
+  "category": "Desktops",
+  "description": "Intel Core I5, 8GB DDR4 Ram, 1TB 7200rpm SATA Hard Disk Drive, DVD Writable, 18.5″ Display, Windows 10 Pro, 3 Years Warranty",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 1769.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:55:17.149Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:55:17.149Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa9bec54d0d0a51edccda2"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Dell 24″ Professional",
+  "image": "/images/dell6.jpeg",
+  "brand": "Dell",
+  "category": "Desktops",
+  "description": "24″ LED-Backlit, 1920 x 1080 Resolution, HDMI, DisplayPort, USB Hub",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 1769.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T14:57:48.264Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T14:57:48.264Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa9ca554d0d0a51edccdc0"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Dell Alienware 610M Wired/Wireless Gaming Mouse",
+  "image": "/images/dell7.jpeg",
+  "brand": "Dell",
+  "category": "Accessories",
+  "description": "Dual mode wired, Rechargeable lithium ion battery, Seven programmable buttons",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 399.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T15:00:53.944Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T15:00:53.944Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa9cf654d0d0a51edccdd5"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Dell Laser Wired Mouse MS3220LSR",
+  "image": "/images/dell8.jpeg",
+  "brand": "Dell",
+  "category": "Accessories",
+  "description": "Dual mode wired, Rechargeable lithium ion battery, Seven programmable buttons",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 199.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T15:02:14.029Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T15:02:14.029Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa9d3c54d0d0a51edccdea"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "DELL KM117 WIRELESS KEYBOARD AND MOUSE",
+  "image": "/images/dell9.jpeg",
+  "brand": "Dell",
+  "category": "Accessories",
+  "description": "Rechargeable lithium ion battery, Standard Keyboard and mouse",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 199.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T15:03:24.114Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T15:03:24.114Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa9e1554d0d0a51edcce08"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "HP Neverstop 1200a",
+  "image": "/images/hp1.jpeg",
+  "brand": "HP",
+  "category": "Accessories",
+  "description": "Copy, Scan, Unique Mess Free Reloading, Save upto 80% on Genuine toner, 5X Print yield",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 499.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T15:07:01.916Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T15:07:01.916Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fa9fa554d0d0a51edcce1d"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "HP Laptop - 15z-ef2000",
+  "image": "/images/hp2.png",
+  "brand": "HP",
+  "category": "Accessories",
+  "description": "Windows 11 Home, AMD Ryzen™ 5 processor, AMD Radeon™ Graphics, 8 GB memory; 128 GB SSD storage, 15.6 'diagonal HD display",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 499.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T15:13:41.075Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T15:13:41.075Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61faba3654d0d0a51edcceb0"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple iPhone XS Gold",
+  "image": "/images/iphone1.png",
+  "brand": "HP",
+  "category": "Accessories",
+  "description": "5.8-inch Super Retina (OLED) display with HDR, IP68 dust and water resistance rating, Dual 12MP camera with dual OIS, Face ID for secure authentication and Apple Pay, A12 Bionic chip, Wireless charging",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 799.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T17:07:02.743Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T17:07:02.743Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61faba4a54d0d0a51edccebc"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple iPhone XS Black",
+  "image": "/images/iphone2.png",
+  "brand": "HP",
+  "category": "Accessories",
+  "description": "5.8-inch Super Retina (OLED) display with HDR, IP68 dust and water resistance rating, Dual 12MP camera with dual OIS, Face ID for secure authentication and Apple Pay, A12 Bionic chip, Wireless charging",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 799.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T17:07:22.836Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T17:07:22.836Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fabb3154d0d0a51edccee6"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple iPhone XR Yellow 265GB",
+  "image": "/images/iphone3.jpeg",
+  "brand": "Apple",
+  "category": "Phones",
+  "description": "4K video recording at 24 fps, 12MP camera,Digital zoom up to 5x,ƒ/1.8, Dual SIM, iOS 12 Operating System, A12 Bionic chip, Wireless charging",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 399.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T17:11:13.763Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T17:11:13.763Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61fabb7054d0d0a51edccefb"
+  },
+  "user": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "Apple iPhone XR Red 256GB",
+  "image": "/images/iphone4.jpeg",
+  "brand": "Apple",
+  "category": "Phones",
+  "description": "4K video recording at 24 fps, 12MP camera,Digital zoom up to 5x,ƒ/1.8, Dual SIM, iOS 12 Operating System, A12 Bionic chip, Wireless charging",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 399.99,
+  "countInStock": 100,
+  "reviews": [],
+  "createdAt": {
+    "$date": "2022-02-02T17:12:16.809Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-02T17:12:16.809Z"
+  },
+  "__v": 0
+}]

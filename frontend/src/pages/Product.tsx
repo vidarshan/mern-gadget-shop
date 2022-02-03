@@ -111,6 +111,8 @@ const Product = () => {
     dispatch(getProduct(params.id as string));
   };
 
+  const handlerCartAdd = (value: any) => {};
+
   useEffect(() => {
     dispatch(getProduct(params.id as string));
   }, [dispatch, params.id]);
