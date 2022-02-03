@@ -217,7 +217,7 @@ const Product = () => {
       ) : product ? (
         <Grid>
           <Head
-            title={product.product.name}
+            title={`${product.product.name} | Techstop`}
             description={`Buy ${product.product.name}`}
             keywords={product.product.name}
           ></Head>

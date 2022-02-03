@@ -85,6 +85,10 @@ input {
   border: 1px solid #373a40 !important;
 }
 
+.mantine-Header-root .mantine-TextInput-input {
+  color: white !important;
+  font-weight: 600 !important;
+}
 .mantine-Header-root a {
   color: white !important;
   font-weight: 700 !important;
