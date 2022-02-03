@@ -7,7 +7,7 @@ import {
   getProductReducer,
   getProductsReducer,
 } from "./reducers/productReducers";
-import { addToCartReducer } from "./reducers/cartReducers";
+import { cartReducer } from "./reducers/cartReducers";
 
 const reducer = combineReducers({
   userRegister: userRegisterReducer,
@@ -15,7 +15,7 @@ const reducer = combineReducers({
   products: getProductsReducer,
   product: getProductReducer,
   review: addReviewReducer,
-  addToCart: addToCartReducer,
+  cart: cartReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
