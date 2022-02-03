@@ -15,7 +15,7 @@ export const addToCartReducer = (state = {}, action: any) => {
     case ADD_PRODUCT_TO_CART_SUCCESS:
       return {
         ...state,
-        cartItem: action.payload,
+        item: action.payload,
         loading: false,
         error: null,
       };

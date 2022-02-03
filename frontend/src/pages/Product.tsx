@@ -113,7 +113,8 @@ const Product = () => {
   };
 
   const handlerCartAdd = (product: string, quantity: number) => {
-    addToCart(params.id as string, 1);
+    console.log("dd");
+    dispatch(addToCart(product, quantity));
   };
 
   useEffect(() => {

@@ -15,7 +15,7 @@ export const addToCart =
 
       const { data } = await axios.get(`/api/v1/products/${productId}`);
 
-      console.log(getState);
+      console.log(getState());
 
       dispatch({
         type: ADD_PRODUCT_TO_CART_SUCCESS,
