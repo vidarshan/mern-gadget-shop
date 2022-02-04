@@ -3,8 +3,10 @@ import {
   ADD_PRODUCT_TO_CART_REQUEST,
   ADD_PRODUCT_TO_CART_SUCCESS,
   ADD_PRODUCT_TO_CART_FAIL,
+  GET_CART_ITEMS_FAIL,
+  GET_CART_ITEMS_REQUEST,
+  GET_CART_ITEMS_SUCCESS,
 } from "../constants/cartConstants";
-import find from "lodash.find";
 import filter from "lodash.filter";
 
 export const addToCart =
@@ -53,3 +55,27 @@ export const addToCart =
       });
     }
   };
+
+export const getCart = () => async (dispatch: any, getState: any) => {
+  try {
+    dispatch({
+      type: GET_CART_ITEMS_REQUEST,
+    });
+
+    let cartItems = localStorage.getItem("cartItems");
+    console.log(cartItems);
+
+    dispatch({
+      type: GET_CART_ITEMS_SUCCESS,
+      payload: cartItems,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: GET_CART_ITEMS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

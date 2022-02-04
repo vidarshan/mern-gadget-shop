@@ -14,8 +14,18 @@ import banner from "../images/banner1.jpeg";
 import { BiTrashAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Layout from "../layout/Layout";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getCart } from "../actions/cartActions";
 
 const Cart = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state: RootStateOrAny) => state.cart);
+
+  useEffect(() => {
+    dispatch(getCart());
+  }, [dispatch]);
+
   // const [value, setValue] = useState<any>(1);
   // const handlers = useRef<NumberInputHandlers>(null);
   return (

@@ -6,6 +6,9 @@ import {
   EMPTY_CART_REQUEST,
   EMPTY_CART_SUCCESS,
   EMPTY_CART_FAIL,
+  GET_CART_ITEMS_REQUEST,
+  GET_CART_ITEMS_SUCCESS,
+  GET_CART_ITEMS_FAIL,
 } from "../constants/cartConstants";
 
 export const cartReducer = (state = {}, action: any) => {
@@ -20,6 +23,17 @@ export const cartReducer = (state = {}, action: any) => {
         error: null,
       };
     case ADD_PRODUCT_TO_CART_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    case GET_CART_ITEMS_REQUEST:
+      return { ...state, loading: true, error: null };
+    case GET_CART_ITEMS_SUCCESS:
+      return {
+        ...state,
+        items: action.payload,
+        loading: false,
+        error: null,
+      };
+    case GET_CART_ITEMS_FAIL:
       return { ...state, loading: false, error: action.payload };
     default:
       return state;

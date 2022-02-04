@@ -174,6 +174,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                 sx={{ margin: "10px" }}
                 variant="default"
                 radius="md"
+                onClick={() => navigate("/cart")}
               >
                 <BiShoppingBag />
               </ActionIcon>
