@@ -4,6 +4,8 @@ import {
   ADD_PRODUCT_TO_CART_SUCCESS,
   ADD_PRODUCT_TO_CART_FAIL,
 } from "../constants/cartConstants";
+import find from "lodash.find";
+import filter from "lodash.filter";
 
 export const addToCart =
   (productId: string, quantity: number) =>
@@ -23,20 +25,24 @@ export const addToCart =
         localStorage.setItem("cartItems", JSON.stringify(allCartItems));
       } else {
         let newCartItems = JSON.parse(currentCartItems);
-        console.log("newCartItems: ", newCartItems);
-        console.log("bi");
-        let ifItemsExist = newCartItems.find(productId);
-        console.log("ifItemsExist: ", ifItemsExist);
-
-        // newCartItems.push({ product: data, quantity: quantity });
-
-        // localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+        if (
+          filter(newCartItems, function (o: any) {
+            return o.product._id === productId;
+          }).length === 0
+        ) {
+          newCartItems.push({ product: data.product, quantity: quantity });
+          localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+          dispatch({
+            type: ADD_PRODUCT_TO_CART_SUCCESS,
+            payload: "Item added to the cart",
+          });
+        } else {
+          dispatch({
+            type: ADD_PRODUCT_TO_CART_FAIL,
+            payload: "Item already exists in the cart",
+          });
+        }
       }
-
-      dispatch({
-        type: ADD_PRODUCT_TO_CART_SUCCESS,
-        payload: "Added to Cart",
-      });
     } catch (error: any) {
       dispatch({
         type: ADD_PRODUCT_TO_CART_FAIL,
