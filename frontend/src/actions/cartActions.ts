@@ -16,24 +16,26 @@ export const addToCart =
       const { data } = await axios.get(`/api/v1/products/${productId}`);
 
       let currentCartItems = localStorage.getItem("cartItems");
-      console.log("currentCartItems: ", currentCartItems);
-
-      console.log("data: ", data.product);
 
       if (currentCartItems === null) {
         let allCartItems = [];
-        allCartItems.push(data);
+        allCartItems.push({ product: data.product, quantity: quantity });
         localStorage.setItem("cartItems", JSON.stringify(allCartItems));
       } else {
         let newCartItems = JSON.parse(currentCartItems);
-        newCartItems.push(data);
-        localStorage.setItem("cartItems", JSON.stringify(newCartItems));
         console.log("newCartItems: ", newCartItems);
+        console.log("bi");
+        let ifItemsExist = newCartItems.find(productId);
+        console.log("ifItemsExist: ", ifItemsExist);
+
+        // newCartItems.push({ product: data, quantity: quantity });
+
+        // localStorage.setItem("cartItems", JSON.stringify(newCartItems));
       }
 
       dispatch({
         type: ADD_PRODUCT_TO_CART_SUCCESS,
-        payload: "",
+        payload: "Added to Cart",
       });
     } catch (error: any) {
       dispatch({
