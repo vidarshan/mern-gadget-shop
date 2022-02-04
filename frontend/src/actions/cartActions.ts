@@ -63,7 +63,6 @@ export const getCart = () => async (dispatch: any, getState: any) => {
     });
 
     let cartItems = localStorage.getItem("cartItems");
-    console.log(cartItems);
 
     dispatch({
       type: GET_CART_ITEMS_SUCCESS,

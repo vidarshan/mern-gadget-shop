@@ -10,6 +10,11 @@ code {
   font-family: "Be Vietnam Pro", sans-serif;
 }
 
+html,
+html a {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004) !important;
+}
+
 #id,
 .mantine-Text-root,
 .mantine-Button-filled,
@@ -18,6 +23,7 @@ code {
 .mantine-lh1194,
 .mantine-1kfvr5r {
   font-family: "Manrope", sans-serif !important;
+  -webkit-font-smoothing: antialiased !important;
 }
 
 .header-home {
