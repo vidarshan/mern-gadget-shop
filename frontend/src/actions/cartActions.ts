@@ -39,6 +39,12 @@ export const addToCart =
             payload: "Item added to the cart",
           });
         } else {
+          let compareQuantities = filter(newCartItems, function (o: any) {
+            return o.product._id === productId;
+          });
+
+          console.log(compareQuantities);
+
           dispatch({
             type: ADD_PRODUCT_TO_CART_FAIL,
             payload: "Item already exists in the cart",

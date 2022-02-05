@@ -15,11 +15,12 @@ import { BiTrashAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Layout from "../layout/Layout";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getCart } from "../actions/cartActions";
+import { useEffect, useRef } from "react";
+import { addToCart, getCart } from "../actions/cartActions";
 import CartTotal from "../components/cart/CartTotal";
 
 const Cart = () => {
+  const numRef = useRef(null);
   const dispatch = useDispatch();
   const { loading, error, cartItems } = useSelector(
     (state: RootStateOrAny) => state.cart
@@ -47,8 +48,8 @@ const Cart = () => {
     return totalQuantity;
   };
 
-  const reRenderTotal = (cartItems: any) => {
-    // return <CartTotal items={cartItems} />;
+  const updateCartItems = (value: number, id: string) => {
+    dispatch(addToCart(id, value));
   };
 
   useEffect(() => {
@@ -137,8 +138,11 @@ const Cart = () => {
                     <NumberInput
                       radius="md"
                       defaultValue={item.quantity}
-                      onChange={() => reRenderTotal(cartItems)}
+                      ref={numRef}
                       placeholder="Your age"
+                      onChange={(e) =>
+                        updateCartItems(e as number, item.product._id)
+                      }
                       min={1}
                       max={10}
                       required
