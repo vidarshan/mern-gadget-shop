@@ -1,89 +1,79 @@
 import axios from "axios";
 import {
-  ADD_PRODUCT_TO_CART_REQUEST,
-  ADD_PRODUCT_TO_CART_SUCCESS,
-  ADD_PRODUCT_TO_CART_FAIL,
-  GET_CART_ITEMS_FAIL,
-  GET_CART_ITEMS_REQUEST,
-  GET_CART_ITEMS_SUCCESS,
+  ADD_PRODUCT_TO_CART,
+  GET_CART_PRODUCTS,
+  UPDATE_CART_PRODUCT,
+  DELETE_CART_PRODUCT,
 } from "../constants/cartConstants";
 import filter from "lodash.filter";
+import find from "lodash.find";
 
 export const addToCart =
-  (productId: string, quantity: number) =>
-  async (dispatch: any, getState: any) => {
-    try {
-      dispatch({
-        type: ADD_PRODUCT_TO_CART_REQUEST,
-      });
+  (productId: string, quantity: number) => async (dispatch: any) => {
+    const { data } = await axios.get(`/api/v1/products/${productId}`);
 
-      const { data } = await axios.get(`/api/v1/products/${productId}`);
+    let currentCartItems = localStorage.getItem("cartItems");
 
-      let currentCartItems = localStorage.getItem("cartItems");
-
-      if (currentCartItems === null) {
-        let allCartItems = [];
-        allCartItems.push({ product: data.product, quantity: quantity });
-        localStorage.setItem("cartItems", JSON.stringify(allCartItems));
+    if (currentCartItems === null) {
+      let allCartItems = [];
+      allCartItems.push({ product: data.product, quantity: quantity });
+      localStorage.setItem("cartItems", JSON.stringify(allCartItems));
+    } else {
+      let newCartItems = JSON.parse(currentCartItems);
+      if (
+        filter(newCartItems, function (o: any) {
+          return o.product._id === productId;
+        }).length === 0
+      ) {
+        newCartItems.push({ product: data.product, quantity: quantity });
+        localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+        dispatch({
+          type: ADD_PRODUCT_TO_CART,
+          payload: "Item added to the cart",
+        });
       } else {
-        let newCartItems = JSON.parse(currentCartItems);
-        if (
-          filter(newCartItems, function (o: any) {
-            return o.product._id === productId;
-          }).length === 0
-        ) {
-          newCartItems.push({ product: data.product, quantity: quantity });
-          localStorage.setItem("cartItems", JSON.stringify(newCartItems));
-          dispatch({
-            type: ADD_PRODUCT_TO_CART_SUCCESS,
-            payload: "Item added to the cart",
-          });
-        } else {
-          newCartItems.map((item: any) => {
-            if (item.product._id === productId) {
-              if (item.quantity !== quantity) {
-                let selectedProductIndex = newCartItems.indexOf(item);
-                newCartItems[selectedProductIndex].quantity = quantity;
-                localStorage.setItem("cartItems", JSON.stringify(newCartItems));
-                dispatch({
-                  type: ADD_PRODUCT_TO_CART_SUCCESS,
-                  payload: "Item updated",
-                });
-              }
+        newCartItems.map((item: any) => {
+          if (item.product._id === productId) {
+            if (item.quantity !== quantity) {
+              let selectedProductIndex = newCartItems.indexOf(item);
+              newCartItems[selectedProductIndex].quantity = quantity;
+              localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+              dispatch({
+                type: UPDATE_CART_PRODUCT,
+                payload: "Item updated",
+              });
             }
-          });
-        }
+          }
+        });
       }
-    } catch (error: any) {
-      dispatch({
-        type: ADD_PRODUCT_TO_CART_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      });
     }
   };
 
-export const getCart = () => async (dispatch: any, getState: any) => {
-  try {
-    dispatch({
-      type: GET_CART_ITEMS_REQUEST,
-    });
+export const getCart = () => async (dispatch: any) => {
+  let cartItems = localStorage.getItem("cartItems");
 
-    let cartItems = localStorage.getItem("cartItems");
-
-    dispatch({
-      type: GET_CART_ITEMS_SUCCESS,
-      payload: cartItems,
-    });
-  } catch (error: any) {
-    dispatch({
-      type: GET_CART_ITEMS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
+  dispatch({
+    type: GET_CART_PRODUCTS,
+    payload: cartItems,
+  });
 };
+
+export const deleteCartProduct =
+  (productId: string) => async (dispatch: any) => {
+    let currentCartItems = localStorage.getItem("cartItems");
+
+    if (currentCartItems !== null) {
+      let cartItems = JSON.parse(currentCartItems);
+      let newCartItems = filter(cartItems, (item: any) => {
+        return item.product._id !== productId;
+      });
+
+      console.log("newCartItems: ", newCartItems);
+      localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+      console.log(localStorage.getItem("cartItems"));
+      dispatch({
+        type: DELETE_CART_PRODUCT,
+        payload: newCartItems,
+      });
+    }
+  };

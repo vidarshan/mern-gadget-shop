@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import Layout from "../layout/Layout";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
-import { addToCart, getCart } from "../actions/cartActions";
+import { addToCart, deleteCartProduct, getCart } from "../actions/cartActions";
 import CartTotal from "../components/cart/CartTotal";
 
 const Cart = () => {
@@ -48,8 +48,12 @@ const Cart = () => {
     return totalQuantity;
   };
 
-  const updateCartItems = (value: number, id: string) => {
+  const handlerUpdateCartItems = (value: number, id: string) => {
     dispatch(addToCart(id, value));
+  };
+
+  const handlerDeleteItem = (id: string) => {
+    dispatch(deleteCartProduct(id));
   };
 
   useEffect(() => {
@@ -65,7 +69,8 @@ const Cart = () => {
           <Text color="gray" size="lg" sx={{ marginBottom: "10px" }}>
             Cart Items
           </Text>
-          {cartItems &&
+          {console.log(cartItems)}
+          {cartItems.length &&
             cartItems.map((item: any) => {
               return (
                 <Card
@@ -147,7 +152,7 @@ const Cart = () => {
                         ref={numRef}
                         placeholder="Your age"
                         onChange={(e) =>
-                          updateCartItems(e as number, item.product._id)
+                          handlerUpdateCartItems(e as number, item.product._id)
                         }
                         min={1}
                         max={10}
@@ -173,6 +178,7 @@ const Cart = () => {
                         fullWidth
                         variant="filled"
                         color="red"
+                        onClick={() => handlerDeleteItem(item.product._id)}
                       >
                         <BiTrashAlt />
                       </Button>
