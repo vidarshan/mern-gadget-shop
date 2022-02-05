@@ -6,7 +6,6 @@ import {
   DELETE_CART_PRODUCT,
 } from "../constants/cartConstants";
 import filter from "lodash.filter";
-import find from "lodash.find";
 
 export const addToCart =
   (productId: string, quantity: number) => async (dispatch: any) => {
@@ -68,9 +67,8 @@ export const deleteCartProduct =
         return item.product._id !== productId;
       });
 
-      console.log("newCartItems: ", newCartItems);
       localStorage.setItem("cartItems", JSON.stringify(newCartItems));
-      console.log(localStorage.getItem("cartItems"));
+
       dispatch({
         type: DELETE_CART_PRODUCT,
         payload: newCartItems,
