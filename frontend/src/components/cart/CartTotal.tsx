@@ -18,18 +18,20 @@ interface ICartTotal {
 const CartTotal: React.FC<PropsWithChildren<ICartTotal>> = ({ items }) => {
   const getTotalQuantity = (items: any) => {
     let totalQuantity = 0;
-    items.map((item: any) => {
-      totalQuantity = totalQuantity + item.quantity;
-    });
+    items &&
+      items.map((item: any) => {
+        totalQuantity = totalQuantity + item.quantity;
+      });
 
     return totalQuantity;
   };
 
   const getTotalAmount = (items: any) => {
     let total = 0;
-    items.map((item: any) => {
-      total = total + item.product.price * item.quantity;
-    });
+    items &&
+      items.map((item: any) => {
+        total = total + item.product.price * item.quantity;
+      });
 
     return total;
   };

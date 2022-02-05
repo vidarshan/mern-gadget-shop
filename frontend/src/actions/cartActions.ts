@@ -39,15 +39,18 @@ export const addToCart =
             payload: "Item added to the cart",
           });
         } else {
-          let compareQuantities = filter(newCartItems, function (o: any) {
-            return o.product._id === productId;
-          });
-
-          console.log(compareQuantities);
-
-          dispatch({
-            type: ADD_PRODUCT_TO_CART_FAIL,
-            payload: "Item already exists in the cart",
+          newCartItems.map((item: any) => {
+            if (item.product._id === productId) {
+              if (item.quantity !== quantity) {
+                let selectedProductIndex = newCartItems.indexOf(item);
+                newCartItems[selectedProductIndex].quantity = quantity;
+                localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+                dispatch({
+                  type: ADD_PRODUCT_TO_CART_SUCCESS,
+                  payload: "Item updated",
+                });
+              }
+            }
           });
         }
       }

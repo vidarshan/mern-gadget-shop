@@ -43,6 +43,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash.filter": "^4.6.0",
     "lodash.find": "^4.6.0",
+    "lodash.remove": "^4.7.0",
     "mongoose": "^6.1.8",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
