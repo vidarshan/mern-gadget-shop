@@ -17,16 +17,24 @@ import {
 import banner from "../images/banner1.jpeg";
 import { BiTrashAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import {
+  ADD_PRODUCT_TO_CART,
+  GET_CART_PRODUCTS,
+  UPDATE_CART_PRODUCT,
+  DELETE_CART_PRODUCT,
+} from "../constants/cartConstants";
 import Layout from "../layout/Layout";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { addToCart, deleteCartProduct, getCart } from "../actions/cartActions";
 import CartTotal from "../components/cart/CartTotal";
 import { IoIosCloseCircle } from "react-icons/io";
+import { useModals } from "@mantine/modals";
 
 const Cart = () => {
   const numRef = useRef(null);
   const dispatch = useDispatch();
+  const modals = useModals();
 
   const [opened, setOpened] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
@@ -35,67 +43,46 @@ const Cart = () => {
     (state: RootStateOrAny) => state.cart
   );
 
-  const getTotalAmount = (items: any) => {
-    let total = 0;
-    items.map((item: any) => {
-      total = total + item.product.price * item.quantity;
+  const openConfirmModal = (id: string) =>
+    modals.openConfirmModal({
+      title: "Please confirm your action",
+      children: (
+        <Text size="sm">Are you sure that you want to remove this item?</Text>
+      ),
+      labels: { confirm: "Remove", cancel: "Cancel" },
+      onCancel: () => setOpened(false),
+      onConfirm: () => handlerDelete(id),
     });
-    return total;
-  };
-
   const handlerUpdateCartItems = (value: number, id: string) => {
     dispatch(addToCart(id, value));
   };
 
-  const handlerDeleteItem = (id: string) => {
-    setOpened(true);
+  const handlerDelete = (id: string) => {
     setSelectedItem(id);
+    dispatch(deleteCartProduct(id));
+    dispatch({
+      type: "GET_CART_PRODUCTS",
+    });
   };
+
+  // const renderItemsList = (cartItems: any) => {
+  //   return (
+
+  //   );
+  // };
 
   useEffect(() => {
     dispatch(getCart());
+    console.log(cartItems);
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log("jj");
-  }, [handlerUpdateCartItems]);
+  // useEffect(() => {
+  //   dispatch(getCart());
+  //   renderItemsList(cartItems);
+  // }, [handlerDelete]);
 
   return (
     <Layout>
-      <Modal
-        centered
-        closeOnClickOutside={false}
-        radius="md"
-        opened={opened}
-        onClose={() => setOpened(false)}
-        title="Remove Item"
-      >
-        <Text sx={{ marginBottom: "1rem" }}>
-          Are you sure that you want to remove this item?
-        </Text>
-        <Grid>
-          <Col span={6}>
-            <Button
-              color="red"
-              radius="md"
-              fullWidth
-              onClick={() => dispatch(deleteCartProduct(selectedItem))}
-            >
-              Yes
-            </Button>
-          </Col>
-          <Col span={6}>
-            <Button
-              color="dark"
-              radius="md"
-              fullWidth
-              onClick={() => setOpened(false)}
-            >
-              No
-            </Button>
-          </Col>
-        </Grid>
-      </Modal>
       <Grid>
         <Col span={9}>
           <>
@@ -113,6 +100,7 @@ const Cart = () => {
               cartItems.map((item: any) => {
                 return (
                   <Card
+                    key={item.product._id}
                     sx={{ marginBottom: "1rem" }}
                     shadow="xl"
                     radius="md"
@@ -225,7 +213,7 @@ const Cart = () => {
                           fullWidth
                           variant="filled"
                           color="red"
-                          onClick={() => handlerDeleteItem(item.product._id)}
+                          onClick={() => openConfirmModal(item.product._id)}
                         >
                           <BiTrashAlt />
                         </Button>
@@ -239,7 +227,7 @@ const Cart = () => {
         </Col>
         <Col span={3}>
           <>
-            <Divider sx={{ marginBottom: "1rem" }} label="Cart Items" />
+            <Divider sx={{ marginBottom: "1rem" }} label="Order Summary" />
             <CartTotal items={cartItems} />
           </>
         </Col>

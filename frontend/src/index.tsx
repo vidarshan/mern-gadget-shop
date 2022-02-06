@@ -18,6 +18,7 @@ import Payment from "./pages/Payment";
 import PlaceOrder from "./pages/PlaceOrder";
 import Order from "./pages/Order";
 import Profile from "./pages/Profile";
+import { ModalsProvider } from "@mantine/modals";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -33,25 +34,27 @@ ReactDOM.render(
       }}
     >
       <NotificationsProvider position="top-right">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route index element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/product/:id" element={<Product />} />
-            <Route path="/cart">
-              <Route path=":id" element={<Cart />} />
-              <Route path="" element={<Cart />} />
-            </Route>
-            <Route path="/shipping" element={<Shipping />} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/placeorder" element={<PlaceOrder />} />
-            <Route path="/order/:order" element={<Order />} />
-          </Routes>
-        </BrowserRouter>
+        <ModalsProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<App />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route index element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/product/:id" element={<Product />} />
+              <Route path="/cart">
+                <Route path=":id" element={<Cart />} />
+                <Route path="" element={<Cart />} />
+              </Route>
+              <Route path="/shipping" element={<Shipping />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/placeorder" element={<PlaceOrder />} />
+              <Route path="/order/:order" element={<Order />} />
+            </Routes>
+          </BrowserRouter>
+        </ModalsProvider>
       </NotificationsProvider>
     </MantineProvider>
   </Provider>,

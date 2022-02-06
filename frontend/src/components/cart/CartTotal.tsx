@@ -38,7 +38,7 @@ const CartTotal: React.FC<PropsWithChildren<ICartTotal>> = ({ items }) => {
 
   const getDiscount = (amount: number, items: any) => {
     let totalQuantity = getTotalAmount(items);
-    return totalQuantity - (amount / 100) * totalQuantity;
+    return (totalQuantity - (amount / 100) * totalQuantity).toFixed(2);
   };
 
   return (
