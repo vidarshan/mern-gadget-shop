@@ -2,11 +2,13 @@ import Announcement from "../components/Announcement";
 import Banner from "../components/Banner";
 import Featured from "../components/Featured";
 import Features from "../components/Features";
+import Head from "../components/Head";
 import Layout from "../layout/Layout";
 
 const Home = () => {
   return (
     <Layout>
+      <Head />
       <Banner />
       <Features title="Why Us?" subTitle="Why you should shop here" />
       <Featured

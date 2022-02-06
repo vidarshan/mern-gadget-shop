@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import Layout from "../layout/Layout";
 import { getProducts } from "../actions/productActions";
 import { useNotifications } from "@mantine/notifications";
+import Head from "../components/Head";
 
 const Shop = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const Shop = () => {
 
   return (
     <Layout>
+      <Head title="Shop | Techstop" description="Shop for gadgets" />
       <Card radius="md" withBorder sx={{ marginBottom: "2rem" }}>
         <Grid>
           <Col xs={12} sm={6} md={3} lg={3} xl={3} span={3}>

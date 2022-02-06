@@ -42,7 +42,7 @@ const ItemCard: React.FC<PropsWithChildren<IItemCard>> = ({
               height={200}
               width={300}
               src={image}
-              alt="Norway"
+              alt={`Image of ${name}`}
             />
           </Card.Section>
         </Col>

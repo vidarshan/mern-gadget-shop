@@ -1,10 +1,14 @@
 import {
+  Alert,
   //ActionIcon,
   Button,
   Card,
   Col,
+  Container,
+  Divider,
   Grid,
   Image,
+  Modal,
   NumberInput,
   Text,
   //NumberInputHandlers,
@@ -13,262 +17,219 @@ import {
 import banner from "../images/banner1.jpeg";
 import { BiTrashAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import {
+  ADD_PRODUCT_TO_CART,
+  GET_CART_PRODUCTS,
+  UPDATE_CART_PRODUCT,
+  DELETE_CART_PRODUCT,
+} from "../constants/cartConstants";
 import Layout from "../layout/Layout";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef, useState } from "react";
+import { addToCart, deleteCartProduct, getCart } from "../actions/cartActions";
+import CartTotal from "../components/cart/CartTotal";
+import { IoIosCloseCircle } from "react-icons/io";
+import { useModals } from "@mantine/modals";
 
 const Cart = () => {
-  // const [value, setValue] = useState<any>(1);
-  // const handlers = useRef<NumberInputHandlers>(null);
+  const numRef = useRef(null);
+  const dispatch = useDispatch();
+  const modals = useModals();
+
+  const [opened, setOpened] = useState(false);
+  const [selectedItem, setSelectedItem] = useState("");
+
+  const { loading, error, cartItems } = useSelector(
+    (state: RootStateOrAny) => state.cart
+  );
+
+  const openConfirmModal = (id: string) =>
+    modals.openConfirmModal({
+      title: "Please confirm your action",
+      children: (
+        <Text size="sm">Are you sure that you want to remove this item?</Text>
+      ),
+      labels: { confirm: "Remove", cancel: "Cancel" },
+      onCancel: () => setOpened(false),
+      onConfirm: () => handlerDelete(id),
+    });
+  const handlerUpdateCartItems = (value: number, id: string) => {
+    dispatch(addToCart(id, value));
+  };
+
+  const handlerDelete = (id: string) => {
+    setSelectedItem(id);
+    dispatch(deleteCartProduct(id));
+    dispatch({
+      type: "GET_CART_PRODUCTS",
+    });
+  };
+
+  // const renderItemsList = (cartItems: any) => {
+  //   return (
+
+  //   );
+  // };
+
+  useEffect(() => {
+    dispatch(getCart());
+    console.log(cartItems);
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(getCart());
+  //   renderItemsList(cartItems);
+  // }, [handlerDelete]);
+
   return (
     <Layout>
       <Grid>
-        <Col xs={12} sm={12} md={12} lg={8} xl={8} span={6}>
-          <Text color="gray" size="lg" sx={{ marginBottom: "10px" }}>
-            Cart Items
-          </Text>
-          <Card
-            sx={{ marginBottom: "10px" }}
-            shadow="xl"
-            radius="md"
-            withBorder
-          >
-            <Grid>
-              <Col
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                xs={12}
-                sm={2}
-                md={2}
-                lg={2}
-                xl={2}
-                span={2}
+        <Col span={9}>
+          <>
+            <Divider sx={{ marginBottom: "1rem" }} label="Cart Items" />
+            {!cartItems.length ? (
+              <Alert
+                icon={<IoIosCloseCircle size={16} />}
+                title="No items"
+                color="blue"
+                radius="md"
               >
-                <Image radius="md" height={70} width={100} src={banner} />
-              </Col>
-              <Col
-                xs={12}
-                sm={3}
-                md={3}
-                lg={3}
-                xl={3}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                span={3}
-              >
-                <Text size="md"> Apple iPhone 13 Pro Max (256GB)</Text>
-              </Col>
-              <Col
-                xs={12}
-                sm={3}
-                md={3}
-                lg={3}
-                xl={3}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                span={3}
-              >
-                <Text size="md"> $1299.99 x 1</Text>
-              </Col>
-              <Col
-                xs={6}
-                sm={2}
-                md={2}
-                lg={2}
-                xl={2}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                span={2}
-              >
-                <NumberInput
-                  radius="md"
-                  defaultValue={18}
-                  placeholder="Your age"
-                  required
-                />
-              </Col>
-              <Col
-                xs={6}
-                sm={2}
-                md={2}
-                lg={2}
-                xl={2}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                span={2}
-              >
-                <Button
-                  size="sm"
-                  radius="md"
-                  fullWidth
-                  variant="filled"
-                  color="red"
-                >
-                  <BiTrashAlt />
-                </Button>
-              </Col>
-            </Grid>
-          </Card>
-          <Card
-            sx={{ marginBottom: "10px" }}
-            shadow="xl"
-            radius="md"
-            withBorder
-          >
-            <Grid>
-              <Col
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                xs={12}
-                sm={2}
-                md={2}
-                lg={2}
-                xl={2}
-                span={2}
-              >
-                <Image radius="md" height={70} width={100} src={banner} />
-              </Col>
-              <Col
-                xs={12}
-                sm={3}
-                md={3}
-                lg={3}
-                xl={3}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                span={3}
-              >
-                <Text size="md"> Apple iPhone 13 Pro Max (256GB)</Text>
-              </Col>
-              <Col
-                xs={12}
-                sm={3}
-                md={3}
-                lg={3}
-                xl={3}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                span={3}
-              >
-                <Text size="md"> $1299.99 x 1</Text>
-              </Col>
-              <Col
-                xs={6}
-                sm={2}
-                md={2}
-                lg={2}
-                xl={2}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                span={2}
-              >
-                <NumberInput
-                  radius="md"
-                  defaultValue={18}
-                  placeholder="Your age"
-                  required
-                />
-              </Col>
-              <Col
-                xs={6}
-                sm={2}
-                md={2}
-                lg={2}
-                xl={2}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                span={2}
-              >
-                <Button
-                  size="sm"
-                  radius="md"
-                  fullWidth
-                  variant="filled"
-                  color="red"
-                >
-                  <BiTrashAlt />
-                </Button>
-              </Col>
-            </Grid>
-          </Card>
+                No items in the cart.
+              </Alert>
+            ) : (
+              cartItems.map((item: any) => {
+                return (
+                  <Card
+                    key={item.product._id}
+                    sx={{ marginBottom: "1rem" }}
+                    shadow="xl"
+                    radius="md"
+                    withBorder
+                  >
+                    <Grid>
+                      <Col
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        xs={12}
+                        sm={2}
+                        md={2}
+                        lg={2}
+                        xl={2}
+                        span={2}
+                      >
+                        <Image
+                          fit="contain"
+                          radius="md"
+                          height={70}
+                          width={70}
+                          src={item.product.image}
+                        />
+                      </Col>
+                      <Col
+                        xs={12}
+                        sm={3}
+                        md={3}
+                        lg={3}
+                        xl={3}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        span={3}
+                      >
+                        <Text weight={600} align="left" size="md">
+                          {" "}
+                          {item.product.name}
+                        </Text>
+                      </Col>
+                      <Col
+                        xs={12}
+                        sm={3}
+                        md={3}
+                        lg={3}
+                        xl={5}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        span={5}
+                      >
+                        <Text weight={600} align="left" size="md">
+                          {" "}
+                          ${item.product.price} x {item.quantity} = $
+                          {item.product.price * item.quantity}
+                        </Text>
+                      </Col>
+                      <Col
+                        xs={6}
+                        sm={2}
+                        md={2}
+                        lg={2}
+                        xl={1}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        span={1}
+                      >
+                        <NumberInput
+                          radius="md"
+                          defaultValue={item.quantity}
+                          ref={numRef}
+                          placeholder="Your age"
+                          onChange={(e) =>
+                            handlerUpdateCartItems(
+                              e as number,
+                              item.product._id
+                            )
+                          }
+                          min={1}
+                          max={10}
+                          required
+                        />
+                      </Col>
+                      <Col
+                        xs={6}
+                        sm={2}
+                        md={2}
+                        lg={2}
+                        xl={1}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        span={1}
+                      >
+                        <Button
+                          size="sm"
+                          radius="md"
+                          fullWidth
+                          variant="filled"
+                          color="red"
+                          onClick={() => openConfirmModal(item.product._id)}
+                        >
+                          <BiTrashAlt />
+                        </Button>
+                      </Col>
+                    </Grid>
+                  </Card>
+                );
+              })
+            )}
+          </>
         </Col>
-        <Col xs={12} sm={12} md={12} lg={4} xl={4} span={6}>
-          <Text color="gray" size="lg" sx={{ marginBottom: "10px" }}>
-            Checkout
-          </Text>
-          <Card radius="md" withBorder shadow="xl">
-            <Col sx={{ borderBottom: "1px solid #E0E0E0" }} span={12}>
-              <Grid>
-                <Col span={7}>
-                  <Text size="lg">Subtotal (3) Items</Text>
-                </Col>
-                <Col span={5}>
-                  <Text align="right" size="lg">
-                    $5999.00
-                  </Text>
-                </Col>
-              </Grid>
-            </Col>
-            <Col
-              sx={{ margin: "10px 0", borderBottom: "1px solid #E0E0E0" }}
-              span={12}
-            >
-              <Grid>
-                <Col span={7}>
-                  <Text color="gray" size="md">
-                    Discount (5%)
-                  </Text>
-                </Col>
-                <Col span={5}>
-                  <Text align="right" color="gray" size="md">
-                    $59.00
-                  </Text>
-                </Col>
-              </Grid>
-            </Col>
-            <Col sx={{ margin: "10px 0" }} span={12}>
-              <Link to="/login">
-                <Button color="dark" fullWidth radius="md">
-                  Proceed to Checkout
-                </Button>
-              </Link>
-            </Col>
-            <Col sx={{ margin: "10px 0" }} span={12}>
-              <Link to="/shipping">
-                <Button color="dark" fullWidth radius="md">
-                  Shipping
-                </Button>
-              </Link>
-            </Col>
-          </Card>
+        <Col span={3}>
+          <>
+            <Divider sx={{ marginBottom: "1rem" }} label="Order Summary" />
+            <CartTotal items={cartItems} />
+          </>
         </Col>
       </Grid>
     </Layout>

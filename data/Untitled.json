@@ -1,0 +1,121 @@
+[{
+  "_id": {
+    "$oid": "61f541ad28c60fb31a63c900"
+  },
+  "name": "John Doe",
+  "email": "jdoe@gmail.com",
+  "password": "$2a$10$6dJR1No6N73RDPABnjf/k.gKoyeJnstkKy7FUeYtqRu3G06Ghwtm2",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2022-01-29T13:31:25.041Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-29T13:31:25.041Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f550d52bf7a4e12af88ee9"
+  },
+  "name": "John Doe",
+  "email": "john@gmail.com",
+  "password": "$2a$10$EVNts0.SjKu8cSOk08zmwORgvdznl4OOHunf9.L9un0ItQ9nnxB4a",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2022-01-29T14:36:05.113Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-29T14:36:05.113Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f7673c4b2dce12c541eb88"
+  },
+  "name": "Jake Doe",
+  "email": "jake@gmail.com",
+  "password": "$2a$10$8/4eaauRyPpk4GAsKsiG7eqzFW6U70PEIpwqj6kuDcxTVYMMJCHua",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2022-01-31T04:36:12.475Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-31T04:36:12.475Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f768334b2dce12c541eb96"
+  },
+  "name": "Steve Smith",
+  "email": "steve@gmail.com",
+  "password": "$2a$10$bbq0ljMH7WQLQtad1tRjb.n.Fq/ppdpPsiy8u.fIWaCQZsSNVAq0K",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2022-01-31T04:40:19.864Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-31T04:40:19.864Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f7dd8438831bef24804f18"
+  },
+  "name": "Rich Smith",
+  "email": "rich@gmail.com",
+  "password": "$2a$10$.k2/hcSVKbT6U8y.3Np/0.8ZXypMyZGC./eHW7V5qPjFPHKdT8iAe",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2022-01-31T13:00:52.629Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-31T13:00:52.629Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f7df379ac311407217bc17"
+  },
+  "name": "Adithya",
+  "email": "janakea.e@agencycolombo.com",
+  "password": "$2a$10$loDhnDiWq2nibOy6a3waJundIbYldgZSOzBMtWIvbW3yoaCIy.Ul.",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2022-01-31T13:08:07.057Z"
+  },
+  "updatedAt": {
+    "$date": "2022-01-31T13:08:07.057Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f929a352258858000c6527"
+  },
+  "name": "Steve",
+  "email": "steve1@gmail.com",
+  "password": "$2a$10$goTDQrF3XN/yT9db9/5rC.LCs11whmWce8ZtVuvySFq7Fsr6XHQ7a",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2022-02-01T12:37:55.200Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-01T12:37:55.200Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61f92a0575e5339fc3836042"
+  },
+  "name": "Jay",
+  "email": "janaka.e@agencycolombo.com",
+  "password": "$2a$10$MrZBn/7S47f50ghXOCZ4ku4cT7oXF.nfHYoV/p/0xxw9DfC/ICbYe",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2022-02-01T12:39:33.641Z"
+  },
+  "updatedAt": {
+    "$date": "2022-02-01T12:39:33.641Z"
+  },
+  "__v": 0
+}]

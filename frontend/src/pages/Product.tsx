@@ -30,6 +30,8 @@ import ReviewCard from "../components/reviews/ReviewCard";
 import { useForm } from "@mantine/hooks";
 import { useNotifications } from "@mantine/notifications";
 import { ADD_REVIEW_RESET } from "../constants/productConstants";
+import Head from "../components/Head";
+import { addToCart } from "../actions/cartActions";
 
 const Product = () => {
   const params = useParams();
@@ -108,6 +110,11 @@ const Product = () => {
     form.reset();
     setOpened(false);
     dispatch(getProduct(params.id as string));
+  };
+
+  const handlerCartAdd = (product: string, quantity: number) => {
+    console.log("dd");
+    dispatch(addToCart(product, quantity));
   };
 
   useEffect(() => {
@@ -215,6 +222,11 @@ const Product = () => {
         <Loader />
       ) : product ? (
         <Grid>
+          <Head
+            title={`${product.product.name} | Techstop`}
+            description={`Buy ${product.product.name}`}
+            keywords={product.product.name}
+          ></Head>
           <Col span={12}>
             <Card shadow="md" withBorder radius="md">
               {" "}
@@ -242,7 +254,7 @@ const Product = () => {
                 >
                   <Group>
                     <Text weight={600} size="xl">
-                      `{product.product.name}`
+                      {product.product.name}
                     </Text>
 
                     {product.product.countInStock === 0 ? (
@@ -324,7 +336,9 @@ const Product = () => {
                     </Col>
                     <Col xs={12} sm={6} md={7} lg={8} xl={9} span={9}>
                       <Button
-                        onClick={() => navigate("/cart/1")}
+                        onClick={() =>
+                          handlerCartAdd(product.product._id, value)
+                        }
                         color="dark"
                         radius="md"
                         fullWidth
