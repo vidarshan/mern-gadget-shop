@@ -10,8 +10,24 @@ import {
 } from "@mantine/core";
 import Layout from "../layout/Layout";
 import { RiCloseLine, RiCheckLine } from "react-icons/ri";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const Profile = () => {
+  const navigate = useNavigate();
+
+  const { userInfo, loading, error } = useSelector(
+    (state: RootStateOrAny) => state.userLogin
+  );
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("/login");
+    }
+    // eslint-disable-next-line
+  }, [userInfo]);
+
   const elements = [
     {
       id: "345345dsf34545",

@@ -123,122 +123,6 @@ const Product = () => {
     dispatch(addToCart(product, quantity));
   };
 
-  const handlerCheckIfExistsInCart = (cartItems: string, id: string) => {
-    console.log("id: ", id);
-    console.log("cartItems: ", cartItems);
-    console.log(
-      "sss",
-      filter(cartItems, function (o: any) {
-        return o.product._id === id;
-      })
-    );
-    if (
-      filter(cartItems, function (o: any) {
-        return o.product._id === id;
-      }).length === 0
-    ) {
-      return (
-        <Grid sx={{ marginTop: "1rem" }}>
-          <Col xs={12} sm={6} md={5} lg={4} xl={3} span={6}>
-            <Group spacing={5}>
-              <ActionIcon
-                size={36}
-                radius="md"
-                variant="filled"
-                color="dark"
-                onClick={() => handlers?.current?.decrement()}
-              >
-                –
-              </ActionIcon>
-              <NumberInput
-                hideControls
-                value={value}
-                onChange={(val) => setValue(val)}
-                handlersRef={handlers}
-                max={10}
-                min={1}
-                step={1}
-                styles={{ input: { width: 54, textAlign: "center" } }}
-                radius="md"
-              />
-              <ActionIcon
-                size={36}
-                radius="md"
-                variant="filled"
-                color="dark"
-                onClick={() => handlers?.current?.increment()}
-              >
-                +
-              </ActionIcon>
-            </Group>
-          </Col>
-          <Col xs={12} sm={6} md={7} lg={8} xl={9} span={9}>
-            <Button
-              onClick={() => handlerCartAdd(id, value)}
-              color="dark"
-              radius="md"
-              fullWidth
-            >
-              Add to Cart
-            </Button>
-          </Col>
-        </Grid>
-      );
-    } else {
-      return (
-        <Grid sx={{ marginTop: "1rem" }}>
-          <Col xs={12} sm={6} md={5} lg={4} xl={3} span={6}>
-            <Group spacing={5}>
-              <ActionIcon
-                size={36}
-                radius="md"
-                variant="filled"
-                color="dark"
-                onClick={() => handlers?.current?.decrement()}
-                disabled
-              >
-                –
-              </ActionIcon>
-              <NumberInput
-                hideControls
-                value={value}
-                onChange={(val) => setValue(val)}
-                handlersRef={handlers}
-                max={10}
-                min={1}
-                step={1}
-                styles={{ input: { width: 54, textAlign: "center" } }}
-                radius="md"
-                disabled
-              />
-              <ActionIcon
-                size={36}
-                radius="md"
-                variant="filled"
-                color="dark"
-                onClick={() => handlers?.current?.increment()}
-                disabled
-              >
-                +
-              </ActionIcon>
-            </Group>
-          </Col>
-          <Col xs={12} sm={6} md={7} lg={8} xl={9} span={9}>
-            <Button
-              onClick={() => handlerCartAdd(id, value)}
-              color="dark"
-              radius="md"
-              fullWidth
-              disabled
-            >
-              Item is already in the cart
-            </Button>
-          </Col>
-        </Grid>
-      );
-    }
-  };
-
   useEffect(() => {
     dispatch(getProduct(params.id as string));
     dispatch(getCart());
@@ -430,7 +314,53 @@ const Product = () => {
                     </Group>
                   </Group>
                   <Divider />
-                  {handlerCheckIfExistsInCart(cartItems, product.product._id)}
+                  <Grid sx={{ marginTop: "1rem" }}>
+                    <Col xs={12} sm={6} md={5} lg={4} xl={3} span={6}>
+                      <Group spacing={5}>
+                        <ActionIcon
+                          size={36}
+                          radius="md"
+                          variant="filled"
+                          color="dark"
+                          onClick={() => handlers?.current?.decrement()}
+                        >
+                          –
+                        </ActionIcon>
+                        <NumberInput
+                          hideControls
+                          value={value}
+                          onChange={(val) => setValue(val)}
+                          handlersRef={handlers}
+                          max={10}
+                          min={1}
+                          step={1}
+                          styles={{ input: { width: 54, textAlign: "center" } }}
+                          radius="md"
+                        />
+                        <ActionIcon
+                          size={36}
+                          radius="md"
+                          variant="filled"
+                          color="dark"
+                          onClick={() => handlers?.current?.increment()}
+                        >
+                          +
+                        </ActionIcon>
+                      </Group>
+                    </Col>
+                    <Col xs={12} sm={6} md={7} lg={8} xl={9} span={9}>
+                      <Button
+                        onClick={() =>
+                          handlerCartAdd(product.product._id, value)
+                        }
+                        color="dark"
+                        radius="md"
+                        fullWidth
+                      >
+                        Add to Cart
+                      </Button>
+                    </Col>
+                  </Grid>
                 </Col>
               </Grid>
             </Card>

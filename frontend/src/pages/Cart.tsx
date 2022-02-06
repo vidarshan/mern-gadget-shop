@@ -38,8 +38,11 @@ const Cart = () => {
 
   const [opened, setOpened] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
+  const [renderTotal, setRenderTotal] = useState(0);
 
-  const { cartItems } = useSelector((state: RootStateOrAny) => state.cart);
+  const { cartItems, loading, error } = useSelector(
+    (state: RootStateOrAny) => state.cart
+  );
 
   const openConfirmModal = (id: string) =>
     modals.openConfirmModal({
@@ -53,17 +56,18 @@ const Cart = () => {
     });
 
   const handlerUpdateCartItems = (value: number, id: string) => {
-    console.log("ddd");
     dispatch(addToCart(id, value));
+    setRenderTotal(1);
   };
 
   const handlerDelete = (id: string) => {
     setSelectedItem(id);
     dispatch(deleteCartProduct(id));
-    dispatch({
-      type: "GET_CART_PRODUCTS",
-    });
   };
+
+  useEffect(() => {
+    console.log("rednder");
+  }, [renderTotal]);
 
   useEffect(() => {
     dispatch(getCart());
@@ -73,6 +77,7 @@ const Cart = () => {
     <Layout>
       <Grid>
         <Col span={9}>
+          {console.log(loading)}
           <>
             <Divider sx={{ marginBottom: "1rem" }} label="Cart Items" />
             {!cartItems.length ? (
@@ -167,7 +172,7 @@ const Cart = () => {
                         span={1}
                       >
                         <NumberInput
-                          radius="md"
+                          radius="xl"
                           defaultValue={item.quantity}
                           ref={numRef}
                           placeholder="Your age"
@@ -197,7 +202,7 @@ const Cart = () => {
                       >
                         <Button
                           size="sm"
-                          radius="md"
+                          radius="xl"
                           fullWidth
                           variant="filled"
                           color="red"
