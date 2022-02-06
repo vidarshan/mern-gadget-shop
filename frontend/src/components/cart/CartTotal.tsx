@@ -72,6 +72,23 @@ const CartTotal: React.FC<PropsWithChildren<ICartTotal>> = ({ items }) => {
           </Col>
         </Grid>
       </Col>
+      <Col
+        sx={{ margin: "10px 0", borderBottom: "1px solid #E0E0E0" }}
+        span={12}
+      >
+        <Grid>
+          <Col span={7}>
+            <Text color="gray" size="md">
+              Discount (5%)
+            </Text>
+          </Col>
+          <Col span={5}>
+            <Text align="right" color="gray" size="md">
+              ${getDiscount(5, items)}
+            </Text>
+          </Col>
+        </Grid>
+      </Col>
       <Col sx={{ margin: "10px 0" }} span={12}>
         <Link to="/login">
           <Button color="dark" fullWidth radius="md">

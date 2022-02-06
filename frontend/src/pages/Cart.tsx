@@ -8,6 +8,7 @@ import {
   Divider,
   Grid,
   Image,
+  Modal,
   NumberInput,
   Text,
   //NumberInputHandlers,
@@ -18,7 +19,7 @@ import { BiTrashAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Layout from "../layout/Layout";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { addToCart, deleteCartProduct, getCart } from "../actions/cartActions";
 import CartTotal from "../components/cart/CartTotal";
 import { IoIosCloseCircle } from "react-icons/io";
@@ -26,6 +27,10 @@ import { IoIosCloseCircle } from "react-icons/io";
 const Cart = () => {
   const numRef = useRef(null);
   const dispatch = useDispatch();
+
+  const [opened, setOpened] = useState(false);
+  const [selectedItem, setSelectedItem] = useState("");
+
   const { loading, error, cartItems } = useSelector(
     (state: RootStateOrAny) => state.cart
   );
@@ -38,36 +43,59 @@ const Cart = () => {
     return total;
   };
 
-  const getDiscount = (amount: number, items: any) => {
-    let totalQuantity = getTotalAmount(items);
-    return totalQuantity - (amount / 100) * totalQuantity;
-  };
-
-  const getTotalQuantity = (items: any) => {
-    let totalQuantity = 0;
-    items.map((item: any) => {
-      totalQuantity = totalQuantity + item.quantity;
-    });
-
-    return totalQuantity;
-  };
-
   const handlerUpdateCartItems = (value: number, id: string) => {
     dispatch(addToCart(id, value));
   };
 
   const handlerDeleteItem = (id: string) => {
-    dispatch(deleteCartProduct(id));
+    setOpened(true);
+    setSelectedItem(id);
   };
 
   useEffect(() => {
     dispatch(getCart());
   }, [dispatch]);
 
-  // const [value, setValue] = useState<any>(1);
-  // const handlers = useRef<NumberInputHandlers>(null);
+  useEffect(() => {
+    console.log("jj");
+  }, [handlerUpdateCartItems]);
+
   return (
     <Layout>
+      <Modal
+        centered
+        closeOnClickOutside={false}
+        radius="md"
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title="Remove Item"
+      >
+        <Text sx={{ marginBottom: "1rem" }}>
+          Are you sure that you want to remove this item?
+        </Text>
+        <Grid>
+          <Col span={6}>
+            <Button
+              color="red"
+              radius="md"
+              fullWidth
+              onClick={() => dispatch(deleteCartProduct(selectedItem))}
+            >
+              Yes
+            </Button>
+          </Col>
+          <Col span={6}>
+            <Button
+              color="dark"
+              radius="md"
+              fullWidth
+              onClick={() => setOpened(false)}
+            >
+              No
+            </Button>
+          </Col>
+        </Grid>
+      </Modal>
       <Grid>
         <Col span={9}>
           <>
@@ -125,7 +153,7 @@ const Cart = () => {
                         }}
                         span={3}
                       >
-                        <Text weight={700} align="left" size="md">
+                        <Text weight={600} align="left" size="md">
                           {" "}
                           {item.product.name}
                         </Text>
@@ -143,9 +171,10 @@ const Cart = () => {
                         }}
                         span={5}
                       >
-                        <Text weight={700} align="left" size="md">
+                        <Text weight={600} align="left" size="md">
                           {" "}
-                          ${item.product.price} x {item.quantity}
+                          ${item.product.price} x {item.quantity} = $
+                          {item.product.price * item.quantity}
                         </Text>
                       </Col>
                       <Col
