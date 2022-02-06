@@ -39,9 +39,7 @@ const Cart = () => {
   const [opened, setOpened] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
 
-  const { loading, error, cartItems } = useSelector(
-    (state: RootStateOrAny) => state.cart
-  );
+  const { cartItems } = useSelector((state: RootStateOrAny) => state.cart);
 
   const openConfirmModal = (id: string) =>
     modals.openConfirmModal({
@@ -53,7 +51,9 @@ const Cart = () => {
       onCancel: () => setOpened(false),
       onConfirm: () => handlerDelete(id),
     });
+
   const handlerUpdateCartItems = (value: number, id: string) => {
+    console.log("ddd");
     dispatch(addToCart(id, value));
   };
 
@@ -65,21 +65,9 @@ const Cart = () => {
     });
   };
 
-  // const renderItemsList = (cartItems: any) => {
-  //   return (
-
-  //   );
-  // };
-
   useEffect(() => {
     dispatch(getCart());
-    console.log(cartItems);
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(getCart());
-  //   renderItemsList(cartItems);
-  // }, [handlerDelete]);
 
   return (
     <Layout>
