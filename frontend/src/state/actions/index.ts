@@ -57,7 +57,7 @@ interface UserLoginFailAction {
 
 interface UserRegisterRequestAction {
   type: ActionType.USER_REGISTER_REQUEST;
-  payload: any;
+  payload?: any;
 }
 
 interface UserRegisterSuccessAction {

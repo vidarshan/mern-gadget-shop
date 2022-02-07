@@ -78,3 +78,44 @@ export const getProducts = () => {
     }
   };
 };
+
+export const register = (name: string, email: string, password: string) => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.USER_REGISTER_REQUEST,
+      });
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const formData = {
+        name,
+        email,
+        password,
+      };
+
+      const { data } = await axios.post("/api/v1/users", formData, config);
+
+      dispatch({
+        type: ActionType.USER_REGISTER_SUCCESS,
+        payload: data,
+      });
+
+      dispatch({
+        type: ActionType.USER_LOGIN_SUCCESS,
+        payload: data,
+      });
+
+      localStorage.setItem("userInfo", JSON.stringify(data));
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.USER_REGISTER_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
