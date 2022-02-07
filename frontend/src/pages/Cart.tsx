@@ -17,32 +17,30 @@ import {
 import banner from "../images/banner1.jpeg";
 import { BiTrashAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import {
-  ADD_PRODUCT_TO_CART,
-  GET_CART_PRODUCTS,
-  UPDATE_CART_PRODUCT,
-  DELETE_CART_PRODUCT,
-} from "../constants/cartConstants";
 import Layout from "../layout/Layout";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
-import { addToCart, deleteCartProduct, getCart } from "../actions/cartActions";
+
 import CartTotal from "../components/cart/CartTotal";
 import { IoIosCloseCircle } from "react-icons/io";
 import { useModals } from "@mantine/modals";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../state";
 
 const Cart = () => {
   const numRef = useRef(null);
   const dispatch = useDispatch();
+
+  const { addToCart, removeFromCart, saveShippingAddress, savePaymentMethod } =
+    bindActionCreators(actionCreators, dispatch);
+
   const modals = useModals();
 
   const [opened, setOpened] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
   const [renderTotal, setRenderTotal] = useState(0);
 
-  const { cartItems, loading, error } = useSelector(
-    (state: RootStateOrAny) => state.cart
-  );
+  const { cartItems, loading, error } = useSelector((state) => state.cart);
 
   const openConfirmModal = (id: string) =>
     modals.openConfirmModal({
@@ -62,7 +60,7 @@ const Cart = () => {
 
   const handlerDelete = (id: string) => {
     setSelectedItem(id);
-    dispatch(deleteCartProduct(id));
+    dispatch(removeFromCart(id));
   };
 
   useEffect(() => {
@@ -70,7 +68,7 @@ const Cart = () => {
   }, [renderTotal]);
 
   useEffect(() => {
-    dispatch(getCart());
+    // dispatch(getCart());
   }, [dispatch]);
 
   return (
