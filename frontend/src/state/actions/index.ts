@@ -25,9 +25,69 @@ interface CartClearItemsAction {
   payload: any;
 }
 
+interface GetProductsRequestAction {
+  type: ActionType.GET_PRODUCT_REQUEST;
+  payload?: any;
+}
+
+interface GetProductsSuccessAction {
+  type: ActionType.GET_PRODUCT_SUCCESS;
+  payload: any;
+}
+
+interface GetProductsFailAction {
+  type: ActionType.GET_PRODUCT_FAIL;
+  payload: any;
+}
+
+interface UserLoginRequestAction {
+  type: ActionType.USER_LOGIN_REQUEST;
+  payload: any;
+}
+
+interface UserLoginSuccessAction {
+  type: ActionType.USER_LOGIN_SUCCESS;
+  payload: any;
+}
+
+interface UserLoginFailAction {
+  type: ActionType.USER_LOGIN_FAIL;
+  payload: any;
+}
+
+interface UserRegisterRequestAction {
+  type: ActionType.USER_REGISTER_REQUEST;
+  payload: any;
+}
+
+interface UserRegisterSuccessAction {
+  type: ActionType.USER_REGISTER_SUCCESS;
+  payload: any;
+}
+
+interface UserRegisterFailAction {
+  type: ActionType.USER_REGISTER_FAIL;
+  payload: any;
+}
+
+interface UserLogoutAction {
+  type: ActionType.USER_LOGOUT;
+  payload: any;
+}
+
 export type Action =
   | CartAddItemAction
   | CartRemoveItemAction
   | CartSaveShippingAction
   | CartSavePaymentAction
-  | CartClearItemsAction;
+  | CartClearItemsAction
+  | GetProductsRequestAction
+  | GetProductsSuccessAction
+  | GetProductsFailAction
+  | UserLoginRequestAction
+  | UserLoginSuccessAction
+  | UserLoginFailAction
+  | UserRegisterRequestAction
+  | UserRegisterSuccessAction
+  | UserRegisterFailAction
+  | UserLogoutAction;

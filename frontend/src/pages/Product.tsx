@@ -25,7 +25,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 import Layout from "../layout/Layout";
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
-import { addReview, getProduct } from "../actions/productActions";
+// import { addReview, getProduct } from "../actions/productActions";
 import ReviewCard from "../components/reviews/ReviewCard";
 import { useForm } from "@mantine/hooks";
 import { useNotifications } from "@mantine/notifications";
@@ -111,17 +111,17 @@ const Product = () => {
   };
 
   const handlerAddReview = (values: any) => {
-    const { rating, comment } = values;
-    dispatch(addReview(params.id as string, parseInt(rating), comment));
-    form.reset();
-    setOpened(false);
-    dispatch(getProduct(params.id as string));
+    // const { rating, comment } = values;
+    // dispatch(addReview(params.id as string, parseInt(rating), comment));
+    // form.reset();
+    // setOpened(false);
+    // dispatch(getProduct(params.id as string));
   };
 
   const handlerCartAdd = (product: string, quantity: number) => {};
 
   useEffect(() => {
-    dispatch(getProduct(params.id as string));
+    // dispatch(getProduct(params.id as string));
   }, [dispatch, params.id]);
 
   useEffect(() => {
@@ -162,7 +162,7 @@ const Product = () => {
       });
     }
     dispatch({ type: ADD_REVIEW_RESET });
-    dispatch(getProduct(params.id as string));
+    // dispatch(getProduct(params.id as string));
     // eslint-disable-next-line
   }, [review]);
 

@@ -25,7 +25,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
-  const { userInfo } = useSelector((state: RootStateOrAny) => state.userLogin);
+  // const { userInfo } = useSelector((state: RootStateOrAny) => state.userLogin);
 
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
@@ -203,7 +203,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                 <BiLogOut />
               </ActionIcon>
             </MediaQuery>
-            {!userInfo && (
+            {/* {!userInfo && (
               <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
                 <Button
                   onClick={() => navigate("/signup")}
@@ -216,7 +216,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                   Sign Up
                 </Button>
               </MediaQuery>
-            )}
+            )} */}
           </div>
         </div>
       </Head>

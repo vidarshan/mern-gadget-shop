@@ -12,20 +12,24 @@ import { BiDollarCircle, BiLaptop, BiBuilding } from "react-icons/bi";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Layout from "../layout/Layout";
-import { getProducts } from "../actions/productActions";
 import { useNotifications } from "@mantine/notifications";
 import Head from "../components/Head";
+
+import { bindActionCreators } from "redux";
+import { actionCreators, State } from "../state";
 
 const Shop = () => {
   const dispatch = useDispatch();
   const notifications = useNotifications();
 
-  const { products, loading, error } = useSelector(
-    (state: RootStateOrAny) => state.products
+  const { getProducts } = bindActionCreators(actionCreators, dispatch);
+
+  const { products, error, loading } = useSelector(
+    (state: State) => state.products
   );
 
   useEffect(() => {
-    dispatch(getProducts());
+    getProducts();
   }, [dispatch]);
 
   useEffect(() => {
@@ -43,7 +47,9 @@ const Shop = () => {
     <Layout>
       <Head title="Shop | Techstop" description="Shop for gadgets" />
       <Card radius="md" withBorder sx={{ marginBottom: "2rem" }}>
-        <Grid>
+        sfsd
+      </Card>
+      {/* <Grid>
           <Col xs={12} sm={6} md={3} lg={3} xl={3} span={3}>
             <Select
               icon={<BiBuilding />}
@@ -99,8 +105,8 @@ const Shop = () => {
             </Button>
           </Col>
         </Grid>
-      </Card>
-      {loading ? (
+      </Card> */}
+      {/* {loading ? (
         <Loader></Loader>
       ) : (
         <Grid gutter="xl">
@@ -125,7 +131,7 @@ const Shop = () => {
               );
             })}
         </Grid>
-      )}
+      )} */}
 
       {/* <Grid gutter="xl">
         <Col xs={12} sm={6} md={4} lg={4} xl={3} span={3}>
@@ -147,11 +153,11 @@ const Shop = () => {
           <ItemCard />
         </Col>
       </Grid> */}
-      <Grid>
+      {/* <Grid>
         <Col className="flex-container" sx={{ margin: "1rem 0" }} span={12}>
           <Pagination total={10} color="dark" radius="md" />
         </Col>
-      </Grid>
+      </Grid> */}
     </Layout>
   );
 };

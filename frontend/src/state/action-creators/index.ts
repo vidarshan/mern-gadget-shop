@@ -5,7 +5,7 @@ import { Action } from "../actions/index";
 
 export const addToCart = (id: string, qty: number) => {
   return async (dispatch: Dispatch<Action>) => {
-    const { data } = await axios.get(`/api/products/${id}`);
+    const { data } = await axios.get(`/api/v1/products/${id}`);
 
     dispatch({
       type: ActionType.CART_ADD_ITEM,
@@ -54,5 +54,27 @@ export const savePaymentMethod = (data: any) => {
     });
 
     localStorage.setItem("paymentMethod", JSON.stringify(data));
+  };
+};
+
+export const getProducts = () => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.GET_PRODUCT_REQUEST,
+      });
+
+      const { data } = await axios.get(`/api/v1/products`);
+
+      dispatch({
+        type: ActionType.GET_PRODUCT_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.GET_PRODUCT_FAIL,
+        payload: error,
+      });
+    }
   };
 };
