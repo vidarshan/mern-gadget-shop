@@ -31,7 +31,6 @@ import { useForm } from "@mantine/hooks";
 import { useNotifications } from "@mantine/notifications";
 import { ADD_REVIEW_RESET } from "../constants/productConstants";
 import Head from "../components/Head";
-import { addToCart, getCart } from "../actions/cartActions";
 import filter from "lodash.filter";
 
 const Product = () => {
@@ -119,13 +118,10 @@ const Product = () => {
     dispatch(getProduct(params.id as string));
   };
 
-  const handlerCartAdd = (product: string, quantity: number) => {
-    dispatch(addToCart(product, quantity));
-  };
+  const handlerCartAdd = (product: string, quantity: number) => {};
 
   useEffect(() => {
     dispatch(getProduct(params.id as string));
-    dispatch(getCart());
   }, [dispatch, params.id]);
 
   useEffect(() => {

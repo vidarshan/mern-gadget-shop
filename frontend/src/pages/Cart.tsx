@@ -25,7 +25,7 @@ import CartTotal from "../components/cart/CartTotal";
 import { IoIosCloseCircle } from "react-icons/io";
 import { useModals } from "@mantine/modals";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../state";
+import { actionCreators, State } from "../state";
 
 const Cart = () => {
   const numRef = useRef(null);
@@ -40,7 +40,9 @@ const Cart = () => {
   const [selectedItem, setSelectedItem] = useState("");
   const [renderTotal, setRenderTotal] = useState(0);
 
-  const { cartItems, loading, error } = useSelector((state) => state.cart);
+  const { cartItems, loading, error } = useSelector(
+    (state: State) => state.cart
+  );
 
   const openConfirmModal = (id: string) =>
     modals.openConfirmModal({
@@ -74,7 +76,7 @@ const Cart = () => {
   return (
     <Layout>
       <Grid>
-        <Col span={9}>
+        {/* <Col span={9}>
           {console.log(loading)}
           <>
             <Divider sx={{ marginBottom: "1rem" }} label="Cart Items" />
@@ -221,7 +223,7 @@ const Cart = () => {
             <Divider sx={{ marginBottom: "1rem" }} label="Order Summary" />
             <CartTotal items={cartItems} />
           </>
-        </Col>
+        </Col> */}
       </Grid>
     </Layout>
   );
