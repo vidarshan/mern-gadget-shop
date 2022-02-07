@@ -1,8 +1,12 @@
 import { ActionType } from "../action-types";
 import { Action } from "../actions/index";
 
+const cartItemsFromStorage = localStorage.getItem("cartItems")
+  ? JSON.parse(localStorage.getItem("cartItems") || "{}")
+  : null;
+
 const cartReducer = (
-  state = { cartItems: [], shippingAddress: {} },
+  state = { cartItems: cartItemsFromStorage, shippingAddress: {} },
   action: Action
 ) => {
   switch (action.type) {

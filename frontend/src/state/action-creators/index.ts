@@ -119,3 +119,47 @@ export const register = (name: string, email: string, password: string) => {
     }
   };
 };
+
+export const login = (email: string, password: string) => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.USER_LOGIN_REQUEST,
+      });
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const formData = {
+        email,
+        password,
+      };
+
+      const { data } = await axios.post(
+        "/api/v1/users/login",
+        formData,
+        config
+      );
+
+      dispatch({
+        type: ActionType.USER_LOGIN_SUCCESS,
+        payload: data,
+      });
+
+      dispatch({
+        type: ActionType.USER_LOGIN_FAIL,
+        payload: data,
+      });
+
+      localStorage.setItem("userInfo", JSON.stringify(data));
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.USER_REGISTER_FAIL,
+        payload: error,
+      });
+    }
+  };
+};

@@ -42,7 +42,7 @@ interface GetProductsFailAction {
 
 interface UserLoginRequestAction {
   type: ActionType.USER_LOGIN_REQUEST;
-  payload: any;
+  payload?: any;
 }
 
 interface UserLoginSuccessAction {

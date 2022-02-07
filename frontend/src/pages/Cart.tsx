@@ -40,9 +40,7 @@ const Cart = () => {
   const [selectedItem, setSelectedItem] = useState("");
   const [renderTotal, setRenderTotal] = useState(0);
 
-  const { cartItems, loading, error } = useSelector(
-    (state: State) => state.cart
-  );
+  const { cartItems } = useSelector((state: State) => state.cart);
 
   const openConfirmModal = (id: string) =>
     modals.openConfirmModal({
