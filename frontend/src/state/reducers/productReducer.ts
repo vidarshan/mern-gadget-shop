@@ -10,16 +10,16 @@ const getProductsReducer = (
   action: Action
 ) => {
   switch (action.type) {
-    case ActionType.GET_PRODUCT_REQUEST:
+    case ActionType.GET_PRODUCTS_REQUEST:
       return { ...state, loading: true, error: null };
-    case ActionType.GET_PRODUCT_SUCCESS:
+    case ActionType.GET_PRODUCTS_SUCCESS:
       return {
         ...state,
         products: action.payload,
         loading: false,
         error: null,
       };
-    case ActionType.GET_PRODUCT_FAIL:
+    case ActionType.GET_PRODUCTS_FAIL:
       return { ...state, loading: false, error: action.payload };
     default:
       return state;

@@ -61,18 +61,18 @@ export const getProducts = () => {
   return async (dispatch: Dispatch<Action>) => {
     try {
       dispatch({
-        type: ActionType.GET_PRODUCT_REQUEST,
+        type: ActionType.GET_PRODUCTS_REQUEST,
       });
 
       const { data } = await axios.get(`/api/v1/products`);
 
       dispatch({
-        type: ActionType.GET_PRODUCT_SUCCESS,
+        type: ActionType.GET_PRODUCTS_SUCCESS,
         payload: data,
       });
     } catch (error: any) {
       dispatch({
-        type: ActionType.GET_PRODUCT_FAIL,
+        type: ActionType.GET_PRODUCTS_FAIL,
         payload: error,
       });
     }

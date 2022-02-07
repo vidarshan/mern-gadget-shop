@@ -26,17 +26,17 @@ interface CartClearItemsAction {
 }
 
 interface GetProductsRequestAction {
-  type: ActionType.GET_PRODUCT_REQUEST;
+  type: ActionType.GET_PRODUCTS_REQUEST;
   payload?: any;
 }
 
 interface GetProductsSuccessAction {
-  type: ActionType.GET_PRODUCT_SUCCESS;
+  type: ActionType.GET_PRODUCTS_SUCCESS;
   payload: any;
 }
 
 interface GetProductsFailAction {
-  type: ActionType.GET_PRODUCT_FAIL;
+  type: ActionType.GET_PRODUCTS_FAIL;
   payload: any;
 }
 
