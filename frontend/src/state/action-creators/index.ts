@@ -79,6 +79,65 @@ export const getProducts = () => {
   };
 };
 
+export const getProduct = (id: string) => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.GET_PRODUCT_REQUEST,
+      });
+
+      const { data } = await axios.get(`/api/v1/products/${id}`);
+
+      dispatch({
+        type: ActionType.GET_PRODUCT_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.GET_PRODUCT_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const addReview = (id: string, rating: number, comment: string) => {
+  return async (dispatch: Dispatch<Action>, getState: any) => {
+    try {
+      dispatch({
+        type: ActionType.ADD_REVIEW_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.post(
+        `/api/v1/products/${id}/review`,
+        { rating, comment },
+        config
+      );
+
+      dispatch({
+        type: ActionType.ADD_REVIEW_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.ADD_REVIEW_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
 export const register = (name: string, email: string, password: string) => {
   return async (dispatch: Dispatch<Action>) => {
     try {

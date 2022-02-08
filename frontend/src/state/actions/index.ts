@@ -40,6 +40,36 @@ interface GetProductsFailAction {
   payload: any;
 }
 
+interface GetProductRequestAction {
+  type: ActionType.GET_PRODUCT_REQUEST;
+  payload?: any;
+}
+
+interface GetProductSuccessAction {
+  type: ActionType.GET_PRODUCT_SUCCESS;
+  payload: any;
+}
+
+interface GetProductFailAction {
+  type: ActionType.GET_PRODUCT_FAIL;
+  payload: any;
+}
+
+interface AddReviewRequestAction {
+  type: ActionType.ADD_REVIEW_REQUEST;
+  payload?: any;
+}
+
+interface AddReviewSuccessAction {
+  type: ActionType.ADD_REVIEW_SUCCESS;
+  payload: any;
+}
+
+interface AddReviewFailAction {
+  type: ActionType.ADD_REVIEW_FAIL;
+  payload: any;
+}
+
 interface UserLoginRequestAction {
   type: ActionType.USER_LOGIN_REQUEST;
   payload?: any;
@@ -84,6 +114,12 @@ export type Action =
   | GetProductsRequestAction
   | GetProductsSuccessAction
   | GetProductsFailAction
+  | GetProductRequestAction
+  | GetProductSuccessAction
+  | GetProductFailAction
+  | AddReviewRequestAction
+  | AddReviewSuccessAction
+  | AddReviewFailAction
   | UserLoginRequestAction
   | UserLoginSuccessAction
   | UserLoginFailAction
