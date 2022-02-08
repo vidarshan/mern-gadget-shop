@@ -30,6 +30,8 @@ import ReviewCard from "../components/reviews/ReviewCard";
 import { useForm } from "@mantine/hooks";
 import { useNotifications } from "@mantine/notifications";
 import { ADD_REVIEW_RESET } from "../constants/productConstants";
+import { bindActionCreators } from "redux";
+import { actionCreators, State } from "../state";
 import Head from "../components/Head";
 import filter from "lodash.filter";
 
@@ -39,21 +41,22 @@ const Product = () => {
   const dispatch = useDispatch();
   const notifications = useNotifications();
 
-  const { product, loading, error } = useSelector(
-    (state: RootStateOrAny) => state.product
+  const { getProduct, addReview } = bindActionCreators(
+    actionCreators,
+    dispatch
   );
 
-  const {
-    loading: cartItemsLoading,
-    error: cartItemsError,
-    cartItems,
-  } = useSelector((state: RootStateOrAny) => state.cart);
+  const { product, loading, error } = useSelector(
+    (state: State) => state.product
+  );
+
+  const { cartItems } = useSelector((state: State) => state.cart);
 
   const {
     review,
     loading: reviewLoading,
     error: reviewError,
-  } = useSelector((state: RootStateOrAny) => state.review);
+  } = useSelector((state: State) => state.review);
 
   const [opened, setOpened] = useState(false);
   const [value, setValue] = useState<any>(1);
@@ -121,7 +124,7 @@ const Product = () => {
   const handlerCartAdd = (product: string, quantity: number) => {};
 
   useEffect(() => {
-    // dispatch(getProduct(params.id as string));
+    dispatch(getProduct(params.id as string));
   }, [dispatch, params.id]);
 
   useEffect(() => {
@@ -221,17 +224,17 @@ const Product = () => {
           </Grid>
         </form>
       </Modal>
-      {loading ? (
+      {/* {loading ? (
         <Loader />
       ) : product ? (
-        <Grid>
-          <Head
+        <Grid> */}
+      {/* <Head
             title={`${product.product.name} | Techstop`}
             description={`Buy ${product.product.name}`}
             keywords={product.product.name}
-          ></Head>
-          <Col span={12}>
-            <Card shadow="md" withBorder radius="md">
+          ></Head> */}
+      {/* <Col span={12}> */}
+      {/* <Card shadow="md" withBorder radius="md">
               {" "}
               <Grid>
                 <Col xs={12} sm={12} md={5} lg={5} xl={5} span={5}>
@@ -359,9 +362,9 @@ const Product = () => {
                   </Grid>
                 </Col>
               </Grid>
-            </Card>
-          </Col>
-          <Col sx={{ padding: "2rem 0" }} span={12}>
+            </Card> */}
+      {/* </Col> */}
+      {/* <Col sx={{ padding: "2rem 0" }} span={12}>
             <Text sx={{ margin: "10px 0" }} size="lg">
               Reviews ({product.product.reviews.length})
             </Text>
@@ -375,8 +378,8 @@ const Product = () => {
               >
                 Add Review
               </Button>
-            </Col>
-            {product.product.reviews.length > 0 ? (
+            </Col> */}
+      {/* {product.product.reviews.length > 0 ? (
               product.product.reviews.map((review: any) => {
                 return (
                   <ReviewCard
@@ -397,8 +400,8 @@ const Product = () => {
               >
                 Be the first to review this item
               </Alert>
-            )}
-          </Col>
+            )} */}
+      {/* </Col>
         </Grid>
       ) : (
         <Grid>
@@ -419,7 +422,7 @@ const Product = () => {
             </Group>
           </Card>
         </Grid>
-      )}
+      )} */}
     </Layout>
   );
 };

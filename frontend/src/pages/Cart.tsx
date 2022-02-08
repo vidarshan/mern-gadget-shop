@@ -64,10 +64,6 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    console.log("rednder");
-  }, [renderTotal]);
-
-  useEffect(() => {
     // dispatch(getCart());
   }, [dispatch]);
 
