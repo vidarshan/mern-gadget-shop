@@ -14,7 +14,6 @@ import { useEffect } from "react";
 import { AiOutlineUsb } from "react-icons/ai";
 import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { login } from "../../actions/userActions";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -49,7 +48,7 @@ const Login = () => {
 
   const handlerLogin = (values: any) => {
     const { email, password } = values;
-    dispatch(login(email, password));
+    // dispatch(login(email, password));
   };
 
   useEffect(() => {

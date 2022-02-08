@@ -18,7 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { BiLogOut, BiShoppingBag, BiUser } from "react-icons/bi";
 import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
-import { logout } from "../actions/userActions";
+// import { logout } from "../actions/userActions";
 
 interface LayoutProps {
   children: any;
@@ -131,7 +131,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   };
 
   const handlerLogout = () => {
-    dispatch(logout());
+    // dispatch(logout());
   };
 
   return (

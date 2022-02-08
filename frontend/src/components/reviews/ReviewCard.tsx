@@ -1,4 +1,4 @@
-import { Card, Grid, Text, Col } from "@mantine/core";
+import { Card, Grid, Text, Col, Divider } from "@mantine/core";
 import React, { PropsWithChildren } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import moment from "moment";
@@ -15,7 +15,7 @@ const renderRatingsList = (rating: number) => {
   const stars = [];
 
   for (let i = 1; i <= rating; i++) {
-    stars.push(<AiFillStar />);
+    stars.push(<AiFillStar color="orange" />);
   }
 
   let remainingStars = 5 - stars.length;
@@ -35,7 +35,7 @@ const ReviewCard: React.FC<PropsWithChildren<IReviewCard>> = ({
   rating,
 }) => {
   return (
-    <Card sx={{ margin: "1rem 0" }} withBorder shadow="xl" radius="md">
+    <>
       <Grid>
         <Col
           xs={12}
@@ -50,7 +50,12 @@ const ReviewCard: React.FC<PropsWithChildren<IReviewCard>> = ({
             <Text sx={{ marginBottom: "5px" }} weight={600}>
               {name}
             </Text>
-            <Text sx={{ marginBottom: "5px" }} size="xs" weight={200}>
+            <Text
+              color="gray"
+              sx={{ marginBottom: "5px" }}
+              size="xs"
+              weight={600}
+            >
               {moment(date).format("DD-MMM-YYYY")}
             </Text>
             {renderRatingsList(rating)}
@@ -68,7 +73,8 @@ const ReviewCard: React.FC<PropsWithChildren<IReviewCard>> = ({
           <Text>"{comment}"</Text>
         </Col>
       </Grid>
-    </Card>
+      <Divider />
+    </>
   );
 };
 

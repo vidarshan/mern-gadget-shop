@@ -13,7 +13,6 @@ import { useNotifications } from "@mantine/notifications";
 import { AiOutlineUsb } from "react-icons/ai";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { register } from "../../actions/userActions";
 import { useEffect } from "react";
 
 const SignUp = () => {
@@ -49,7 +48,7 @@ const SignUp = () => {
 
   const handlerRegister = (values: any) => {
     const { name, email, password } = values;
-    dispatch(register(name, email, password));
+    // dispatch(register(name, email, password));
   };
 
   useEffect(() => {
