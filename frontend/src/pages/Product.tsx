@@ -17,11 +17,12 @@ import {
   List,
   Alert,
   Divider,
+  Anchor,
 } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router";
-import { IoIosCloseCircle } from "react-icons/io";
+import { IoIosCloseCircle, IoIosUnlock } from "react-icons/io";
 import Layout from "../layout/Layout";
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
@@ -237,8 +238,17 @@ const Product = () => {
                 </div>
               </Group>
             )}
+            <Alert
+              icon={<IoIosUnlock size={16} />}
+              sx={{ marginTop: "1rem" }}
+              color="blue"
+              radius="md"
+            >
+              Log In to add a review
+            </Alert>
             <div style={{ marginTop: "1rem" }}>
               {Object.keys(product).includes("product") &&
+              product.product.reviews.length ? (
                 product.product.reviews.map((review: any) => {
                   return (
                     <ReviewCard
@@ -250,7 +260,17 @@ const Product = () => {
                       key={review._id}
                     />
                   );
-                })}
+                })
+              ) : (
+                <Alert
+                  icon={<IoIosCloseCircle size={16} />}
+                  sx={{ marginTop: "1rem" }}
+                  color="blue"
+                  radius="md"
+                >
+                  No reviews for this product
+                </Alert>
+              )}
             </div>
           </Card>
         </>

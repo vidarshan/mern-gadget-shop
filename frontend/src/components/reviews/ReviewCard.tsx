@@ -70,7 +70,7 @@ const ReviewCard: React.FC<PropsWithChildren<IReviewCard>> = ({
           sx={{ display: "flex", alignItems: "center" }}
           span={10}
         >
-          <Text>"{comment}"</Text>
+          <Text weight={600}>"{comment}"</Text>
         </Col>
       </Grid>
       <Divider />
