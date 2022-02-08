@@ -163,3 +163,10 @@ export const login = (email: string, password: string) => {
     }
   };
 };
+
+export const logout = () => {
+  return async (dispatch: Dispatch<Action>) => {
+    localStorage.removeItem("userInfo");
+    dispatch({ type: ActionType.USER_LOGOUT, payload: {} });
+  };
+};

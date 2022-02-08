@@ -50,6 +50,9 @@ const loginReducer = (
       };
     case ActionType.USER_LOGIN_FAIL:
       return { ...state, loading: false, error: action.payload };
+
+    case ActionType.USER_LOGOUT:
+      return { ...state, userInfo: {}, loading: false, error: null };
     default:
       return state;
   }
