@@ -13,7 +13,6 @@ import { RiShoppingBagLine } from "react-icons/ri";
 import Layout from "../layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState } from "react";
-import { useModals } from "@mantine/modals";
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
 import { BiTrashAlt } from "react-icons/bi";
@@ -22,18 +21,16 @@ const Cart = () => {
   const numRef = useRef(null);
   const dispatch = useDispatch();
 
-  const { addToCart, removeFromCart, saveShippingAddress, savePaymentMethod } =
-    bindActionCreators(actionCreators, dispatch);
-
-  const modals = useModals();
-
   const [opened, setOpened] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
-
   const { cartItems } = useSelector((state: State) => state.cart);
 
+  const { addToCart, removeFromCart } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
+
   const handlerUpdateCartItems = (value: number, id: string) => {
-    modals.closeAll();
     dispatch(addToCart(id, value));
   };
 

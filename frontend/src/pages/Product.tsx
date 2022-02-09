@@ -1,7 +1,6 @@
 import {
   Button,
   Col,
-  Textarea,
   Grid,
   Image,
   NumberInput,
@@ -11,57 +10,46 @@ import {
   Text,
   Card,
   Badge,
-  Modal,
-  Select,
   Loader,
   List,
   Alert,
   Divider,
-  Anchor,
 } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { useNavigate, useParams } from "react-router";
+import { AiFillStar } from "react-icons/ai";
+import { useParams } from "react-router";
 import { IoIosCloseCircle, IoIosUnlock, IoMdStar } from "react-icons/io";
 import Layout from "../layout/Layout";
 import { RiShoppingBagLine } from "react-icons/ri";
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
-// import { addReview, getProduct } from "../actions/productActions";
+import { useDispatch, useSelector } from "react-redux";
 import ReviewCard from "../components/reviews/ReviewCard";
-import { useForm } from "@mantine/hooks";
-import { useNotifications } from "@mantine/notifications";
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
 import Head from "../components/Head";
-import filter from "lodash.filter";
-import moment from "moment";
 
 const Product = () => {
   const params = useParams();
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
-  const notifications = useNotifications();
 
   const [value, setValue] = useState<any>(1);
-  const [total, setTotal] = useState(0);
-  const handlers = useRef<NumberInputHandlers>(null);
 
-  const { getProduct, addReview, addToCart } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const handlers = useRef<NumberInputHandlers>(null);
 
   const { product, loading, error } = useSelector(
     (state: State) => state.product
   );
-
-  const { cartItems } = useSelector((state: State) => state.cart);
 
   const {
     review,
     loading: reviewLoading,
     error: reviewError,
   } = useSelector((state: State) => state.review);
+
+  const { getProduct, addReview, addToCart } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   const renderFeaturesList = (description: any) => {
     const features = description.split(", ");
@@ -79,22 +67,6 @@ const Product = () => {
         })}
       </List>
     );
-  };
-
-  const renderRatingsList = (rating: number) => {
-    const stars = [];
-
-    for (let i = 1; i <= rating; i++) {
-      stars.push(<AiFillStar color="orange" size="18" />);
-    }
-
-    let remainingStars = 5 - stars.length;
-
-    for (let i = 1; i <= remainingStars; i++) {
-      stars.push(<AiOutlineStar size="18" />);
-    }
-
-    return <div style={{ display: "flex", alignItems: "center" }}>{stars}</div>;
   };
 
   const handlerAddToCart = (quantity: number, id: string) => {
