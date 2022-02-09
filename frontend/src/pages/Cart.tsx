@@ -1,29 +1,18 @@
 import {
   Alert,
-  //ActionIcon,
   Button,
   Card,
   Col,
-  Container,
-  Divider,
   Grid,
-  Group,
   Image,
   Modal,
   NumberInput,
   Text,
-  //NumberInputHandlers,
 } from "@mantine/core";
-//import { useState, useRef } from "react";
-import banner from "../images/banner1.jpeg";
 import { RiShoppingBagLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
 import Layout from "../layout/Layout";
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
-
-import CartTotal from "../components/cart/CartTotal";
-import { IoIosCloseCircle } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { useRef, useState } from "react";
 import { useModals } from "@mantine/modals";
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
@@ -42,19 +31,6 @@ const Cart = () => {
   const [selectedItem, setSelectedItem] = useState("");
 
   const { cartItems } = useSelector((state: State) => state.cart);
-
-  const openConfirmModal = (id: string) =>
-    modals.openConfirmModal({
-      title: "Please confirm your action",
-      children: (
-        <Text weight={500} size="sm">
-          Are you sure that you want to remove this item?
-        </Text>
-      ),
-      labels: { confirm: "Yes", cancel: "Cancel" },
-      onCancel: () => setOpened(false),
-      onConfirm: () => handlerDeleteCartItem(id),
-    });
 
   const handlerUpdateCartItems = (value: number, id: string) => {
     modals.closeAll();
