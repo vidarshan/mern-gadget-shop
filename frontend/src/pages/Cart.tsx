@@ -85,7 +85,12 @@ const Cart = () => {
         <Grid sx={{ marginTop: "1rem" }}>
           <Col span={6}>
             {" "}
-            <Button color="gray" radius="xl" fullWidth>
+            <Button
+              onClick={() => setOpened(false)}
+              color="gray"
+              radius="xl"
+              fullWidth
+            >
               Cancel
             </Button>
           </Col>
@@ -185,6 +190,18 @@ const Cart = () => {
                 .reduce((acc: any, item: any) => acc + item.qty * item.price, 0)
                 .toFixed(2)}
             </Text>
+            {cartItems && cartItems.length ? (
+              <Button
+                sx={{ marginTop: ".5rem" }}
+                color="dark"
+                radius="xl"
+                fullWidth
+              >
+                Proceed to Checkout
+              </Button>
+            ) : (
+              <></>
+            )}
           </Card>
         </Col>
       </Grid>
