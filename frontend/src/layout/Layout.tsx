@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import {
   Container,
   useMantineTheme,
@@ -17,7 +17,9 @@ import { AiOutlineUsb } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { BiLogOut, BiShoppingBag, BiUser } from "react-icons/bi";
-import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { actionCreators, State } from ".././state";
 // import { logout } from "../actions/userActions";
 
 interface LayoutProps {
@@ -25,12 +27,14 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
-  // const { userInfo } = useSelector((state: RootStateOrAny) => state.userLogin);
+  const { userInfo } = useSelector((state: State) => state.userLogin);
 
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { logout } = bindActionCreators(actionCreators, dispatch);
 
   const handlerNavigate = (route: string) => {
     navigate(route);
@@ -131,7 +135,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   };
 
   const handlerLogout = () => {
-    // dispatch(logout());
+    dispatch(logout());
   };
 
   return (
@@ -191,19 +195,21 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                 <BiUser />
               </ActionIcon>
             </MediaQuery>
-            <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-              <ActionIcon
-                color="red"
-                size="lg"
-                onClick={() => handlerLogout()}
-                sx={{ margin: "10px" }}
-                variant="outline"
-                radius="md"
-              >
-                <BiLogOut />
-              </ActionIcon>
-            </MediaQuery>
-            {/* {!userInfo && (
+            {userInfo && (
+              <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+                <ActionIcon
+                  color="red"
+                  size="lg"
+                  onClick={() => handlerLogout()}
+                  sx={{ margin: "10px" }}
+                  variant="outline"
+                  radius="md"
+                >
+                  <BiLogOut />
+                </ActionIcon>
+              </MediaQuery>
+            )}
+            {!userInfo && (
               <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
                 <Button
                   onClick={() => navigate("/signup")}
@@ -216,7 +222,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                   Sign Up
                 </Button>
               </MediaQuery>
-            )} */}
+            )}
           </div>
         </div>
       </Head>
