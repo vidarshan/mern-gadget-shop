@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 import ItemCard from "../components/items/ItemCard";
 import { BiDollarCircle, BiLaptop, BiBuilding } from "react-icons/bi";
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import Layout from "../layout/Layout";
 import { useNotifications } from "@mantine/notifications";

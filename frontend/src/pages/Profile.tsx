@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import Layout from "../layout/Layout";
 import { RiCloseLine, RiCheckLine } from "react-icons/ri";
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { RootStateOrAny, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
