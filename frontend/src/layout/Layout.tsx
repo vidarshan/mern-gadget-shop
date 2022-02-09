@@ -11,6 +11,7 @@ import {
   Grid,
   Col,
   Text,
+  Badge,
 } from "@mantine/core";
 import Footer from "../components/Footer";
 import { AiOutlineUsb } from "react-icons/ai";
@@ -28,7 +29,7 @@ interface LayoutProps {
 
 const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   const { userInfo } = useSelector((state: State) => state.userLogin);
-
+  const { cartItems } = useSelector((state: State) => state.cart);
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
   const navigate = useNavigate();
@@ -158,7 +159,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
             </MediaQuery>
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
               <Link className="header-home" to="/">
-                Techstop
+                Techstop{" "}
               </Link>
             </MediaQuery>
           </div>
@@ -168,21 +169,28 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
               <TextInput
                 icon={<FiSearch />}
                 size="sm"
-                radius="md"
+                radius="xl"
                 placeholder="Search for an item..."
               />
             </MediaQuery>
 
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-              <ActionIcon
-                size="lg"
-                sx={{ margin: "10px" }}
-                variant="default"
-                radius="md"
+              <Button
+                radius="xl"
+                sx={{ margin: "10px", backgroundColor: "#373a40" }}
+                leftIcon={<BiShoppingBag />}
                 onClick={() => navigate("/cart")}
               >
-                <BiShoppingBag />
-              </ActionIcon>
+                {cartItems && cartItems.length ? (
+                  <Badge variant="filled" color="red">
+                    {cartItems.length}
+                  </Badge>
+                ) : (
+                  <Badge variant="filled" color="red">
+                    0
+                  </Badge>
+                )}
+              </Button>
             </MediaQuery>
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
               <ActionIcon
@@ -190,7 +198,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                 onClick={() => navigate("/profile")}
                 sx={{ margin: "10px" }}
                 variant="default"
-                radius="md"
+                radius="xl"
               >
                 <BiUser />
               </ActionIcon>
@@ -203,7 +211,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                   onClick={() => handlerLogout()}
                   sx={{ margin: "10px" }}
                   variant="outline"
-                  radius="md"
+                  radius="xl"
                 >
                   <BiLogOut />
                 </ActionIcon>
@@ -216,8 +224,8 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                   color="dark"
                   variant="filled"
                   sx={{ margin: "10px" }}
-                  radius="md"
-                  size="xs"
+                  radius="xl"
+                  size="sm"
                 >
                   Sign Up
                 </Button>
