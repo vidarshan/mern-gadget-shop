@@ -12,14 +12,21 @@ import { useForm } from "@mantine/hooks";
 import { useNotifications } from "@mantine/notifications";
 import { useEffect } from "react";
 import { AiOutlineUsb } from "react-icons/ai";
-import { RootStateOrAny, useSelector, useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { actionCreators, State } from "../../state";
 import { useNavigate } from "react-router";
-import { login } from "../../actions/userActions";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const notifications = useNotifications();
+
+  const { login } = bindActionCreators(actionCreators, dispatch);
+
+  const { userInfo, loading, error } = useSelector(
+    (state: State) => state.userLogin
+  );
 
   const form = useForm({
     initialValues: {
@@ -35,10 +42,6 @@ const Login = () => {
       password: "Password is not valid",
     },
   });
-
-  const { userInfo, loading, error } = useSelector(
-    (state: RootStateOrAny) => state.userLogin
-  );
 
   useEffect(() => {
     if (userInfo) {

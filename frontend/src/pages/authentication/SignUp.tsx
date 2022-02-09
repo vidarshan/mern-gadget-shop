@@ -12,14 +12,16 @@ import { useForm } from "@mantine/hooks";
 import { useNotifications } from "@mantine/notifications";
 import { AiOutlineUsb } from "react-icons/ai";
 import { useNavigate } from "react-router";
-import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import { register } from "../../actions/userActions";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { actionCreators, State } from "../../state";
 import { useEffect } from "react";
+import { bindActionCreators } from "redux";
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const notifications = useNotifications();
+  const { register } = bindActionCreators(actionCreators, dispatch);
 
   const form = useForm({
     initialValues: {
