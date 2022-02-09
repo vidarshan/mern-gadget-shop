@@ -3,7 +3,7 @@ import { Action } from "../actions/index";
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
   ? JSON.parse(localStorage.getItem("cartItems") || "{}")
-  : null;
+  : [];
 
 const cartReducer = (
   state = { cartItems: cartItemsFromStorage, shippingAddress: {} },
@@ -13,8 +13,13 @@ const cartReducer = (
     case ActionType.CART_ADD_ITEM:
       const item = action.payload;
 
-      let existItem: any;
-      existItem = state.cartItems.find((x: any) => x.product === item.product);
+      console.log(state);
+      console.log(state.cartItems.find((x: any) => x.product === item.product));
+
+      let existItem = state.cartItems.find(
+        (x: any) => x.product === item.product
+      );
+      console.log(existItem);
 
       if (existItem) {
         return {

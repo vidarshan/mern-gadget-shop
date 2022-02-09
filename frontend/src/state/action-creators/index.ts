@@ -4,20 +4,27 @@ import { ActionType } from "../action-types";
 import { Action } from "../actions/index";
 
 export const addToCart = (id: string, qty: number) => {
-  return async (dispatch: Dispatch<Action>) => {
+  return async (dispatch: Dispatch<Action>, getState: any) => {
+    console.log("getState: ", getState);
     const { data } = await axios.get(`/api/v1/products/${id}`);
+    console.log("data: ", data.product);
 
     dispatch({
       type: ActionType.CART_ADD_ITEM,
       payload: {
-        product: data._id,
-        name: data.name,
-        image: data.image,
-        price: data.price,
-        countInStock: data.countInStock,
+        product: data.product._id,
+        name: data.product.name,
+        image: data.product.image,
+        price: data.product.price,
+        countInStock: data.product.countInStock,
         qty,
       },
     });
+
+    localStorage.setItem(
+      "cartItems",
+      JSON.stringify(getState().cart.cartItems)
+    );
   };
 };
 

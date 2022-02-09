@@ -22,9 +22,9 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router";
-import { IoIosCloseCircle, IoIosUnlock } from "react-icons/io";
+import { IoIosCloseCircle, IoIosUnlock, IoMdStar } from "react-icons/io";
 import Layout from "../layout/Layout";
-import { BsFillExclamationTriangleFill } from "react-icons/bs";
+import { RiShoppingBagLine } from "react-icons/ri";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 // import { addReview, getProduct } from "../actions/productActions";
 import ReviewCard from "../components/reviews/ReviewCard";
@@ -46,7 +46,7 @@ const Product = () => {
   const [total, setTotal] = useState(0);
   const handlers = useRef<NumberInputHandlers>(null);
 
-  const { getProduct, addReview } = bindActionCreators(
+  const { getProduct, addReview, addToCart } = bindActionCreators(
     actionCreators,
     dispatch
   );
@@ -95,6 +95,10 @@ const Product = () => {
     }
 
     return <div style={{ display: "flex", alignItems: "center" }}>{stars}</div>;
+  };
+
+  const handlerAddToCart = (quantity: number, id: string) => {
+    addToCart(product.product._id, quantity);
   };
 
   useEffect(() => {
@@ -208,7 +212,14 @@ const Product = () => {
                             value * product.product.price
                           )}
                         </Text>
-                        <Button radius="xl" color="dark">
+                        <Button
+                          leftIcon={<RiShoppingBagLine />}
+                          radius="xl"
+                          color="dark"
+                          onClick={() =>
+                            handlerAddToCart(value, product.product._id)
+                          }
+                        >
                           Add to Cart
                         </Button>
                       </Group>
@@ -246,6 +257,18 @@ const Product = () => {
             >
               Log In to add a review
             </Alert>
+            <Group sx={{ marginTop: "1rem" }} position="right">
+              <Button
+                variant="outline"
+                leftIcon={<IoMdStar />}
+                radius="xl"
+                sx={{ marginLeft: "10px" }}
+                color="dark"
+                size="xs"
+              >
+                Add Review
+              </Button>
+            </Group>
             <div style={{ marginTop: "1rem" }}>
               {Object.keys(product).includes("product") &&
               product.product.reviews.length ? (
