@@ -5,9 +5,7 @@ import { Action } from "../actions/index";
 
 export const addToCart = (id: string, qty: number) => {
   return async (dispatch: Dispatch<Action>, getState: any) => {
-    console.log("getState: ", getState);
     const { data } = await axios.get(`/api/v1/products/${id}`);
-    console.log("data: ", data.product);
 
     dispatch({
       type: ActionType.CART_ADD_ITEM,

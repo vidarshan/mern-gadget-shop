@@ -114,6 +114,11 @@ const Product = () => {
           <Card radius="md" shadow="xl">
             {Object.keys(product).includes("product") && (
               <Grid>
+                <Head
+                  title={product.product.name}
+                  keywords={product.product.name}
+                  description={`Buy ${product.product.name}`}
+                />
                 <Col
                   sx={{
                     display: "flex",
