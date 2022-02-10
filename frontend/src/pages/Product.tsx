@@ -70,7 +70,7 @@ const Product = () => {
   };
 
   const handlerAddToCart = (quantity: number, id: string) => {
-    addToCart(product.product._id, quantity);
+    addToCart(product._id, quantity);
   };
 
   useEffect(() => {
@@ -84,12 +84,12 @@ const Product = () => {
       ) : (
         <>
           <Card radius="md" shadow="xl">
-            {Object.keys(product).includes("product") && (
+            {Object.keys(product).length && (
               <Grid>
                 <Head
-                  title={product.product.name}
-                  keywords={product.product.name}
-                  description={`Buy ${product.product.name}`}
+                  title={product.name}
+                  keywords={product.name}
+                  description={`Buy ${product.name}`}
                 />
                 <Col
                   sx={{
@@ -110,7 +110,7 @@ const Product = () => {
                     }}
                     width={300}
                     height={300}
-                    src={product.product.image}
+                    src={product.image}
                   ></Image>
                 </Col>
 
@@ -118,10 +118,10 @@ const Product = () => {
                   <div>
                     <Group>
                       <Text weight={600} size="xl">
-                        {product.product.name}
+                        {product.name}
                       </Text>
 
-                      {product.product.countInStock === 0 ? (
+                      {product.countInStock === 0 ? (
                         <Badge
                           color="red"
                           sx={{ marginLeft: "10px" }}
@@ -143,7 +143,7 @@ const Product = () => {
                     </Group>
                     <Divider />{" "}
                     <Group sx={{ margin: "1rem 0" }}>
-                      {renderFeaturesList(product.product.description)}
+                      {renderFeaturesList(product.description)}
                     </Group>
                     <Divider />
                     <Group position="apart" sx={{ margin: "1rem 0" }}>
@@ -186,16 +186,14 @@ const Product = () => {
                         <Text color="gray" size="lg" weight={700}>
                           $
                           {new Intl.NumberFormat().format(
-                            value * product.product.price
+                            value * product.price
                           )}
                         </Text>
                         <Button
                           leftIcon={<RiShoppingBagLine />}
                           radius="xl"
                           color="dark"
-                          onClick={() =>
-                            handlerAddToCart(value, product.product._id)
-                          }
+                          onClick={() => handlerAddToCart(value, product._id)}
                         >
                           Add to Cart
                         </Button>
@@ -207,7 +205,7 @@ const Product = () => {
             )}
           </Card>
           <Card sx={{ marginTop: "1.5rem" }} radius="md" shadow="xl">
-            {Object.keys(product).includes("product") && (
+            {Object.keys(product).length && (
               <Group position="apart">
                 <Text color="gray" size="md" weight={600}>
                   Reviews
@@ -220,7 +218,7 @@ const Product = () => {
                   }}
                 >
                   <Text weight={600} sx={{ marginRight: "10px" }}>
-                    {product.product.rating.toFixed(1)}
+                    {product.rating.toFixed(1)}
                   </Text>
                   <AiFillStar color="orange" size="18" />
                 </div>
@@ -247,9 +245,8 @@ const Product = () => {
               </Button>
             </Group>
             <div style={{ marginTop: "1rem" }}>
-              {Object.keys(product).includes("product") &&
-              product.product.reviews.length ? (
-                product.product.reviews.map((review: any) => {
+              {Object.keys(product).length && product.reviews.length ? (
+                product.reviews.map((review: any) => {
                   return (
                     <ReviewCard
                       comment={review.comment}
