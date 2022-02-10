@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators, State } from ".././state";
 import { useForm } from "@mantine/hooks";
 import { bindActionCreators } from "redux";
+import Head from "../components/Head";
 
 const Shipping = () => {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ const Shipping = () => {
 
   return (
     <Layout>
+      <Head title="Shipping" />
       <Card padding="xl" withBorder radius="md" shadow="xl">
         <Steps active={1} />
         <form onSubmit={form.onSubmit((values) => handlerAddShipping(values))}>

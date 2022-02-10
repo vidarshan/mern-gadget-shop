@@ -4,13 +4,19 @@ import Steps from "../components/Steps";
 import Layout from "../layout/Layout";
 import banner from "../images/banner1.jpeg";
 import { BsCreditCard2Front, BsBox } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { State } from "../state";
+import Head from "../components/Head";
 
 const PlaceOrder = () => {
   const navigate = useNavigate();
 
+  const { cartItems } = useSelector((state: State) => state.cart);
+
   return (
     <Layout>
-      <Card withBorder shadow="sm" radius="md" padding="xl">
+      <Head title="Place Order" />
+      <Card withBorder shadow="sm" radius="xl" padding="xl">
         <Steps active={3} />
         <Grid sx={{ marginTop: "2rem" }}>
           <Col span={12}>
@@ -20,7 +26,7 @@ const PlaceOrder = () => {
                 <Card
                   withBorder
                   shadow="xs"
-                  radius="md"
+                  radius="xl"
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -47,7 +53,7 @@ const PlaceOrder = () => {
                 <Card
                   withBorder
                   shadow="xs"
-                  radius="md"
+                  radius="xl"
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -71,78 +77,62 @@ const PlaceOrder = () => {
             <Text>Order Items</Text>
             <Grid>
               <Col span={12}>
-                <Card
-                  sx={{ margin: "10px 0" }}
-                  padding="xs"
-                  withBorder
-                  shadow="xs"
-                  radius="md"
-                >
-                  <Grid>
-                    <Col
-                      sx={{ display: "flex", alignItems: "center" }}
-                      span={4}
-                    >
-                      <Image radius="md" height={50} width={60} src={banner} />
-                    </Col>
-                    <Col
-                      sx={{ display: "flex", alignItems: "center" }}
-                      span={4}
-                    >
-                      <Text align="left" color="gray" weight={600}>
-                        Apple Airpods 2
-                      </Text>
-                    </Col>
-                    <Col
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "flex-end",
-                      }}
-                      span={4}
-                    >
-                      <Text align="right" weight={600}>
-                        1 x $1399.00
-                      </Text>
-                    </Col>
-                  </Grid>
-                </Card>
-                <Card padding="xs" withBorder shadow="xs" radius="md">
-                  <Grid>
-                    <Col
-                      sx={{ display: "flex", alignItems: "center" }}
-                      span={4}
-                    >
-                      <Image radius="md" height={50} width={60} src={banner} />
-                    </Col>
-                    <Col
-                      sx={{ display: "flex", alignItems: "center" }}
-                      span={4}
-                    >
-                      <Text align="left" color="gray" weight={600}>
-                        Apple Airpods 2
-                      </Text>
-                    </Col>
-                    <Col
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "flex-end",
-                      }}
-                      span={4}
-                    >
-                      <Text align="right" weight={600}>
-                        1 x $1399.00
-                      </Text>
-                    </Col>
-                  </Grid>
-                </Card>
+                {cartItems && cartItems.length ? (
+                  cartItems.map((item: any) => {
+                    return (
+                      <Card
+                        sx={{ margin: "10px 0" }}
+                        padding="sm"
+                        withBorder
+                        shadow="xs"
+                        radius="xl"
+                      >
+                        <Grid>
+                          <Col
+                            sx={{ display: "flex", alignItems: "center" }}
+                            span={5}
+                          >
+                            <Image
+                              radius="xl"
+                              fit="contain"
+                              height={40}
+                              width={40}
+                              src={item.image}
+                            />
+                          </Col>
+                          <Col
+                            sx={{ display: "flex", alignItems: "center" }}
+                            span={3}
+                          >
+                            <Text align="left" color="gray" weight={600}>
+                              {item.name}
+                            </Text>
+                          </Col>
+                          <Col
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "flex-end",
+                            }}
+                            span={4}
+                          >
+                            <Text align="right" weight={600}>
+                              {item.qty} x ${item.price}
+                            </Text>
+                          </Col>
+                        </Grid>
+                      </Card>
+                    );
+                  })
+                ) : (
+                  <></>
+                )}
               </Col>
             </Grid>
           </Col>
           <Col span={12}>
             <Text sx={{ margin: "10px 0" }}>Order Summary</Text>
-            <Card withBorder shadow="xs" radius="md">
+            <Card withBorder shadow="xs" radius="xl">
               <Grid
                 sx={{ margin: "10px 0", borderBottom: "1px solid #E0E0E0" }}
               >
@@ -187,7 +177,7 @@ const PlaceOrder = () => {
             <Button
               onClick={() => navigate("/order/2342348284")}
               color="dark"
-              radius="md"
+              radius="xl"
               fullWidth
             >
               Place Order
