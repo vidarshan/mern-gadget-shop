@@ -10,11 +10,11 @@ export const addToCart = (id: string, qty: number) => {
     dispatch({
       type: ActionType.CART_ADD_ITEM,
       payload: {
-        product: data.product._id,
-        name: data.product.name,
-        image: data.product.image,
-        price: data.product.price,
-        countInStock: data.product.countInStock,
+        product: data._id,
+        name: data.name,
+        image: data.image,
+        price: data.price,
+        countInStock: data.countInStock,
         qty,
       },
     });

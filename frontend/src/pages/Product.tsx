@@ -70,7 +70,8 @@ const Product = () => {
   };
 
   const handlerAddToCart = (quantity: number, id: string) => {
-    addToCart(product._id, quantity);
+    console.log("id: ", id);
+    addToCart(id, quantity);
   };
 
   useEffect(() => {
