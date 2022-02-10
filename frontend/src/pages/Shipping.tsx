@@ -37,8 +37,8 @@ const Shipping = () => {
     },
   });
 
-  const handlerAddShipping = async (values: any) => {
-    await dispatch(saveShippingAddress(values));
+  const handlerAddShipping = (values: any) => {
+    //  dispatch(saveShippingAddress(values));
     navigate("/payment");
     // handlerRedirectToPayment();
   };
