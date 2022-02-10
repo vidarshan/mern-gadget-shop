@@ -13,6 +13,7 @@ import { RiCloseLine, RiCheckLine } from "react-icons/ri";
 import { RootStateOrAny, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { useForm } from "@mantine/hooks";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -20,6 +21,28 @@ const Profile = () => {
   const { userInfo, loading, error } = useSelector(
     (state: RootStateOrAny) => state.userLogin
   );
+
+  const form = useForm({
+    initialValues: {
+      email: userInfo && userInfo.email,
+      username: userInfo && userInfo.name,
+      password: "",
+      confirmpassword: "",
+    },
+    validationRules: {
+      email: (value) => /^\S+@\S+$/.test(value),
+      username: (value) => value.trim().length > 1,
+      password: (value) => value.trim().length >= 6,
+      confirmpassword: (confirmPassword, values) =>
+        confirmPassword === values?.password,
+    },
+    errorMessages: {
+      username: "Name should be more than 2 characters or longer",
+      email: "Email is not valid",
+      password: "Password should be 6 characters or longer",
+      confirmpassword: "Passwords does not match",
+    },
+  });
 
   useEffect(() => {
     if (!userInfo) {
@@ -78,81 +101,99 @@ const Profile = () => {
     </tr>
   ));
 
+  const handlerEditProfile = (values: any) => {};
+
   return (
     <Layout>
-      <Card withBorder shadow="sm" radius="md" padding="xl">
-        <Text>User Profile</Text>
-        <Grid sx={{ marginTop: "10px" }}>
-          <Col span={6}>
-            <TextInput
-              radius="md"
-              label="Your username"
-              placeholder="Username"
-              required
-            />
-          </Col>
-          <Col span={6}>
-            {" "}
-            <TextInput
-              radius="md"
-              label="Your email"
-              placeholder="email"
-              required
-            />
-          </Col>
+      {userInfo && (
+        <>
+          <Card withBorder shadow="sm" radius="md" padding="xl">
+            <Text>User Profile</Text>
+            <form
+              onSubmit={form.onSubmit((values) => handlerEditProfile(values))}
+            >
+              <Grid sx={{ marginTop: "10px" }}>
+                <Col span={6}>
+                  <TextInput
+                    radius="md"
+                    label="Your username"
+                    placeholder="Username"
+                    {...form.getInputProps("username")}
+                    error={form.errors.username}
+                    required
+                  />
+                </Col>
+                <Col span={6}>
+                  {" "}
+                  <TextInput
+                    radius="md"
+                    label="Your email"
+                    placeholder="email"
+                    {...form.getInputProps("email")}
+                    error={form.errors.email}
+                    required
+                  />
+                </Col>
 
-          <Col span={6}>
-            {" "}
-            <PasswordInput
-              radius="md"
-              label="Your password"
-              placeholder="Password"
-              required
-            />
-          </Col>
-          <Col span={6}>
-            {" "}
-            <PasswordInput
-              radius="md"
-              label="Confirm password"
-              placeholder="Confirmation"
-              required
-            />
-          </Col>
-          <Col span={12}>
-            <Button radius="md" color="dark" fullWidth>
-              Update Profile
-            </Button>
-          </Col>
-        </Grid>
-      </Card>
-      <Card
-        sx={{ marginTop: "2rem" }}
-        withBorder
-        shadow="sm"
-        radius="md"
-        padding="xl"
-      >
-        <Text>Orders</Text>
-        <Grid sx={{ marginTop: "10px" }}>
-          <Col span={12}>
-            <Table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Date</th>
-                  <th>Total</th>
-                  <th>Paid</th>
-                  <th>Delivered</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>{rows}</tbody>
-            </Table>
-          </Col>
-        </Grid>
-      </Card>
+                <Col span={6}>
+                  {" "}
+                  <PasswordInput
+                    radius="md"
+                    label="Your password"
+                    placeholder="Password"
+                    {...form.getInputProps("password")}
+                    error={form.errors.password}
+                    required
+                  />
+                </Col>
+                <Col span={6}>
+                  {" "}
+                  <PasswordInput
+                    radius="md"
+                    label="Confirm password"
+                    placeholder="Confirmation"
+                    {...form.getInputProps("confirmpassword")}
+                    error={form.errors.confirmpassword}
+                    required
+                  />
+                </Col>
+                <Col span={12}>
+                  <Button type="submit" radius="md" color="dark" fullWidth>
+                    Update Profile
+                  </Button>
+                </Col>
+              </Grid>
+            </form>
+          </Card>
+          <Card
+            sx={{ marginTop: "2rem" }}
+            withBorder
+            shadow="sm"
+            radius="md"
+            padding="xl"
+          >
+            <Text>Orders</Text>
+            <Grid sx={{ marginTop: "10px" }}>
+              <Col span={12}>
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Date</th>
+                      <th>Total</th>
+                      <th>Paid</th>
+                      <th>Delivered</th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>{rows}</tbody>
+                </Table>
+              </Col>
+            </Grid>
+          </Card>
+        </>
+      )}
     </Layout>
   );
 };

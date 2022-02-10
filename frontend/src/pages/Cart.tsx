@@ -15,11 +15,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState } from "react";
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
+import { useNavigate } from "react-router";
 import { BiTrashAlt } from "react-icons/bi";
 
 const Cart = () => {
   const numRef = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [opened, setOpened] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
@@ -169,6 +171,7 @@ const Cart = () => {
                 color="dark"
                 radius="xl"
                 fullWidth
+                onClick={() => navigate("/shipping")}
               >
                 Proceed to Checkout
               </Button>

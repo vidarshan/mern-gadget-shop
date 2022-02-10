@@ -6,11 +6,20 @@ import {
   getProduct,
   getProducts,
   createProductReview,
+  getTopProducts,
+  getProductById,
+  deleteProduct,
+  updateProduct,
 } from "../controllers/productControllers";
-import { protect } from "../middleware/authMiddleware";
+import { admin, protect } from "../middleware/authMiddleware";
 
-router.route("/").get(getProducts).post(protect, createProduct);
-router.route("/:id").get(getProduct);
-router.route("/:id/review").post(protect, createProductReview);
+router.route("/").get(getProducts).post(protect, admin, createProduct);
+router.route("/:id/reviews").post(protect, createProductReview);
+router.get("/top", getTopProducts);
+router
+  .route("/:id")
+  .get(getProductById)
+  .delete(protect, admin, deleteProduct)
+  .put(protect, admin, updateProduct);
 
 export default router;

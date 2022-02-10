@@ -33,7 +33,7 @@ const ItemCard: React.FC<PropsWithChildren<IItemCard>> = ({
   const navigate = useNavigate();
 
   return (
-    <Card shadow="xl" radius="lg" withBorder>
+    <Card padding="xl" shadow="xl" radius="xl" withBorder>
       <Grid>
         <Col xs={12} sm={12} md={12} span={6}>
           <Card.Section sx={{ display: "flex", justifyContent: "center" }}>
@@ -66,7 +66,7 @@ const ItemCard: React.FC<PropsWithChildren<IItemCard>> = ({
             <Button
               onClick={() => navigate(`/product/${id}`)}
               variant="filled"
-              radius="md"
+              radius="xl"
               color="dark"
               fullWidth
             >

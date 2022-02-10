@@ -15,13 +15,15 @@ import { AiOutlineUsb } from "react-icons/ai";
 import { bindActionCreators } from "redux";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { actionCreators, State } from "../../state";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const notifications = useNotifications();
 
+  const redirectTo = location.search;
   const { login } = bindActionCreators(actionCreators, dispatch);
 
   const { userInfo, loading, error } = useSelector(
@@ -45,7 +47,11 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate("/");
+      if (redirectTo === "?redirect=shipping") {
+        navigate("/shipping");
+      } else {
+        navigate("/");
+      }
     }
     // eslint-disable-next-line
   }, [userInfo]);
