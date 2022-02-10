@@ -10,13 +10,13 @@ const Banner = () => {
   return (
     <Grid>
       <Col span={12}>
-        <Image radius="md" fit="contain" src={frame1} />
+        <Image radius="xl" fit="contain" src={frame1} />
       </Col>
       <Col className="flex-container" span={12}>
         <Button
           onClick={() => navigate("/shop")}
           color="dark"
-          radius="md"
+          radius="xl"
           leftIcon={<BiShoppingBag />}
           rightIcon={<BsArrowRight />}
           size="lg"
