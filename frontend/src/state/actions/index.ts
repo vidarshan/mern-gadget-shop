@@ -120,6 +120,11 @@ interface CreateOrderFailAction {
   payload: any;
 }
 
+interface CreateOrderResetAction {
+  type: ActionType.CREATE_ORDER_RESET;
+  payload: any;
+}
+
 interface GetOrderRequestAction {
   type: ActionType.GET_ORDER_REQUEST;
   payload?: any;
@@ -160,6 +165,7 @@ export type Action =
   | CreateOrderRequestAction
   | CreateOrderSuccessAction
   | CreateOrderFailAction
+  | CreateOrderResetAction
   | GetOrderRequestAction
   | GetOrderSuccessAction
   | GetOrderFailAction;

@@ -21,6 +21,8 @@ const createOrderReducer = (
       };
     case ActionType.CREATE_ORDER_FAIL:
       return { ...state, loading: false, error: action.payload };
+    case ActionType.CREATE_ORDER_RESET:
+      return { ...state, loading: false, orderCreate: {} };
     default:
       return state;
   }

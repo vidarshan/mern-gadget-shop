@@ -21,7 +21,7 @@ const Order = () => {
         <Grid>
           <Col span={12}>
             <Text size="xl" weight={600}>
-              Order 3942389489d84jfh3420482
+              {`Order ${params.order}`}
             </Text>
           </Col>
           <Col span={12}>
