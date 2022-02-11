@@ -3,17 +3,20 @@ import Layout from "../layout/Layout";
 import { BiUser } from "react-icons/bi";
 import { HiOutlineMail } from "react-icons/hi";
 import { BsBox, BsCreditCard2Front } from "react-icons/bs";
-import banner from "../images/banner1.jpeg";
+import { useParams } from "react-router";
 import { useSelector } from "react-redux";
+
 import { State } from "../state";
 import Head from "../components/Head";
 
 const Order = () => {
+  const params = useParams();
+
   const { cartItems } = useSelector((state: State) => state.cart);
 
   return (
     <Layout>
-      <Head title={`Order 3942389489d84jfh3420482`} />
+      <Head title={`Order ${params.order}`} />
       <Card withBorder shadow="sm" radius="xl" padding="xl">
         <Grid>
           <Col span={12}>

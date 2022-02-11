@@ -2,7 +2,6 @@ import { Button, Card, Col, Grid, Image, Text } from "@mantine/core";
 import { useNavigate } from "react-router";
 import Steps from "../components/Steps";
 import Layout from "../layout/Layout";
-import banner from "../images/banner1.jpeg";
 import { BsCreditCard2Front, BsBox } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators, State } from "../state";
@@ -25,6 +24,12 @@ const PlaceOrder = () => {
     loading: createOrderLoading,
     error: createOrderError,
   } = useSelector((state: State) => state.orderCreate);
+
+  const {
+    order,
+    loading: orderLoading,
+    error: orderError,
+  } = useSelector((state: State) => state.order);
 
   const addDecimals = (num: number) => {
     return (Math.round(num * 100) / 100).toFixed(2);
@@ -58,7 +63,9 @@ const PlaceOrder = () => {
   };
 
   useEffect(() => {
-    console.log(orderCreate);
+    if (Object.keys(orderCreate).length) {
+      navigate(`/order/${orderCreate._id}`);
+    }
   }, [createOrder]);
 
   return (
@@ -224,6 +231,7 @@ const PlaceOrder = () => {
           <Col span={12}>
             <Button
               onClick={() => handlerOrderCreate()}
+              loading={createOrderLoading}
               color="dark"
               radius="xl"
               fullWidth
