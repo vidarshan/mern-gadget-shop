@@ -12,6 +12,7 @@ import {
   Col,
   Text,
   Badge,
+  Select,
 } from "@mantine/core";
 import Footer from "../components/Footer";
 import { AiOutlineUsb } from "react-icons/ai";
@@ -166,6 +167,26 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
 
           <div className="flex-container-no-horizontal-align">
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+              {/* <Select
+                radius="xl"
+                placeholder="Search for an item..."
+                data={[
+                  {
+                    value: "rick",
+                    label: "Rick",
+                  },
+                  {
+                    value: "morty",
+                    label: "Morty",
+                  },
+
+                  {
+                    value: "summer",
+                    label: "Summer",
+                  },
+                ]}
+                icon={<FiSearch />}
+              /> */}
               <TextInput
                 icon={<FiSearch />}
                 size="sm"
