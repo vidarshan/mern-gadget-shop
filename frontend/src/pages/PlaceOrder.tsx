@@ -13,6 +13,23 @@ const PlaceOrder = () => {
 
   const { cartItems } = useSelector((state: State) => state.cart);
 
+  const addDecimals = (num: number) => {
+    return (Math.round(num * 100) / 100).toFixed(2);
+  };
+
+  cartItems.itemsPrice = addDecimals(
+    cartItems.reduce((acc: any, item: any) => acc + item.price * item.qty, 0)
+  );
+  cartItems.shippingPrice = addDecimals(cartItems.itemsPrice > 100 ? 0 : 100);
+  cartItems.taxPrice = addDecimals(
+    Number((0.15 * cartItems.itemsPrice).toFixed(2))
+  );
+  cartItems.totalPrice = (
+    Number(cartItems.itemsPrice) +
+    Number(cartItems.shippingPrice) +
+    Number(cartItems.taxPrice)
+  ).toFixed(2);
+
   return (
     <Layout>
       <Head title="Place Order" />
@@ -140,7 +157,15 @@ const PlaceOrder = () => {
                   <Text>Price</Text>
                 </Col>
                 <Col span={6}>
-                  <Text align="right">$1399.99</Text>
+                  <Text align="right">
+                    ${" "}
+                    {cartItems
+                      .reduce(
+                        (acc: any, item: any) => acc + item.qty * item.price,
+                        0
+                      )
+                      .toFixed(2)}
+                  </Text>
                 </Col>
               </Grid>
               <Grid
@@ -150,25 +175,16 @@ const PlaceOrder = () => {
                   <Text>Tax (2%)</Text>
                 </Col>
                 <Col span={6}>
-                  <Text align="right">$13.00</Text>
+                  <Text align="right">${cartItems.taxPrice}</Text>
                 </Col>
               </Grid>
-              <Grid
-                sx={{ margin: "10px 0", borderBottom: "1px solid #E0E0E0" }}
-              >
-                <Col span={6}>
-                  <Text>Discount (5%)</Text>
-                </Col>
-                <Col span={6}>
-                  <Text align="right">$299.00</Text>
-                </Col>
-              </Grid>
+
               <Grid sx={{ margin: "10px 0" }}>
                 <Col span={6}>
                   <Text>Total</Text>
                 </Col>
                 <Col span={6}>
-                  <Text align="right">$1099.99</Text>
+                  <Text align="right">${cartItems.totalPrice}</Text>
                 </Col>
               </Grid>
             </Card>

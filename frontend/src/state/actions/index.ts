@@ -105,6 +105,21 @@ interface UserLogoutAction {
   payload: any;
 }
 
+interface CreateOrderRequestAction {
+  type: ActionType.CREATE_ORDER_REQUEST;
+  payload?: any;
+}
+
+interface CreateOrderSuccessAction {
+  type: ActionType.CREATE_ORDER_SUCCESS;
+  payload: any;
+}
+
+interface CreateOrderFailAction {
+  type: ActionType.CREATE_ORDER_FAIL;
+  payload: any;
+}
+
 export type Action =
   | CartAddItemAction
   | CartRemoveItemAction
@@ -126,4 +141,7 @@ export type Action =
   | UserRegisterRequestAction
   | UserRegisterSuccessAction
   | UserRegisterFailAction
-  | UserLogoutAction;
+  | UserLogoutAction
+  | CreateOrderRequestAction
+  | CreateOrderSuccessAction
+  | CreateOrderFailAction;
