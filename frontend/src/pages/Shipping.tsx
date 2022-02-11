@@ -39,13 +39,8 @@ const Shipping = () => {
   });
 
   const handlerAddShipping = (values: any) => {
-    //  dispatch(saveShippingAddress(values));
     navigate("/payment");
-    // handlerRedirectToPayment();
-  };
-
-  const handlerRedirectToPayment = () => {
-    return navigate("/payment");
+    dispatch(saveShippingAddress(values));
   };
 
   useEffect(() => {
@@ -96,6 +91,17 @@ const Shipping = () => {
                 error={form.errors.country}
                 label="Country"
               />
+            </Col>
+            <Col span={12}>
+              <Button
+                type="submit"
+                // onClick={() => navigate("/payment")}
+                radius="xl"
+                color="dark"
+                fullWidth
+              >
+                Continue
+              </Button>
             </Col>
             <Col span={12}>
               <Button
