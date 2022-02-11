@@ -4,22 +4,27 @@ import Steps from "../components/Steps";
 import Layout from "../layout/Layout";
 import banner from "../images/banner1.jpeg";
 import { BsCreditCard2Front, BsBox } from "react-icons/bs";
-import { useSelector } from "react-redux";
-import { State } from "../state";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators, State } from "../state";
 import Head from "../components/Head";
+import { bindActionCreators } from "redux";
+import { useEffect } from "react";
 
 const PlaceOrder = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { cartItems, shippingAddress } = useSelector(
+  const { createOrder } = bindActionCreators(actionCreators, dispatch);
+
+  const { cartItems, shippingAddress, paymentMethod } = useSelector(
     (state: State) => state.cart
   );
 
   const {
-    createOrder,
+    orderCreate,
     loading: createOrderLoading,
     error: createOrderError,
-  } = useSelector((state: State) => state.createOrder);
+  } = useSelector((state: State) => state.orderCreate);
 
   const addDecimals = (num: number) => {
     return (Math.round(num * 100) / 100).toFixed(2);
@@ -38,9 +43,26 @@ const PlaceOrder = () => {
     Number(cartItems.taxPrice)
   ).toFixed(2);
 
+  const handlerOrderCreate = () => {
+    dispatch(
+      createOrder(
+        cartItems,
+        shippingAddress,
+        paymentMethod,
+        cartItems.itemsPrice,
+        cartItems.taxPrice,
+        cartItems.shippingPrice,
+        cartItems.totalPrice
+      )
+    );
+  };
+
+  useEffect(() => {
+    console.log(orderCreate);
+  }, [createOrder]);
+
   return (
     <Layout>
-      {console.log(shippingAddress)}
       <Head title="Place Order" />
       <Card withBorder shadow="sm" radius="xl" padding="xl">
         <Steps active={3} />
@@ -66,7 +88,8 @@ const PlaceOrder = () => {
                     weight={500}
                     size="sm"
                   >
-                    No 2, Galle road, Moratuwa, Sri Lanka, 10400
+                    {shippingAddress.address}, {shippingAddress.city}{" "}
+                    {shippingAddress.postalCode}, {shippingAddress.country}
                   </Text>
                 </Card>
               </Col>
@@ -93,7 +116,7 @@ const PlaceOrder = () => {
                     weight={500}
                     size="sm"
                   >
-                    PayPal
+                    {paymentMethod}
                   </Text>
                 </Card>
               </Col>
@@ -200,7 +223,7 @@ const PlaceOrder = () => {
           </Col>
           <Col span={12}>
             <Button
-              onClick={() => navigate("/order/2342348284")}
+              onClick={() => handlerOrderCreate()}
               color="dark"
               radius="xl"
               fullWidth

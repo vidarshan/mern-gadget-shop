@@ -1,7 +1,9 @@
 import axios from "axios";
 import { Dispatch } from "redux";
+import { State } from "..";
 import { ActionType } from "../action-types";
 import { Action } from "../actions/index";
+import { store } from "../store";
 
 export const addToCart = (id: string, qty: number) => {
   return async (dispatch: Dispatch<Action>, getState: any) => {
@@ -237,18 +239,18 @@ export const createOrder = (
   shippingPrice: any,
   totalPrice: any
 ) => {
-  return async (dispatch: Dispatch<Action>, getState: any) => {
+  return async (dispatch: Dispatch<Action>) => {
     try {
       dispatch({
         type: ActionType.CREATE_ORDER_REQUEST,
       });
 
-      const userInfo = getState();
+      const userInfo = store.getState().userLogin.userInfo.token;
 
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${userInfo}`,
         },
       };
 

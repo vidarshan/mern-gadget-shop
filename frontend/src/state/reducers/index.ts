@@ -16,7 +16,7 @@ const reducers = combineReducers({
   userRegister: registerReducer,
   userLogin: loginReducer,
   order: getOrderReducer,
-  createOrder: createOrderReducer,
+  orderCreate: createOrderReducer,
 });
 
 export default reducers;

@@ -7,6 +7,8 @@ import connectDB from "./config/db";
 
 import userRoutes from "./routes/userRoutes";
 import productRoutes from "./routes/productRoutes";
+import orderRoutes from "./routes/orderRoutes";
+
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
 
 const app = express();
@@ -24,6 +26,7 @@ const PORT = process.env.PORT || 10100;
 app.use(express.json());
 
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/orders", orderRoutes);
 app.use("/api/v1/products", productRoutes);
 
 if (process.env.NODE_ENV === "production") {

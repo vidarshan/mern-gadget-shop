@@ -3,7 +3,7 @@ import { Action } from "../actions/index";
 
 const createOrderReducer = (
   state = {
-    createOrder: {},
+    orderCreate: {},
     error: null,
     loading: false,
   },
@@ -15,7 +15,7 @@ const createOrderReducer = (
     case ActionType.CREATE_ORDER_SUCCESS:
       return {
         ...state,
-        order: action.payload,
+        orderCreate: action.payload,
         loading: false,
         error: null,
       };
