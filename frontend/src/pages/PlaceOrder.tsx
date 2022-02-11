@@ -11,7 +11,15 @@ import Head from "../components/Head";
 const PlaceOrder = () => {
   const navigate = useNavigate();
 
-  const { cartItems } = useSelector((state: State) => state.cart);
+  const { cartItems, shippingAddress } = useSelector(
+    (state: State) => state.cart
+  );
+
+  const {
+    createOrder,
+    loading: createOrderLoading,
+    error: createOrderError,
+  } = useSelector((state: State) => state.createOrder);
 
   const addDecimals = (num: number) => {
     return (Math.round(num * 100) / 100).toFixed(2);
@@ -32,6 +40,7 @@ const PlaceOrder = () => {
 
   return (
     <Layout>
+      {console.log(shippingAddress)}
       <Head title="Place Order" />
       <Card withBorder shadow="sm" radius="xl" padding="xl">
         <Steps active={3} />

@@ -5,8 +5,15 @@ const cartItemsFromStorage = localStorage.getItem("cartItems")
   ? JSON.parse(localStorage.getItem("cartItems") || "{}")
   : [];
 
+const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
+  ? JSON.parse(localStorage.getItem("shippingAddress") || "{}")
+  : [];
+
 const cartReducer = (
-  state = { cartItems: cartItemsFromStorage, shippingAddress: {} },
+  state = {
+    cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage,
+  },
   action: Action
 ) => {
   switch (action.type) {

@@ -10,9 +10,20 @@ import {
 import { useNavigate } from "react-router";
 import Steps from "../components/Steps";
 import Layout from "../layout/Layout";
+import { bindActionCreators } from "redux";
+import { actionCreators, State } from "../state";
+import { useDispatch, useSelector } from "react-redux";
 
 const Payment = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { savePaymentMethod } = bindActionCreators(actionCreators, dispatch);
+
+  const handlerAddPaymentMethod = (method: string) => {
+    navigate("/placeorder");
+    dispatch(savePaymentMethod(method));
+  };
 
   return (
     <Layout>
@@ -33,7 +44,7 @@ const Payment = () => {
           </Col>
           <Col span={12}>
             <Button
-              onClick={() => navigate("/placeorder")}
+              onClick={() => handlerAddPaymentMethod("PayPal")}
               radius="md"
               color="dark"
               fullWidth
