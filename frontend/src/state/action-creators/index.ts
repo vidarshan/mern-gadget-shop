@@ -228,6 +228,86 @@ export const login = (email: string, password: string) => {
   };
 };
 
+export const createOrder = (
+  orderItems: any,
+  shippingAddress: any,
+  paymentMethod: string,
+  itemsPrice: any,
+  taxPrice: any,
+  shippingPrice: any,
+  totalPrice: any
+) => {
+  return async (dispatch: Dispatch<Action>, getState: any) => {
+    try {
+      dispatch({
+        type: ActionType.CREATE_ORDER_REQUEST,
+      });
+
+      const userInfo = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const formData = {
+        orderItems,
+        shippingAddress,
+        paymentMethod,
+        itemsPrice,
+        taxPrice,
+        shippingPrice,
+        totalPrice,
+      };
+
+      const { data } = await axios.post("/api/v1/orders", formData, config);
+
+      dispatch({
+        type: ActionType.CREATE_ORDER_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.CREATE_ORDER_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const getOrder = (id: string) => {
+  return async (dispatch: Dispatch<Action>, getState: any) => {
+    try {
+      dispatch({
+        type: ActionType.GET_ORDER_REQUEST,
+      });
+
+      const userInfo = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.get(`/api/v1/orders/${id}`, config);
+
+      dispatch({
+        type: ActionType.GET_ORDER_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.GET_ORDER_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
 export const logout = () => {
   return async (dispatch: Dispatch<Action>) => {
     localStorage.removeItem("userInfo");
