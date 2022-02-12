@@ -23,7 +23,7 @@ const Announcement = ({
       </Text>
       <Grid>
         <Col span={12}>
-          <Image radius="xl" fit="contain" src={announcement} />
+          <Image radius="md" fit="contain" src={announcement} />
         </Col>
       </Grid>
     </div>

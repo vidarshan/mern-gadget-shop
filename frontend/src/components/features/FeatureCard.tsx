@@ -21,7 +21,7 @@ const FeatureCard: React.FC<PropsWithChildren<IFeatureCard>> = ({
       className="height-full-perc flex-container-vertical-align"
       padding="xl"
       withBorder
-      radius="xl"
+      radius="md"
     >
       <Text color={textColor} align="center">
         {icon}

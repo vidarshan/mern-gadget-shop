@@ -77,7 +77,7 @@ const Login = () => {
       <Card
         withBorder
         padding="xl"
-        radius="xl"
+        radius="md"
         shadow="xl"
         sx={{ width: "500px" }}
       >
@@ -92,7 +92,7 @@ const Login = () => {
 
             <Col span={12}>
               <TextInput
-                radius="xl"
+                radius="md"
                 placeholder="Your Email"
                 label="Email"
                 {...form.getInputProps("email")}
@@ -101,7 +101,7 @@ const Login = () => {
             </Col>
             <Col span={12}>
               <PasswordInput
-                radius="xl"
+                radius="md"
                 placeholder="Your Password"
                 label="Password"
                 {...form.getInputProps("password")}
@@ -114,7 +114,7 @@ const Login = () => {
                 type="submit"
                 fullWidth
                 color="dark"
-                radius="xl"
+                radius="md"
               >
                 Log In
               </Button>

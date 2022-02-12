@@ -63,7 +63,7 @@ const Cart = () => {
             <Button
               onClick={() => setOpened(false)}
               color="gray"
-              radius="xl"
+              radius="md"
               fullWidth
             >
               Cancel
@@ -73,7 +73,7 @@ const Cart = () => {
             <Button
               onClick={() => handlerDeleteCartItem(selectedItem)}
               color="red"
-              radius="xl"
+              radius="md"
               fullWidth
             >
               Yes
@@ -114,7 +114,7 @@ const Cart = () => {
                     </Col>
                     <Col span={2}>
                       <NumberInput
-                        radius="xl"
+                        radius="md"
                         value={item.qty}
                         ref={numRef}
                         onChange={(e) =>
@@ -128,7 +128,7 @@ const Cart = () => {
                     <Col span={1}>
                       <Button
                         size="sm"
-                        radius="xl"
+                        radius="md"
                         variant="filled"
                         color="red"
                         onClick={() => selectItem(item.product)}
@@ -169,7 +169,7 @@ const Cart = () => {
               <Button
                 sx={{ marginTop: ".5rem" }}
                 color="dark"
-                radius="xl"
+                radius="md"
                 fullWidth
                 onClick={() => navigate("/shipping")}
               >

@@ -21,7 +21,7 @@ import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators, State } from "../state";
 import { bindActionCreators } from "redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import Head from "../components/Head";
 
@@ -29,6 +29,8 @@ const Order = () => {
   const params = useParams();
   // const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [checkout, setCheckout] = useState(false);
 
   const { getOrder } = bindActionCreators(actionCreators, dispatch);
 
@@ -46,7 +48,7 @@ const Order = () => {
     <Layout>
       <Head title={`Order ${params.order}`} />
       {order && Object.keys(order) ? (
-        <Card withBorder shadow="md" radius="md" padding="xl">
+        <Card withBorder shadow="sm" radius="md" padding="xl">
           <Grid>
             <Col span={12}>
               {console.log(order)}
@@ -59,7 +61,7 @@ const Order = () => {
               {Object.keys(order).includes("user") ? (
                 <Grid sx={{ marginTop: "10px" }}>
                   <Col span={12}>
-                    <Card padding="xs" withBorder shadow="xs" radius="md">
+                    <Card padding="xs" withBorder shadow="sm" radius="md">
                       <Col
                         sx={{ display: "flex", alignItems: "center" }}
                         span={12}
@@ -137,7 +139,7 @@ const Order = () => {
               <Text>Payment</Text>
               <Grid sx={{ marginTop: "10px" }}>
                 <Col span={12}>
-                  <Card padding="xs" withBorder shadow="xs" radius="md">
+                  <Card padding="xs" withBorder shadow="sm" radius="md">
                     <Col
                       sx={{ display: "flex", alignItems: "center" }}
                       span={12}
@@ -188,7 +190,7 @@ const Order = () => {
                           sx={{ margin: "10px 0" }}
                           padding="sm"
                           withBorder
-                          shadow="xs"
+                          shadow="sm"
                           radius="md"
                         >
                           <Grid>
@@ -236,7 +238,7 @@ const Order = () => {
             </Col>
             <Col span={12}>
               <Text sx={{ margin: "10px 0" }}>Order Summary</Text>
-              <Card withBorder shadow="xs" radius="md">
+              <Card withBorder shadow="sm" radius="md">
                 <Grid
                   sx={{ margin: "10px 0", borderBottom: "1px solid #E0E0E0" }}
                 >
@@ -277,16 +279,18 @@ const Order = () => {
                 </Grid>
               </Card>
             </Col>
-            <Col span={12}>
-              <Button color="dark" radius="md" fullWidth>
-                Debit Card or Credit Card
-              </Button>
-            </Col>
-            <Col span={12}>
-              <Button color="yellow" radius="md" fullWidth>
-                PayPal
-              </Button>
-            </Col>
+            <Grid>
+              <Col span={12}>
+                <Button color="dark" radius="md" fullWidth>
+                  Debit Card or Credit Card
+                </Button>
+              </Col>
+              <Col span={12}>
+                <Button color="yellow" radius="md" fullWidth>
+                  PayPal
+                </Button>
+              </Col>
+            </Grid>
           </Grid>
         </Card>
       ) : (

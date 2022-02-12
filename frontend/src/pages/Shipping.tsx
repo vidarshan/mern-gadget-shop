@@ -58,7 +58,7 @@ const Shipping = () => {
           <Grid sx={{ marginTop: "2rem" }}>
             <Col span={12}>
               <TextInput
-                radius="xl"
+                radius="md"
                 placeholder="Your Address"
                 {...form.getInputProps("address")}
                 error={form.errors.address}
@@ -67,7 +67,7 @@ const Shipping = () => {
             </Col>
             <Col span={12}>
               <TextInput
-                radius="xl"
+                radius="md"
                 placeholder="Your City"
                 {...form.getInputProps("city")}
                 error={form.errors.city}
@@ -76,7 +76,7 @@ const Shipping = () => {
             </Col>
             <Col span={12}>
               <TextInput
-                radius="xl"
+                radius="md"
                 placeholder="Your Postal Code"
                 {...form.getInputProps("postalCode")}
                 error={form.errors.postalCode}
@@ -85,7 +85,7 @@ const Shipping = () => {
             </Col>
             <Col span={12}>
               <TextInput
-                radius="xl"
+                radius="md"
                 placeholder="Your Country"
                 {...form.getInputProps("country")}
                 error={form.errors.country}
@@ -96,7 +96,7 @@ const Shipping = () => {
               <Button
                 type="submit"
                 // onClick={() => navigate("/payment")}
-                radius="xl"
+                radius="md"
                 color="dark"
                 fullWidth
               >
@@ -107,7 +107,7 @@ const Shipping = () => {
               <Button
                 type="submit"
                 // onClick={() => navigate("/payment")}
-                radius="xl"
+                radius="md"
                 color="dark"
                 fullWidth
               >

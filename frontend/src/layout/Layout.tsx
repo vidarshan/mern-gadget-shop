@@ -168,7 +168,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
           <div className="flex-container-no-horizontal-align">
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
               {/* <Select
-                radius="xl"
+                radius="md"
                 placeholder="Search for an item..."
                 data={[
                   {
@@ -190,14 +190,14 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
               <TextInput
                 icon={<FiSearch />}
                 size="sm"
-                radius="xl"
+                radius="md"
                 placeholder="Search for an item..."
               />
             </MediaQuery>
 
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
               <Button
-                radius="xl"
+                radius="md"
                 sx={{ margin: "10px", backgroundColor: "#373a40" }}
                 leftIcon={<BiShoppingBag />}
                 onClick={() => navigate("/cart")}
@@ -219,7 +219,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                 onClick={() => navigate("/profile")}
                 sx={{ margin: "10px" }}
                 variant="default"
-                radius="xl"
+                radius="md"
               >
                 <BiUser />
               </ActionIcon>
@@ -232,7 +232,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                   onClick={() => handlerLogout()}
                   sx={{ margin: "10px" }}
                   variant="outline"
-                  radius="xl"
+                  radius="md"
                 >
                   <BiLogOut />
                 </ActionIcon>
@@ -245,7 +245,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                   color="dark"
                   variant="filled"
                   sx={{ margin: "10px" }}
-                  radius="xl"
+                  radius="md"
                   size="sm"
                 >
                   Sign Up
