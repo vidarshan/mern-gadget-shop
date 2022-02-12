@@ -1,6 +1,10 @@
 import { combineReducers } from "redux";
 import cartReducer from "./cartReducer";
-import { createOrderReducer, getOrderReducer } from "./orderReducers";
+import {
+  createOrderReducer,
+  getOrderReducer,
+  orderPayReducer,
+} from "./orderReducers";
 import {
   addReviewReducer,
   getProductReducer,
@@ -17,6 +21,7 @@ const reducers = combineReducers({
   userLogin: loginReducer,
   order: getOrderReducer,
   orderCreate: createOrderReducer,
+  orderPay: orderPayReducer,
 });
 
 export default reducers;

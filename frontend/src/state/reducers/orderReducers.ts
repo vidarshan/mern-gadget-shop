@@ -53,4 +53,31 @@ const getOrderReducer = (
   }
 };
 
-export { createOrderReducer, getOrderReducer };
+const orderPayReducer = (
+  state = {
+    order: {},
+    error: null,
+    loading: false,
+  },
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.ORDER_PAY_REQUEST:
+      return { ...state, loading: true, error: null };
+    case ActionType.ORDER_PAY_SUCCESS:
+      return {
+        ...state,
+        success: true,
+        loading: false,
+        error: null,
+      };
+    case ActionType.ORDER_PAY_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    case ActionType.ORDER_PAY_RESET:
+      return { ...state, loading: false, success: {}, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export { createOrderReducer, getOrderReducer, orderPayReducer };

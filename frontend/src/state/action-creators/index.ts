@@ -309,6 +309,41 @@ export const getOrder = (id: any) => {
   };
 };
 
+export const payOrder = (id: any, paymentResult: any) => {
+  return async (dispatch: Dispatch<Action>, getState: any) => {
+    try {
+      dispatch({
+        type: ActionType.ORDER_PAY_REQUEST,
+      });
+
+      const token = store.getState().userLogin.userInfo.token;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `/api/v1/orders/${id}/pay/`,
+        paymentResult,
+        config
+      );
+
+      dispatch({
+        type: ActionType.ORDER_PAY_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.ORDER_PAY_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
 export const logout = () => {
   return async (dispatch: Dispatch<Action>) => {
     localStorage.removeItem("userInfo");

@@ -29,6 +29,10 @@ app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/orders", orderRoutes);
 app.use("/api/v1/products", productRoutes);
 
+app.get("/api/v1/config/paypal", (req: any, res: any) => {
+  res.send(process.env.PAYPAL_CLIENT_ID);
+});
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "frontend/build")));
 
