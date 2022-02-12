@@ -244,12 +244,12 @@ export const createOrder = (
         type: ActionType.CREATE_ORDER_REQUEST,
       });
 
-      const userInfo = store.getState().userLogin.userInfo.token;
+      const token = store.getState().userLogin.userInfo.token;
 
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo}`,
+          Authorization: `Bearer ${token}`,
         },
       };
 
@@ -278,19 +278,19 @@ export const createOrder = (
   };
 };
 
-export const getOrder = (id: string) => {
+export const getOrder = (id: any) => {
   return async (dispatch: Dispatch<Action>, getState: any) => {
     try {
       dispatch({
         type: ActionType.GET_ORDER_REQUEST,
       });
 
-      const userInfo = getState();
+      const token = store.getState().userLogin.userInfo.token;
 
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
 

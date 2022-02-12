@@ -8,6 +8,7 @@ import { actionCreators, State } from "../state";
 import Head from "../components/Head";
 import { bindActionCreators } from "redux";
 import { useEffect } from "react";
+import { ActionType } from "../state/action-types";
 
 const PlaceOrder = () => {
   const dispatch = useDispatch();
@@ -65,6 +66,9 @@ const PlaceOrder = () => {
   useEffect(() => {
     if (Object.keys(orderCreate).length) {
       navigate(`/order/${orderCreate._id}`);
+      // dispatch({
+      //   type: ActionType.GET_ORDER_REQUEST,
+      // });
     }
   }, [createOrder]);
 
