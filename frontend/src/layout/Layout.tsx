@@ -124,7 +124,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
             <Container
               sx={{
                 marginTop: "7rem",
-                maxWidth: "1280px",
+                maxWidth: "1920px",
                 width: "100%",
               }}
             >
