@@ -162,7 +162,7 @@ interface OrderPayResetAction {
 
 interface GetUsersSuccessAction {
   type: ActionType.GET_USERS_REQUEST;
-  payload: any;
+  payload?: any;
 }
 
 interface GetUsersFailAction {

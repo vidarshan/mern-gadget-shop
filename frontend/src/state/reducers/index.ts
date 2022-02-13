@@ -10,7 +10,7 @@ import {
   getProductReducer,
   getProductsReducer,
 } from "./productReducer";
-import { loginReducer, registerReducer } from "./userReducer";
+import { loginReducer, registerReducer, getUsersReducer } from "./userReducer";
 
 const reducers = combineReducers({
   cart: cartReducer,
@@ -22,6 +22,7 @@ const reducers = combineReducers({
   order: getOrderReducer,
   orderCreate: createOrderReducer,
   orderPay: orderPayReducer,
+  users: getUsersReducer,
 });
 
 export default reducers;
