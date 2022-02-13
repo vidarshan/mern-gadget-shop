@@ -1,96 +1,4 @@
-import {
-  Card,
-  Text,
-  Grid,
-  Col,
-  Alert,
-  Image,
-  Button,
-  Loader,
-} from "@mantine/core";
-import Layout from "../layout/Layout";
-import { BiUser } from "react-icons/bi";
-import { HiOutlineMail } from "react-icons/hi";
-import { PayPalButton } from "react-paypal-button-v2";
-import axios from "axios";
-import {
-  BsBox,
-  BsCreditCard2Front,
-  BsCheckCircleFill,
-  BsXCircleFill,
-} from "react-icons/bs";
-import { useParams } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
-import { actionCreators, State } from "../state";
-import { bindActionCreators } from "redux";
-import { useEffect, useState } from "react";
-
-import Head from "../components/Head";
-import { ActionType } from "../state/action-types";
-
-const Order = () => {
-  const params = useParams();
-  // const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const [checkout, setCheckout] = useState(false);
-  const [sdkReady, setSdkReady] = useState(false);
-
-  const { getOrder, payOrder } = bindActionCreators(actionCreators, dispatch);
-
-  const {
-    order,
-    loading: orderLoading,
-    error: orderError,
-  } = useSelector((state: State) => state.order);
-
-  const {
-    success,
-    loading: payLoading,
-    error: payError,
-  } = useSelector((state: State) => state.orderPay);
-
-  const successPaymentHanlder = (paymentResult: any) => {
-    console.log(paymentResult);
-    payOrder(params.order, paymentResult);
-  };
-
-  useEffect(() => {
-    // if (!userInfo) {
-    //   history.push('/login')
-    // }
-
-    const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get("/api/v1/config/paypal");
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      script.async = true;
-      script.onload = () => {
-        setSdkReady(true);
-      };
-      document.body.appendChild(script);
-    };
-
-    if (!order || success) {
-      dispatch({ type: ActionType.ORDER_PAY_RESET });
-    } else if (!order.isPaid) {
-      if (!(window as any).paypal) {
-        addPayPalScript();
-      } else {
-        setSdkReady(true);
-      }
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    getOrder(params.order);
-  }, [dispatch]);
-
-  return (
-    <Layout>
-      <Head title={`Order ${params.order}`} />
-      {order && Object.keys(order).length ? (
+{Object.keys(order).length ? (
         <Card withBorder shadow="sm" radius="md" padding="xl">
           <Grid>
             <Col span={12}>
@@ -180,7 +88,7 @@ const Order = () => {
             </Col>
             <Col span={12}>
               <Text>Payment</Text>
-              <Grid sx={{ marginTop: "10px" }}>
+              {/* <Grid sx={{ marginTop: "10px" }}>
                 <Col span={12}>
                   <Card padding="xs" withBorder shadow="sm" radius="md">
                     <Col
@@ -220,11 +128,11 @@ const Order = () => {
                     </Col>
                   </Card>
                 </Col>
-              </Grid>
+              </Grid> */}
             </Col>
             <Col span={12}>
               <Text>Order Items</Text>
-              <Grid sx={{ marginTop: "10px" }}>
+              {/* <Grid sx={{ marginTop: "10px" }}>
                 <Col span={12}>
                   {order.orderItems && order.orderItems.length ? (
                     order.orderItems.map((item: any) => {
@@ -277,7 +185,7 @@ const Order = () => {
                     <></>
                   )}
                 </Col>
-              </Grid>
+              </Grid> */}
             </Col>
             <Col span={12}>
               <Text sx={{ margin: "10px 0" }}>Order Summary</Text>
@@ -342,8 +250,3 @@ const Order = () => {
       ) : (
         <Loader />
       )}
-    </Layout>
-  );
-};
-
-export default Order;

@@ -310,6 +310,7 @@ export const getOrder = (id: any) => {
 };
 
 export const payOrder = (id: any, paymentResult: any) => {
+  console.log(id);
   return async (dispatch: Dispatch<Action>, getState: any) => {
     try {
       dispatch({
@@ -326,7 +327,7 @@ export const payOrder = (id: any, paymentResult: any) => {
       };
 
       const { data } = await axios.put(
-        `/api/v1/orders/${id}/pay/`,
+        `/api/v1/orders/${id}/pay`,
         paymentResult,
         config
       );
