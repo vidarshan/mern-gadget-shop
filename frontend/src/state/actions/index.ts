@@ -175,6 +175,21 @@ interface GetUsersRequestAction {
   payload: any;
 }
 
+interface GetOrdersSuccessAction {
+  type: ActionType.GET_ORDERS_REQUEST;
+  payload?: any;
+}
+
+interface GetOrdersFailAction {
+  type: ActionType.GET_ORDERS_SUCCESS;
+  payload: any;
+}
+
+interface GetOrdersRequestAction {
+  type: ActionType.GET_ORDERS_FAIL;
+  payload: any;
+}
+
 export type Action =
   | CartAddItemAction
   | CartRemoveItemAction
@@ -210,4 +225,7 @@ export type Action =
   | OrderPayResetAction
   | GetUsersSuccessAction
   | GetUsersFailAction
-  | GetUsersRequestAction;
+  | GetUsersRequestAction
+  | GetOrdersRequestAction
+  | GetOrdersSuccessAction
+  | GetOrdersFailAction;
