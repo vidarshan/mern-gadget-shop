@@ -29,7 +29,7 @@ const Shop = () => {
   );
 
   useEffect(() => {
-    getProducts();
+    getProducts(1);
   }, [dispatch]);
 
   useEffect(() => {
@@ -47,13 +47,13 @@ const Shop = () => {
     <Layout>
       <Head title="Shop | Techstop" description="Shop for gadgets" />
 
-      <Card radius="xl" sx={{ marginBottom: "1rem" }} withBorder>
+      <Card radius="md" sx={{ marginBottom: "1rem" }} withBorder>
         <Grid>
           <Col xs={12} sm={6} md={3} lg={3} xl={4} span={3}>
             <Select
               icon={<BiBuilding />}
               variant="default"
-              radius="xl"
+              radius="md"
               size="sm"
               placeholder="Brand"
               data={[
@@ -67,7 +67,7 @@ const Shop = () => {
           <Col xs={12} sm={6} md={3} lg={3} xl={4} span={3}>
             <Select
               icon={<BiLaptop />}
-              radius="xl"
+              radius="md"
               size="sm"
               placeholder="Model"
               data={[
@@ -81,7 +81,7 @@ const Shop = () => {
           <Col xs={12} sm={6} md={3} lg={3} xl={2} span={3}>
             <Select
               icon={<BiDollarCircle />}
-              radius="xl"
+              radius="md"
               size="sm"
               placeholder="Price"
               data={[
@@ -95,7 +95,7 @@ const Shop = () => {
           <Col xs={12} sm={6} md={3} lg={3} xl={2} span={3}>
             <Button
               variant="filled"
-              radius="xl"
+              radius="md"
               size="sm"
               fullWidth
               color="dark"

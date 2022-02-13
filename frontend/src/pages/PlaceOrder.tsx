@@ -2,24 +2,35 @@ import { Button, Card, Col, Grid, Image, Text } from "@mantine/core";
 import { useNavigate } from "react-router";
 import Steps from "../components/Steps";
 import Layout from "../layout/Layout";
-import banner from "../images/banner1.jpeg";
 import { BsCreditCard2Front, BsBox } from "react-icons/bs";
-import { useSelector } from "react-redux";
-import { State } from "../state";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators, State } from "../state";
 import Head from "../components/Head";
+import { bindActionCreators } from "redux";
+import { useEffect } from "react";
+import { ActionType } from "../state/action-types";
 
 const PlaceOrder = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { cartItems, shippingAddress } = useSelector(
+  const { createOrder } = bindActionCreators(actionCreators, dispatch);
+
+  const { cartItems, shippingAddress, paymentMethod } = useSelector(
     (state: State) => state.cart
   );
 
   const {
-    createOrder,
+    orderCreate,
     loading: createOrderLoading,
     error: createOrderError,
-  } = useSelector((state: State) => state.createOrder);
+  } = useSelector((state: State) => state.orderCreate);
+
+  const {
+    order,
+    loading: orderLoading,
+    error: orderError,
+  } = useSelector((state: State) => state.order);
 
   const addDecimals = (num: number) => {
     return (Math.round(num * 100) / 100).toFixed(2);
@@ -38,11 +49,33 @@ const PlaceOrder = () => {
     Number(cartItems.taxPrice)
   ).toFixed(2);
 
+  const handlerOrderCreate = () => {
+    dispatch(
+      createOrder(
+        cartItems,
+        shippingAddress,
+        paymentMethod,
+        cartItems.itemsPrice,
+        cartItems.taxPrice,
+        cartItems.shippingPrice,
+        cartItems.totalPrice
+      )
+    );
+  };
+
+  useEffect(() => {
+    if (Object.keys(orderCreate).length) {
+      navigate(`/order/${orderCreate._id}`);
+      // dispatch({
+      //   type: ActionType.GET_ORDER_REQUEST,
+      // });
+    }
+  }, [createOrder]);
+
   return (
     <Layout>
-      {console.log(shippingAddress)}
       <Head title="Place Order" />
-      <Card withBorder shadow="sm" radius="xl" padding="xl">
+      <Card withBorder shadow="sm" radius="md" padding="xl">
         <Steps active={3} />
         <Grid sx={{ marginTop: "2rem" }}>
           <Col span={12}>
@@ -52,7 +85,7 @@ const PlaceOrder = () => {
                 <Card
                   withBorder
                   shadow="xs"
-                  radius="xl"
+                  radius="md"
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -66,7 +99,8 @@ const PlaceOrder = () => {
                     weight={500}
                     size="sm"
                   >
-                    No 2, Galle road, Moratuwa, Sri Lanka, 10400
+                    {shippingAddress.address}, {shippingAddress.city}{" "}
+                    {shippingAddress.postalCode}, {shippingAddress.country}
                   </Text>
                 </Card>
               </Col>
@@ -79,7 +113,7 @@ const PlaceOrder = () => {
                 <Card
                   withBorder
                   shadow="xs"
-                  radius="xl"
+                  radius="md"
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -93,7 +127,7 @@ const PlaceOrder = () => {
                     weight={500}
                     size="sm"
                   >
-                    PayPal
+                    {paymentMethod}
                   </Text>
                 </Card>
               </Col>
@@ -111,7 +145,7 @@ const PlaceOrder = () => {
                         padding="sm"
                         withBorder
                         shadow="xs"
-                        radius="xl"
+                        radius="md"
                       >
                         <Grid>
                           <Col
@@ -119,7 +153,7 @@ const PlaceOrder = () => {
                             span={5}
                           >
                             <Image
-                              radius="xl"
+                              radius="md"
                               fit="contain"
                               height={40}
                               width={40}
@@ -158,7 +192,7 @@ const PlaceOrder = () => {
           </Col>
           <Col span={12}>
             <Text sx={{ margin: "10px 0" }}>Order Summary</Text>
-            <Card withBorder shadow="xs" radius="xl">
+            <Card withBorder shadow="xs" radius="md">
               <Grid
                 sx={{ margin: "10px 0", borderBottom: "1px solid #E0E0E0" }}
               >
@@ -200,9 +234,10 @@ const PlaceOrder = () => {
           </Col>
           <Col span={12}>
             <Button
-              onClick={() => navigate("/order/2342348284")}
+              onClick={() => handlerOrderCreate()}
+              loading={createOrderLoading}
               color="dark"
-              radius="xl"
+              radius="md"
               fullWidth
             >
               Place Order

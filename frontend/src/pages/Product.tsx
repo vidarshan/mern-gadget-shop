@@ -152,7 +152,7 @@ const Product = () => {
                         <Group spacing={5}>
                           <ActionIcon
                             size={28}
-                            radius="xl"
+                            radius="md"
                             variant="filled"
                             color="dark"
                             onClick={() => handlers?.current?.decrement()}
@@ -170,11 +170,11 @@ const Product = () => {
                             styles={{
                               input: { width: 54, textAlign: "center" },
                             }}
-                            radius="xl"
+                            radius="md"
                           />
                           <ActionIcon
                             size={28}
-                            radius="xl"
+                            radius="md"
                             variant="filled"
                             color="dark"
                             onClick={() => handlers?.current?.increment()}
@@ -192,7 +192,7 @@ const Product = () => {
                         </Text>
                         <Button
                           leftIcon={<RiShoppingBagLine />}
-                          radius="xl"
+                          radius="md"
                           color="dark"
                           onClick={() => handlerAddToCart(value, product._id)}
                         >
@@ -237,7 +237,7 @@ const Product = () => {
               <Button
                 variant="outline"
                 leftIcon={<IoMdStar />}
-                radius="xl"
+                radius="md"
                 sx={{ marginLeft: "10px" }}
                 color="dark"
                 size="xs"

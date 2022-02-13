@@ -2,6 +2,7 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { ActionType } from "../action-types";
 import { Action } from "../actions/index";
+import { store } from "../store";
 
 export const addToCart = (id: string, qty: number) => {
   return async (dispatch: Dispatch<Action>, getState: any) => {
@@ -62,14 +63,14 @@ export const savePaymentMethod = (data: any) => {
   };
 };
 
-export const getProducts = () => {
+export const getProducts = (page: number) => {
   return async (dispatch: Dispatch<Action>) => {
     try {
       dispatch({
         type: ActionType.GET_PRODUCTS_REQUEST,
       });
 
-      const { data } = await axios.get(`/api/v1/products`);
+      const { data } = await axios.get(`/api/v1/products?pageNumber=${page}`);
 
       dispatch({
         type: ActionType.GET_PRODUCTS_SUCCESS,
@@ -237,18 +238,18 @@ export const createOrder = (
   shippingPrice: any,
   totalPrice: any
 ) => {
-  return async (dispatch: Dispatch<Action>, getState: any) => {
+  return async (dispatch: Dispatch<Action>) => {
     try {
       dispatch({
         type: ActionType.CREATE_ORDER_REQUEST,
       });
 
-      const userInfo = getState();
+      const token = store.getState().userLogin.userInfo.token;
 
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
 
@@ -277,19 +278,19 @@ export const createOrder = (
   };
 };
 
-export const getOrder = (id: string) => {
+export const getOrder = (id: any) => {
   return async (dispatch: Dispatch<Action>, getState: any) => {
     try {
       dispatch({
         type: ActionType.GET_ORDER_REQUEST,
       });
 
-      const userInfo = getState();
+      const token = store.getState().userLogin.userInfo.token;
 
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
 
@@ -302,6 +303,104 @@ export const getOrder = (id: string) => {
     } catch (error: any) {
       dispatch({
         type: ActionType.GET_ORDER_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const payOrder = (id: any, paymentResult: any) => {
+  console.log(id);
+  return async (dispatch: Dispatch<Action>, getState: any) => {
+    try {
+      dispatch({
+        type: ActionType.ORDER_PAY_REQUEST,
+      });
+
+      const token = store.getState().userLogin.userInfo.token;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `/api/v1/orders/${id}/pay`,
+        paymentResult,
+        config
+      );
+
+      dispatch({
+        type: ActionType.ORDER_PAY_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.ORDER_PAY_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const getUsers = () => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.GET_USERS_REQUEST,
+      });
+
+      const token = store.getState().userLogin.userInfo.token;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await axios.get(`/api/v1/users`, config);
+
+      dispatch({
+        type: ActionType.GET_USERS_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.GET_USERS_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const getOrders = () => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.GET_ORDERS_REQUEST,
+      });
+
+      const token = store.getState().userLogin.userInfo.token;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await axios.get(`/api/v1/orders`, config);
+
+      dispatch({
+        type: ActionType.GET_ORDERS_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.GET_ORDERS_FAIL,
         payload: error,
       });
     }

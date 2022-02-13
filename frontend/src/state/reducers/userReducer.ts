@@ -58,4 +58,29 @@ const loginReducer = (
   }
 };
 
-export { registerReducer, loginReducer };
+const getUsersReducer = (
+  state = {
+    users: [],
+    error: null,
+    loading: false,
+  },
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.GET_USERS_REQUEST:
+      return { ...state, loading: true, error: null };
+    case ActionType.GET_USERS_SUCCESS:
+      return {
+        ...state,
+        users: action.payload,
+        loading: false,
+        error: null,
+      };
+    case ActionType.GET_USERS_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export { registerReducer, loginReducer, getUsersReducer };

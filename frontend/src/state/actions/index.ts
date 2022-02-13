@@ -120,6 +120,11 @@ interface CreateOrderFailAction {
   payload: any;
 }
 
+interface CreateOrderResetAction {
+  type: ActionType.CREATE_ORDER_RESET;
+  payload: any;
+}
+
 interface GetOrderRequestAction {
   type: ActionType.GET_ORDER_REQUEST;
   payload?: any;
@@ -132,6 +137,56 @@ interface GetOrderSuccessAction {
 
 interface GetOrderFailAction {
   type: ActionType.GET_ORDER_FAIL;
+  payload: any;
+}
+
+interface OrderPayRequestAction {
+  type: ActionType.ORDER_PAY_REQUEST;
+  payload?: any;
+}
+
+interface OrderPaySuccessAction {
+  type: ActionType.ORDER_PAY_SUCCESS;
+  payload: any;
+}
+
+interface OrderPayFailAction {
+  type: ActionType.ORDER_PAY_FAIL;
+  payload: any;
+}
+
+interface OrderPayResetAction {
+  type: ActionType.ORDER_PAY_RESET;
+  payload: any;
+}
+
+interface GetUsersSuccessAction {
+  type: ActionType.GET_USERS_REQUEST;
+  payload?: any;
+}
+
+interface GetUsersFailAction {
+  type: ActionType.GET_USERS_SUCCESS;
+  payload: any;
+}
+
+interface GetUsersRequestAction {
+  type: ActionType.GET_USERS_FAIL;
+  payload: any;
+}
+
+interface GetOrdersSuccessAction {
+  type: ActionType.GET_ORDERS_REQUEST;
+  payload?: any;
+}
+
+interface GetOrdersFailAction {
+  type: ActionType.GET_ORDERS_SUCCESS;
+  payload: any;
+}
+
+interface GetOrdersRequestAction {
+  type: ActionType.GET_ORDERS_FAIL;
   payload: any;
 }
 
@@ -160,6 +215,17 @@ export type Action =
   | CreateOrderRequestAction
   | CreateOrderSuccessAction
   | CreateOrderFailAction
+  | CreateOrderResetAction
   | GetOrderRequestAction
   | GetOrderSuccessAction
-  | GetOrderFailAction;
+  | GetOrderFailAction
+  | OrderPayRequestAction
+  | OrderPaySuccessAction
+  | OrderPayFailAction
+  | OrderPayResetAction
+  | GetUsersSuccessAction
+  | GetUsersFailAction
+  | GetUsersRequestAction
+  | GetOrdersRequestAction
+  | GetOrdersSuccessAction
+  | GetOrdersFailAction;
