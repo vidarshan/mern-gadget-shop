@@ -29,7 +29,7 @@ const Shop = () => {
   );
 
   useEffect(() => {
-    getProducts();
+    getProducts(1);
   }, [dispatch]);
 
   useEffect(() => {

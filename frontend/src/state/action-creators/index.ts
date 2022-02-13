@@ -63,14 +63,14 @@ export const savePaymentMethod = (data: any) => {
   };
 };
 
-export const getProducts = () => {
+export const getProducts = (page: number) => {
   return async (dispatch: Dispatch<Action>) => {
     try {
       dispatch({
         type: ActionType.GET_PRODUCTS_REQUEST,
       });
 
-      const { data } = await axios.get(`/api/v1/products`);
+      const { data } = await axios.get(`/api/v1/products?pageNumber=${page}`);
 
       dispatch({
         type: ActionType.GET_PRODUCTS_SUCCESS,
