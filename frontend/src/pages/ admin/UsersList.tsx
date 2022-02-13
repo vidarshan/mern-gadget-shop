@@ -1,4 +1,4 @@
-import { Card, Table } from "@mantine/core";
+import { Button, Card, Group, Table, Text } from "@mantine/core";
 import React from "react";
 import Head from "../../components/Head";
 import Layout from "../../layout/Layout";
@@ -26,6 +26,12 @@ const UsersList = () => {
       <Head title="Users List | Admin" />
 
       <Card withBorder shadow="sm" radius="md" padding="xl">
+        <Group sx={{ marginBottom: "1rem" }} direction="row" position="apart">
+          <Text weight={700}>Users</Text>
+          <Button radius="lg" color="dark">
+            Add new Users
+          </Button>
+        </Group>
         <Table
           horizontalSpacing="xl"
           verticalSpacing="xs"
