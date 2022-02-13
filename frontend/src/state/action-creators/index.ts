@@ -376,6 +376,37 @@ export const getUsers = () => {
   };
 };
 
+export const getOrders = () => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.GET_ORDERS_REQUEST,
+      });
+
+      const token = store.getState().userLogin.userInfo.token;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await axios.get(`/api/v1/orders`, config);
+
+      dispatch({
+        type: ActionType.GET_ORDERS_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.GET_ORDERS_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
 export const logout = () => {
   return async (dispatch: Dispatch<Action>) => {
     localStorage.removeItem("userInfo");

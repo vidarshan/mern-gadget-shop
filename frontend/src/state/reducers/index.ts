@@ -4,6 +4,7 @@ import {
   createOrderReducer,
   getOrderReducer,
   orderPayReducer,
+  getOrdersReducer,
 } from "./orderReducers";
 import {
   addReviewReducer,
@@ -23,6 +24,7 @@ const reducers = combineReducers({
   orderCreate: createOrderReducer,
   orderPay: orderPayReducer,
   users: getUsersReducer,
+  orders: getOrdersReducer,
 });
 
 export default reducers;

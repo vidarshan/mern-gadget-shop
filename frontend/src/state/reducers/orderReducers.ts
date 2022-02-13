@@ -80,4 +80,34 @@ const orderPayReducer = (
   }
 };
 
-export { createOrderReducer, getOrderReducer, orderPayReducer };
+const getOrdersReducer = (
+  state = {
+    orders: [],
+    error: null,
+    loading: false,
+  },
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.GET_ORDERS_REQUEST:
+      return { ...state, loading: true, error: null };
+    case ActionType.GET_ORDERS_SUCCESS:
+      return {
+        ...state,
+        orders: action.payload,
+        loading: false,
+        error: null,
+      };
+    case ActionType.GET_ORDERS_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export {
+  createOrderReducer,
+  getOrderReducer,
+  orderPayReducer,
+  getOrdersReducer,
+};
