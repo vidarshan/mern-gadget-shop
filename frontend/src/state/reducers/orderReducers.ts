@@ -55,7 +55,7 @@ const getOrderReducer = (
 
 const orderPayReducer = (
   state = {
-    order: {},
+    success: false,
     error: null,
     loading: false,
   },

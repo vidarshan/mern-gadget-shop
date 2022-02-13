@@ -11,6 +11,7 @@ import {
 import Layout from "../layout/Layout";
 import { BiUser } from "react-icons/bi";
 import { HiOutlineMail } from "react-icons/hi";
+import axios from "axios";
 import {
   BsBox,
   BsCreditCard2Front,
@@ -24,6 +25,7 @@ import { bindActionCreators } from "redux";
 import { useEffect, useState } from "react";
 
 import Head from "../components/Head";
+import { ActionType } from "../state/action-types";
 
 const Order = () => {
   const params = useParams();
@@ -31,18 +33,50 @@ const Order = () => {
   const dispatch = useDispatch();
 
   const [checkout, setCheckout] = useState(false);
+  const [sdkReady, setSdkReady] = useState(false);
 
   const { getOrder } = bindActionCreators(actionCreators, dispatch);
 
   const {
     order,
     loading: orderLoading,
-    error: errorLoading,
+    error: orderError,
   } = useSelector((state: State) => state.order);
 
+  const {
+    success,
+    loading: payLoading,
+    error: payError,
+  } = useSelector((state: State) => state.orderPay);
+
   useEffect(() => {
-    getOrder(params.order);
-  }, [dispatch]);
+    // if (!userInfo) {
+    //   history.push('/login')
+    // }
+
+    const addPayPalScript = async () => {
+      const { data: clientId } = await axios.get("/api/v1/config/paypal");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+    };
+
+    if (success) {
+      // dispatch({ type: ActionType.ORDER_PAY_RESET });
+      dispatch(getOrder(params.order));
+    } else if (!order.isPaid) {
+      if (!(window as any).paypal) {
+        addPayPalScript();
+      } else {
+        setSdkReady(true);
+      }
+    }
+  }, [dispatch, order, success]);
 
   return (
     <Layout>
