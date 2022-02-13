@@ -29,6 +29,8 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
+  const [value, setValue] = useState("");
+
   const { userInfo } = useSelector((state: State) => state.userLogin);
   const { cartItems } = useSelector((state: State) => state.cart);
   const [opened, setOpened] = useState(false);
@@ -140,6 +142,11 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
     dispatch(logout());
   };
 
+  useEffect(() => {
+    if (value !== "") {
+      navigate(`/admin/${value}`);
+    }
+  }, [value]);
   return (
     <>
       <Head height={70} padding="md" fixed>
@@ -167,26 +174,6 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
 
           <div className="flex-container-no-horizontal-align">
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-              {/* <Select
-                radius="md"
-                placeholder="Search for an item..."
-                data={[
-                  {
-                    value: "rick",
-                    label: "Rick",
-                  },
-                  {
-                    value: "morty",
-                    label: "Morty",
-                  },
-
-                  {
-                    value: "summer",
-                    label: "Summer",
-                  },
-                ]}
-                icon={<FiSearch />}
-              /> */}
               <TextInput
                 icon={<FiSearch />}
                 size="sm"
@@ -212,6 +199,18 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                   </Badge>
                 )}
               </Button>
+            </MediaQuery>
+            <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+              <Select
+                placeholder="Admin"
+                value={value}
+                onChange={(e) => setValue(e as any)}
+                data={[
+                  { value: "orders", label: "Orders" },
+                  { value: "products", label: "Products" },
+                  { value: "users", label: "Users" },
+                ]}
+              />
             </MediaQuery>
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
               <ActionIcon

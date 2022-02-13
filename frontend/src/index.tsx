@@ -19,6 +19,9 @@ import PlaceOrder from "./pages/PlaceOrder";
 import Order from "./pages/Order";
 import Profile from "./pages/Profile";
 import { ModalsProvider } from "@mantine/modals";
+import UsersList from "./pages/ admin/UsersList";
+import ProductsList from "./pages/ admin/ProductsList";
+import OrdersList from "./pages/ admin/OrdersList";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -52,6 +55,9 @@ ReactDOM.render(
               <Route path="/payment" element={<Payment />} />
               <Route path="/placeorder" element={<PlaceOrder />} />
               <Route path="/order/:order" element={<Order />} />
+              <Route path="/admin/orders" element={<OrdersList />} />
+              <Route path="/admin/products" element={<ProductsList />} />
+              <Route path="/admin/users" element={<UsersList />} />
             </Routes>
           </BrowserRouter>
         </ModalsProvider>
