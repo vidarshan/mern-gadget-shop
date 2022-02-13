@@ -1,4 +1,16 @@
-import { Card, Table, Image, Button, Pagination, Group } from "@mantine/core";
+import {
+  Card,
+  Table,
+  Image,
+  Button,
+  Pagination,
+  Group,
+  Modal,
+  TextInput,
+  Textarea,
+  NumberInput,
+  Text,
+} from "@mantine/core";
 import Head from "../../components/Head";
 import Layout from "../../layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,16 +19,56 @@ import { actionCreators, State } from "../../state";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import { BiDetail, BiTrash, BiTrashAlt } from "react-icons/bi";
+import { useForm } from "@mantine/hooks";
 
 const ProductsList = () => {
-  const [activePage, setActivePage] = useState(1);
   const dispatch = useDispatch();
+
+  const [activePage, setActivePage] = useState(1);
+  const [opened, setOpened] = useState(false);
+  const [selectedItem, setSelectedItem] = useState("");
 
   const { getProducts } = bindActionCreators(actionCreators, dispatch);
 
   const { products, error, loading } = useSelector(
     (state: State) => state.products
   );
+
+  const form = useForm({
+    initialValues: {
+      name: selectedItem,
+      brand: "",
+      description: "",
+      price: "",
+      count: 100,
+    },
+    validationRules: {
+      name: (value) => value.trim().length > 2,
+      brand: (value) => value.trim().length > 2,
+      description: (value) => value.trim().length > 2,
+      price: (value) => value.trim().length > 2,
+      count: (value) => value > 0,
+    },
+    errorMessages: {
+      name: "Provide a valid name",
+      brand: "Provide a valid brand",
+      description: "Provide a valid description",
+      price: "Provide a valid price",
+      count: "Provide a valid count",
+    },
+  });
+
+  const handlerSetDetails = (product: any) => {
+    form.setValues({
+      name: product.name,
+      brand: product.brand,
+      description: product.description,
+      price: product.price,
+      count: product.countInStock,
+    });
+    setSelectedItem(product);
+    setOpened(true);
+  };
 
   const rows =
     products &&
@@ -39,7 +91,11 @@ const ProductsList = () => {
         <td>{product.countInStock}</td>
         <td>${product.price}</td>
         <td>
-          <Button color="dark" radius="xl">
+          <Button
+            color="dark"
+            radius="xl"
+            onClick={() => handlerSetDetails(product)}
+          >
             <BiDetail />
           </Button>
         </td>
@@ -56,6 +112,8 @@ const ProductsList = () => {
     getProducts(page);
   };
 
+  const handlerEditProduct = (values: any) => {};
+
   useEffect(() => {
     getProducts(1);
   }, [dispatch]);
@@ -63,12 +121,61 @@ const ProductsList = () => {
   return (
     <Layout>
       <Head title="Products List | Admin" />
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title="Product Details"
+      >
+        <form onSubmit={form.onSubmit((values) => handlerEditProduct(values))}>
+          <Group direction="column" grow>
+            <TextInput
+              label="Product Name"
+              placeholder="Product Name"
+              {...form.getInputProps("name")}
+              error={form.errors.name}
+            />
+            <TextInput
+              label="Product Brand"
+              placeholder="Product Brand"
+              {...form.getInputProps("brand")}
+              error={form.errors.brand}
+            />
+            <Textarea
+              label="Product Description"
+              placeholder="Product Description"
+              {...form.getInputProps("description")}
+              error={form.errors.description}
+            />
+            <NumberInput
+              label="Product Count"
+              placeholder="Product Count"
+              {...form.getInputProps("count")}
+              error={form.errors.count}
+            />
+            <input type="file" id="myfile" name="myfile" />
+            <NumberInput
+              label="Product Price"
+              placeholder="Product Price"
+              {...form.getInputProps("price")}
+              error={form.errors.price}
+            />
+            <Button type="submit" color="dark">
+              Add Product
+            </Button>
+          </Group>
+        </form>
+      </Modal>
       <Card shadow="md" radius="lg">
+        <Group sx={{ marginBottom: "1rem" }} direction="row" position="apart">
+          <Text weight={700}>Products</Text>
+          <Button radius="lg" color="dark">
+            Add new Product
+          </Button>
+        </Group>
         {loading ? (
           <Loading />
         ) : (
           <Group position="center" direction="column">
-            {console.log(products)}
             <Table horizontalSpacing="xl" verticalSpacing="xs" highlightOnHover>
               <thead>
                 <tr>
