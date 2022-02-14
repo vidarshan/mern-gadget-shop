@@ -407,6 +407,37 @@ export const getOrders = () => {
   };
 };
 
+export const deliverOrder = (id: string) => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.ORDER_DELIVER_REQUEST,
+      });
+
+      const token = store.getState().userLogin.userInfo.token;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await axios.get(`/api/v1/${id}/deliver`, config);
+
+      dispatch({
+        type: ActionType.ORDER_DELIVER_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.ORDER_DELIVER_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
 export const logout = () => {
   return async (dispatch: Dispatch<Action>) => {
     localStorage.removeItem("userInfo");

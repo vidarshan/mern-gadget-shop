@@ -105,9 +105,35 @@ const getOrdersReducer = (
   }
 };
 
+const orderDeliverReducer = (
+  state = {
+    success: false,
+    error: null,
+    loading: false,
+  },
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.ORDER_DELIVER_REQUEST:
+      return { ...state, loading: true, error: null };
+    case ActionType.ORDER_DELIVER_SUCCESS:
+      return {
+        ...state,
+        success: action.payload,
+        loading: false,
+        error: null,
+      };
+    case ActionType.ORDER_DELIVER_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
 export {
   createOrderReducer,
   getOrderReducer,
   orderPayReducer,
   getOrdersReducer,
+  orderDeliverReducer,
 };

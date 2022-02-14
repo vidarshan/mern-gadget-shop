@@ -202,7 +202,7 @@ interface OrderDeliverFailAction {
 
 interface OrderDeliverRequestAction {
   type: ActionType.ORDER_DELIVER_REQUEST;
-  payload: any;
+  payload?: any;
 }
 
 export type Action =
