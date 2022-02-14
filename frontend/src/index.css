@@ -92,13 +92,6 @@ input,
   border: 1px solid #373a40 !important;
 }
 
-.mantine-Header-root .mantine-TextInput-withIcon,
-.mantine-Select-icon,
-.mantine-1ez2cgg {
-  background-color: #373a40 !important;
-  border: 1px solid #373a40 !important;
-}
-
 .mantine-Header-root .mantine-TextInput-input {
   color: white !important;
   font-weight: 600 !important;
