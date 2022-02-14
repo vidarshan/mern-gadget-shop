@@ -205,6 +205,11 @@ interface OrderDeliverRequestAction {
   payload?: any;
 }
 
+interface OrderDeliverResetAction {
+  type: ActionType.ORDER_DELIVER_RESET;
+  payload?: any;
+}
+
 export type Action =
   | CartAddItemAction
   | CartRemoveItemAction
@@ -246,4 +251,5 @@ export type Action =
   | GetOrdersFailAction
   | OrderDeliverRequestAction
   | OrderDeliverSuccessAction
-  | OrderDeliverFailAction;
+  | OrderDeliverFailAction
+  | OrderDeliverResetAction;

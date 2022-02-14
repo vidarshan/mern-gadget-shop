@@ -125,6 +125,13 @@ const orderDeliverReducer = (
       };
     case ActionType.ORDER_DELIVER_FAIL:
       return { ...state, loading: false, error: action.payload };
+    case ActionType.ORDER_DELIVER_RESET:
+      return {
+        ...state,
+        success: false,
+        loading: false,
+        error: null,
+      };
     default:
       return state;
   }

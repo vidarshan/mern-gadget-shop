@@ -1,4 +1,13 @@
-import { Badge, Button, Card, Group, Switch, Table, Text } from "@mantine/core";
+import {
+  Badge,
+  Button,
+  Card,
+  Group,
+  List,
+  Switch,
+  Table,
+  Text,
+} from "@mantine/core";
 import React from "react";
 import Head from "../../components/Head";
 import Layout from "../../layout/Layout";
@@ -11,6 +20,7 @@ import { BiDetail, BiTrash, BiTrashAlt } from "react-icons/bi";
 import { useForm } from "@mantine/hooks";
 import moment from "moment";
 import { useNotifications } from "@mantine/notifications";
+import { ActionType } from "../../state/action-types";
 
 const OrdersList = () => {
   const dispatch = useDispatch();
@@ -39,35 +49,68 @@ const OrdersList = () => {
     getOrders();
   }, [dispatch, success]);
 
-  if (orderDeliverError || error) {
-    notifications.showNotification({
-      title: "Oh no!",
-      message: error && error.message,
-      color: "red",
+  useEffect(() => {
+    if (orderDeliverError || error) {
+      notifications.showNotification({
+        title: "Oh no!",
+        message: error && error.message,
+        color: "red",
+      });
+    }
+  }, [error, orderDeliverError]);
+
+  useEffect(() => {
+    if (success) {
+      notifications.showNotification({
+        title: "Success!",
+        message: "Marked as Delivered",
+        color: "green",
+      });
+    }
+
+    dispatch({
+      type: ActionType.ORDER_DELIVER_RESET,
     });
-  }
+  }, [success]);
 
   const rows =
     orders &&
     Object.keys(orders).length &&
     orders.map((order: any) => (
       <tr key={order._id}>
-        <td>{order._id}</td>
         <td>
-          {order.orderItems.map((item: any) => {
-            return (
-              <p>
-                {item.name} x {item.qty}
-              </p>
-            );
-          })}
+          <Text size="sm" weight={600}>
+            {order._id}
+          </Text>
         </td>
         <td>
-          {order.shippingAddress.address}, {order.shippingAddress.city},{" "}
-          {order.shippingAddress.country}, {order.shippingAddress.postalCode}
+          <List size="sm">
+            {order.orderItems.map((item: any) => {
+              return (
+                <List.Item>
+                  {item.name} x {item.qty}
+                </List.Item>
+              );
+            })}
+          </List>
         </td>
-        <td>${order.totalPrice}</td>
-        <td>{order.user.name}</td>
+        <td>
+          <Text size="sm" weight={600}>
+            {" "}
+            {order.shippingAddress.address}, {order.shippingAddress.city},{" "}
+            {order.shippingAddress.country}, {order.shippingAddress.postalCode}
+          </Text>
+        </td>
+        <td>
+          <Text size="sm" weight={600}>
+            ${order.totalPrice}
+          </Text>
+        </td>
+        <td>
+          <Text size="sm" weight={600}>
+            {order.user.name}
+          </Text>
+        </td>
         <td>
           {order.isPaid ? (
             <Badge radius="md" variant="filled" color="green">
