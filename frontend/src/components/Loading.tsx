@@ -2,7 +2,15 @@ import React from "react";
 import { Loader, Card } from "@mantine/core";
 
 const Loading = () => {
-  return <Loader color="dark" />;
+  return (
+    <Card
+      shadow="md"
+      radius="lg"
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+    >
+      <Loader color="dark" />
+    </Card>
+  );
 };
 
 export default Loading;

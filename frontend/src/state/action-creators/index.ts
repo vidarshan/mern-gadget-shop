@@ -310,7 +310,6 @@ export const getOrder = (id: any) => {
 };
 
 export const payOrder = (id: any, paymentResult: any) => {
-  console.log(id);
   return async (dispatch: Dispatch<Action>, getState: any) => {
     try {
       dispatch({
@@ -423,7 +422,11 @@ export const deliverOrder = (id: string) => {
         },
       };
 
-      const { data } = await axios.get(`/api/v1/${id}/deliver`, config);
+      const { data } = await axios.put(
+        `/api/v1/orders/${id}/deliver`,
+        {},
+        config
+      );
 
       dispatch({
         type: ActionType.ORDER_DELIVER_SUCCESS,

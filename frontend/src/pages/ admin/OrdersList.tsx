@@ -10,19 +10,42 @@ import Loading from "../../components/Loading";
 import { BiDetail, BiTrash, BiTrashAlt } from "react-icons/bi";
 import { useForm } from "@mantine/hooks";
 import moment from "moment";
+import { useNotifications } from "@mantine/notifications";
 
 const OrdersList = () => {
   const dispatch = useDispatch();
+  const notifications = useNotifications();
 
-  const { getOrders } = bindActionCreators(actionCreators, dispatch);
+  const { getOrders, deliverOrder } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   const { orders, error, loading } = useSelector(
     (state: State) => state.orders
   );
 
+  const {
+    success,
+    error: orderDeliverError,
+    loading: orderDeliverLoading,
+  } = useSelector((state: State) => state.orderDeliver);
+
+  const handlerDeliverOrder = (orderId: string) => {
+    deliverOrder(orderId);
+  };
+
   useEffect(() => {
     getOrders();
-  }, [dispatch]);
+  }, [dispatch, success]);
+
+  if (orderDeliverError || error) {
+    notifications.showNotification({
+      title: "Oh no!",
+      message: error && error.message,
+      color: "red",
+    });
+  }
 
   const rows =
     orders &&
@@ -44,35 +67,41 @@ const OrdersList = () => {
           {order.shippingAddress.country}, {order.shippingAddress.postalCode}
         </td>
         <td>${order.totalPrice}</td>
-        <td>
-          {order.user.name} - {order.user._id}
-        </td>
+        <td>{order.user.name}</td>
         <td>
           {order.isPaid ? (
-            <Badge variant="filled" color="green">
+            <Badge radius="md" variant="filled" color="green">
               {`Paid | ${moment(order.paidAt).format("DD-MMM-YYYY HH:mm")}`}
             </Badge>
           ) : (
-            <Badge variant="filled" color="red">
+            <Badge radius="md" variant="filled" color="red">
               Not Paid
             </Badge>
           )}
         </td>
         <td>
           {order.isDelivered ? (
-            <Badge variant="filled" color="green">
+            <Badge radius="md" variant="filled" color="green">
               {`Delivered | ${moment(order.deliveredAt).format(
                 "DD-MMM-YYYY hh:mm"
               )}`}
             </Badge>
           ) : (
-            <Badge variant="filled" color="red">
+            <Badge radius="md" variant="filled" color="red">
               Not Delivered
             </Badge>
           )}
         </td>
         <td>
-          <Switch color="dark" />
+          {order.isDelivered ? (
+            "-"
+          ) : (
+            <Switch
+              checked={order.isDelivered}
+              onChange={() => handlerDeliverOrder(order._id)}
+              color="dark"
+            />
+          )}
         </td>
       </tr>
     ));
@@ -81,7 +110,7 @@ const OrdersList = () => {
     <Layout>
       <Head title="Orders List | Admin" />
 
-      <Card shadow="md" radius="lg">
+      <Card shadow="xl" radius="md">
         <Group sx={{ marginBottom: "1rem" }} direction="row" position="apart">
           <Text weight={700}>Orders</Text>
         </Group>
