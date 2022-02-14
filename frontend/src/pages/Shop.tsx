@@ -10,7 +10,7 @@ import {
 import ItemCard from "../components/items/ItemCard";
 import { BiDollarCircle, BiLaptop, BiBuilding } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import { useNotifications } from "@mantine/notifications";
 import Head from "../components/Head";
@@ -22,11 +22,18 @@ const Shop = () => {
   const dispatch = useDispatch();
   const notifications = useNotifications();
 
+  const [activePage, setActivePage] = useState(1);
+
   const { getProducts } = bindActionCreators(actionCreators, dispatch);
 
   const { products, error, loading } = useSelector(
     (state: State) => state.products
   );
+
+  const handlerPageChange = (page: number) => {
+    setActivePage(page);
+    getProducts(page);
+  };
 
   useEffect(() => {
     getProducts(1);
@@ -138,7 +145,13 @@ const Shop = () => {
 
       <Grid>
         <Col className="flex-container" sx={{ margin: "1rem 0" }} span={12}>
-          <Pagination total={10} color="dark" radius="md" />
+          <Pagination
+            total={products.pages}
+            color="dark"
+            radius="xl"
+            page={activePage}
+            onChange={(e) => handlerPageChange(e)}
+          />
         </Col>
       </Grid>
     </Layout>
