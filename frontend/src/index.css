@@ -114,3 +114,7 @@ input,
 .mantine-Header-root .flex-container-no-horizontal-align svg {
   color: white !important;
 }
+
+.admin-select {
+  background-color: rgb(44, 46, 51) !important;
+}

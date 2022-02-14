@@ -26,6 +26,7 @@ import ReviewCard from "../components/reviews/ReviewCard";
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
 import Head from "../components/Head";
+import Loading from "../components/Loading";
 
 const Product = () => {
   const params = useParams();
@@ -81,10 +82,10 @@ const Product = () => {
   return (
     <Layout>
       {loading ? (
-        <Loader />
+        <Loading />
       ) : (
         <>
-          <Card radius="md" shadow="xl">
+          <Card radius="lg" shadow="xs" withBorder>
             {Object.keys(product).length && (
               <Grid>
                 <Head
@@ -102,7 +103,7 @@ const Product = () => {
                 >
                   {" "}
                   <Image
-                    radius="md"
+                    radius="lg"
                     fit="contain"
                     sx={{
                       display: "flex",
@@ -152,7 +153,7 @@ const Product = () => {
                         <Group spacing={5}>
                           <ActionIcon
                             size={28}
-                            radius="md"
+                            radius="lg"
                             variant="filled"
                             color="dark"
                             onClick={() => handlers?.current?.decrement()}
@@ -170,11 +171,11 @@ const Product = () => {
                             styles={{
                               input: { width: 54, textAlign: "center" },
                             }}
-                            radius="md"
+                            radius="lg"
                           />
                           <ActionIcon
                             size={28}
-                            radius="md"
+                            radius="lg"
                             variant="filled"
                             color="dark"
                             onClick={() => handlers?.current?.increment()}
@@ -192,7 +193,7 @@ const Product = () => {
                         </Text>
                         <Button
                           leftIcon={<RiShoppingBagLine />}
-                          radius="md"
+                          radius="lg"
                           color="dark"
                           onClick={() => handlerAddToCart(value, product._id)}
                         >
@@ -205,7 +206,7 @@ const Product = () => {
               </Grid>
             )}
           </Card>
-          <Card sx={{ marginTop: "1.5rem" }} radius="md" shadow="xl">
+          <Card sx={{ marginTop: "1.5rem" }} radius="lg" shadow="xl">
             {Object.keys(product).length && (
               <Group position="apart">
                 <Text color="gray" size="md" weight={600}>
@@ -229,7 +230,7 @@ const Product = () => {
               icon={<IoIosUnlock size={16} />}
               sx={{ marginTop: "1rem" }}
               color="blue"
-              radius="md"
+              radius="lg"
             >
               Log In to add a review
             </Alert>
@@ -237,7 +238,7 @@ const Product = () => {
               <Button
                 variant="outline"
                 leftIcon={<IoMdStar />}
-                radius="md"
+                radius="lg"
                 sx={{ marginLeft: "10px" }}
                 color="dark"
                 size="xs"
@@ -264,7 +265,7 @@ const Product = () => {
                   icon={<IoIosCloseCircle size={16} />}
                   sx={{ marginTop: "1rem" }}
                   color="blue"
-                  radius="md"
+                  radius="lg"
                 >
                   No reviews for this product
                 </Alert>
