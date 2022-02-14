@@ -10,6 +10,8 @@ import {
   Textarea,
   NumberInput,
   Text,
+  Loader,
+  Select,
 } from "@mantine/core";
 import Head from "../../components/Head";
 import Layout from "../../layout/Layout";
@@ -28,33 +30,46 @@ const ProductsList = () => {
   const [activePage, setActivePage] = useState(1);
   const [opened, setOpened] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
-  const [image, setImage] = useState();
+  const [image, setImage] = useState("");
+  const [uploading, setUploading] = useState(false);
 
-  const { getProducts } = bindActionCreators(actionCreators, dispatch);
+  const { getProducts, createProduct } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   const { products, error, loading } = useSelector(
     (state: State) => state.products
   );
+
+  const {
+    productCreate,
+    error: createProductError,
+    loading: createProductLoading,
+  } = useSelector((state: State) => state.createProduct);
 
   const form = useForm({
     initialValues: {
       name: selectedItem,
       brand: "",
       description: "",
-      price: "",
+      category: "",
+      price: 10,
       count: 100,
     },
     validationRules: {
       name: (value) => value.trim().length > 2,
       brand: (value) => value.trim().length > 2,
       description: (value) => value.trim().length > 2,
-      price: (value) => value.trim().length > 2,
+      category: (value) => value.trim().length > 2,
+      price: (value) => value > 0,
       count: (value) => value > 0,
     },
     errorMessages: {
       name: "Provide a valid name",
       brand: "Provide a valid brand",
       description: "Provide a valid description",
+      category: "Provide a valid category",
       price: "Provide a valid price",
       count: "Provide a valid count",
     },
@@ -65,6 +80,7 @@ const ProductsList = () => {
       name: product.name,
       brand: product.brand,
       description: product.description,
+      category: product.category,
       price: product.price,
       count: product.countInStock,
     });
@@ -113,7 +129,7 @@ const ProductsList = () => {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("image", file);
-    // setUploading(true)
+    setUploading(true);
 
     try {
       const config = {
@@ -126,10 +142,10 @@ const ProductsList = () => {
       console.log("data: ", data);
 
       setImage(data);
-      // setUploading(false)
+      setUploading(false);
     } catch (error) {
       console.error(error);
-      // setUploading(false)
+      setUploading(false);
     }
   };
 
@@ -139,7 +155,27 @@ const ProductsList = () => {
   };
 
   const handlerEditProduct = (values: any) => {
+    const {
+      name,
+      price,
+      brand,
+      category,
+      countInStock,
+      numReviews,
+      description,
+    } = values;
+    console.log(image);
     console.log(values);
+    createProduct(
+      name,
+      price,
+      image,
+      brand,
+      category,
+      countInStock,
+      numReviews,
+      description
+    );
   };
 
   useEffect(() => {
@@ -174,18 +210,35 @@ const ProductsList = () => {
               {...form.getInputProps("description")}
               error={form.errors.description}
             />
+            <Select
+              data={[
+                { value: "Laptops", label: "Laptops" },
+                { value: "Desktops", label: "Desktops" },
+                { value: "Phones", label: "Phones" },
+                { value: "Accessories", label: "Accessories" },
+              ]}
+              label="Product Category"
+              placeholder="Product Category"
+              {...form.getInputProps("category")}
+              error={form.errors.category}
+            />
             <NumberInput
               label="Product Count"
               placeholder="Product Count"
               {...form.getInputProps("count")}
               error={form.errors.count}
             />
+            {/* {uploading ? (
+              <Loader />
+            ) : ( */}
             <input
               type="file"
               id="myfile"
               name="myfile"
               onChange={uploadFileHandler}
             />
+            {/* )} */}
+
             <NumberInput
               label="Product Price"
               placeholder="Product Price"
