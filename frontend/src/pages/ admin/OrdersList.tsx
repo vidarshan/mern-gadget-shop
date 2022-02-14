@@ -26,7 +26,7 @@ const OrdersList = () => {
 
   const rows =
     orders &&
-    Object.keys(orders).length >= 3 &&
+    Object.keys(orders).length &&
     orders.map((order: any) => (
       <tr key={order._id}>
         <td>{order._id}</td>
@@ -50,7 +50,7 @@ const OrdersList = () => {
         <td>
           {order.isPaid ? (
             <Badge variant="filled" color="green">
-              {`Paid | ${moment(order.paidAt).format("DD-MMM-YYYY hh:mm")}`}
+              {`Paid | ${moment(order.paidAt).format("DD-MMM-YYYY HH:mm")}`}
             </Badge>
           ) : (
             <Badge variant="filled" color="red">
