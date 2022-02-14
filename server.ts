@@ -8,6 +8,7 @@ import connectDB from "./config/db";
 import userRoutes from "./routes/userRoutes";
 import productRoutes from "./routes/productRoutes";
 import orderRoutes from "./routes/orderRoutes";
+import uploadRoutes from "./routes/uploadRoutes";
 
 import { errorHandler, notFound } from "./middleware/errorMiddleware";
 
@@ -28,10 +29,13 @@ app.use(express.json());
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/orders", orderRoutes);
 app.use("/api/v1/products", productRoutes);
+app.use("/api/upload", uploadRoutes);
 
 app.get("/api/v1/config/paypal", (req: any, res: any) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
+
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "frontend/build")));
