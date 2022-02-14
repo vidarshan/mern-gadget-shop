@@ -441,6 +441,57 @@ export const deliverOrder = (id: string) => {
   };
 };
 
+export const createProduct = (
+  name: string,
+  price: number,
+  image: string,
+  brand: string,
+  category: string,
+  countInStock: number,
+  numReviews: number,
+  description: string
+) => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.CREATE_PRODUCT_REQUEST,
+      });
+
+      const token = store.getState().userLogin.userInfo.token;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const formData = {
+        name,
+        price,
+        image,
+        brand,
+        category,
+        countInStock,
+        numReviews,
+        description,
+      };
+
+      const { data } = await axios.post(`/api/v1/products`, formData, config);
+
+      dispatch({
+        type: ActionType.CREATE_PRODUCT_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.CREATE_PRODUCT_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
 export const logout = () => {
   return async (dispatch: Dispatch<Action>) => {
     localStorage.removeItem("userInfo");
