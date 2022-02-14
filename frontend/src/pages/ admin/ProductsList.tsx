@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import { BiDetail, BiTrash, BiTrashAlt } from "react-icons/bi";
 import { useForm } from "@mantine/hooks";
+import axios from "axios";
 
 const ProductsList = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const ProductsList = () => {
   const [activePage, setActivePage] = useState(1);
   const [opened, setOpened] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
+  const [image, setImage] = useState();
 
   const { getProducts } = bindActionCreators(actionCreators, dispatch);
 
@@ -107,12 +109,38 @@ const ProductsList = () => {
       </tr>
     ));
 
+  const uploadFileHandler = async (e: any) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    // setUploading(true)
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.post("/api/upload", formData, config);
+      console.log("data: ", data);
+
+      setImage(data);
+      // setUploading(false)
+    } catch (error) {
+      console.error(error);
+      // setUploading(false)
+    }
+  };
+
   const handlerPageChange = (page: number) => {
     setActivePage(page);
     getProducts(page);
   };
 
-  const handlerEditProduct = (values: any) => {};
+  const handlerEditProduct = (values: any) => {
+    console.log(values);
+  };
 
   useEffect(() => {
     getProducts(1);
@@ -152,7 +180,12 @@ const ProductsList = () => {
               {...form.getInputProps("count")}
               error={form.errors.count}
             />
-            <input type="file" id="myfile" name="myfile" />
+            <input
+              type="file"
+              id="myfile"
+              name="myfile"
+              onChange={uploadFileHandler}
+            />
             <NumberInput
               label="Product Price"
               placeholder="Product Price"
@@ -168,7 +201,7 @@ const ProductsList = () => {
       <Card shadow="md" radius="lg">
         <Group sx={{ marginBottom: "1rem" }} direction="row" position="apart">
           <Text weight={700}>Products</Text>
-          <Button radius="lg" color="dark">
+          <Button radius="lg" color="dark" onClick={() => setOpened(true)}>
             Add new Product
           </Button>
         </Group>
