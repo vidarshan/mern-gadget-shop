@@ -200,6 +200,11 @@ const Product = () => {
                     alignItems: "center",
                     justifyContent: "center",
                   }}
+                  xs={12}
+                  sm={12}
+                  md={6}
+                  lg={4}
+                  xl={4}
                   span={4}
                 >
                   {" "}
@@ -217,7 +222,7 @@ const Product = () => {
                   ></Image>
                 </Col>
 
-                <Col span={8}>
+                <Col xs={12} sm={12} md={6} lg={8} xl={8} span={8}>
                   <div>
                     <Group>
                       <Text weight={600} size="xl">

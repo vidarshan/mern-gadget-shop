@@ -36,11 +36,13 @@ const Featured = ({ title, subTitle }: { title: string; subTitle: string }) => {
       </Text>
       <Grid>
         {loading ? (
-          <Loading />
+          <Col span={12}>
+            <Loading />
+          </Col>
         ) : (
           topProducts.map((product: any) => {
             return (
-              <Col span={3}>
+              <Col xs={12} sm={6} md={4} lg={3} span={3}>
                 <ItemCard
                   id={product._id}
                   name={product.name}
