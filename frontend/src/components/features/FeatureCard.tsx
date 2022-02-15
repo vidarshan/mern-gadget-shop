@@ -16,17 +16,25 @@ const FeatureCard: React.FC<PropsWithChildren<IFeatureCard>> = ({
 }) => {
   return (
     <Card
-      sx={{ backgroundColor }}
-      shadow="xl"
+      // sx={{ backgroundColor }}
+      shadow="xs"
       className="height-full-perc flex-container-vertical-align"
       padding="xl"
       withBorder
-      radius="md"
+      radius="lg"
     >
-      <Text color={textColor} align="center">
+      <Text
+        // color={textColor}
+        align="center"
+      >
         {icon}
       </Text>
-      <Text color={textColor} size="xl" weight={600} align="center">
+      <Text
+        // color={textColor}
+        size="xl"
+        weight={600}
+        align="center"
+      >
         {title}
       </Text>
     </Card>
