@@ -147,6 +147,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
       navigate(`/admin/${value}`);
     }
   }, [value]);
+
   return (
     <>
       <Head height={70} padding="md" fixed>

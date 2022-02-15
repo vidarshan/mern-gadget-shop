@@ -107,6 +107,9 @@ const Product = () => {
     const { rating, comment } = values;
     addReview(params.id as string, parseInt(rating), comment);
     setOpened(false);
+    dispatch({
+      type: ActionType.ADD_REVIEW_RESET,
+    });
   };
 
   const handlerAddToCart = (quantity: number, id: string) => {
@@ -125,6 +128,16 @@ const Product = () => {
       type: ActionType.ADD_REVIEW_RESET,
     });
   }, [reviewError]);
+
+  useEffect(() => {
+    if (review && Object.keys(review).includes("message")) {
+      notifications.showNotification({
+        title: "Success!",
+        message: review.message,
+        color: "green",
+      });
+    }
+  }, [review]);
 
   useEffect(() => {
     getProduct(params.id as string);

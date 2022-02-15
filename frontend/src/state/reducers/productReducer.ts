@@ -72,7 +72,7 @@ const addReviewReducer = (
     case ActionType.ADD_REVIEW_FAIL:
       return { ...state, loading: false, error: action.payload };
     case ActionType.ADD_REVIEW_RESET:
-      return { ...state, loading: false, error: null };
+      return { ...state, loading: false, review: {}, error: null };
     default:
       return state;
   }

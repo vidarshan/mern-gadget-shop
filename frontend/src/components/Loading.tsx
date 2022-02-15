@@ -7,6 +7,7 @@ const Loading = () => {
       shadow="md"
       radius="lg"
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      withBorder
     >
       <Loader color="dark" />
     </Card>
