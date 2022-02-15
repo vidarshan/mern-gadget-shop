@@ -128,7 +128,7 @@ const Product = () => {
 
   useEffect(() => {
     getProduct(params.id as string);
-  }, [dispatch]);
+  }, [dispatch, review]);
 
   return (
     <Layout>
