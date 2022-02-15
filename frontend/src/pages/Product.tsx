@@ -14,6 +14,10 @@ import {
   List,
   Alert,
   Divider,
+  Modal,
+  TextInput,
+  Select,
+  Textarea,
 } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
@@ -34,12 +38,15 @@ const Product = () => {
   const dispatch = useDispatch();
 
   const [value, setValue] = useState<any>(1);
+  const [opened, setOpened] = useState(false);
 
   const handlers = useRef<NumberInputHandlers>(null);
 
   const { product, loading, error } = useSelector(
     (state: State) => state.product
   );
+
+  const { userInfo } = useSelector((state: State) => state.userLogin);
 
   const {
     review,
@@ -51,6 +58,14 @@ const Product = () => {
     actionCreators,
     dispatch
   );
+
+  const ratingLevels = [
+    { value: "1", label: "1 - Poor" },
+    { value: "2", label: "2 - Fair" },
+    { value: "3", label: "3 - Good" },
+    { value: "4", label: "4 - Very Good" },
+    { value: "5", label: "5 - Excellent" },
+  ];
 
   const renderFeaturesList = (description: any) => {
     const features = description.split(", ");
@@ -81,6 +96,29 @@ const Product = () => {
 
   return (
     <Layout>
+      <Modal
+        title="Add Review"
+        opened={opened}
+        onClose={() => setOpened(false)}
+        radius="lg"
+      >
+        <Select
+          label="Your Rating"
+          placeholder="Your Rating"
+          value={value}
+          data={ratingLevels}
+          radius="md"
+        />
+        <Textarea
+          sx={{ marginTop: "1rem" }}
+          label="Your Comment"
+          placeholder="Your Comment"
+          radius="md"
+        />
+        <Button sx={{ marginTop: "1rem" }} radius="md" color="dark" fullWidth>
+          Add Review
+        </Button>
+      </Modal>
       {loading ? (
         <Loading />
       ) : (
@@ -206,7 +244,7 @@ const Product = () => {
               </Grid>
             )}
           </Card>
-          <Card sx={{ marginTop: "1.5rem" }} radius="lg" shadow="xl">
+          <Card sx={{ marginTop: "1.5rem" }} radius="lg" shadow="xl" withBorder>
             {Object.keys(product).length && (
               <Group position="apart">
                 <Text color="gray" size="md" weight={600}>
@@ -226,26 +264,30 @@ const Product = () => {
                 </div>
               </Group>
             )}
-            <Alert
-              icon={<IoIosUnlock size={16} />}
-              sx={{ marginTop: "1rem" }}
-              color="blue"
-              radius="lg"
-            >
-              Log In to add a review
-            </Alert>
-            <Group sx={{ marginTop: "1rem" }} position="right">
-              <Button
-                variant="outline"
-                leftIcon={<IoMdStar />}
+
+            {!userInfo ? (
+              <Alert
+                icon={<IoIosUnlock size={16} />}
+                sx={{ marginTop: "1rem" }}
+                color="blue"
                 radius="lg"
-                sx={{ marginLeft: "10px" }}
-                color="dark"
-                size="xs"
               >
-                Add Review
-              </Button>
-            </Group>
+                Log In to add a review
+              </Alert>
+            ) : (
+              <Group sx={{ marginTop: "1rem" }} position="right">
+                <Button
+                  radius="lg"
+                  sx={{ marginLeft: "10px" }}
+                  color="dark"
+                  size="xs"
+                  onClick={() => setOpened(true)}
+                >
+                  Add Review
+                </Button>
+              </Group>
+            )}
+
             <div style={{ marginTop: "1rem" }}>
               {Object.keys(product).length && product.reviews.length ? (
                 product.reviews.map((review: any) => {
