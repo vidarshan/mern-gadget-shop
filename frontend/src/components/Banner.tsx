@@ -19,7 +19,7 @@ const Banner = () => {
           radius="lg"
           leftIcon={<BiShoppingBag />}
           rightIcon={<BsArrowRight />}
-          size="lg"
+          size="md"
         >
           View Shop
         </Button>
