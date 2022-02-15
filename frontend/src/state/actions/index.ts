@@ -229,6 +229,20 @@ interface CreateProductFailAction {
   payload: any;
 }
 
+interface GetTopProductsRequestAction {
+  type: ActionType.GET_TOP_PRODUCTS_REQUEST;
+  payload?: any;
+}
+interface GetTopProductsSuccessAction {
+  type: ActionType.GET_TOP_PRODUCTS_SUCCESS;
+  payload?: any;
+}
+
+interface GetTopProductsFailAction {
+  type: ActionType.GET_TOP_PRODUCTS_FAIL;
+  payload: any;
+}
+
 export type Action =
   | CartAddItemAction
   | CartRemoveItemAction
@@ -275,4 +289,7 @@ export type Action =
   | OrderDeliverResetAction
   | CreateProductRequestAction
   | CreateProductSuccessAction
-  | CreateProductFailAction;
+  | CreateProductFailAction
+  | GetTopProductsRequestAction
+  | GetTopProductsSuccessAction
+  | GetTopProductsFailAction;
