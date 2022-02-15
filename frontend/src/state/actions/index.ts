@@ -70,6 +70,11 @@ interface AddReviewFailAction {
   payload: any;
 }
 
+interface AddReviewResetAction {
+  type: ActionType.ADD_REVIEW_RESET;
+  payload?: any;
+}
+
 interface UserLoginRequestAction {
   type: ActionType.USER_LOGIN_REQUEST;
   payload?: any;
@@ -210,6 +215,34 @@ interface OrderDeliverResetAction {
   payload?: any;
 }
 
+interface CreateProductRequestAction {
+  type: ActionType.CREATE_PRODUCT_REQUEST;
+  payload?: any;
+}
+interface CreateProductSuccessAction {
+  type: ActionType.CREATE_PRODUCT_SUCCESS;
+  payload?: any;
+}
+
+interface CreateProductFailAction {
+  type: ActionType.CREATE_PRODUCT_FAIL;
+  payload: any;
+}
+
+interface GetTopProductsRequestAction {
+  type: ActionType.GET_TOP_PRODUCTS_REQUEST;
+  payload?: any;
+}
+interface GetTopProductsSuccessAction {
+  type: ActionType.GET_TOP_PRODUCTS_SUCCESS;
+  payload?: any;
+}
+
+interface GetTopProductsFailAction {
+  type: ActionType.GET_TOP_PRODUCTS_FAIL;
+  payload: any;
+}
+
 export type Action =
   | CartAddItemAction
   | CartRemoveItemAction
@@ -225,6 +258,7 @@ export type Action =
   | AddReviewRequestAction
   | AddReviewSuccessAction
   | AddReviewFailAction
+  | AddReviewResetAction
   | UserLoginRequestAction
   | UserLoginSuccessAction
   | UserLoginFailAction
@@ -252,4 +286,10 @@ export type Action =
   | OrderDeliverRequestAction
   | OrderDeliverSuccessAction
   | OrderDeliverFailAction
-  | OrderDeliverResetAction;
+  | OrderDeliverResetAction
+  | CreateProductRequestAction
+  | CreateProductSuccessAction
+  | CreateProductFailAction
+  | GetTopProductsRequestAction
+  | GetTopProductsSuccessAction
+  | GetTopProductsFailAction;

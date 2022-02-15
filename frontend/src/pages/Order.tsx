@@ -51,7 +51,6 @@ const Order = () => {
   } = useSelector((state: State) => state.orderPay);
 
   const successPaymentHanlder = (paymentResult: any) => {
-    console.log(paymentResult);
     payOrder(params.order, paymentResult);
   };
 
@@ -94,7 +93,6 @@ const Order = () => {
         <Card withBorder shadow="sm" radius="md" padding="xl">
           <Grid>
             <Col span={12}>
-              {console.log("order : ", order)}
               <Text size="xl" weight={600}>
                 {`Order ${params.order}`}
               </Text>

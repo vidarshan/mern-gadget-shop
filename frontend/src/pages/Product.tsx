@@ -14,6 +14,10 @@ import {
   List,
   Alert,
   Divider,
+  Modal,
+  TextInput,
+  Select,
+  Textarea,
 } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
@@ -26,13 +30,38 @@ import ReviewCard from "../components/reviews/ReviewCard";
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
 import Head from "../components/Head";
+import Loading from "../components/Loading";
+import { useForm } from "@mantine/hooks";
+import { useNotifications } from "@mantine/notifications";
+import { ActionType } from "../state/action-types";
 
 const Product = () => {
   const params = useParams();
-
   const dispatch = useDispatch();
+  const notifications = useNotifications();
+
+  const form = useForm({
+    initialValues: {
+      rating: "",
+      comment: "",
+    },
+    validationRules: {
+      rating: (value) => value.trim().length >= 1,
+      comment: (value) => value.trim().length >= 1,
+    },
+    errorMessages: {
+      rating: "Rating is not valid",
+      comment: "Comment is not valid",
+    },
+  });
+
+  const { getProduct, addReview, addToCart } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   const [value, setValue] = useState<any>(1);
+  const [opened, setOpened] = useState(false);
 
   const handlers = useRef<NumberInputHandlers>(null);
 
@@ -40,16 +69,21 @@ const Product = () => {
     (state: State) => state.product
   );
 
+  const { userInfo } = useSelector((state: State) => state.userLogin);
+
   const {
     review,
     loading: reviewLoading,
     error: reviewError,
   } = useSelector((state: State) => state.review);
 
-  const { getProduct, addReview, addToCart } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const ratingLevels = [
+    { value: "1", label: "1 - Poor" },
+    { value: "2", label: "2 - Fair" },
+    { value: "3", label: "3 - Good" },
+    { value: "4", label: "4 - Very Good" },
+    { value: "5", label: "5 - Excellent" },
+  ];
 
   const renderFeaturesList = (description: any) => {
     const features = description.split(", ");
@@ -69,22 +103,90 @@ const Product = () => {
     );
   };
 
+  const handlerAddReview = (values: any) => {
+    const { rating, comment } = values;
+    addReview(params.id as string, parseInt(rating), comment);
+    setOpened(false);
+    dispatch({
+      type: ActionType.ADD_REVIEW_RESET,
+    });
+  };
+
   const handlerAddToCart = (quantity: number, id: string) => {
-    console.log("id: ", id);
     addToCart(id, quantity);
   };
 
   useEffect(() => {
+    if (reviewError !== null) {
+      notifications.showNotification({
+        title: "Error!",
+        message: reviewError,
+        color: "red",
+      });
+    }
+    dispatch({
+      type: ActionType.ADD_REVIEW_RESET,
+    });
+  }, [reviewError]);
+
+  useEffect(() => {
+    if (review && Object.keys(review).includes("message")) {
+      notifications.showNotification({
+        title: "Success!",
+        message: review.message,
+        color: "green",
+      });
+    }
+  }, [review]);
+
+  useEffect(() => {
     getProduct(params.id as string);
-  }, [dispatch]);
+  }, [dispatch, review]);
 
   return (
     <Layout>
+      <Modal
+        title="Add Review"
+        opened={opened}
+        onClose={() => setOpened(false)}
+        radius="lg"
+      >
+        <form onSubmit={form.onSubmit((values) => handlerAddReview(values))}>
+          <Select
+            label="Your Rating"
+            placeholder="Your Rating"
+            {...form.getInputProps("rating")}
+            error={form.errors.rating}
+            value={value}
+            data={ratingLevels}
+            radius="md"
+            required
+          />
+          <Textarea
+            sx={{ marginTop: "1rem" }}
+            label="Your Comment"
+            placeholder="Your Comment"
+            {...form.getInputProps("comment")}
+            error={form.errors.comment}
+            radius="md"
+            required
+          />
+          <Button
+            type="submit"
+            sx={{ marginTop: "1rem" }}
+            radius="md"
+            color="dark"
+            fullWidth
+          >
+            Add Review
+          </Button>
+        </form>
+      </Modal>
       {loading ? (
-        <Loader />
+        <Loading />
       ) : (
         <>
-          <Card radius="md" shadow="xl">
+          <Card radius="lg" shadow="xs" withBorder>
             {Object.keys(product).length && (
               <Grid>
                 <Head
@@ -98,11 +200,16 @@ const Product = () => {
                     alignItems: "center",
                     justifyContent: "center",
                   }}
+                  xs={12}
+                  sm={12}
+                  md={6}
+                  lg={4}
+                  xl={4}
                   span={4}
                 >
                   {" "}
                   <Image
-                    radius="md"
+                    radius="lg"
                     fit="contain"
                     sx={{
                       display: "flex",
@@ -115,7 +222,7 @@ const Product = () => {
                   ></Image>
                 </Col>
 
-                <Col span={8}>
+                <Col xs={12} sm={12} md={6} lg={8} xl={8} span={8}>
                   <div>
                     <Group>
                       <Text weight={600} size="xl">
@@ -152,7 +259,7 @@ const Product = () => {
                         <Group spacing={5}>
                           <ActionIcon
                             size={28}
-                            radius="md"
+                            radius="lg"
                             variant="filled"
                             color="dark"
                             onClick={() => handlers?.current?.decrement()}
@@ -170,11 +277,11 @@ const Product = () => {
                             styles={{
                               input: { width: 54, textAlign: "center" },
                             }}
-                            radius="md"
+                            radius="lg"
                           />
                           <ActionIcon
                             size={28}
-                            radius="md"
+                            radius="lg"
                             variant="filled"
                             color="dark"
                             onClick={() => handlers?.current?.increment()}
@@ -192,7 +299,7 @@ const Product = () => {
                         </Text>
                         <Button
                           leftIcon={<RiShoppingBagLine />}
-                          radius="md"
+                          radius="lg"
                           color="dark"
                           onClick={() => handlerAddToCart(value, product._id)}
                         >
@@ -205,7 +312,7 @@ const Product = () => {
               </Grid>
             )}
           </Card>
-          <Card sx={{ marginTop: "1.5rem" }} radius="md" shadow="xl">
+          <Card sx={{ marginTop: "1.5rem" }} radius="lg" shadow="xl" withBorder>
             {Object.keys(product).length && (
               <Group position="apart">
                 <Text color="gray" size="md" weight={600}>
@@ -225,26 +332,30 @@ const Product = () => {
                 </div>
               </Group>
             )}
-            <Alert
-              icon={<IoIosUnlock size={16} />}
-              sx={{ marginTop: "1rem" }}
-              color="blue"
-              radius="md"
-            >
-              Log In to add a review
-            </Alert>
-            <Group sx={{ marginTop: "1rem" }} position="right">
-              <Button
-                variant="outline"
-                leftIcon={<IoMdStar />}
-                radius="md"
-                sx={{ marginLeft: "10px" }}
-                color="dark"
-                size="xs"
+
+            {!userInfo ? (
+              <Alert
+                icon={<IoIosUnlock size={16} />}
+                sx={{ marginTop: "1rem" }}
+                color="blue"
+                radius="lg"
               >
-                Add Review
-              </Button>
-            </Group>
+                Log In to add a review
+              </Alert>
+            ) : (
+              <Group sx={{ marginTop: "1rem" }} position="right">
+                <Button
+                  radius="lg"
+                  sx={{ marginLeft: "10px" }}
+                  color="dark"
+                  size="xs"
+                  onClick={() => setOpened(true)}
+                >
+                  Add Review
+                </Button>
+              </Group>
+            )}
+
             <div style={{ marginTop: "1rem" }}>
               {Object.keys(product).length && product.reviews.length ? (
                 product.reviews.map((review: any) => {
@@ -264,7 +375,7 @@ const Product = () => {
                   icon={<IoIosCloseCircle size={16} />}
                   sx={{ marginTop: "1rem" }}
                   color="blue"
-                  radius="md"
+                  radius="lg"
                 >
                   No reviews for this product
                 </Alert>

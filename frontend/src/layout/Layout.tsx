@@ -124,7 +124,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
             <Container
               sx={{
                 marginTop: "7rem",
-                maxWidth: "1920px",
+                maxWidth: "1620px",
                 width: "100%",
               }}
             >
@@ -147,6 +147,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
       navigate(`/admin/${value}`);
     }
   }, [value]);
+
   return (
     <>
       <Head height={70} padding="md" fixed>
@@ -177,14 +178,14 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
               <TextInput
                 icon={<FiSearch />}
                 size="sm"
-                radius="md"
+                radius="lg"
                 placeholder="Search for an item..."
               />
             </MediaQuery>
 
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
               <Button
-                radius="md"
+                radius="lg"
                 sx={{ margin: "10px", backgroundColor: "#373a40" }}
                 leftIcon={<BiShoppingBag />}
                 onClick={() => navigate("/cart")}
@@ -218,7 +219,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                 onClick={() => navigate("/profile")}
                 sx={{ margin: "10px" }}
                 variant="default"
-                radius="md"
+                radius="lg"
               >
                 <BiUser />
               </ActionIcon>
@@ -231,7 +232,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                   onClick={() => handlerLogout()}
                   sx={{ margin: "10px" }}
                   variant="outline"
-                  radius="md"
+                  radius="lg"
                 >
                   <BiLogOut />
                 </ActionIcon>
@@ -244,7 +245,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                   color="dark"
                   variant="filled"
                   sx={{ margin: "10px" }}
-                  radius="md"
+                  radius="lg"
                   size="sm"
                 >
                   Sign Up

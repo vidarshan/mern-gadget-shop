@@ -10,6 +10,8 @@ import {
   Textarea,
   NumberInput,
   Text,
+  Loader,
+  Select,
 } from "@mantine/core";
 import Head from "../../components/Head";
 import Layout from "../../layout/Layout";
@@ -20,6 +22,7 @@ import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import { BiDetail, BiTrash, BiTrashAlt } from "react-icons/bi";
 import { useForm } from "@mantine/hooks";
+import axios from "axios";
 
 const ProductsList = () => {
   const dispatch = useDispatch();
@@ -27,32 +30,46 @@ const ProductsList = () => {
   const [activePage, setActivePage] = useState(1);
   const [opened, setOpened] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
+  const [image, setImage] = useState("");
+  const [uploading, setUploading] = useState(false);
 
-  const { getProducts } = bindActionCreators(actionCreators, dispatch);
+  const { getProducts, createProduct } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   const { products, error, loading } = useSelector(
     (state: State) => state.products
   );
+
+  const {
+    productCreate,
+    error: createProductError,
+    loading: createProductLoading,
+  } = useSelector((state: State) => state.createProduct);
 
   const form = useForm({
     initialValues: {
       name: selectedItem,
       brand: "",
       description: "",
-      price: "",
+      category: "",
+      price: 10,
       count: 100,
     },
     validationRules: {
       name: (value) => value.trim().length > 2,
       brand: (value) => value.trim().length > 2,
       description: (value) => value.trim().length > 2,
-      price: (value) => value.trim().length > 2,
+      category: (value) => value.trim().length > 2,
+      price: (value) => value > 0,
       count: (value) => value > 0,
     },
     errorMessages: {
       name: "Provide a valid name",
       brand: "Provide a valid brand",
       description: "Provide a valid description",
+      category: "Provide a valid category",
       price: "Provide a valid price",
       count: "Provide a valid count",
     },
@@ -63,6 +80,7 @@ const ProductsList = () => {
       name: product.name,
       brand: product.brand,
       description: product.description,
+      category: product.category,
       price: product.price,
       count: product.countInStock,
     });
@@ -107,12 +125,56 @@ const ProductsList = () => {
       </tr>
     ));
 
+  const uploadFileHandler = async (e: any) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.post("/api/upload", formData, config);
+
+      setImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
+  };
+
   const handlerPageChange = (page: number) => {
     setActivePage(page);
     getProducts(page);
   };
 
-  const handlerEditProduct = (values: any) => {};
+  const handlerEditProduct = (values: any) => {
+    const {
+      name,
+      price,
+      brand,
+      category,
+      countInStock,
+      numReviews,
+      description,
+    } = values;
+
+    createProduct(
+      name,
+      price,
+      image,
+      brand,
+      category,
+      countInStock,
+      numReviews,
+      description
+    );
+  };
 
   useEffect(() => {
     getProducts(1);
@@ -146,13 +208,35 @@ const ProductsList = () => {
               {...form.getInputProps("description")}
               error={form.errors.description}
             />
+            <Select
+              data={[
+                { value: "Laptops", label: "Laptops" },
+                { value: "Desktops", label: "Desktops" },
+                { value: "Phones", label: "Phones" },
+                { value: "Accessories", label: "Accessories" },
+              ]}
+              label="Product Category"
+              placeholder="Product Category"
+              {...form.getInputProps("category")}
+              error={form.errors.category}
+            />
             <NumberInput
               label="Product Count"
               placeholder="Product Count"
               {...form.getInputProps("count")}
               error={form.errors.count}
             />
-            <input type="file" id="myfile" name="myfile" />
+            {/* {uploading ? (
+              <Loader />
+            ) : ( */}
+            <input
+              type="file"
+              id="myfile"
+              name="myfile"
+              onChange={uploadFileHandler}
+            />
+            {/* )} */}
+
             <NumberInput
               label="Product Price"
               placeholder="Product Price"
@@ -168,7 +252,7 @@ const ProductsList = () => {
       <Card shadow="md" radius="lg">
         <Group sx={{ marginBottom: "1rem" }} direction="row" position="apart">
           <Text weight={700}>Products</Text>
-          <Button radius="lg" color="dark">
+          <Button radius="lg" color="dark" onClick={() => setOpened(true)}>
             Add new Product
           </Button>
         </Group>

@@ -1,4 +1,4 @@
-import { Button, Card, Col, Grid, Image, Text } from "@mantine/core";
+import { Button, Card, Col, Grid, Group, Image, Text } from "@mantine/core";
 import React, { PropsWithChildren } from "react";
 
 import { useNavigate } from "react-router";
@@ -33,7 +33,7 @@ const ItemCard: React.FC<PropsWithChildren<IItemCard>> = ({
   const navigate = useNavigate();
 
   return (
-    <Card padding="xl" shadow="xl" radius="md" withBorder>
+    <Card padding="xl" shadow="xs" radius="lg" withBorder>
       <Grid>
         <Col xs={12} sm={12} md={12} span={6}>
           <Card.Section sx={{ display: "flex", justifyContent: "center" }}>
@@ -58,7 +58,7 @@ const ItemCard: React.FC<PropsWithChildren<IItemCard>> = ({
             </Text>
           </Card.Section>{" "}
           <Card.Section sx={{ marginTop: "1rem" }}>
-            <Text align="left" size="xl" weight={600}>
+            <Text color="gray" align="left" size="xl" weight={700}>
               ${price}
             </Text>
           </Card.Section>
@@ -66,7 +66,7 @@ const ItemCard: React.FC<PropsWithChildren<IItemCard>> = ({
             <Button
               onClick={() => navigate(`/product/${id}`)}
               variant="filled"
-              radius="md"
+              radius="lg"
               color="dark"
               fullWidth
             >

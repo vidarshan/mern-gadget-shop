@@ -8,22 +8,22 @@ const Features = ({ title, subTitle }: { title: string; subTitle: string }) => {
     {
       id: 1,
       title: "Search what you need easily.",
-      icon: <BiSearch size="70" />,
+      icon: <BiSearch size="70" color="#84C8FF" />,
     },
     {
       id: 2,
       title: "Your items will be shipped with great care.",
-      icon: <FiBox size="70" />,
+      icon: <FiBox size="70" color="#FFCC84" />,
     },
     {
       id: 3,
       title: "Find the best deals and save more.",
-      icon: <BiDollarCircle size="70" />,
+      icon: <BiDollarCircle size="70" color="#C4FEB4" />,
     },
     {
       id: 4,
       title: "Great return policy on defected products.",
-      icon: <FiHeart size="70" />,
+      icon: <FiHeart size="70" color="#FF8484" />,
     },
   ];
 

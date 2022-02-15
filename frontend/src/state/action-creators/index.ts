@@ -108,25 +108,23 @@ export const getProduct = (id: string) => {
 };
 
 export const addReview = (id: string, rating: number, comment: string) => {
-  return async (dispatch: Dispatch<Action>, getState: any) => {
+  return async (dispatch: Dispatch<Action>) => {
     try {
       dispatch({
         type: ActionType.ADD_REVIEW_REQUEST,
       });
 
-      const {
-        userLogin: { userInfo },
-      } = getState();
+      const token = store.getState().userLogin.userInfo.token;
 
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
 
       const { data } = await axios.post(
-        `/api/v1/products/${id}/review`,
+        `/api/v1/products/${id}/reviews`,
         { rating, comment },
         config
       );
@@ -138,7 +136,9 @@ export const addReview = (id: string, rating: number, comment: string) => {
     } catch (error: any) {
       dispatch({
         type: ActionType.ADD_REVIEW_FAIL,
-        payload: error,
+        payload: error.response.data.message
+          ? error.response.data.message
+          : error.message,
       });
     }
   };
@@ -435,6 +435,79 @@ export const deliverOrder = (id: string) => {
     } catch (error: any) {
       dispatch({
         type: ActionType.ORDER_DELIVER_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const createProduct = (
+  name: string,
+  price: number,
+  image: string,
+  brand: string,
+  category: string,
+  countInStock: number,
+  numReviews: number,
+  description: string
+) => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.CREATE_PRODUCT_REQUEST,
+      });
+
+      const token = store.getState().userLogin.userInfo.token;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const formData = {
+        name,
+        price,
+        image,
+        brand,
+        category,
+        countInStock,
+        numReviews,
+        description,
+      };
+
+      const { data } = await axios.post(`/api/v1/products`, formData, config);
+
+      dispatch({
+        type: ActionType.CREATE_PRODUCT_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.CREATE_PRODUCT_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const getTopProducts = () => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.GET_TOP_PRODUCTS_REQUEST,
+      });
+
+      const { data } = await axios.get(`/api/v1/products/top`);
+
+      dispatch({
+        type: ActionType.GET_TOP_PRODUCTS_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.GET_TOP_PRODUCTS_FAIL,
         payload: error,
       });
     }
