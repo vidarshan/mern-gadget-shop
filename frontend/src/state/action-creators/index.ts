@@ -492,6 +492,28 @@ export const createProduct = (
   };
 };
 
+export const getTopProducts = () => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.GET_TOP_PRODUCTS_REQUEST,
+      });
+
+      const { data } = await axios.get(`/api/v1/products/top`);
+
+      dispatch({
+        type: ActionType.GET_TOP_PRODUCTS_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.GET_TOP_PRODUCTS_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
 export const logout = () => {
   return async (dispatch: Dispatch<Action>) => {
     localStorage.removeItem("userInfo");
