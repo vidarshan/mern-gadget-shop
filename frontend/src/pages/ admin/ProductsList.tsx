@@ -139,7 +139,6 @@ const ProductsList = () => {
       };
 
       const { data } = await axios.post("/api/upload", formData, config);
-      console.log("data: ", data);
 
       setImage(data);
       setUploading(false);
@@ -164,8 +163,7 @@ const ProductsList = () => {
       numReviews,
       description,
     } = values;
-    console.log(image);
-    console.log(values);
+
     createProduct(
       name,
       price,

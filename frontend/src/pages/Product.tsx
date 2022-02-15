@@ -32,10 +32,14 @@ import { actionCreators, State } from "../state";
 import Head from "../components/Head";
 import Loading from "../components/Loading";
 import { useForm } from "@mantine/hooks";
+import { useNotifications } from "@mantine/notifications";
+import { ActionType } from "../state/action-types";
 
 const Product = () => {
   const params = useParams();
   const dispatch = useDispatch();
+  const notifications = useNotifications();
+
   const form = useForm({
     initialValues: {
       rating: "",
@@ -108,6 +112,19 @@ const Product = () => {
   const handlerAddToCart = (quantity: number, id: string) => {
     addToCart(id, quantity);
   };
+
+  useEffect(() => {
+    if (reviewError !== null) {
+      notifications.showNotification({
+        title: "Error!",
+        message: reviewError,
+        color: "red",
+      });
+    }
+    dispatch({
+      type: ActionType.ADD_REVIEW_RESET,
+    });
+  }, [reviewError]);
 
   useEffect(() => {
     getProduct(params.id as string);

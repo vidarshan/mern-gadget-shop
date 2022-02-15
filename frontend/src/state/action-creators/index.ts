@@ -128,7 +128,6 @@ export const addReview = (id: string, rating: number, comment: string) => {
         { rating, comment },
         config
       );
-      console.log(data);
 
       dispatch({
         type: ActionType.ADD_REVIEW_SUCCESS,
@@ -137,7 +136,9 @@ export const addReview = (id: string, rating: number, comment: string) => {
     } catch (error: any) {
       dispatch({
         type: ActionType.ADD_REVIEW_FAIL,
-        payload: error,
+        payload: error.response.data.message
+          ? error.response.data.message
+          : error.message,
       });
     }
   };
