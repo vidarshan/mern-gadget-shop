@@ -108,28 +108,27 @@ export const getProduct = (id: string) => {
 };
 
 export const addReview = (id: string, rating: number, comment: string) => {
-  return async (dispatch: Dispatch<Action>, getState: any) => {
+  return async (dispatch: Dispatch<Action>) => {
     try {
       dispatch({
         type: ActionType.ADD_REVIEW_REQUEST,
       });
 
-      const {
-        userLogin: { userInfo },
-      } = getState();
+      const token = store.getState().userLogin.userInfo.token;
 
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
 
       const { data } = await axios.post(
-        `/api/v1/products/${id}/review`,
+        `/api/v1/products/${id}/reviews`,
         { rating, comment },
         config
       );
+      console.log(data);
 
       dispatch({
         type: ActionType.ADD_REVIEW_SUCCESS,

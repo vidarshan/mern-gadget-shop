@@ -31,11 +31,30 @@ import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
 import Head from "../components/Head";
 import Loading from "../components/Loading";
+import { useForm } from "@mantine/hooks";
 
 const Product = () => {
   const params = useParams();
-
   const dispatch = useDispatch();
+  const form = useForm({
+    initialValues: {
+      rating: "",
+      comment: "",
+    },
+    validationRules: {
+      rating: (value) => value.trim().length >= 1,
+      comment: (value) => value.trim().length >= 1,
+    },
+    errorMessages: {
+      rating: "Rating is not valid",
+      comment: "Comment is not valid",
+    },
+  });
+
+  const { getProduct, addReview, addToCart } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   const [value, setValue] = useState<any>(1);
   const [opened, setOpened] = useState(false);
@@ -53,11 +72,6 @@ const Product = () => {
     loading: reviewLoading,
     error: reviewError,
   } = useSelector((state: State) => state.review);
-
-  const { getProduct, addReview, addToCart } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
 
   const ratingLevels = [
     { value: "1", label: "1 - Poor" },
@@ -85,8 +99,13 @@ const Product = () => {
     );
   };
 
+  const handlerAddReview = (values: any) => {
+    const { rating, comment } = values;
+    addReview(params.id as string, parseInt(rating), comment);
+    setOpened(false);
+  };
+
   const handlerAddToCart = (quantity: number, id: string) => {
-    console.log("id: ", id);
     addToCart(id, quantity);
   };
 
@@ -102,22 +121,36 @@ const Product = () => {
         onClose={() => setOpened(false)}
         radius="lg"
       >
-        <Select
-          label="Your Rating"
-          placeholder="Your Rating"
-          value={value}
-          data={ratingLevels}
-          radius="md"
-        />
-        <Textarea
-          sx={{ marginTop: "1rem" }}
-          label="Your Comment"
-          placeholder="Your Comment"
-          radius="md"
-        />
-        <Button sx={{ marginTop: "1rem" }} radius="md" color="dark" fullWidth>
-          Add Review
-        </Button>
+        <form onSubmit={form.onSubmit((values) => handlerAddReview(values))}>
+          <Select
+            label="Your Rating"
+            placeholder="Your Rating"
+            {...form.getInputProps("rating")}
+            error={form.errors.rating}
+            value={value}
+            data={ratingLevels}
+            radius="md"
+            required
+          />
+          <Textarea
+            sx={{ marginTop: "1rem" }}
+            label="Your Comment"
+            placeholder="Your Comment"
+            {...form.getInputProps("comment")}
+            error={form.errors.comment}
+            radius="md"
+            required
+          />
+          <Button
+            type="submit"
+            sx={{ marginTop: "1rem" }}
+            radius="md"
+            color="dark"
+            fullWidth
+          >
+            Add Review
+          </Button>
+        </form>
       </Modal>
       {loading ? (
         <Loading />
