@@ -204,11 +204,18 @@ const Profile = () => {
                     required
                   />
                 </Col>
-                <Col span={12}>
-                  <Button type="submit" radius="md" color="dark" fullWidth>
+                <Group sx={{ marginTop: "1rem" }} position="right">
+                  <Button type="submit" radius="md" color="dark">
                     Update Profile
                   </Button>
+                  <Button type="submit" radius="md" color="red">
+                    Log Out
+                  </Button>
+                </Group>
+                {/* <Col span={6}>
                 </Col>
+                <Col span={6}>
+                </Col> */}
               </Grid>
             </form>
           </Card>
