@@ -35,17 +35,13 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
 
   const { userInfo } = useSelector((state: State) => state.userLogin);
   const { cartItems } = useSelector((state: State) => state.cart);
-  const { products } = useSelector((state: State) => state.products);
   const { quickSearch } = useSelector((state: State) => state.quickSearch);
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { logout, quickSearchProducts } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { quickSearchProducts } = bindActionCreators(actionCreators, dispatch);
 
   const handlerNavigate = (route: string) => {
     navigate(route);
@@ -154,10 +150,6 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
     navigate(`/product/${id}`);
   };
 
-  const handlerLogout = () => {
-    logout();
-  };
-
   useEffect(() => {
     if (value !== "") {
       navigate(`/admin/${value}`);
@@ -165,7 +157,6 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   }, [value]);
 
   useEffect(() => {
-    console.log(userInfo);
     if (!userInfo) {
       navigate("/");
     }
@@ -240,7 +231,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                 <BiUser />
               </ActionIcon>
             </MediaQuery>
-            {!userInfo ? (
+            {!userInfo && (
               <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
                 <Button
                   onClick={() => navigate("/login")}
@@ -252,19 +243,6 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                 >
                   Log In
                 </Button>
-              </MediaQuery>
-            ) : (
-              <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-                <ActionIcon
-                  color="red"
-                  size="lg"
-                  onClick={() => handlerLogout()}
-                  sx={{ margin: "10px" }}
-                  variant="outline"
-                  radius="lg"
-                >
-                  <BiLogOut />
-                </ActionIcon>
               </MediaQuery>
             )}
           </div>

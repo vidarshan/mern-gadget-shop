@@ -238,15 +238,10 @@ export const login = (email: string, password: string) => {
         payload: data,
       });
 
-      dispatch({
-        type: ActionType.USER_LOGIN_FAIL,
-        payload: data,
-      });
-
       localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error: any) {
       dispatch({
-        type: ActionType.USER_REGISTER_FAIL,
+        type: ActionType.USER_LOGIN_FAIL,
         payload: error,
       });
     }

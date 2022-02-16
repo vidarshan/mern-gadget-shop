@@ -36,9 +36,7 @@ const Profile = () => {
     dispatch
   );
 
-  const { userInfo, loading, error } = useSelector(
-    (state: State) => state.userLogin
-  );
+  const { userInfo, error } = useSelector((state: State) => state.userLogin);
 
   const {
     profileUpdate,
@@ -145,35 +143,35 @@ const Profile = () => {
     navigate("/login");
   };
 
-  useEffect(() => {
-    if (Object.keys(profileUpdate).length !== 0) {
-      notifications.showNotification({
-        title: "Success!",
-        message: "Profile Updated",
-        color: "green",
-      });
-    }
-  }, [profileUpdate]);
+  // useEffect(() => {
+  //   if (Object.keys(profileUpdate).length !== 0) {
+  //     notifications.showNotification({
+  //       title: "Success!",
+  //       message: "Profile Updated",
+  //       color: "green",
+  //     });
+  //   }
+  // }, [profileUpdate]);
 
   useEffect(() => {
-    console.log(userInfo);
     if (!userInfo) {
       navigate("/login");
     } else if (userInfo) {
       getMyOrders();
-      if (error || myOrdersError) {
-        notifications.showNotification({
-          title: "Error!",
-          message: error,
-          color: "red",
-        });
-      }
+      console.log("e", error);
+      console.log("em", myOrdersError);
+      // if (error || myOrdersError) {
+      //   notifications.showNotification({
+      //     title: "Error!",
+      //     message: error,
+      //     color: "red",
+      //   });
+      // }
     }
   }, [dispatch, userInfo]);
 
   return (
     <Layout>
-      {console.log(userInfo)}
       <Head title="Profile | Techstop" description="Shop for gadgets" />
       {userInfo && (
         <>
@@ -224,82 +222,17 @@ const Profile = () => {
             radius="lg"
             padding="xl"
           >
-            <Text weight={700}>User Profile</Text>
-
-            {loading ? (
-              <Loading />
-            ) : (
-              <form
-                onSubmit={form.onSubmit((values) => handlerEditProfile(values))}
-              >
-                <Grid sx={{ marginTop: "10px" }}>
-                  <Col span={6}>
-                    <TextInput
-                      radius="md"
-                      label="Your username"
-                      placeholder="Username"
-                      {...form.getInputProps("username")}
-                      error={form.errors.username}
-                      required
-                    />
-                  </Col>
-                  <Col span={6}>
-                    {" "}
-                    <TextInput
-                      radius="md"
-                      label="Your email"
-                      placeholder="email"
-                      {...form.getInputProps("email")}
-                      error={form.errors.email}
-                      required
-                    />
-                  </Col>
-
-                  <Col span={6}>
-                    {" "}
-                    <PasswordInput
-                      radius="md"
-                      label="Your password"
-                      placeholder="Password"
-                      {...form.getInputProps("password")}
-                      error={form.errors.password}
-                      required
-                    />
-                  </Col>
-                  <Col span={6}>
-                    {" "}
-                    <PasswordInput
-                      radius="md"
-                      label="Confirm password"
-                      placeholder="Confirmation"
-                      {...form.getInputProps("confirmpassword")}
-                      error={form.errors.confirmpassword}
-                      required
-                    />
-                  </Col>
-                  <Group sx={{ marginTop: "1rem" }} position="right">
-                    <Button
-                      loading={profileUpdateLoading}
-                      type="submit"
-                      radius="md"
-                      color="dark"
-                    >
-                      Update Profile
-                    </Button>
-                    <Button
-                      radius="md"
-                      color="red"
-                      onClick={() => handlerLogout()}
-                    >
-                      Log Out
-                    </Button>
-                  </Group>
-                </Grid>
-              </form>
-            )}
+            <Col span={2}>
+              <Text weight={700}>User Profile</Text>
+            </Col>
+            <Col span={10}>
+              <Button radius="md" color="red" onClick={() => handlerLogout()}>
+                Log Out
+              </Button>
+            </Col>
           </Card>
 
-          {/* <Card
+          <Card
             sx={{ marginTop: "2rem" }}
             withBorder
             shadow="xs"
@@ -330,7 +263,7 @@ const Profile = () => {
                 </Col>
               </Grid>
             )}
-          </Card> */}
+          </Card>
         </>
       )}
     </Layout>
