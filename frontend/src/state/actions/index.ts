@@ -257,6 +257,20 @@ interface QuickSearchFailAction {
   payload: any;
 }
 
+interface GetMyOrdersRequestAction {
+  type: ActionType.GET_MY_ORDERS_REQUEST;
+  payload?: any;
+}
+interface GetMyOrdersSuccessAction {
+  type: ActionType.GET_MY_ORDERS_SUCCESS;
+  payload?: any;
+}
+
+interface GetMyOrdersFailAction {
+  type: ActionType.GET_MY_ORDERS_FAIL;
+  payload: any;
+}
+
 export type Action =
   | CartAddItemAction
   | CartRemoveItemAction
@@ -309,4 +323,7 @@ export type Action =
   | GetTopProductsFailAction
   | QuickSearchRequestAction
   | QuickSearchSuccessAction
-  | QuickSearchFailAction;
+  | QuickSearchFailAction
+  | GetMyOrdersRequestAction
+  | GetMyOrdersSuccessAction
+  | GetMyOrdersFailAction;
