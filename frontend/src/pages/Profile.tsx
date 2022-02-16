@@ -8,20 +8,40 @@ import {
   Table,
   Text,
   TextInput,
+  Badge,
+  List,
 } from "@mantine/core";
 import Layout from "../layout/Layout";
 import { RiCloseLine, RiCheckLine } from "react-icons/ri";
-import { RootStateOrAny, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useForm } from "@mantine/hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useNotifications } from "@mantine/notifications";
+import { useParams } from "react-router";
+import Head from "../components/Head";
+import moment from "moment";
+import { bindActionCreators } from "redux";
+import { actionCreators, State } from "../state";
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const notifications = useNotifications();
+
+  const { getProducts, getMyOrders } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   const { userInfo, loading, error } = useSelector(
-    (state: RootStateOrAny) => state.userLogin
+    (state: State) => state.userLogin
   );
+  const {
+    myOrders,
+    loading: myOrdersLoading,
+    error: myOrdersError,
+  } = useSelector((state: State) => state.myOrders);
 
   const form = useForm({
     initialValues: {
@@ -50,6 +70,7 @@ const Profile = () => {
       navigate("/login");
     }
     // eslint-disable-next-line
+    getMyOrders();
   }, [userInfo]);
 
   const elements = [
@@ -75,37 +96,81 @@ const Profile = () => {
       delivered: false,
     },
   ];
-  const rows = elements.map((element) => (
-    <tr key={element.id}>
-      <td>{element.id}</td>
-      <td>{element.date}</td>
-      <td>{element.total}</td>
-      <td>
-        {element.paid ? (
-          <RiCheckLine size="20" color="green" />
-        ) : (
-          <RiCloseLine size="20" color="red" />
-        )}
-      </td>
-      <td>
-        {element.delivered ? (
-          <RiCheckLine size="20" color="green" />
-        ) : (
-          <RiCloseLine size="20" color="red" />
-        )}
-      </td>
-      <td>
-        <Button radius="md" variant="light" color="dark" fullWidth>
-          Details
-        </Button>
-      </td>
-    </tr>
-  ));
+  const rows =
+    myOrders &&
+    Object.keys(myOrders).length &&
+    myOrders.map((order: any) => (
+      <tr key={order._id}>
+        <td>
+          <Text size="sm" weight={600}>
+            {order._id}
+          </Text>
+        </td>
+        <td>
+          <List size="sm">
+            {order.orderItems.map((item: any) => {
+              return (
+                <List.Item>
+                  {item.name} x {item.qty}
+                </List.Item>
+              );
+            })}
+          </List>
+        </td>
+        <td>
+          <Text size="sm" weight={600}>
+            {" "}
+            {order.shippingAddress.address}, {order.shippingAddress.city},{" "}
+            {order.shippingAddress.country}, {order.shippingAddress.postalCode}
+          </Text>
+        </td>
+        <td>
+          <Text size="sm" weight={600}>
+            ${order.totalPrice}
+          </Text>
+        </td>
+        <td>
+          {order.isPaid ? (
+            <Badge radius="md" variant="filled" color="green">
+              {`Paid | ${moment(order.paidAt).format("DD-MMM-YYYY HH:mm")}`}
+            </Badge>
+          ) : (
+            <Badge radius="md" variant="filled" color="red">
+              Not Paid
+            </Badge>
+          )}
+        </td>
+        <td>
+          {order.isDelivered ? (
+            <Badge radius="md" variant="filled" color="green">
+              {`Delivered | ${moment(order.deliveredAt).format(
+                "DD-MMM-YYYY hh:mm"
+              )}`}
+            </Badge>
+          ) : (
+            <Badge radius="md" variant="filled" color="red">
+              Not Delivered
+            </Badge>
+          )}
+        </td>
+      </tr>
+    ));
 
   const handlerEditProfile = (values: any) => {};
 
+  useEffect(() => {
+    if (error || myOrdersError) {
+      notifications.showNotification({
+        title: "Error!",
+        message: error,
+        color: "red",
+      });
+    }
+  }, [dispatch]);
+
   return (
     <Layout>
+      <Head title="Profile | Techstop" description="Shop for gadgets" />
       {userInfo && (
         <>
           <Card withBorder shadow="xs" radius="lg" padding="xl">
@@ -219,6 +284,7 @@ const Profile = () => {
               </Grid>
             </form>
           </Card>
+
           <Card
             sx={{ marginTop: "2rem" }}
             withBorder
@@ -229,20 +295,21 @@ const Profile = () => {
             <Text weight={700}>My Orders</Text>
             <Grid sx={{ marginTop: "10px" }}>
               <Col span={12}>
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Date</th>
-                      <th>Total</th>
-                      <th>Paid</th>
-                      <th>Delivered</th>
-                      <th></th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>{rows}</tbody>
-                </Table>
+                {myOrders && (
+                  <Table>
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Address</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Paid</th>
+                        <th>Delivered</th>
+                      </tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                  </Table>
+                )}
               </Col>
             </Grid>
           </Card>
