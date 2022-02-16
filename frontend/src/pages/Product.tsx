@@ -69,6 +69,8 @@ const Product = () => {
     (state: State) => state.product
   );
 
+  const { quickSearch } = useSelector((state: State) => state.quickSearch);
+
   const { userInfo } = useSelector((state: State) => state.userLogin);
 
   const {
@@ -141,7 +143,7 @@ const Product = () => {
 
   useEffect(() => {
     getProduct(params.id as string);
-  }, [dispatch, review]);
+  }, [dispatch, review, quickSearch]);
 
   return (
     <Layout>

@@ -13,6 +13,7 @@ import {
   getProductReducer,
   getProductsReducer,
   getTopProductsReducer,
+  quickSearchReducer,
 } from "./productReducer";
 import { loginReducer, registerReducer, getUsersReducer } from "./userReducer";
 
@@ -31,6 +32,7 @@ const reducers = combineReducers({
   orderDeliver: orderDeliverReducer,
   createProduct: createProductReducer,
   topProducts: getTopProductsReducer,
+  quickSearch: quickSearchReducer,
 });
 
 export default reducers;
