@@ -271,6 +271,25 @@ interface GetMyOrdersFailAction {
   payload: any;
 }
 
+interface UpdateProfileRequestAction {
+  type: ActionType.UPDATE_PROFILE_REQUEST;
+  payload?: any;
+}
+interface UpdateProfileSuccessAction {
+  type: ActionType.UPDATE_PROFILE_SUCCESS;
+  payload?: any;
+}
+
+interface UpdateProfileFailAction {
+  type: ActionType.UPDATE_PROFILE_FAIL;
+  payload: any;
+}
+
+interface UpdateProfileResetAction {
+  type: ActionType.UPDATE_PROFILE_RESET;
+  payload: any;
+}
+
 export type Action =
   | CartAddItemAction
   | CartRemoveItemAction
@@ -326,4 +345,8 @@ export type Action =
   | QuickSearchFailAction
   | GetMyOrdersRequestAction
   | GetMyOrdersSuccessAction
-  | GetMyOrdersFailAction;
+  | GetMyOrdersFailAction
+  | UpdateProfileRequestAction
+  | UpdateProfileSuccessAction
+  | UpdateProfileFailAction
+  | UpdateProfileResetAction;

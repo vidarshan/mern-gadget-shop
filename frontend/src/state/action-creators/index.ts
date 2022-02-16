@@ -569,6 +569,46 @@ export const getMyOrders = () => {
   };
 };
 
+export const updateProfile = (name: string, email: any) => {
+  return async (dispatch: Dispatch<Action>, getState: any) => {
+    try {
+      dispatch({
+        type: ActionType.UPDATE_PROFILE_REQUEST,
+      });
+
+      const token = store.getState().userLogin.userInfo.token;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const formData = {
+        name,
+        email,
+      };
+
+      const { data } = await axios.put(
+        `/api/v1/users/profile`,
+        formData,
+        config
+      );
+
+      dispatch({
+        type: ActionType.UPDATE_PROFILE_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.UPDATE_PROFILE_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
 export const logout = () => {
   return async (dispatch: Dispatch<Action>) => {
     localStorage.removeItem("userInfo");

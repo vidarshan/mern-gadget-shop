@@ -83,4 +83,36 @@ const getUsersReducer = (
   }
 };
 
-export { registerReducer, loginReducer, getUsersReducer };
+const updateProfileReducer = (
+  state = {
+    profileUpdate: {},
+    error: null,
+    loading: false,
+  },
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.UPDATE_PROFILE_REQUEST:
+      return { ...state, loading: true, error: null };
+    case ActionType.UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        profileUpdate: action.payload,
+        loading: false,
+        error: null,
+      };
+    case ActionType.UPDATE_PROFILE_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    case ActionType.UPDATE_PROFILE_RESET:
+      return {
+        ...state,
+        loading: false,
+        updateProfile: {},
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export { registerReducer, loginReducer, getUsersReducer, updateProfileReducer };

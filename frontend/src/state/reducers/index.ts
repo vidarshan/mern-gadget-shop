@@ -16,7 +16,12 @@ import {
   getTopProductsReducer,
   quickSearchReducer,
 } from "./productReducer";
-import { loginReducer, registerReducer, getUsersReducer } from "./userReducer";
+import {
+  loginReducer,
+  registerReducer,
+  getUsersReducer,
+  updateProfileReducer,
+} from "./userReducer";
 
 const reducers = combineReducers({
   cart: cartReducer,
@@ -35,6 +40,7 @@ const reducers = combineReducers({
   topProducts: getTopProductsReducer,
   quickSearch: quickSearchReducer,
   myOrders: getMyOrdersReducer,
+  profileUpdate: updateProfileReducer,
 });
 
 export default reducers;
