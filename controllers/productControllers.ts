@@ -44,7 +44,12 @@ const getProductsForSearch = asyncHandler(async (req: any, res: any) => {
   const formattedProducts = [];
 
   products.map((product: any) => {
-    formattedProducts.push({ value: product._id, label: product.name });
+    formattedProducts.push({
+      value: product._id,
+      label: product.name,
+      group: product.category,
+      image: product.image,
+    });
   });
 
   res.json(formattedProducts);

@@ -235,18 +235,6 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
               </Button>
             </MediaQuery>
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-              <Select
-                placeholder="Admin"
-                value={value}
-                onChange={(e) => setValue(e as any)}
-                data={[
-                  { value: "orders", label: "Orders" },
-                  { value: "products", label: "Products" },
-                  { value: "users", label: "Users" },
-                ]}
-              />
-            </MediaQuery>
-            <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
               <ActionIcon
                 size="lg"
                 onClick={() => navigate("/profile")}
