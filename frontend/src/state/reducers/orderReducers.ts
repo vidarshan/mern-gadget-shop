@@ -137,10 +137,36 @@ const orderDeliverReducer = (
   }
 };
 
+const getMyOrdersReducer = (
+  state = {
+    myOrders: false,
+    error: null,
+    loading: false,
+  },
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.GET_MY_ORDERS_REQUEST:
+      return { ...state, loading: true, error: null };
+    case ActionType.GET_MY_ORDERS_SUCCESS:
+      return {
+        ...state,
+        myOrders: action.payload,
+        loading: false,
+        error: null,
+      };
+    case ActionType.GET_MY_ORDERS_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
 export {
   createOrderReducer,
   getOrderReducer,
   orderPayReducer,
   getOrdersReducer,
   orderDeliverReducer,
+  getMyOrdersReducer,
 };

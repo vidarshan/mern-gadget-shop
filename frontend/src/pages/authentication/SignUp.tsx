@@ -16,6 +16,7 @@ import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { actionCreators, State } from "../../state";
 import { useEffect } from "react";
 import { bindActionCreators } from "redux";
+import Head from "../../components/Head";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -72,6 +73,7 @@ const SignUp = () => {
 
   return (
     <Container className="flex-container height-full-vh">
+      <Head title="Sign Up | Techstop" description="Shop for gadgets" />
       <Card
         withBorder
         padding="xl"

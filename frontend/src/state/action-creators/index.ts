@@ -538,6 +538,86 @@ export const getTopProducts = () => {
   };
 };
 
+export const getMyOrders = () => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.GET_MY_ORDERS_REQUEST,
+      });
+
+      const token = store.getState().userLogin.userInfo.token;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await axios.get(`/api/v1/orders/myorders`, config);
+
+      dispatch({
+        type: ActionType.GET_MY_ORDERS_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.GET_MY_ORDERS_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const updateProfile = (
+  name: string,
+  email: string,
+  password: string
+) => {
+  return async (dispatch: Dispatch<Action>, getState: any) => {
+    try {
+      dispatch({
+        type: ActionType.UPDATE_PROFILE_REQUEST,
+      });
+
+      const token = store.getState().userLogin.userInfo.token;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const formData = {
+        name,
+        email,
+        password,
+      };
+
+      const { data } = await axios.put(
+        `/api/v1/users/profile`,
+        formData,
+        config
+      );
+
+      dispatch({
+        type: ActionType.UPDATE_PROFILE_SUCCESS,
+        payload: data,
+      });
+
+      dispatch({
+        type: ActionType.UPDATE_PROFILE_RESET,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.UPDATE_PROFILE_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
 export const logout = () => {
   return async (dispatch: Dispatch<Action>) => {
     localStorage.removeItem("userInfo");

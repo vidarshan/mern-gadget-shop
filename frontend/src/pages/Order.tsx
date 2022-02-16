@@ -7,6 +7,7 @@ import {
   Image,
   Button,
   Loader,
+  Group,
 } from "@mantine/core";
 import Layout from "../layout/Layout";
 import { BiUser } from "react-icons/bi";
@@ -84,7 +85,7 @@ const Order = () => {
 
   useEffect(() => {
     getOrder(params.order);
-  }, [dispatch]);
+  }, [dispatch, success]);
 
   return (
     <Layout>
@@ -320,22 +321,22 @@ const Order = () => {
                 </Grid>
               </Card>
             </Col>
-            <Grid>
-              {!order.isPaid && (
-                <Col span={12}>
-                  {/* {payLoading && <Loader />} */}
-                  {!sdkReady ? (
-                    <Loader />
-                  ) : (
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      onSuccess={successPaymentHanlder}
-                    />
-                  )}
-                </Col>
-              )}
-            </Grid>
           </Grid>
+
+          <Group sx={{ marginTop: "1rem" }} position="right">
+            {!order.isPaid && (
+              <Col span={6}>
+                {!sdkReady ? (
+                  <Loader />
+                ) : (
+                  <PayPalButton
+                    amount={order.totalPrice}
+                    onSuccess={successPaymentHanlder}
+                  />
+                )}
+              </Col>
+            )}
+          </Group>
         </Card>
       ) : (
         <Loader />

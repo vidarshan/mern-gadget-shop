@@ -103,17 +103,6 @@ const Shipping = () => {
                 Continue
               </Button>
             </Col>
-            <Col span={12}>
-              <Button
-                type="submit"
-                // onClick={() => navigate("/payment")}
-                radius="md"
-                color="dark"
-                fullWidth
-              >
-                Continue
-              </Button>
-            </Col>
           </Grid>
         </form>
       </Card>

@@ -42,7 +42,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { logout, getProducts, quickSearchProducts } = bindActionCreators(
+  const { logout, quickSearchProducts } = bindActionCreators(
     actionCreators,
     dispatch
   );
@@ -51,10 +51,6 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
     navigate(route);
     setOpened(false);
   };
-
-  useEffect(() => {
-    getProducts(1);
-  }, [dispatch]);
 
   const openMobileNavbar = () => {
     if (opened) {
@@ -159,7 +155,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   };
 
   const handlerLogout = () => {
-    dispatch(logout());
+    logout();
   };
 
   useEffect(() => {
@@ -167,6 +163,12 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
       navigate(`/admin/${value}`);
     }
   }, [value]);
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("/");
+    }
+  }, [userInfo]);
 
   return (
     <>
@@ -254,14 +256,14 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
             {!userInfo && (
               <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
                 <Button
-                  onClick={() => navigate("/signup")}
+                  onClick={() => navigate("/login")}
                   color="dark"
                   variant="filled"
                   sx={{ margin: "10px" }}
                   radius="lg"
                   size="sm"
                 >
-                  Sign Up
+                  Log In
                 </Button>
               </MediaQuery>
             )}
