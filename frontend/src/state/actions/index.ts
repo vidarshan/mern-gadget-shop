@@ -289,6 +289,20 @@ interface UpdateProfileResetAction {
   type: ActionType.UPDATE_PROFILE_RESET;
   payload?: any;
 }
+interface UpdateUserRequestAction {
+  type: ActionType.UPDATE_USER_REQUEST;
+  payload?: any;
+}
+
+interface UpdateUserSuccessAction {
+  type: ActionType.UPDATE_USER_SUCCESS;
+  payload?: any;
+}
+
+interface UpdateUserFailAction {
+  type: ActionType.UPDATE_USER_FAIL;
+  payload: any;
+}
 
 export type Action =
   | CartAddItemAction
@@ -349,4 +363,7 @@ export type Action =
   | UpdateProfileRequestAction
   | UpdateProfileSuccessAction
   | UpdateProfileFailAction
-  | UpdateProfileResetAction;
+  | UpdateProfileResetAction
+  | UpdateUserRequestAction
+  | UpdateUserSuccessAction
+  | UpdateUserFailAction;
