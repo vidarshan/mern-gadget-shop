@@ -24,13 +24,14 @@ import moment from "moment";
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
 import { ActionType } from "../state/action-types";
+import Loading from "../components/Loading";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const notifications = useNotifications();
 
-  const { getProducts, getMyOrders, updateProfile } = bindActionCreators(
+  const { logout, getMyOrders, updateProfile } = bindActionCreators(
     actionCreators,
     dispatch
   );
@@ -73,37 +74,6 @@ const Profile = () => {
     },
   });
 
-  useEffect(() => {
-    if (!userInfo) {
-      navigate("/login");
-    }
-    // eslint-disable-next-line
-    getMyOrders();
-  }, [userInfo]);
-
-  const elements = [
-    {
-      id: "345345dsf34545",
-      date: "20-Jan-2022",
-      total: "$291.99",
-      paid: true,
-      delivered: false,
-    },
-    {
-      id: "345345dsf3432ff",
-      date: "02-Jan-2022",
-      total: "$291.99",
-      paid: true,
-      delivered: false,
-    },
-    {
-      id: "345345d66534545",
-      date: "23-Jan-2022",
-      total: "$291.99",
-      paid: true,
-      delivered: false,
-    },
-  ];
   const rows =
     myOrders &&
     Object.keys(myOrders).length &&
@@ -170,18 +140,12 @@ const Profile = () => {
     form.reset();
   };
 
-  useEffect(() => {
-    if (error || myOrdersError) {
-      notifications.showNotification({
-        title: "Error!",
-        message: error,
-        color: "red",
-      });
-    }
-  }, [dispatch]);
+  const handlerLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   useEffect(() => {
-    console.log(Object.keys(profileUpdate).length);
     if (Object.keys(profileUpdate).length !== 0) {
       notifications.showNotification({
         title: "Success!",
@@ -189,14 +153,27 @@ const Profile = () => {
         color: "green",
       });
     }
+  }, [profileUpdate]);
 
-    dispatch({
-      type: ActionType.UPDATE_PROFILE_RESET,
-    });
-  }, [dispatch, profileUpdate]);
+  useEffect(() => {
+    console.log(userInfo);
+    if (!userInfo) {
+      navigate("/login");
+    } else if (userInfo) {
+      getMyOrders();
+      if (error || myOrdersError) {
+        notifications.showNotification({
+          title: "Error!",
+          message: error,
+          color: "red",
+        });
+      }
+    }
+  }, [dispatch, userInfo]);
 
   return (
     <Layout>
+      {console.log(userInfo)}
       <Head title="Profile | Techstop" description="Shop for gadgets" />
       {userInfo && (
         <>
@@ -248,72 +225,81 @@ const Profile = () => {
             padding="xl"
           >
             <Text weight={700}>User Profile</Text>
-            <form
-              onSubmit={form.onSubmit((values) => handlerEditProfile(values))}
-            >
-              <Grid sx={{ marginTop: "10px" }}>
-                <Col span={6}>
-                  <TextInput
-                    radius="md"
-                    label="Your username"
-                    placeholder="Username"
-                    {...form.getInputProps("username")}
-                    error={form.errors.username}
-                    required
-                  />
-                </Col>
-                <Col span={6}>
-                  {" "}
-                  <TextInput
-                    radius="md"
-                    label="Your email"
-                    placeholder="email"
-                    {...form.getInputProps("email")}
-                    error={form.errors.email}
-                    required
-                  />
-                </Col>
 
-                <Col span={6}>
-                  {" "}
-                  <PasswordInput
-                    radius="md"
-                    label="Your password"
-                    placeholder="Password"
-                    {...form.getInputProps("password")}
-                    error={form.errors.password}
-                    required
-                  />
-                </Col>
-                <Col span={6}>
-                  {" "}
-                  <PasswordInput
-                    radius="md"
-                    label="Confirm password"
-                    placeholder="Confirmation"
-                    {...form.getInputProps("confirmpassword")}
-                    error={form.errors.confirmpassword}
-                    required
-                  />
-                </Col>
-                <Group sx={{ marginTop: "1rem" }} position="right">
-                  <Button
-                    loading={profileUpdateLoading}
-                    type="submit"
-                    radius="md"
-                    color="dark"
-                  >
-                    Update Profile
-                  </Button>
-                  <Button type="submit" radius="md" color="red">
-                    Log Out
-                  </Button>
-                </Group>
-              </Grid>
-            </form>
+            {loading ? (
+              <Loading />
+            ) : (
+              <form
+                onSubmit={form.onSubmit((values) => handlerEditProfile(values))}
+              >
+                <Grid sx={{ marginTop: "10px" }}>
+                  <Col span={6}>
+                    <TextInput
+                      radius="md"
+                      label="Your username"
+                      placeholder="Username"
+                      {...form.getInputProps("username")}
+                      error={form.errors.username}
+                      required
+                    />
+                  </Col>
+                  <Col span={6}>
+                    {" "}
+                    <TextInput
+                      radius="md"
+                      label="Your email"
+                      placeholder="email"
+                      {...form.getInputProps("email")}
+                      error={form.errors.email}
+                      required
+                    />
+                  </Col>
+
+                  <Col span={6}>
+                    {" "}
+                    <PasswordInput
+                      radius="md"
+                      label="Your password"
+                      placeholder="Password"
+                      {...form.getInputProps("password")}
+                      error={form.errors.password}
+                      required
+                    />
+                  </Col>
+                  <Col span={6}>
+                    {" "}
+                    <PasswordInput
+                      radius="md"
+                      label="Confirm password"
+                      placeholder="Confirmation"
+                      {...form.getInputProps("confirmpassword")}
+                      error={form.errors.confirmpassword}
+                      required
+                    />
+                  </Col>
+                  <Group sx={{ marginTop: "1rem" }} position="right">
+                    <Button
+                      loading={profileUpdateLoading}
+                      type="submit"
+                      radius="md"
+                      color="dark"
+                    >
+                      Update Profile
+                    </Button>
+                    <Button
+                      radius="md"
+                      color="red"
+                      onClick={() => handlerLogout()}
+                    >
+                      Log Out
+                    </Button>
+                  </Group>
+                </Grid>
+              </form>
+            )}
           </Card>
 
-          <Card
+          {/* <Card
             sx={{ marginTop: "2rem" }}
             withBorder
             shadow="xs"
@@ -321,26 +307,30 @@ const Profile = () => {
             padding="xl"
           >
             <Text weight={700}>My Orders</Text>
-            <Grid sx={{ marginTop: "10px" }}>
-              <Col span={12}>
-                {myOrders && (
-                  <Table>
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Address</th>
-                        <th>Date</th>
-                        <th>Total</th>
-                        <th>Paid</th>
-                        <th>Delivered</th>
-                      </tr>
-                    </thead>
-                    <tbody>{rows}</tbody>
-                  </Table>
-                )}
-              </Col>
-            </Grid>
-          </Card>
+            {myOrdersLoading ? (
+              <Loading />
+            ) : (
+              <Grid sx={{ marginTop: "10px" }}>
+                <Col span={12}>
+                  {myOrders && (
+                    <Table>
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Address</th>
+                          <th>Date</th>
+                          <th>Total</th>
+                          <th>Paid</th>
+                          <th>Delivered</th>
+                        </tr>
+                      </thead>
+                      <tbody>{rows}</tbody>
+                    </Table>
+                  )}
+                </Col>
+              </Grid>
+            )}
+          </Card> */}
         </>
       )}
     </Layout>

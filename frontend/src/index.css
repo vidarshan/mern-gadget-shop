@@ -123,4 +123,6 @@ input,
   background-color: #373a40 !important;
   border: none !important;
   width: 400px !important;
+  color: white !important;
+  font-weight: 600 !important;
 }

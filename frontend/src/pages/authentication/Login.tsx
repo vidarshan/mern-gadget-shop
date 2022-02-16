@@ -16,6 +16,7 @@ import { bindActionCreators } from "redux";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { actionCreators, State } from "../../state";
 import { useNavigate, useLocation } from "react-router";
+import Head from "../../components/Head";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -74,6 +75,7 @@ const Login = () => {
 
   return (
     <Container className="flex-container height-full-vh">
+      <Head title="Login | Techstop" description="Shop for gadgets" />
       <Card
         withBorder
         padding="xl"

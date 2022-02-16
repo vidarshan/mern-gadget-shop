@@ -287,7 +287,7 @@ interface UpdateProfileFailAction {
 
 interface UpdateProfileResetAction {
   type: ActionType.UPDATE_PROFILE_RESET;
-  payload: any;
+  payload?: any;
 }
 
 export type Action =

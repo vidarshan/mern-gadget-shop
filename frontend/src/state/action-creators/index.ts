@@ -605,6 +605,10 @@ export const updateProfile = (
         type: ActionType.UPDATE_PROFILE_SUCCESS,
         payload: data,
       });
+
+      dispatch({
+        type: ActionType.UPDATE_PROFILE_RESET,
+      });
     } catch (error: any) {
       dispatch({
         type: ActionType.UPDATE_PROFILE_FAIL,
