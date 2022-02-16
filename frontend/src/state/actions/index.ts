@@ -304,6 +304,11 @@ interface UpdateUserFailAction {
   payload: any;
 }
 
+interface UpdateUserResetAction {
+  type: ActionType.UPDATE_USER_RESET;
+  payload: any;
+}
+
 export type Action =
   | CartAddItemAction
   | CartRemoveItemAction
@@ -366,4 +371,5 @@ export type Action =
   | UpdateProfileResetAction
   | UpdateUserRequestAction
   | UpdateUserSuccessAction
-  | UpdateUserFailAction;
+  | UpdateUserFailAction
+  | UpdateUserResetAction;

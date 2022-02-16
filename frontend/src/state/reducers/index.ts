@@ -21,6 +21,7 @@ import {
   registerReducer,
   getUsersReducer,
   updateProfileReducer,
+  updateUserReducer,
 } from "./userReducer";
 
 const reducers = combineReducers({
@@ -41,6 +42,7 @@ const reducers = combineReducers({
   quickSearch: quickSearchReducer,
   myOrders: getMyOrdersReducer,
   profileUpdate: updateProfileReducer,
+  userUpdate: updateUserReducer,
 });
 
 export default reducers;
