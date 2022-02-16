@@ -107,7 +107,7 @@ const updateProfileReducer = (
       return {
         ...state,
         loading: false,
-        updateProfile: {},
+        profileUpdate: {},
         error: action.payload,
       };
     default:

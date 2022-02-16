@@ -569,7 +569,11 @@ export const getMyOrders = () => {
   };
 };
 
-export const updateProfile = (name: string, email: any) => {
+export const updateProfile = (
+  name: string,
+  email: string,
+  password: string
+) => {
   return async (dispatch: Dispatch<Action>, getState: any) => {
     try {
       dispatch({
@@ -588,6 +592,7 @@ export const updateProfile = (name: string, email: any) => {
       const formData = {
         name,
         email,
+        password,
       };
 
       const { data } = await axios.put(

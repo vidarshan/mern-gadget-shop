@@ -23,13 +23,14 @@ import Head from "../components/Head";
 import moment from "moment";
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
+import { ActionType } from "../state/action-types";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const notifications = useNotifications();
 
-  const { getProducts, getMyOrders } = bindActionCreators(
+  const { getProducts, getMyOrders, updateProfile } = bindActionCreators(
     actionCreators,
     dispatch
   );
@@ -37,6 +38,13 @@ const Profile = () => {
   const { userInfo, loading, error } = useSelector(
     (state: State) => state.userLogin
   );
+
+  const {
+    profileUpdate,
+    loading: profileUpdateLoading,
+    error: profileUpdateError,
+  } = useSelector((state: State) => state.profileUpdate);
+
   const {
     myOrders,
     loading: myOrdersLoading,
@@ -156,7 +164,11 @@ const Profile = () => {
       </tr>
     ));
 
-  const handlerEditProfile = (values: any) => {};
+  const handlerEditProfile = (values: any) => {
+    const { username, email, password } = values;
+    updateProfile(username, email, password);
+    form.reset();
+  };
 
   useEffect(() => {
     if (error || myOrdersError) {
@@ -167,6 +179,21 @@ const Profile = () => {
       });
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log(Object.keys(profileUpdate).length);
+    if (Object.keys(profileUpdate).length !== 0) {
+      notifications.showNotification({
+        title: "Success!",
+        message: "Profile Updated",
+        color: "green",
+      });
+    }
+
+    dispatch({
+      type: ActionType.UPDATE_PROFILE_RESET,
+    });
+  }, [dispatch, profileUpdate]);
 
   return (
     <Layout>
@@ -270,17 +297,18 @@ const Profile = () => {
                   />
                 </Col>
                 <Group sx={{ marginTop: "1rem" }} position="right">
-                  <Button type="submit" radius="md" color="dark">
+                  <Button
+                    loading={profileUpdateLoading}
+                    type="submit"
+                    radius="md"
+                    color="dark"
+                  >
                     Update Profile
                   </Button>
                   <Button type="submit" radius="md" color="red">
                     Log Out
                   </Button>
                 </Group>
-                {/* <Col span={6}>
-                </Col>
-                <Col span={6}>
-                </Col> */}
               </Grid>
             </form>
           </Card>
