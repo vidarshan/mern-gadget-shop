@@ -85,6 +85,9 @@ const Order = () => {
 
   useEffect(() => {
     getOrder(params.order);
+    if (success) {
+      dispatch({ type: ActionType.CART_CLEAR_ITEMS });
+    }
   }, [dispatch, success]);
 
   return (

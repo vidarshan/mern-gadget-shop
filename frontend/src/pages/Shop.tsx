@@ -40,7 +40,6 @@ const Shop = () => {
 
   useEffect(() => {
     getProducts(1);
-    console.log(params);
   }, [dispatch]);
 
   useEffect(() => {

@@ -238,15 +238,10 @@ export const login = (email: string, password: string) => {
         payload: data,
       });
 
-      dispatch({
-        type: ActionType.USER_LOGIN_FAIL,
-        payload: data,
-      });
-
       localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error: any) {
       dispatch({
-        type: ActionType.USER_REGISTER_FAIL,
+        type: ActionType.USER_LOGIN_FAIL,
         payload: error,
       });
     }
@@ -612,6 +607,45 @@ export const updateProfile = (
     } catch (error: any) {
       dispatch({
         type: ActionType.UPDATE_PROFILE_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const updateUser = (id: string, isAdmin: boolean) => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.UPDATE_USER_REQUEST,
+      });
+
+      const token = store.getState().userLogin.userInfo.token;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const formData = {
+        isAdmin,
+      };
+
+      const { data } = await axios.put(`/api/v1/users/${id}`, formData, config);
+
+      dispatch({
+        type: ActionType.UPDATE_USER_SUCCESS,
+        payload: data,
+      });
+
+      dispatch({
+        type: ActionType.UPDATE_USER_RESET,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.UPDATE_USER_FAIL,
         payload: error,
       });
     }

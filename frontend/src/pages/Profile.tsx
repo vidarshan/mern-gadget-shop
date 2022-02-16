@@ -36,9 +36,7 @@ const Profile = () => {
     dispatch
   );
 
-  const { userInfo, loading, error } = useSelector(
-    (state: State) => state.userLogin
-  );
+  const { userInfo, error } = useSelector((state: State) => state.userLogin);
 
   const {
     profileUpdate,
@@ -156,7 +154,6 @@ const Profile = () => {
   }, [profileUpdate]);
 
   useEffect(() => {
-    console.log(userInfo);
     if (!userInfo) {
       navigate("/login");
     } else if (userInfo) {
@@ -173,7 +170,6 @@ const Profile = () => {
 
   return (
     <Layout>
-      {console.log(userInfo)}
       <Head title="Profile | Techstop" description="Shop for gadgets" />
       {userInfo && (
         <>
@@ -225,81 +221,74 @@ const Profile = () => {
             padding="xl"
           >
             <Text weight={700}>User Profile</Text>
+            <form
+              onSubmit={form.onSubmit((values) => handlerEditProfile(values))}
+            >
+              <Grid sx={{ marginTop: "10px" }}>
+                <Col span={6}>
+                  <TextInput
+                    radius="lg"
+                    label="Your username"
+                    placeholder="Username"
+                    {...form.getInputProps("username")}
+                    error={form.errors.username}
+                    required
+                  />
+                </Col>
+                <Col span={6}>
+                  {" "}
+                  <TextInput
+                    radius="lg"
+                    label="Your email"
+                    placeholder="email"
+                    {...form.getInputProps("email")}
+                    error={form.errors.email}
+                    required
+                  />
+                </Col>
 
-            {loading ? (
-              <Loading />
-            ) : (
-              <form
-                onSubmit={form.onSubmit((values) => handlerEditProfile(values))}
-              >
-                <Grid sx={{ marginTop: "10px" }}>
-                  <Col span={6}>
-                    <TextInput
-                      radius="md"
-                      label="Your username"
-                      placeholder="Username"
-                      {...form.getInputProps("username")}
-                      error={form.errors.username}
-                      required
-                    />
-                  </Col>
-                  <Col span={6}>
-                    {" "}
-                    <TextInput
-                      radius="md"
-                      label="Your email"
-                      placeholder="email"
-                      {...form.getInputProps("email")}
-                      error={form.errors.email}
-                      required
-                    />
-                  </Col>
-
-                  <Col span={6}>
-                    {" "}
-                    <PasswordInput
-                      radius="md"
-                      label="Your password"
-                      placeholder="Password"
-                      {...form.getInputProps("password")}
-                      error={form.errors.password}
-                      required
-                    />
-                  </Col>
-                  <Col span={6}>
-                    {" "}
-                    <PasswordInput
-                      radius="md"
-                      label="Confirm password"
-                      placeholder="Confirmation"
-                      {...form.getInputProps("confirmpassword")}
-                      error={form.errors.confirmpassword}
-                      required
-                    />
-                  </Col>
-                  <Group sx={{ marginTop: "1rem" }} position="right">
-                    <Button
-                      loading={profileUpdateLoading}
-                      type="submit"
-                      radius="md"
-                      color="dark"
-                    >
-                      Update Profile
-                    </Button>
-                    <Button
-                      radius="md"
-                      color="red"
-                      onClick={() => handlerLogout()}
-                    >
-                      Log Out
-                    </Button>
-                  </Group>
-                </Grid>
-              </form>
-            )}
+                <Col span={6}>
+                  {" "}
+                  <PasswordInput
+                    radius="lg"
+                    label="Your password"
+                    placeholder="Password"
+                    {...form.getInputProps("password")}
+                    error={form.errors.password}
+                    required
+                  />
+                </Col>
+                <Col span={6}>
+                  {" "}
+                  <PasswordInput
+                    radius="lg"
+                    label="Confirm password"
+                    placeholder="Confirmation"
+                    {...form.getInputProps("confirmpassword")}
+                    error={form.errors.confirmpassword}
+                    required
+                  />
+                </Col>
+                <Col span={6}>
+                  <Button type="submit" radius="lg" color="dark" fullWidth>
+                    Update Profile
+                  </Button>
+                </Col>
+                <Col span={6}>
+                  <Button
+                    radius="lg"
+                    color="red"
+                    fullWidth
+                    onClick={() => handlerLogout()}
+                  >
+                    Log Out
+                  </Button>
+                </Col>
+              </Grid>
+            </form>
           </Card>
 
-          {/* <Card
+          <Card
             sx={{ marginTop: "2rem" }}
             withBorder
             shadow="xs"
@@ -330,7 +319,7 @@ const Profile = () => {
                 </Col>
               </Grid>
             )}
-          </Card> */}
+          </Card>
         </>
       )}
     </Layout>

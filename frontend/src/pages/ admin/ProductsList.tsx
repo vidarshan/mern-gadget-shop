@@ -113,12 +113,13 @@ const ProductsList = () => {
             color="dark"
             radius="xl"
             onClick={() => handlerSetDetails(product)}
+            disabled
           >
             <BiDetail />
           </Button>
         </td>
         <td>
-          <Button color="red" radius="xl">
+          <Button color="red" radius="xl" disabled>
             <BiTrashAlt />
           </Button>
         </td>
@@ -151,6 +152,11 @@ const ProductsList = () => {
   const handlerPageChange = (page: number) => {
     setActivePage(page);
     getProducts(page);
+  };
+
+  const handlerOpenForm = () => {
+    setOpened(true);
+    form.reset();
   };
 
   const handlerEditProduct = (values: any) => {
@@ -187,6 +193,7 @@ const ProductsList = () => {
         opened={opened}
         onClose={() => setOpened(false)}
         title="Product Details"
+        radius="lg"
       >
         <form onSubmit={form.onSubmit((values) => handlerEditProduct(values))}>
           <Group direction="column" grow>
@@ -194,18 +201,21 @@ const ProductsList = () => {
               label="Product Name"
               placeholder="Product Name"
               {...form.getInputProps("name")}
+              radius="lg"
               error={form.errors.name}
             />
             <TextInput
               label="Product Brand"
               placeholder="Product Brand"
               {...form.getInputProps("brand")}
+              radius="lg"
               error={form.errors.brand}
             />
             <Textarea
               label="Product Description"
               placeholder="Product Description"
               {...form.getInputProps("description")}
+              radius="lg"
               error={form.errors.description}
             />
             <Select
@@ -215,6 +225,7 @@ const ProductsList = () => {
                 { value: "Phones", label: "Phones" },
                 { value: "Accessories", label: "Accessories" },
               ]}
+              radius="lg"
               label="Product Category"
               placeholder="Product Category"
               {...form.getInputProps("category")}
@@ -224,26 +235,30 @@ const ProductsList = () => {
               label="Product Count"
               placeholder="Product Count"
               {...form.getInputProps("count")}
+              radius="lg"
               error={form.errors.count}
             />
-            {/* {uploading ? (
-              <Loader />
-            ) : ( */}
-            <input
-              type="file"
-              id="myfile"
-              name="myfile"
-              onChange={uploadFileHandler}
-            />
-            {/* )} */}
+            {image && <Text>{image}</Text>}
+
+            {uploading ? (
+              <Loading />
+            ) : (
+              <input
+                type="file"
+                id="myfile"
+                name="myfile"
+                onChange={uploadFileHandler}
+              />
+            )}
 
             <NumberInput
               label="Product Price"
               placeholder="Product Price"
               {...form.getInputProps("price")}
               error={form.errors.price}
+              radius="lg"
             />
-            <Button type="submit" color="dark">
+            <Button type="submit" color="dark" radius="lg">
               Add Product
             </Button>
           </Group>
@@ -252,7 +267,12 @@ const ProductsList = () => {
       <Card shadow="md" radius="lg">
         <Group sx={{ marginBottom: "1rem" }} direction="row" position="apart">
           <Text weight={700}>Products</Text>
-          <Button radius="lg" color="dark" onClick={() => setOpened(true)}>
+          <Button
+            radius="lg"
+            color="dark"
+            onClick={() => handlerOpenForm()}
+            disabled
+          >
             Add new Product
           </Button>
         </Group>

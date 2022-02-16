@@ -52,7 +52,7 @@ const loginReducer = (
       return { ...state, loading: false, error: action.payload };
 
     case ActionType.USER_LOGOUT:
-      return { ...state, userInfo: {}, loading: false, error: null };
+      return { ...state, userInfo: null, loading: false, error: null };
     default:
       return state;
   }
@@ -115,4 +115,42 @@ const updateProfileReducer = (
   }
 };
 
-export { registerReducer, loginReducer, getUsersReducer, updateProfileReducer };
+const updateUserReducer = (
+  state = {
+    userUpdate: {},
+    error: null,
+    loading: false,
+  },
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.UPDATE_USER_REQUEST:
+      return { ...state, loading: true, error: null };
+    case ActionType.UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        userUpdate: action.payload,
+        loading: false,
+        error: null,
+      };
+    case ActionType.UPDATE_USER_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    case ActionType.UPDATE_PROFILE_RESET:
+      return {
+        ...state,
+        loading: false,
+        userUpdate: {},
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export {
+  registerReducer,
+  loginReducer,
+  getUsersReducer,
+  updateProfileReducer,
+  updateUserReducer,
+};
