@@ -17,24 +17,36 @@ import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import moment from "moment";
 import { BiDetail, BiTrashAlt } from "react-icons/bi";
+import { useNotifications } from "@mantine/notifications";
 
 const UsersList = () => {
   const dispatch = useDispatch();
-  const { getUsers } = bindActionCreators(actionCreators, dispatch);
+  const notifications = useNotifications();
+
+  const { getUsers, updateUser } = bindActionCreators(actionCreators, dispatch);
 
   const { users, error, loading } = useSelector((state: State) => state.users);
+  const { userUpdate: updateUserRole, error: userUpdateError } = useSelector(
+    (state: State) => state.userUpdate
+  );
 
-  const elements = [
-    { position: 6, mass: 12.011, symbol: "C", name: "Carbon" },
-    { position: 7, mass: 14.007, symbol: "N", name: "Nitrogen" },
-    { position: 39, mass: 88.906, symbol: "Y", name: "Yttrium" },
-    { position: 56, mass: 137.33, symbol: "Ba", name: "Barium" },
-    { position: 58, mass: 140.12, symbol: "Ce", name: "Cerium" },
-  ];
+  const handlerUpdateUser = (id: string, isAdmin: boolean) => {
+    updateUser(id, isAdmin);
+  };
 
   useEffect(() => {
     getUsers();
-  }, [dispatch]);
+  }, [dispatch, updateUserRole]);
+
+  useEffect(() => {
+    if (error || userUpdateError) {
+      notifications.showNotification({
+        title: "Oh no!",
+        message: error && error.message,
+        color: "red",
+      });
+    }
+  }, [error, userUpdateError]);
 
   const rows =
     users &&
@@ -44,7 +56,13 @@ const UsersList = () => {
         <td>{user.name}</td>
         <td>{user.email}</td>
         <td>
-          <Switch checked={user.isAdmin ? true : false} />
+          <Switch
+            checked={user.isAdmin ? true : false}
+            onChange={() =>
+              handlerUpdateUser(user._id, !user.isAdmin ? true : false)
+            }
+            disabled
+          />
         </td>
         <td>{moment(user.createdAt).format("DD-MMM-YYYY hh:mm")}</td>
         <td>
