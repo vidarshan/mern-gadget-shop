@@ -1,4 +1,12 @@
-import { Button, Card, Group, Pagination, Table, Text } from "@mantine/core";
+import {
+  Button,
+  Card,
+  Group,
+  Pagination,
+  Switch,
+  Table,
+  Text,
+} from "@mantine/core";
 import React from "react";
 import Head from "../../components/Head";
 import Layout from "../../layout/Layout";
@@ -35,16 +43,12 @@ const UsersList = () => {
       <tr key={user._id}>
         <td>{user.name}</td>
         <td>{user.email}</td>
-        <td>{user.isAdmin ? "Yes" : "No"}</td>
-        <td>{moment(user.createdAt).format("DD-MMM-YYYY hh:mm")}</td>
-
         <td>
-          <Button color="dark" radius="xl">
-            <BiDetail />
-          </Button>
+          <Switch checked={user.isAdmin ? true : false} />
         </td>
+        <td>{moment(user.createdAt).format("DD-MMM-YYYY hh:mm")}</td>
         <td>
-          <Button color="red" radius="xl" disabled>
+          <Button color="red" radius="lg" disabled>
             <BiTrashAlt />
           </Button>
         </td>
@@ -55,12 +59,9 @@ const UsersList = () => {
     <Layout>
       <Head title="Users List | Admin" />
 
-      <Card shadow="md" radius="lg">
+      <Card shadow="md" radius="lg" withBorder>
         <Group sx={{ marginBottom: "1rem" }} direction="row" position="apart">
           <Text weight={700}>Users</Text>
-          <Button radius="lg" color="dark">
-            Add new User
-          </Button>
         </Group>
         {loading ? (
           <Loading />
@@ -73,7 +74,6 @@ const UsersList = () => {
                   <th>Email</th>
                   <th>Is Admin</th>
                   <th>Joined Date</th>
-                  <th></th>
                   <th></th>
                 </tr>
               </thead>

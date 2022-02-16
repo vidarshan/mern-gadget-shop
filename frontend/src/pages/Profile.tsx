@@ -227,7 +227,7 @@ const Profile = () => {
               <Grid sx={{ marginTop: "10px" }}>
                 <Col span={6}>
                   <TextInput
-                    radius="md"
+                    radius="lg"
                     label="Your username"
                     placeholder="Username"
                     {...form.getInputProps("username")}
@@ -238,7 +238,7 @@ const Profile = () => {
                 <Col span={6}>
                   {" "}
                   <TextInput
-                    radius="md"
+                    radius="lg"
                     label="Your email"
                     placeholder="email"
                     {...form.getInputProps("email")}
@@ -250,7 +250,7 @@ const Profile = () => {
                 <Col span={6}>
                   {" "}
                   <PasswordInput
-                    radius="md"
+                    radius="lg"
                     label="Your password"
                     placeholder="Password"
                     {...form.getInputProps("password")}
@@ -261,7 +261,7 @@ const Profile = () => {
                 <Col span={6}>
                   {" "}
                   <PasswordInput
-                    radius="md"
+                    radius="lg"
                     label="Confirm password"
                     placeholder="Confirmation"
                     {...form.getInputProps("confirmpassword")}
