@@ -22,6 +22,7 @@ import { ModalsProvider } from "@mantine/modals";
 import UsersList from "./pages/ admin/UsersList";
 import ProductsList from "./pages/ admin/ProductsList";
 import OrdersList from "./pages/ admin/OrdersList";
+import NotFound from "./pages/NotFound";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -45,7 +46,7 @@ ReactDOM.render(
               <Route path="/signup" element={<SignUp />} />
               <Route path="/profile" element={<Profile />} />
               <Route index element={<Home />} />
-              <Route path="/shop" element={<Shop />} />
+              <Route path="/shop/:keyword" element={<Shop />} />
               <Route path="/product/:id" element={<Product />} />
               <Route path="/cart">
                 <Route path=":id" element={<Cart />} />
@@ -58,6 +59,7 @@ ReactDOM.render(
               <Route path="/admin/orders" element={<OrdersList />} />
               <Route path="/admin/products" element={<ProductsList />} />
               <Route path="/admin/users" element={<UsersList />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
         </ModalsProvider>

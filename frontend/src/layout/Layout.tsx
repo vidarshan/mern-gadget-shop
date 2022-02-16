@@ -30,20 +30,26 @@ interface LayoutProps {
 
 const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   const [value, setValue] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   const { userInfo } = useSelector((state: State) => state.userLogin);
   const { cartItems } = useSelector((state: State) => state.cart);
+  const { products } = useSelector((state: State) => state.products);
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { logout } = bindActionCreators(actionCreators, dispatch);
+  const { logout, getProducts } = bindActionCreators(actionCreators, dispatch);
 
   const handlerNavigate = (route: string) => {
     navigate(route);
     setOpened(false);
   };
+
+  useEffect(() => {
+    getProducts(1);
+  }, [dispatch]);
 
   const openMobileNavbar = () => {
     if (opened) {
@@ -138,6 +144,14 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
     }
   };
 
+  const handlerSearch = (key: any) => {
+    console.log(key);
+    if (key === "Enter") {
+      navigate(`/shop/${keyword}`);
+    }
+    console.log(keyword);
+  };
+
   const handlerLogout = () => {
     dispatch(logout());
   };
@@ -175,9 +189,26 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
 
           <div className="flex-container-no-horizontal-align">
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+              {/* <Select
+                placeholder="Search for an item..."
+                size="sm"
+                icon={<FiSearch />}
+                onChange={(e) => console.log(e)}
+                radius="lg"
+                data={[
+                  { label: "234568673", value: "2434" },
+                  { label: "23425693", value: "24344" },
+                  { label: "26787863423", value: "25434" },
+                  { label: "233424423", value: "25434" },
+                  { label: "2323434253", value: "27434" },
+                ]}
+                searchable
+              /> */}
               <TextInput
                 icon={<FiSearch />}
                 size="sm"
+                onChange={(e) => setKeyword(e.target.value)}
+                onKeyDown={(e) => handlerSearch(e.key)}
                 radius="lg"
                 placeholder="Search for an item..."
               />

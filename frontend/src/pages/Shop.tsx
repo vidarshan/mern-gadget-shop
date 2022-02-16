@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import { useNotifications } from "@mantine/notifications";
+import { useParams } from "react-router";
 import Head from "../components/Head";
 
 import { bindActionCreators } from "redux";
@@ -20,6 +21,7 @@ import { actionCreators, State } from "../state";
 import Loading from "../components/Loading";
 
 const Shop = () => {
+  const params = useParams();
   const dispatch = useDispatch();
   const notifications = useNotifications();
 
@@ -38,6 +40,7 @@ const Shop = () => {
 
   useEffect(() => {
     getProducts(1);
+    console.log(params);
   }, [dispatch]);
 
   useEffect(() => {

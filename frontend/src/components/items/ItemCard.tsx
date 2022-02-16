@@ -54,7 +54,7 @@ const ItemCard: React.FC<PropsWithChildren<IItemCard>> = ({
           </Card.Section>
           <Card.Section sx={{ marginTop: "1rem" }}>
             <Text size="sm" color="gray" align="justify" weight={500}>
-              {description.substring(0, 130) + "..."}
+              {description.substring(0, 90) + "..."}
             </Text>
           </Card.Section>{" "}
           <Card.Section sx={{ marginTop: "1rem" }}>
