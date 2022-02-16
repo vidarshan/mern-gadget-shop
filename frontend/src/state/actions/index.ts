@@ -306,7 +306,7 @@ interface UpdateUserFailAction {
 
 interface UpdateUserResetAction {
   type: ActionType.UPDATE_USER_RESET;
-  payload: any;
+  payload?: any;
 }
 
 export type Action =
