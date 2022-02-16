@@ -243,6 +243,20 @@ interface GetTopProductsFailAction {
   payload: any;
 }
 
+interface QuickSearchRequestAction {
+  type: ActionType.QUICK_SEARCH_REQUEST;
+  payload?: any;
+}
+interface QuickSearchSuccessAction {
+  type: ActionType.QUICK_SEARCH_SUCCESS;
+  payload?: any;
+}
+
+interface QuickSearchFailAction {
+  type: ActionType.QUICK_SEARCH_FAIL;
+  payload: any;
+}
+
 export type Action =
   | CartAddItemAction
   | CartRemoveItemAction
@@ -292,4 +306,7 @@ export type Action =
   | CreateProductFailAction
   | GetTopProductsRequestAction
   | GetTopProductsSuccessAction
-  | GetTopProductsFailAction;
+  | GetTopProductsFailAction
+  | QuickSearchRequestAction
+  | QuickSearchSuccessAction
+  | QuickSearchFailAction;

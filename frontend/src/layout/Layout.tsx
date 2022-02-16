@@ -22,6 +22,7 @@ import { BiLogOut, BiShoppingBag, BiUser } from "react-icons/bi";
 import { bindActionCreators } from "redux";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { actionCreators, State } from ".././state";
+import { getProduct } from "../state/action-creators";
 // import { logout } from "../actions/userActions";
 
 interface LayoutProps {
@@ -30,20 +31,30 @@ interface LayoutProps {
 
 const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   const [value, setValue] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   const { userInfo } = useSelector((state: State) => state.userLogin);
   const { cartItems } = useSelector((state: State) => state.cart);
+  const { products } = useSelector((state: State) => state.products);
+  const { quickSearch } = useSelector((state: State) => state.quickSearch);
   const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { logout } = bindActionCreators(actionCreators, dispatch);
+  const { logout, getProducts, quickSearchProducts } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   const handlerNavigate = (route: string) => {
     navigate(route);
     setOpened(false);
   };
+
+  useEffect(() => {
+    getProducts(1);
+  }, [dispatch]);
 
   const openMobileNavbar = () => {
     if (opened) {
@@ -138,6 +149,15 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
     }
   };
 
+  const handlerSearch = (value: any) => {
+    quickSearchProducts(value);
+  };
+
+  const handlerSearchSelect = (id: any) => {
+    getProduct(id);
+    navigate(`/product/${id}`);
+  };
+
   const handlerLogout = () => {
     dispatch(logout());
   };
@@ -175,11 +195,16 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
 
           <div className="flex-container-no-horizontal-align">
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-              <TextInput
-                icon={<FiSearch />}
-                size="sm"
-                radius="lg"
+              <Select
                 placeholder="Search for an item..."
+                size="sm"
+                nothingFound="No products"
+                icon={<FiSearch />}
+                onSearchChange={(e) => handlerSearch(e)}
+                onChange={(e) => handlerSearchSelect(e)}
+                radius="lg"
+                data={quickSearch}
+                searchable
               />
             </MediaQuery>
 
@@ -200,18 +225,6 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                   </Badge>
                 )}
               </Button>
-            </MediaQuery>
-            <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-              <Select
-                placeholder="Admin"
-                value={value}
-                onChange={(e) => setValue(e as any)}
-                data={[
-                  { value: "orders", label: "Orders" },
-                  { value: "products", label: "Products" },
-                  { value: "users", label: "Users" },
-                ]}
-              />
             </MediaQuery>
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
               <ActionIcon

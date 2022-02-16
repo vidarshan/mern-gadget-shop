@@ -3,6 +3,7 @@ import {
   Card,
   Col,
   Grid,
+  Group,
   PasswordInput,
   Table,
   Text,
@@ -107,8 +108,54 @@ const Profile = () => {
     <Layout>
       {userInfo && (
         <>
-          <Card withBorder shadow="sm" radius="md" padding="xl">
-            <Text>User Profile</Text>
+          <Card withBorder shadow="xs" radius="lg" padding="xl">
+            <Grid>
+              <Col span={1}>
+                <Text weight={700}>Admin</Text>
+              </Col>
+              <Col span={3}>
+                <Button
+                  variant="gradient"
+                  gradient={{ from: "indigo", to: "cyan" }}
+                  radius="lg"
+                  onClick={() => navigate("/admin/orders")}
+                  fullWidth
+                >
+                  Manage Orders
+                </Button>
+              </Col>
+              <Col span={4}>
+                <Button
+                  variant="gradient"
+                  gradient={{ from: "teal", to: "lime", deg: 105 }}
+                  radius="lg"
+                  onClick={() => navigate("/admin/products")}
+                  fullWidth
+                >
+                  Manage Products
+                </Button>
+              </Col>
+              <Col span={4}>
+                <Button
+                  variant="gradient"
+                  gradient={{ from: "orange", to: "red" }}
+                  radius="lg"
+                  onClick={() => navigate("/admin/users")}
+                  fullWidth
+                >
+                  Manage Users
+                </Button>
+              </Col>
+            </Grid>
+          </Card>
+          <Card
+            sx={{ marginTop: "2rem" }}
+            withBorder
+            shadow="xs"
+            radius="lg"
+            padding="xl"
+          >
+            <Text weight={700}>User Profile</Text>
             <form
               onSubmit={form.onSubmit((values) => handlerEditProfile(values))}
             >
@@ -157,22 +204,29 @@ const Profile = () => {
                     required
                   />
                 </Col>
-                <Col span={12}>
-                  <Button type="submit" radius="md" color="dark" fullWidth>
+                <Group sx={{ marginTop: "1rem" }} position="right">
+                  <Button type="submit" radius="md" color="dark">
                     Update Profile
                   </Button>
+                  <Button type="submit" radius="md" color="red">
+                    Log Out
+                  </Button>
+                </Group>
+                {/* <Col span={6}>
                 </Col>
+                <Col span={6}>
+                </Col> */}
               </Grid>
             </form>
           </Card>
           <Card
             sx={{ marginTop: "2rem" }}
             withBorder
-            shadow="sm"
-            radius="md"
+            shadow="xs"
+            radius="lg"
             padding="xl"
           >
-            <Text>Orders</Text>
+            <Text weight={700}>My Orders</Text>
             <Grid sx={{ marginTop: "10px" }}>
               <Col span={12}>
                 <Table>

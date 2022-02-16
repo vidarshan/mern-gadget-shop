@@ -85,6 +85,30 @@ export const getProducts = (page: number) => {
   };
 };
 
+export const quickSearchProducts = (keyword: number) => {
+  return async (dispatch: Dispatch<Action>) => {
+    try {
+      dispatch({
+        type: ActionType.QUICK_SEARCH_REQUEST,
+      });
+
+      const { data } = await axios.get(
+        `/api/v1/products/search?keyword=${keyword}`
+      );
+
+      dispatch({
+        type: ActionType.QUICK_SEARCH_SUCCESS,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.QUICK_SEARCH_FAIL,
+        payload: error,
+      });
+    }
+  };
+};
+
 export const getProduct = (id: string) => {
   return async (dispatch: Dispatch<Action>) => {
     try {

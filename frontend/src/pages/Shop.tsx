@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import { useNotifications } from "@mantine/notifications";
+import { useParams } from "react-router";
 import Head from "../components/Head";
 
 import { bindActionCreators } from "redux";
@@ -20,6 +21,7 @@ import { actionCreators, State } from "../state";
 import Loading from "../components/Loading";
 
 const Shop = () => {
+  const params = useParams();
   const dispatch = useDispatch();
   const notifications = useNotifications();
 
@@ -38,6 +40,7 @@ const Shop = () => {
 
   useEffect(() => {
     getProducts(1);
+    console.log(params);
   }, [dispatch]);
 
   useEffect(() => {
@@ -54,70 +57,6 @@ const Shop = () => {
   return (
     <Layout>
       <Head title="Shop | Techstop" description="Shop for gadgets" />
-
-      <Card radius="lg" sx={{ marginBottom: "1rem" }} withBorder>
-        <Grid>
-          <Col xs={12} sm={6} md={3} lg={3} xl={4} span={3}>
-            <Select
-              icon={<BiBuilding />}
-              variant="default"
-              radius="lg"
-              searchable
-              size="sm"
-              placeholder="Brand"
-              data={[
-                { value: "apple", label: "Apple" },
-                { value: "samsung", label: "Samsung" },
-                { value: "microsoft", label: "Microsoft" },
-                { value: "dell", label: "Dell" },
-                { value: "asus", label: "Asus" },
-                { value: "logitec", label: "Logitec" },
-                { value: "jbl", label: "JBL" },
-                { value: "beats", label: "Beats" },
-              ]}
-            />
-          </Col>
-          <Col xs={12} sm={6} md={3} lg={3} xl={4} span={3}>
-            <Select
-              icon={<BiLaptop />}
-              radius="lg"
-              size="sm"
-              placeholder="Category"
-              data={[
-                { value: "Laptops", label: "Laptops" },
-                { value: "Desktops", label: "Desktops" },
-                { value: "Phones", label: "Phones" },
-                { value: "Accessories", label: "Accessories" },
-              ]}
-            />
-          </Col>
-          <Col xs={12} sm={6} md={3} lg={3} xl={2} span={3}>
-            <Select
-              icon={<BiDollarCircle />}
-              radius="lg"
-              size="sm"
-              placeholder="Price / Latest"
-              data={[
-                { value: "asc-price", label: "Price : Low to High" },
-                { value: "dsc-price", label: "Price : High to Low" },
-                { value: "asc-date", label: "Date : Old to New" },
-                { value: "dsc-date", label: "Date : New to Old" },
-              ]}
-            />
-          </Col>
-          <Col xs={12} sm={6} md={3} lg={3} xl={2} span={3}>
-            <Button
-              variant="filled"
-              radius="lg"
-              size="sm"
-              fullWidth
-              color="dark"
-            >
-              Reset Filters
-            </Button>
-          </Col>
-        </Grid>
-      </Card>
 
       {loading ? (
         <Loading />
