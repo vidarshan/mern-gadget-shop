@@ -46,7 +46,7 @@ ReactDOM.render(
               <Route path="/signup" element={<SignUp />} />
               <Route path="/profile" element={<Profile />} />
               <Route index element={<Home />} />
-              <Route path="/shop/:keyword" element={<Shop />} />
+              <Route path="/shop" element={<Shop />} />
               <Route path="/product/:id" element={<Product />} />
               <Route path="/cart">
                 <Route path=":id" element={<Cart />} />
