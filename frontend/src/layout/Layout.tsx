@@ -206,14 +206,6 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                 data={quickSearch}
                 searchable
               />
-              {/* <TextInput
-                icon={<FiSearch />}
-                size="sm"
-                onChange={(e) => setKeyword(e.target.value)}
-                onKeyDown={(e) => handlerSearch(e.key)}
-                radius="lg"
-                placeholder="Search for an item..."
-              /> */}
             </MediaQuery>
 
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
