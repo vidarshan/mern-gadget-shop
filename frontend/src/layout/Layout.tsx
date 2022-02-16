@@ -165,6 +165,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
   }, [value]);
 
   useEffect(() => {
+    console.log(userInfo);
     if (!userInfo) {
       navigate("/");
     }
@@ -239,21 +240,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                 <BiUser />
               </ActionIcon>
             </MediaQuery>
-            {userInfo && (
-              <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-                <ActionIcon
-                  color="red"
-                  size="lg"
-                  onClick={() => handlerLogout()}
-                  sx={{ margin: "10px" }}
-                  variant="outline"
-                  radius="lg"
-                >
-                  <BiLogOut />
-                </ActionIcon>
-              </MediaQuery>
-            )}
-            {!userInfo && (
+            {!userInfo ? (
               <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
                 <Button
                   onClick={() => navigate("/login")}
@@ -265,6 +252,19 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                 >
                   Log In
                 </Button>
+              </MediaQuery>
+            ) : (
+              <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+                <ActionIcon
+                  color="red"
+                  size="lg"
+                  onClick={() => handlerLogout()}
+                  sx={{ margin: "10px" }}
+                  variant="outline"
+                  radius="lg"
+                >
+                  <BiLogOut />
+                </ActionIcon>
               </MediaQuery>
             )}
           </div>

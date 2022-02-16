@@ -52,7 +52,7 @@ const loginReducer = (
       return { ...state, loading: false, error: action.payload };
 
     case ActionType.USER_LOGOUT:
-      return { ...state, userInfo: {}, loading: false, error: null };
+      return { ...state, userInfo: null, loading: false, error: null };
     default:
       return state;
   }
