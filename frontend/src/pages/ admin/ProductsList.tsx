@@ -113,12 +113,13 @@ const ProductsList = () => {
             color="dark"
             radius="xl"
             onClick={() => handlerSetDetails(product)}
+            disabled
           >
             <BiDetail />
           </Button>
         </td>
         <td>
-          <Button color="red" radius="xl">
+          <Button color="red" radius="xl" disabled>
             <BiTrashAlt />
           </Button>
         </td>
@@ -151,6 +152,11 @@ const ProductsList = () => {
   const handlerPageChange = (page: number) => {
     setActivePage(page);
     getProducts(page);
+  };
+
+  const handlerOpenForm = () => {
+    setOpened(true);
+    form.reset();
   };
 
   const handlerEditProduct = (values: any) => {
@@ -261,7 +267,12 @@ const ProductsList = () => {
       <Card shadow="md" radius="lg">
         <Group sx={{ marginBottom: "1rem" }} direction="row" position="apart">
           <Text weight={700}>Products</Text>
-          <Button radius="lg" color="dark" onClick={() => setOpened(true)}>
+          <Button
+            radius="lg"
+            color="dark"
+            onClick={() => handlerOpenForm()}
+            disabled
+          >
             Add new Product
           </Button>
         </Group>
