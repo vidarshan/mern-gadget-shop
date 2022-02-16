@@ -26,6 +26,30 @@ const getProducts = asyncHandler(async (req: any, res: any) => {
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
+//@desc         Get products for search
+//@route        GET /api/products/search
+//@access       Public
+const getProductsForSearch = asyncHandler(async (req: any, res: any) => {
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+    : {};
+
+  const products = await Product.find({ ...keyword });
+
+  const formattedProducts = [];
+
+  products.map((product: any) => {
+    formattedProducts.push({ value: product._id, label: product.name });
+  });
+
+  res.json(formattedProducts);
+});
+
 //@desc         Get product
 //@route        GET /api/products/:id
 //@access       Public
@@ -182,6 +206,7 @@ const updateProduct = asyncHandler(async (req: any, res: any) => {
 export {
   getProducts,
   getProduct,
+  getProductsForSearch,
   createProduct,
   createProductReview,
   getTopProducts,

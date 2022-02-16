@@ -10,10 +10,12 @@ import {
   getProductById,
   deleteProduct,
   updateProduct,
+  getProductsForSearch,
 } from "../controllers/productControllers";
 import { admin, protect } from "../middleware/authMiddleware";
 
 router.route("/").get(getProducts).post(protect, admin, createProduct);
+router.route("/search").get(getProductsForSearch);
 router.route("/:id/reviews").post(protect, createProductReview);
 router.get("/top", getTopProducts);
 router
