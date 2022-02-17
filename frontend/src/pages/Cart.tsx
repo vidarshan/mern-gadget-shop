@@ -93,7 +93,7 @@ const Cart = () => {
                   withBorder
                 >
                   <Grid>
-                    <Col xs={2} sm={2} md={2} lg={2} xl={2} span={2}>
+                    <Col xs={12} sm={2} md={2} lg={2} xl={2} span={2}>
                       <Image
                         fit="contain"
                         radius="lg"
@@ -104,7 +104,7 @@ const Cart = () => {
                     </Col>
                     <Col
                       sx={{ display: "flex", alignItems: "center" }}
-                      xs={5}
+                      xs={12}
                       sm={5}
                       md={5}
                       lg={5}
