@@ -7,6 +7,7 @@ import {
   Text,
   PasswordInput,
   Button,
+  Alert,
 } from "@mantine/core";
 import { useForm } from "@mantine/hooks";
 import { useNotifications } from "@mantine/notifications";
@@ -17,6 +18,7 @@ import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { actionCreators, State } from "../../state";
 import { useNavigate, useLocation } from "react-router";
 import Head from "../../components/Head";
+import { BsFillExclamationCircleFill } from "react-icons/bs";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -91,7 +93,17 @@ const Login = () => {
                 Techstop
               </Text>
             </Col>
-
+            <Col span={12}>
+              <Alert
+                icon={<BsFillExclamationCircleFill size={16} />}
+                sx={{ marginTop: "1rem" }}
+                color="gray"
+                radius="lg"
+              >
+                Use [email: john@gmail.com | password: 123456] to browse as an
+                admin.
+              </Alert>
+            </Col>
             <Col span={12}>
               <TextInput
                 radius="lg"
