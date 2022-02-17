@@ -11,30 +11,17 @@ interface IFeatureCard {
 const FeatureCard: React.FC<PropsWithChildren<IFeatureCard>> = ({
   title,
   icon,
-  backgroundColor,
-  textColor,
 }) => {
   return (
     <Card
-      // sx={{ backgroundColor }}
       shadow="xs"
       className="height-full-perc flex-container-vertical-align"
       padding="xl"
       withBorder
       radius="lg"
     >
-      <Text
-        // color={textColor}
-        align="center"
-      >
-        {icon}
-      </Text>
-      <Text
-        // color={textColor}
-        size="xl"
-        weight={700}
-        align="center"
-      >
+      <Text align="center">{icon}</Text>
+      <Text size="xl" weight={700} align="center">
         {title}
       </Text>
     </Card>

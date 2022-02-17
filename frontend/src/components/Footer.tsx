@@ -1,5 +1,4 @@
-import { Col, Container, Grid, Group, Text } from "@mantine/core";
-import { FiFacebook, FiTwitter, FiInstagram } from "react-icons/fi";
+import { Container, Group, Text } from "@mantine/core";
 import { AiOutlineUsb } from "react-icons/ai";
 
 const Footer = () => {

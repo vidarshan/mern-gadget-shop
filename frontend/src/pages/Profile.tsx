@@ -3,7 +3,6 @@ import {
   Card,
   Col,
   Grid,
-  Group,
   PasswordInput,
   Table,
   Text,
@@ -12,18 +11,15 @@ import {
   List,
 } from "@mantine/core";
 import Layout from "../layout/Layout";
-import { RiCloseLine, RiCheckLine } from "react-icons/ri";
 import { useNavigate } from "react-router";
 import { useForm } from "@mantine/hooks";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNotifications } from "@mantine/notifications";
-import { useParams } from "react-router";
 import Head from "../components/Head";
 import moment from "moment";
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
-import { ActionType } from "../state/action-types";
 import Loading from "../components/Loading";
 
 const Profile = () => {
@@ -38,11 +34,7 @@ const Profile = () => {
 
   const { userInfo, error } = useSelector((state: State) => state.userLogin);
 
-  const {
-    profileUpdate,
-    loading: profileUpdateLoading,
-    error: profileUpdateError,
-  } = useSelector((state: State) => state.profileUpdate);
+  const { profileUpdate } = useSelector((state: State) => state.profileUpdate);
 
   const {
     myOrders,
@@ -151,6 +143,7 @@ const Profile = () => {
         color: "green",
       });
     }
+    // eslint-disable-next-line
   }, [profileUpdate]);
 
   useEffect(() => {
@@ -166,6 +159,7 @@ const Profile = () => {
         });
       }
     }
+    // eslint-disable-next-line
   }, [dispatch, userInfo]);
 
   return (

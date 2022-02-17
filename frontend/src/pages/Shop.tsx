@@ -1,19 +1,9 @@
-import {
-  Button,
-  Card,
-  Col,
-  Grid,
-  Loader,
-  Pagination,
-  Select,
-} from "@mantine/core";
+import { Col, Grid, Pagination } from "@mantine/core";
 import ItemCard from "../components/items/ItemCard";
-import { BiDollarCircle, BiLaptop, BiBuilding } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import { useNotifications } from "@mantine/notifications";
-import { useParams } from "react-router";
 import Head from "../components/Head";
 
 import { bindActionCreators } from "redux";
@@ -21,7 +11,6 @@ import { actionCreators, State } from "../state";
 import Loading from "../components/Loading";
 
 const Shop = () => {
-  const params = useParams();
   const dispatch = useDispatch();
   const notifications = useNotifications();
 
@@ -40,6 +29,7 @@ const Shop = () => {
 
   useEffect(() => {
     getProducts(1);
+    // eslint-disable-next-line
   }, [dispatch]);
 
   useEffect(() => {

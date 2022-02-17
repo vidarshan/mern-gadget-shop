@@ -13,7 +13,7 @@ import { useNotifications } from "@mantine/notifications";
 import { AiOutlineUsb } from "react-icons/ai";
 import { useNavigate } from "react-router";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
-import { actionCreators, State } from "../../state";
+import { actionCreators } from "../../state";
 import { useEffect } from "react";
 import { bindActionCreators } from "redux";
 import Head from "../../components/Head";

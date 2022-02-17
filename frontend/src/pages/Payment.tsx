@@ -11,8 +11,8 @@ import { useNavigate } from "react-router";
 import Steps from "../components/Steps";
 import Layout from "../layout/Layout";
 import { bindActionCreators } from "redux";
-import { actionCreators, State } from "../state";
-import { useDispatch, useSelector } from "react-redux";
+import { actionCreators } from "../state";
+import { useDispatch } from "react-redux";
 
 const Payment = () => {
   const dispatch = useDispatch();
