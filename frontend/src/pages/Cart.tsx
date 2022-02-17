@@ -50,7 +50,7 @@ const Cart = () => {
     <Layout>
       <Modal
         title="Delete Item?"
-        radius="md"
+        radius="lg"
         onClose={() => setOpened(false)}
         opened={opened}
       >
@@ -63,7 +63,7 @@ const Cart = () => {
             <Button
               onClick={() => setOpened(false)}
               color="gray"
-              radius="md"
+              radius="lg"
               fullWidth
             >
               Cancel
@@ -73,7 +73,7 @@ const Cart = () => {
             <Button
               onClick={() => handlerDeleteCartItem(selectedItem)}
               color="red"
-              radius="md"
+              radius="lg"
               fullWidth
             >
               Yes
@@ -88,7 +88,7 @@ const Cart = () => {
               return (
                 <Card
                   sx={{ marginTop: "1rem" }}
-                  radius="md"
+                  radius="lg"
                   shadow="xl"
                   withBorder
                 >
@@ -96,25 +96,34 @@ const Cart = () => {
                     <Col span={2}>
                       <Image
                         fit="contain"
-                        radius="md"
-                        height={70}
-                        width={70}
+                        radius="lg"
+                        height={50}
+                        width={50}
                         src={item.image}
                       />
                     </Col>
-                    <Col span={5}>
+                    <Col
+                      sx={{ display: "flex", alignItems: "center" }}
+                      span={5}
+                    >
                       <Text color="gray" weight={600}>
                         {item.name}
                       </Text>
                     </Col>
-                    <Col span={2}>
+                    <Col
+                      sx={{ display: "flex", alignItems: "center" }}
+                      span={2}
+                    >
                       <Text color="gray" weight={600}>
                         ${item.price} x {item.qty}
                       </Text>
                     </Col>
-                    <Col span={2}>
+                    <Col
+                      sx={{ display: "flex", alignItems: "center" }}
+                      span={2}
+                    >
                       <NumberInput
-                        radius="md"
+                        radius="lg"
                         value={item.qty}
                         ref={numRef}
                         onChange={(e) =>
@@ -125,10 +134,13 @@ const Cart = () => {
                         required
                       />
                     </Col>
-                    <Col span={1}>
+                    <Col
+                      sx={{ display: "flex", alignItems: "center" }}
+                      span={1}
+                    >
                       <Button
                         size="sm"
-                        radius="md"
+                        radius="lg"
                         variant="filled"
                         color="red"
                         onClick={() => selectItem(item.product)}
@@ -145,14 +157,14 @@ const Cart = () => {
               icon={<RiShoppingBagLine size={16} />}
               sx={{ marginTop: "1rem" }}
               color="blue"
-              radius="md"
+              radius="lg"
             >
               No items in the cart
             </Alert>
           )}
         </Col>
         <Col sx={{ marginTop: ".5rem" }} span={3}>
-          <Card sx={{ marginTop: ".5rem" }} radius="md" shadow="xl" withBorder>
+          <Card sx={{ marginTop: ".5rem" }} radius="lg" shadow="xl" withBorder>
             <Text color="gray" sx={{ marginBottom: "1rem" }} weight={600}>
               Subtotal (
               {cartItems.reduce((acc: any, item: any) => acc + item.qty, 0)})
@@ -169,7 +181,7 @@ const Cart = () => {
               <Button
                 sx={{ marginTop: ".5rem" }}
                 color="dark"
-                radius="md"
+                radius="lg"
                 fullWidth
                 onClick={() => navigate("/shipping")}
               >
