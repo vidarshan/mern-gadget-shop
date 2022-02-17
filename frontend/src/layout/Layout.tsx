@@ -5,7 +5,6 @@ import {
   Header as Head,
   MediaQuery,
   Burger,
-  TextInput,
   ActionIcon,
   Button,
   Grid,
@@ -18,9 +17,9 @@ import Footer from "../components/Footer";
 import { AiOutlineUsb } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
-import { BiLogOut, BiShoppingBag, BiUser } from "react-icons/bi";
+import { BiShoppingBag, BiUser } from "react-icons/bi";
 import { bindActionCreators } from "redux";
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actionCreators, State } from ".././state";
 import { getProduct } from "../state/action-creators";
 // import { logout } from "../actions/userActions";
@@ -30,8 +29,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
-  const [value, setValue] = useState("");
-  const [keyword, setKeyword] = useState("");
+  const [value] = useState("");
 
   const { userInfo } = useSelector((state: State) => state.userLogin);
   const { cartItems } = useSelector((state: State) => state.cart);
@@ -88,7 +86,16 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
               span={12}
             >
               <Text color="gray" weight={500} size="xl" align="center">
-                Cart
+                Cart{" "}
+                {cartItems && cartItems.length ? (
+                  <Badge variant="filled" color="red">
+                    {cartItems.length}
+                  </Badge>
+                ) : (
+                  <Badge variant="filled" color="red">
+                    0
+                  </Badge>
+                )}
               </Text>
             </Col>
             <Col sx={{ marginTop: "1rem" }} span={12}>
@@ -107,9 +114,11 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
               sx={{ marginTop: "1rem" }}
               span={12}
             >
-              <Text color="gray" weight={500} size="xl" align="center">
-                Log In
-              </Text>
+              {!userInfo && (
+                <Text color="gray" weight={500} size="xl" align="center">
+                  Log In
+                </Text>
+              )}
             </Col>
           </Grid>
         </div>
@@ -154,6 +163,7 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
     if (value !== "") {
       navigate(`/admin/${value}`);
     }
+    // eslint-disable-next-line
   }, [value]);
 
   return (

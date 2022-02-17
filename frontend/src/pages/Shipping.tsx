@@ -1,4 +1,4 @@
-import { Card, Grid, TextInput, Col, Button, Select } from "@mantine/core";
+import { Card, Grid, TextInput, Col, Button } from "@mantine/core";
 import { useNavigate } from "react-router";
 import Layout from "../layout/Layout";
 import Steps from "../components/Steps";
@@ -47,6 +47,7 @@ const Shipping = () => {
     if (!userInfo) {
       navigate("/login?redirect=shipping");
     }
+    // eslint-disable-next-line
   }, []);
 
   return (

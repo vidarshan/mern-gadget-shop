@@ -3,7 +3,6 @@ import {
   Card,
   Col,
   Grid,
-  Group,
   PasswordInput,
   Table,
   Text,
@@ -12,18 +11,15 @@ import {
   List,
 } from "@mantine/core";
 import Layout from "../layout/Layout";
-import { RiCloseLine, RiCheckLine } from "react-icons/ri";
 import { useNavigate } from "react-router";
 import { useForm } from "@mantine/hooks";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNotifications } from "@mantine/notifications";
-import { useParams } from "react-router";
 import Head from "../components/Head";
 import moment from "moment";
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
-import { ActionType } from "../state/action-types";
 import Loading from "../components/Loading";
 
 const Profile = () => {
@@ -38,11 +34,7 @@ const Profile = () => {
 
   const { userInfo, error } = useSelector((state: State) => state.userLogin);
 
-  const {
-    profileUpdate,
-    loading: profileUpdateLoading,
-    error: profileUpdateError,
-  } = useSelector((state: State) => state.profileUpdate);
+  const { profileUpdate } = useSelector((state: State) => state.profileUpdate);
 
   const {
     myOrders,
@@ -151,6 +143,7 @@ const Profile = () => {
         color: "green",
       });
     }
+    // eslint-disable-next-line
   }, [profileUpdate]);
 
   useEffect(() => {
@@ -166,6 +159,7 @@ const Profile = () => {
         });
       }
     }
+    // eslint-disable-next-line
   }, [dispatch, userInfo]);
 
   return (
@@ -178,7 +172,7 @@ const Profile = () => {
               <Col span={1}>
                 <Text weight={700}>Admin</Text>
               </Col>
-              <Col span={3}>
+              <Col xs={12} sm={3} md={3} lg={3} xl={4} span={4}>
                 <Button
                   variant="gradient"
                   gradient={{ from: "indigo", to: "cyan" }}
@@ -189,7 +183,7 @@ const Profile = () => {
                   Manage Orders
                 </Button>
               </Col>
-              <Col span={4}>
+              <Col xs={12} sm={3} md={3} lg={3} xl={3} span={3}>
                 <Button
                   variant="gradient"
                   gradient={{ from: "teal", to: "lime", deg: 105 }}
@@ -200,7 +194,7 @@ const Profile = () => {
                   Manage Products
                 </Button>
               </Col>
-              <Col span={4}>
+              <Col xs={12} sm={3} md={3} lg={3} xl={4} span={4}>
                 <Button
                   variant="gradient"
                   gradient={{ from: "orange", to: "red" }}
@@ -225,7 +219,7 @@ const Profile = () => {
               onSubmit={form.onSubmit((values) => handlerEditProfile(values))}
             >
               <Grid sx={{ marginTop: "10px" }}>
-                <Col span={6}>
+                <Col xs={12} sm={12} md={6} lg={6} xl={6} span={6}>
                   <TextInput
                     radius="lg"
                     label="Your username"
@@ -235,7 +229,7 @@ const Profile = () => {
                     required
                   />
                 </Col>
-                <Col span={6}>
+                <Col xs={12} sm={12} md={6} lg={6} xl={6} span={6}>
                   {" "}
                   <TextInput
                     radius="lg"
@@ -248,7 +242,7 @@ const Profile = () => {
                   />
                 </Col>
 
-                <Col span={6}>
+                <Col xs={12} sm={12} md={6} lg={6} xl={6} span={6}>
                   {" "}
                   <PasswordInput
                     radius="lg"
@@ -260,7 +254,7 @@ const Profile = () => {
                     disabled
                   />
                 </Col>
-                <Col span={6}>
+                <Col xs={12} sm={12} md={6} lg={6} xl={6} span={6}>
                   {" "}
                   <PasswordInput
                     radius="lg"
@@ -272,12 +266,12 @@ const Profile = () => {
                     disabled
                   />
                 </Col>
-                <Col span={6}>
+                <Col xs={12} sm={12} md={6} lg={6} xl={6} span={6}>
                   <Button type="submit" radius="lg" color="dark" fullWidth>
                     Update Profile
                   </Button>
                 </Col>
-                <Col span={6}>
+                <Col xs={12} sm={12} md={6} lg={6} xl={6} span={6}>
                   <Button
                     radius="lg"
                     color="red"

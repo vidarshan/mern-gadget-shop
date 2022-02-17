@@ -1,23 +1,11 @@
-import {
-  Badge,
-  Button,
-  Card,
-  Group,
-  List,
-  Switch,
-  Table,
-  Text,
-} from "@mantine/core";
-import React from "react";
+import { Badge, Card, Group, List, Switch, Table, Text } from "@mantine/core";
 import Head from "../../components/Head";
 import Layout from "../../layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../../state";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Loading from "../../components/Loading";
-import { BiDetail, BiTrash, BiTrashAlt } from "react-icons/bi";
-import { useForm } from "@mantine/hooks";
 import moment from "moment";
 import { useNotifications } from "@mantine/notifications";
 import { ActionType } from "../../state/action-types";
@@ -35,11 +23,9 @@ const OrdersList = () => {
     (state: State) => state.orders
   );
 
-  const {
-    success,
-    error: orderDeliverError,
-    loading: orderDeliverLoading,
-  } = useSelector((state: State) => state.orderDeliver);
+  const { success, error: orderDeliverError } = useSelector(
+    (state: State) => state.orderDeliver
+  );
 
   const handlerDeliverOrder = (orderId: string) => {
     deliverOrder(orderId);
@@ -47,6 +33,7 @@ const OrdersList = () => {
 
   useEffect(() => {
     getOrders();
+    // eslint-disable-next-line
   }, [dispatch, success]);
 
   useEffect(() => {
@@ -57,6 +44,7 @@ const OrdersList = () => {
         color: "red",
       });
     }
+    // eslint-disable-next-line
   }, [error, orderDeliverError]);
 
   useEffect(() => {
@@ -71,6 +59,7 @@ const OrdersList = () => {
     dispatch({
       type: ActionType.ORDER_DELIVER_RESET,
     });
+    // eslint-disable-next-line
   }, [success]);
 
   const rows =

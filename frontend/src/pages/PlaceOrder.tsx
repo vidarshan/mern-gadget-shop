@@ -8,7 +8,6 @@ import { actionCreators, State } from "../state";
 import Head from "../components/Head";
 import { bindActionCreators } from "redux";
 import { useEffect } from "react";
-import { ActionType } from "../state/action-types";
 
 const PlaceOrder = () => {
   const dispatch = useDispatch();
@@ -20,17 +19,9 @@ const PlaceOrder = () => {
     (state: State) => state.cart
   );
 
-  const {
-    orderCreate,
-    loading: createOrderLoading,
-    error: createOrderError,
-  } = useSelector((state: State) => state.orderCreate);
-
-  const {
-    order,
-    loading: orderLoading,
-    error: orderError,
-  } = useSelector((state: State) => state.order);
+  const { orderCreate, loading: createOrderLoading } = useSelector(
+    (state: State) => state.orderCreate
+  );
 
   const addDecimals = (num: number) => {
     return (Math.round(num * 100) / 100).toFixed(2);
@@ -66,10 +57,8 @@ const PlaceOrder = () => {
   useEffect(() => {
     if (Object.keys(orderCreate).length) {
       navigate(`/order/${orderCreate._id}`);
-      // dispatch({
-      //   type: ActionType.GET_ORDER_REQUEST,
-      // });
     }
+    // eslint-disable-next-line
   }, [createOrder]);
 
   return (

@@ -5,7 +5,6 @@ import {
   Col,
   Alert,
   Image,
-  Button,
   Loader,
   Group,
 } from "@mantine/core";
@@ -31,25 +30,16 @@ import { ActionType } from "../state/action-types";
 
 const Order = () => {
   const params = useParams();
-  // const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
-  const [checkout, setCheckout] = useState(false);
   const [sdkReady, setSdkReady] = useState(false);
 
   const { getOrder, payOrder } = bindActionCreators(actionCreators, dispatch);
 
-  const {
-    order,
-    loading: orderLoading,
-    error: orderError,
-  } = useSelector((state: State) => state.order);
+  const { order } = useSelector((state: State) => state.order);
 
-  const {
-    success,
-    loading: payLoading,
-    error: payError,
-  } = useSelector((state: State) => state.orderPay);
+  const { success } = useSelector((state: State) => state.orderPay);
 
   const successPaymentHanlder = (paymentResult: any) => {
     payOrder(params.order, paymentResult);
@@ -77,6 +67,7 @@ const Order = () => {
         setSdkReady(true);
       }
     }
+    // eslint-disable-next-line
   }, [dispatch]);
 
   useEffect(() => {
@@ -84,6 +75,7 @@ const Order = () => {
     if (success) {
       dispatch({ type: ActionType.CART_CLEAR_ITEMS });
     }
+    // eslint-disable-next-line
   }, [dispatch, success]);
 
   return (

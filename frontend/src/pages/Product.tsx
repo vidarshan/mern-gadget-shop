@@ -10,19 +10,17 @@ import {
   Text,
   Card,
   Badge,
-  Loader,
   List,
   Alert,
   Divider,
   Modal,
-  TextInput,
   Select,
   Textarea,
 } from "@mantine/core";
 import { useEffect, useRef, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useParams } from "react-router";
-import { IoIosCloseCircle, IoIosUnlock, IoMdStar } from "react-icons/io";
+import { IoIosCloseCircle, IoIosUnlock } from "react-icons/io";
 import Layout from "../layout/Layout";
 import { RiShoppingBagLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
@@ -65,9 +63,7 @@ const Product = () => {
 
   const handlers = useRef<NumberInputHandlers>(null);
 
-  const { product, loading, error } = useSelector(
-    (state: State) => state.product
-  );
+  const { product, loading } = useSelector((state: State) => state.product);
 
   const { quickSearch } = useSelector((state: State) => state.quickSearch);
 
@@ -129,6 +125,7 @@ const Product = () => {
     dispatch({
       type: ActionType.ADD_REVIEW_RESET,
     });
+    // eslint-disable-next-line
   }, [reviewError]);
 
   useEffect(() => {
@@ -139,10 +136,12 @@ const Product = () => {
         color: "green",
       });
     }
+    // eslint-disable-next-line
   }, [review]);
 
   useEffect(() => {
     getProduct(params.id as string);
+    // eslint-disable-next-line
   }, [dispatch, review, quickSearch]);
 
   return (
@@ -178,6 +177,7 @@ const Product = () => {
             sx={{ marginTop: "1rem" }}
             radius="lg"
             color="dark"
+            loading={reviewLoading}
             fullWidth
           >
             Add Review
