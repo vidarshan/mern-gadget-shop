@@ -32,7 +32,7 @@ const FeatureCard: React.FC<PropsWithChildren<IFeatureCard>> = ({
       <Text
         // color={textColor}
         size="xl"
-        weight={600}
+        weight={700}
         align="center"
       >
         {title}

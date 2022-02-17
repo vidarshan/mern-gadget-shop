@@ -113,24 +113,24 @@ const OrdersList = () => {
         </td>
         <td>
           {order.isPaid ? (
-            <Badge radius="md" variant="filled" color="green">
+            <Badge radius="lg" variant="filled" color="green">
               {`Paid | ${moment(order.paidAt).format("DD-MMM-YYYY HH:mm")}`}
             </Badge>
           ) : (
-            <Badge radius="md" variant="filled" color="red">
+            <Badge radius="lg" variant="filled" color="red">
               Not Paid
             </Badge>
           )}
         </td>
         <td>
           {order.isDelivered ? (
-            <Badge radius="md" variant="filled" color="green">
+            <Badge radius="lg" variant="filled" color="green">
               {`Delivered | ${moment(order.deliveredAt).format(
                 "DD-MMM-YYYY hh:mm"
               )}`}
             </Badge>
           ) : (
-            <Badge radius="md" variant="filled" color="red">
+            <Badge radius="lg" variant="filled" color="red">
               Not Delivered
             </Badge>
           )}
@@ -153,7 +153,7 @@ const OrdersList = () => {
     <Layout>
       <Head title="Orders List | Admin" />
 
-      <Card shadow="xl" radius="md">
+      <Card shadow="xl" radius="lg">
         <Group sx={{ marginBottom: "1rem" }} direction="row" position="apart">
           <Text weight={700}>Orders</Text>
         </Group>

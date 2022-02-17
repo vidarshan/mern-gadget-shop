@@ -107,24 +107,24 @@ const Profile = () => {
         </td>
         <td>
           {order.isPaid ? (
-            <Badge radius="md" variant="filled" color="green">
+            <Badge radius="lg" variant="filled" color="green">
               {`Paid | ${moment(order.paidAt).format("DD-MMM-YYYY HH:mm")}`}
             </Badge>
           ) : (
-            <Badge radius="md" variant="filled" color="red">
+            <Badge radius="lg" variant="filled" color="red">
               Not Paid
             </Badge>
           )}
         </td>
         <td>
           {order.isDelivered ? (
-            <Badge radius="md" variant="filled" color="green">
+            <Badge radius="lg" variant="filled" color="green">
               {`Delivered | ${moment(order.deliveredAt).format(
                 "DD-MMM-YYYY hh:mm"
               )}`}
             </Badge>
           ) : (
-            <Badge radius="md" variant="filled" color="red">
+            <Badge radius="lg" variant="filled" color="red">
               Not Delivered
             </Badge>
           )}
@@ -244,6 +244,7 @@ const Profile = () => {
                     {...form.getInputProps("email")}
                     error={form.errors.email}
                     required
+                    disabled
                   />
                 </Col>
 
@@ -256,6 +257,7 @@ const Profile = () => {
                     {...form.getInputProps("password")}
                     error={form.errors.password}
                     required
+                    disabled
                   />
                 </Col>
                 <Col span={6}>
@@ -267,6 +269,7 @@ const Profile = () => {
                     {...form.getInputProps("confirmpassword")}
                     error={form.errors.confirmpassword}
                     required
+                    disabled
                   />
                 </Col>
                 <Col span={6}>

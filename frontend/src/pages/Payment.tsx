@@ -27,12 +27,12 @@ const Payment = () => {
 
   return (
     <Layout>
-      <Card withBorder shadow="xl" radius="md" padding="xl">
+      <Card withBorder shadow="xl" radius="lg" padding="xl">
         <Steps active={2} />
         <Grid sx={{ marginTop: "2rem" }}>
           <Col span={12}>
             <Text sx={{ margin: "10px 0" }}>Select Payment Method</Text>
-            <Card withBorder shadow="xs" radius="md">
+            <Card withBorder shadow="xs" radius="lg">
               <Col span={12}>
                 <RadioGroup value="credit" color="dark" required>
                   <Radio checked size="sm" value="credit">
@@ -45,7 +45,7 @@ const Payment = () => {
           <Col span={12}>
             <Button
               onClick={() => handlerAddPaymentMethod("PayPal")}
-              radius="md"
+              radius="lg"
               color="dark"
               fullWidth
             >

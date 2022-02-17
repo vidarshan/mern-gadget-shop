@@ -161,7 +161,7 @@ const Product = () => {
             error={form.errors.rating}
             value={value}
             data={ratingLevels}
-            radius="md"
+            radius="lg"
             required
           />
           <Textarea
@@ -170,13 +170,13 @@ const Product = () => {
             placeholder="Your Comment"
             {...form.getInputProps("comment")}
             error={form.errors.comment}
-            radius="md"
+            radius="lg"
             required
           />
           <Button
             type="submit"
             sx={{ marginTop: "1rem" }}
-            radius="md"
+            radius="lg"
             color="dark"
             fullWidth
           >

@@ -75,7 +75,7 @@ const PlaceOrder = () => {
   return (
     <Layout>
       <Head title="Place Order" />
-      <Card withBorder shadow="sm" radius="md" padding="xl">
+      <Card withBorder shadow="sm" radius="lg" padding="xl">
         <Steps active={3} />
         <Grid sx={{ marginTop: "2rem" }}>
           <Col span={12}>
@@ -85,7 +85,7 @@ const PlaceOrder = () => {
                 <Card
                   withBorder
                   shadow="xs"
-                  radius="md"
+                  radius="lg"
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -113,7 +113,7 @@ const PlaceOrder = () => {
                 <Card
                   withBorder
                   shadow="xs"
-                  radius="md"
+                  radius="lg"
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -145,7 +145,7 @@ const PlaceOrder = () => {
                         padding="sm"
                         withBorder
                         shadow="xs"
-                        radius="md"
+                        radius="lg"
                       >
                         <Grid>
                           <Col
@@ -153,7 +153,7 @@ const PlaceOrder = () => {
                             span={5}
                           >
                             <Image
-                              radius="md"
+                              radius="lg"
                               fit="contain"
                               height={40}
                               width={40}
@@ -192,7 +192,7 @@ const PlaceOrder = () => {
           </Col>
           <Col span={12}>
             <Text sx={{ margin: "10px 0" }}>Order Summary</Text>
-            <Card withBorder shadow="xs" radius="md">
+            <Card withBorder shadow="xs" radius="lg">
               <Grid
                 sx={{ margin: "10px 0", borderBottom: "1px solid #E0E0E0" }}
               >
@@ -237,7 +237,7 @@ const PlaceOrder = () => {
               onClick={() => handlerOrderCreate()}
               loading={createOrderLoading}
               color="dark"
-              radius="md"
+              radius="lg"
               fullWidth
             >
               Place Order

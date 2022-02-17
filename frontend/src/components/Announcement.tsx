@@ -40,7 +40,7 @@ const Announcement = ({
             justifyContent: "center",
           }}
         >
-          <Image radius="md" fit="contain" src={ad} />
+          <Image radius="lg" fit="contain" src={ad} />
         </Col>
       </Grid>
     </div>

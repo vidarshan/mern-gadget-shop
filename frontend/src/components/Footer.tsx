@@ -5,7 +5,7 @@ import { AiOutlineUsb } from "react-icons/ai";
 const Footer = () => {
   return (
     <footer
-      style={{ backgroundColor: "#2c2e33", padding: "2rem", marginTop: "2rem" }}
+      style={{ backgroundColor: "#000", padding: "2rem", marginTop: "2rem" }}
     >
       <Container sx={{ maxWidth: "85vw" }}>
         <Group direction="row" position="apart">

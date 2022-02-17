@@ -77,7 +77,7 @@ const SignUp = () => {
       <Card
         withBorder
         padding="xl"
-        radius="md"
+        radius="lg"
         shadow="xl"
         sx={{ width: "500px" }}
       >
@@ -91,7 +91,7 @@ const SignUp = () => {
             </Col>
             <Col span={12}>
               <TextInput
-                radius="md"
+                radius="lg"
                 placeholder="Your Name"
                 label="Name"
                 {...form.getInputProps("name")}
@@ -101,7 +101,7 @@ const SignUp = () => {
             </Col>
             <Col span={12}>
               <TextInput
-                radius="md"
+                radius="lg"
                 placeholder="Your Email"
                 label="Email"
                 {...form.getInputProps("email")}
@@ -111,7 +111,7 @@ const SignUp = () => {
             </Col>
             <Col span={12}>
               <PasswordInput
-                radius="md"
+                radius="lg"
                 placeholder="Your Password"
                 label="Password"
                 {...form.getInputProps("password")}
@@ -121,7 +121,7 @@ const SignUp = () => {
             </Col>
             <Col span={12}>
               <PasswordInput
-                radius="md"
+                radius="lg"
                 placeholder="Confirm Password"
                 label="Confirmation"
                 {...form.getInputProps("confirmPassword")}
@@ -135,7 +135,7 @@ const SignUp = () => {
                 type="submit"
                 fullWidth
                 color="dark"
-                radius="md"
+                radius="lg"
               >
                 Sign Up
               </Button>

@@ -56,10 +56,6 @@ const Order = () => {
   };
 
   useEffect(() => {
-    // if (!userInfo) {
-    //   history.push('/login')
-    // }
-
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get("/api/v1/config/paypal");
       const script = document.createElement("script");
@@ -94,7 +90,7 @@ const Order = () => {
     <Layout>
       <Head title={`Order ${params.order}`} />
       {order && Object.keys(order).length ? (
-        <Card withBorder shadow="sm" radius="md" padding="xl">
+        <Card withBorder shadow="sm" radius="lg" padding="xl">
           <Grid>
             <Col span={12}>
               <Text size="xl" weight={600}>
@@ -106,7 +102,7 @@ const Order = () => {
               {Object.keys(order).includes("user") ? (
                 <Grid sx={{ marginTop: "10px" }}>
                   <Col span={12}>
-                    <Card padding="xs" withBorder shadow="sm" radius="md">
+                    <Card padding="xs" withBorder shadow="sm" radius="lg">
                       <Col
                         sx={{ display: "flex", alignItems: "center" }}
                         span={12}
@@ -156,7 +152,7 @@ const Order = () => {
                         {order.isDelivered ? (
                           <Alert
                             icon={<BsCheckCircleFill />}
-                            radius="md"
+                            radius="lg"
                             title="Delivered"
                             color="green"
                           >
@@ -165,7 +161,7 @@ const Order = () => {
                         ) : (
                           <Alert
                             icon={<BsXCircleFill />}
-                            radius="md"
+                            radius="lg"
                             title="Not Delivered"
                             color="red"
                           >
@@ -184,7 +180,7 @@ const Order = () => {
               <Text>Payment</Text>
               <Grid sx={{ marginTop: "10px" }}>
                 <Col span={12}>
-                  <Card padding="xs" withBorder shadow="sm" radius="md">
+                  <Card padding="xs" withBorder shadow="sm" radius="lg">
                     <Col
                       sx={{ display: "flex", alignItems: "center" }}
                       span={12}
@@ -203,7 +199,7 @@ const Order = () => {
                       {order.isPaid ? (
                         <Alert
                           icon={<BsCheckCircleFill />}
-                          radius="md"
+                          radius="lg"
                           title="Paid"
                           color="green"
                         >
@@ -212,7 +208,7 @@ const Order = () => {
                       ) : (
                         <Alert
                           icon={<BsXCircleFill />}
-                          radius="md"
+                          radius="lg"
                           title="Not Delivered"
                           color="red"
                         >
@@ -236,7 +232,7 @@ const Order = () => {
                           padding="sm"
                           withBorder
                           shadow="sm"
-                          radius="md"
+                          radius="lg"
                         >
                           <Grid>
                             <Col
@@ -244,7 +240,7 @@ const Order = () => {
                               span={5}
                             >
                               <Image
-                                radius="md"
+                                radius="lg"
                                 fit="contain"
                                 height={40}
                                 width={40}
@@ -283,7 +279,7 @@ const Order = () => {
             </Col>
             <Col span={12}>
               <Text sx={{ margin: "10px 0" }}>Order Summary</Text>
-              <Card withBorder shadow="sm" radius="md">
+              <Card withBorder shadow="sm" radius="lg">
                 <Grid
                   sx={{ margin: "10px 0", borderBottom: "1px solid #E0E0E0" }}
                 >
