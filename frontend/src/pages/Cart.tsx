@@ -82,7 +82,7 @@ const Cart = () => {
         </Grid>
       </Modal>
       <Grid>
-        <Col span={9}>
+        <Col xs={12} sm={12} md={9} lg={9} xl={9} span={9}>
           {cartItems && cartItems.length ? (
             cartItems.map((item: any) => {
               return (
@@ -93,7 +93,7 @@ const Cart = () => {
                   withBorder
                 >
                   <Grid>
-                    <Col span={2}>
+                    <Col xs={2} sm={2} md={2} lg={2} xl={2} span={2}>
                       <Image
                         fit="contain"
                         radius="lg"
@@ -104,6 +104,11 @@ const Cart = () => {
                     </Col>
                     <Col
                       sx={{ display: "flex", alignItems: "center" }}
+                      xs={5}
+                      sm={5}
+                      md={5}
+                      lg={5}
+                      xl={5}
                       span={5}
                     >
                       <Text color="gray" weight={600}>
@@ -112,6 +117,11 @@ const Cart = () => {
                     </Col>
                     <Col
                       sx={{ display: "flex", alignItems: "center" }}
+                      xs={5}
+                      sm={5}
+                      md={5}
+                      lg={2}
+                      xl={2}
                       span={2}
                     >
                       <Text color="gray" weight={600}>
@@ -119,8 +129,13 @@ const Cart = () => {
                       </Text>
                     </Col>
                     <Col
-                      sx={{ display: "flex", alignItems: "center" }}
+                      xs={6}
+                      sm={6}
+                      md={6}
+                      lg={2}
+                      xl={2}
                       span={2}
+                      sx={{ display: "flex", alignItems: "center" }}
                     >
                       <NumberInput
                         radius="lg"
@@ -135,8 +150,13 @@ const Cart = () => {
                       />
                     </Col>
                     <Col
-                      sx={{ display: "flex", alignItems: "center" }}
+                      xs={6}
+                      sm={6}
+                      md={6}
+                      lg={1}
+                      xl={1}
                       span={1}
+                      sx={{ display: "flex", alignItems: "center" }}
                     >
                       <Button
                         size="sm"
@@ -144,6 +164,7 @@ const Cart = () => {
                         variant="filled"
                         color="red"
                         onClick={() => selectItem(item.product)}
+                        fullWidth
                       >
                         <BiTrashAlt />
                       </Button>
@@ -163,7 +184,15 @@ const Cart = () => {
             </Alert>
           )}
         </Col>
-        <Col sx={{ marginTop: ".5rem" }} span={3}>
+        <Col
+          sx={{ marginTop: ".5rem" }}
+          xs={12}
+          sm={12}
+          md={3}
+          lg={3}
+          xl={3}
+          span={3}
+        >
           <Card sx={{ marginTop: ".5rem" }} radius="lg" shadow="xl" withBorder>
             <Text color="gray" sx={{ marginBottom: "1rem" }} weight={600}>
               Subtotal (
