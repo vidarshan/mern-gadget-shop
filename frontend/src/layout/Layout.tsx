@@ -156,12 +156,6 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
     }
   }, [value]);
 
-  useEffect(() => {
-    if (!userInfo) {
-      navigate("/");
-    }
-  }, [userInfo]);
-
   return (
     <>
       <Head height={70} padding="md" fixed>
@@ -220,17 +214,19 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
                 )}
               </Button>
             </MediaQuery>
-            <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-              <ActionIcon
-                size="lg"
-                onClick={() => navigate("/profile")}
-                sx={{ margin: "10px" }}
-                variant="default"
-                radius="lg"
-              >
-                <BiUser />
-              </ActionIcon>
-            </MediaQuery>
+            {userInfo && (
+              <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+                <ActionIcon
+                  size="lg"
+                  onClick={() => navigate("/profile")}
+                  sx={{ margin: "10px" }}
+                  variant="default"
+                  radius="lg"
+                >
+                  <BiUser />
+                </ActionIcon>
+              </MediaQuery>
+            )}
             {!userInfo && (
               <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
                 <Button

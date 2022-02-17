@@ -140,7 +140,7 @@ const Profile = () => {
 
   const handlerLogout = () => {
     logout();
-    navigate("/login");
+    navigate("/");
   };
 
   useEffect(() => {
