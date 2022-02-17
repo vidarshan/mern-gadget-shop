@@ -150,7 +150,7 @@ const Cart = () => {
                       />
                     </Col>
                     <Col
-                      xs={6}
+                      xs={12}
                       sm={6}
                       md={6}
                       lg={1}

@@ -88,7 +88,16 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
               span={12}
             >
               <Text color="gray" weight={500} size="xl" align="center">
-                Cart
+                Cart{" "}
+                {cartItems && cartItems.length ? (
+                  <Badge variant="filled" color="red">
+                    {cartItems.length}
+                  </Badge>
+                ) : (
+                  <Badge variant="filled" color="red">
+                    0
+                  </Badge>
+                )}
               </Text>
             </Col>
             <Col sx={{ marginTop: "1rem" }} span={12}>
@@ -107,9 +116,11 @@ const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({ children }) => {
               sx={{ marginTop: "1rem" }}
               span={12}
             >
-              <Text color="gray" weight={500} size="xl" align="center">
-                Log In
-              </Text>
+              {!userInfo && (
+                <Text color="gray" weight={500} size="xl" align="center">
+                  Log In
+                </Text>
+              )}
             </Col>
           </Grid>
         </div>
