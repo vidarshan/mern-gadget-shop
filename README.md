@@ -2,11 +2,9 @@
 
 <h5 align='center'>An online shop to sell electronic gadgets.</h5>
 
-
-<div align="center">
+<div align='center'>
   <img src="https://heroku-badge.herokuapp.com/?app=cryptic-escarpment-74612" />
 </div>
-
 
 ## ⭐ Features
 - Easy naviagtion flow within the application
