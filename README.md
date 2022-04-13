@@ -1,6 +1,6 @@
 <h1 align='center'>🏪 MERN Gadget Shop (Techstop)</h1>
 
-<h5 align='center'>An online shop to sell electronic gadgets.</h5>
+<h5 align='center'>An online shop to sell electronic gadgets</h5>
 <h5 align='center'>https://cryptic-escarpment-74612.herokuapp.com/</h5>
 
 ## ⭐ Features
