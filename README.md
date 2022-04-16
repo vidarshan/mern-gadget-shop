@@ -4,7 +4,7 @@
 <h5 align='center'>https://cryptic-escarpment-74612.herokuapp.com/</h5>
 
 ## ⭐ Features
-- Easy naviagtion flow within the application
+- Easy naviagtion flow within the application.
 - Shopping cart.
 - Quick search with instant search results.
 - Order products.
