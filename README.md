@@ -61,7 +61,7 @@
         npm run server
   
   ## ↩️ Reuse
-  Reusing application and the code is free, atleast star this repo before doing that.
+  Reusing application and the code is free, atleast star this repo before doing that
   
   <br/>
   
