@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import morgan from "morgan";
+import cors from "cors";
 import path from "path";
 import connectDB from "./config/db";
 
@@ -25,7 +26,7 @@ const MODE = process.env.NODE_ENV;
 const PORT = process.env.PORT || 10100;
 
 app.use(express.json());
-
+app.use(cors());
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/orders", orderRoutes);
 app.use("/api/v1/products", productRoutes);
