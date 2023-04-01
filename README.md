@@ -1,7 +1,10 @@
 <h1 align='center'>🏪 MERN Gadget Shop (Techstop)</h1>
 
 <h5 align='center'>An online shop to sell electronic gadgets</h5>
-<h5 align='center'>https://cryptic-escarpment-74612.herokuapp.com/</h5>
+<h5 align='center'>https://tech-stop.onrender.com/</h5>
+   
+| Due to the recent deprecation of Heroku's free plan, this project was moved and hosted on Render. |
+|---------------------------------------------------------------------------------------------------|
 
 ## ⭐ Features
 - Easy naviagtion flow within the application.
@@ -27,7 +30,7 @@
 - Express JS (Backend Framework)
 - Mongo DB (Database)
 - Mantine (UI Framework)
-- Heroku (Deployed)
+- Render (Deployed)
 
 <br/>
 
@@ -65,5 +68,5 @@
   
   <br/>
   
-  📅 *Last Updated: March 5th, 2022.*
+  📅 *Last Updated: Jan 16th, 2023.*
   
