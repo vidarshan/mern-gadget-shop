@@ -49,6 +49,7 @@ const getProductsForSearch = asyncHandler(async (req: any, res: any) => {
       label: product.name,
       group: product.category,
       image: product.image,
+      altImage: product.altImage,
     });
   });
 
@@ -133,6 +134,7 @@ const createProduct = asyncHandler(async (req: any, res: any) => {
     price,
     user: _id,
     image,
+    altImage: image,
     brand,
     category,
     countInStock,
@@ -196,6 +198,7 @@ const updateProduct = asyncHandler(async (req: any, res: any) => {
     product.price = price;
     product.description = description;
     product.image = image;
+    product.altImage = image;
     product.brand = brand;
     product.category = category;
     product.countInStock = countInStock;
